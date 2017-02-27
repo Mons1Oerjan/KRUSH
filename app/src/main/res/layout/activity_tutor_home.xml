@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:design="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/activity_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="cs.dal.krush.MainActivity">
 
-    <TextView
-        android:text="Tutor Home Page"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/tutor_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tutor_home"/>
-</LinearLayout>
+        android:layout_gravity="start"
+        design:itemBackground="@color/bottom_bar_color"
+        design:menu="@menu/tutor_bottom_nav_items"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
