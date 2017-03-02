@@ -4,9 +4,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+
     <TextView
-        android:text="Student Home View"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/student_home"/>
+        android:text="Student Home"/>
+
 </LinearLayout>

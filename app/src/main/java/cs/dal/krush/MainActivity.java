@@ -1,13 +1,42 @@
 package cs.dal.krush;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity
+{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final Button tutor_home_button = (Button) findViewById(R.id.tutor_home_button);
+
+        tutor_home_button.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent i = new Intent(MainActivity.this, TutorMainActivity.class);
+                startActivity(i);
+
+            }
+        });
+
+        final Button student_home_button = (Button) findViewById(R.id.student_home_button);
+
+        student_home_button.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent i = new Intent(MainActivity.this, StudentMainActivity.class);
+                startActivity(i);
+
+            }
+        });
     }
+
 }
