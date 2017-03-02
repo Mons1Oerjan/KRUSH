@@ -52,6 +52,12 @@ public class StudentMainActivity extends FragmentActivity {
                         transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
+                    case R.id.menu_sessions:
+                        StudentSessionsFragment sessions = new StudentSessionsFragment();
+                        transaction.replace(R.id.student_fragment_container, sessions);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        return true;
                 }
                 return false;
             }
