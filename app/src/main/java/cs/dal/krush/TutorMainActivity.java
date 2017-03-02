@@ -9,13 +9,11 @@ import android.view.MenuItem;
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
 
 
-public class TutorMainActivity extends FragmentActivity
-{
+public class TutorMainActivity extends FragmentActivity {
     BottomNavigationView bottomNav;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutor_main);
 
@@ -29,14 +27,11 @@ public class TutorMainActivity extends FragmentActivity
         BottomNavigationViewHelper.disableShiftMode(bottomNav);
 
         //Nav bar listener
-        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
-        {
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item)
-            {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int menu_item = item.getItemId();
-                if(menu_item == R.id.menu_home)
-                {
+                if(menu_item == R.id.menu_home) {
                     TutorHomeFragment home = new TutorHomeFragment();
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.tutor_fragment_container, home);
@@ -44,10 +39,8 @@ public class TutorMainActivity extends FragmentActivity
                     transaction.commit();
                     return true;
                 }
-                else if (menu_item == R.id.menu_profile)
-                {
+                else if (menu_item == R.id.menu_profile) {
                     TutorProfileFragment profile = new TutorProfileFragment();
-
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.tutor_fragment_container, profile);
                     transaction.addToBackStack(null);

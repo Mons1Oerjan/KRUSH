@@ -10,13 +10,11 @@ import android.view.MenuItem;
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
 
 
-public class StudentMainActivity extends FragmentActivity
-{
+public class StudentMainActivity extends FragmentActivity {
     BottomNavigationView bottomNav;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_main);
 
@@ -30,14 +28,11 @@ public class StudentMainActivity extends FragmentActivity
         BottomNavigationViewHelper.disableShiftMode(bottomNav);
 
         //Nav bar listener
-        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
-        {
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item)
-            {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int menu_item = item.getItemId();
-                if(menu_item == R.id.menu_home)
-                {
+                if(menu_item == R.id.menu_home) {
                     StudentHomeFragment home = new StudentHomeFragment();
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.student_fragment_container, home);
