@@ -45,6 +45,12 @@ public class TutorMainActivity extends FragmentActivity {
                         transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
+                    case R.id.menu_sessions:
+                        TutorSessionsFragment sessions = new TutorSessionsFragment();
+                        transaction.replace(R.id.tutor_fragment_container, sessions);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        return true;
                 }
                 return false;
             }
