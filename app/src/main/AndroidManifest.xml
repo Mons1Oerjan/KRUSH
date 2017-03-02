@@ -16,6 +16,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".TutorCalendarActivity" />
+
+        <activity android:name=".TutorMainActivity" />
+        <activity android:name=".StudentMainActivity" />
     </application>
 
 </manifest>
