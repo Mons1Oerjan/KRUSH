@@ -31,24 +31,22 @@ public class TutorMainActivity extends FragmentActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int menu_item = item.getItemId();
-                if(menu_item == R.id.menu_home) {
-                    TutorHomeFragment home = new TutorHomeFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.tutor_fragment_container, home);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                    return true;
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                switch(menu_item) {
+                    case R.id.menu_home:
+                        TutorHomeFragment home = new TutorHomeFragment();
+                        transaction.replace(R.id.tutor_fragment_container, home);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        return true;
+                    case R.id.menu_profile:
+                        TutorProfileFragment profile = new TutorProfileFragment();
+                        transaction.replace(R.id.tutor_fragment_container, profile);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        return true;
                 }
-                else if (menu_item == R.id.menu_profile) {
-                    TutorProfileFragment profile = new TutorProfileFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.tutor_fragment_container, profile);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                    return true;
-                }
-                else
-                    return false;
+                return false;
             }
         });
     }

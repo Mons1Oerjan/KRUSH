@@ -25,6 +25,5 @@
         android:id="@+id/menu_quick_book"
         android:title="@string/menu_quick_book_text"
         android:icon="@drawable/ic_event_black_24dp"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
 </menu>
