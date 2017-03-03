@@ -32,16 +32,34 @@ public class StudentMainActivity extends FragmentActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int menu_item = item.getItemId();
-                if(menu_item == R.id.menu_home) {
-                    StudentHomeFragment home = new StudentHomeFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.student_fragment_container, home);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                    return true;
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                switch(menu_item) {
+                    case R.id.menu_home:
+                        StudentHomeFragment home = new StudentHomeFragment();
+                        transaction.replace(R.id.student_fragment_container, home);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        return true;
+                    case R.id.menu_quick_book:
+                        StudentQuickBookFragment quickbook = new StudentQuickBookFragment();
+                        transaction.replace(R.id.student_fragment_container, quickbook);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        return true;
+                    case R.id.menu_profile:
+                        StudentProfileFragment profile = new StudentProfileFragment();
+                        transaction.replace(R.id.student_fragment_container, profile);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        return true;
+                    case R.id.menu_sessions:
+                        StudentSessionsFragment sessions = new StudentSessionsFragment();
+                        transaction.replace(R.id.student_fragment_container, sessions);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        return true;
                 }
-                else
-                    return false;
+                return false;
             }
         });
     }

@@ -9,15 +9,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tutor_home_button"
-        android:text="Tutor Home"/>
+        android:id="@+id/tutor_login_button"
+        android:text="Tutor Login"/>
 
     <Button
-        android:layout_below="@+id/tutor_home_button"
+        android:layout_below="@+id/tutor_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/student_home_button"
-        android:text="Student Home"/>
+        android:id="@+id/student_login_button"
+        android:text="Student Login"/>
 
 
 
