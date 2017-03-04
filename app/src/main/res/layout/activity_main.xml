@@ -33,5 +33,30 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/tutor_login_button" />
 
+    <TextView
+        android:text="KRUSH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="102dp"
+        android:id="@+id/krushLogo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        tools:text="KRUSH"
+        android:textSize="50dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="normal|bold"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="Share Success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/krushSlogan"
+        tools:text="Share Success"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:layout_below="@+id/krushLogo"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
