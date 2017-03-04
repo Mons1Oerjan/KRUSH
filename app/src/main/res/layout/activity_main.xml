@@ -10,15 +10,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tutor_login_button"
-        android:text="Tutor Login"/>
+        android:text="Tutor Login"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:minWidth="170dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:layout_above="@+id/student_login_button"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_below="@+id/tutor_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/student_login_button"
-        android:text="Student Login"/>
-
+        android:text="Student Login"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:minWidth="170dp"
+        android:layout_marginBottom="97dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/tutor_login_button" />
 
 
 </RelativeLayout>
