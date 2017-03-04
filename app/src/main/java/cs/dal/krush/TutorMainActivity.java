@@ -51,6 +51,12 @@ public class TutorMainActivity extends FragmentActivity {
                         transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
+                    case R.id.menu_calendar:
+                        TutorCalendarFragment calendar = new TutorCalendarFragment();
+                        transaction.replace(R.id.tutor_fragment_container, calendar);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                        return true;
                 }
                 return false;
             }
