@@ -10,15 +10,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tutor_login_button"
-        android:text="Tutor Login"/>
+        android:text="Tutor Login"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:minWidth="170dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:layout_above="@+id/student_login_button"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_below="@+id/tutor_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/student_login_button"
-        android:text="Student Login"/>
+        android:text="Student Login"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:minWidth="170dp"
+        android:layout_marginBottom="97dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/tutor_login_button" />
 
+    <TextView
+        android:text="KRUSH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="102dp"
+        android:id="@+id/krushLogo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        tools:text="KRUSH"
+        android:textSize="50dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="normal|bold"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="Share Success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/krushSlogan"
+        tools:text="Share Success"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:layout_below="@+id/krushLogo"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
