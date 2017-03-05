@@ -26,4 +26,10 @@ public abstract class Table {
      * @return Cursor
      */
     public abstract Cursor getData(int id);
+
+    /**
+     * Get all rows in table
+     * @return Cursor
+     */
+    public abstract Cursor getAll();
 }

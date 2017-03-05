@@ -12,7 +12,6 @@ public class CoursesTutors {
     SQLiteDatabase dbWrite;
     SQLiteDatabase dbRead;
 
-
     public CoursesTutors(SQLiteDatabase dbWrite, SQLiteDatabase dbRead){
         this.dbWrite = dbWrite;
         this.dbRead = dbRead;

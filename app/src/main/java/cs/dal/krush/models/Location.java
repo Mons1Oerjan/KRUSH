@@ -13,6 +13,11 @@ public class Location extends Table{
         super(dbWrite,dbRead);
     }
 
+    /**
+     * Insert row into locations table
+     * @param location
+     * @return boolean
+     */
     public boolean insert(String location) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("location", location);
@@ -23,6 +28,12 @@ public class Location extends Table{
     @Override
     public Cursor getData(int id) {
         res = dbRead.rawQuery("SELECT * FROM locations WHERE id="+id+"",null);
+        return res;
+    }
+
+    @Override
+    public Cursor getAll() {
+        res = dbRead.rawQuery("SELECT * FROM locations",null);
         return res;
     }
 

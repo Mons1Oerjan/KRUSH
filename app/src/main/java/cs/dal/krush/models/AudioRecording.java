@@ -14,7 +14,12 @@ public class AudioRecording extends Table {
         super(dbWrite,dbRead);
     }
 
-
+    /**
+     * Insert row into audio_recordings table
+     * @param studentId
+     * @param locationId
+     * @return boolean
+     */
     public boolean insert(int studentId, int locationId){
         ContentValues contentValues = new ContentValues();
         contentValues.put("student_id", studentId);
@@ -26,6 +31,12 @@ public class AudioRecording extends Table {
     @Override
     public Cursor getData(int id){
         res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE id="+id+"",null);
+        return res;
+    }
+
+    @Override
+    public Cursor getAll() {
+        res = dbRead.rawQuery("SELECT * FROM audio_recording",null);
         return res;
     }
 

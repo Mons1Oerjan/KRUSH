@@ -10,19 +10,31 @@ import cs.dal.krush.models.DBHelper;
  */
 
 public class Initial {
+    /**
+     * Declare variables
+     */
     DBHelper mydb;
     Object[] args;
     Context context;
 
+    /**
+     * Empty constructor
+     * @param context
+     */
     public Initial(Context context){
         this.context = context;
     }
 
+    /**
+     * Seed data into database
+     */
     public void insertData() {
-
-        args = new Object[10];
+        //instantiate DBHelper
         mydb = new DBHelper(context);
 
+        /**
+         * Insert data
+         */
         mydb.location.insert("Halifax");
         mydb.location.insert("Stewiacke");
         mydb.school.insert("CPA",2,"Highschool");
@@ -35,6 +47,9 @@ public class Initial {
         mydb.coursesTutors.insertCoursesTutors(1, 1);
         mydb.coursesTutors.insertCoursesTutors(1, 2);
 
+        /**
+         * Get and display data
+         */
         Cursor rs;
         rs = mydb.audioRecording.getData(1);
         rs.moveToFirst();
@@ -76,5 +91,5 @@ public class Initial {
         if (!rs.isClosed()) {
             rs.close();
         }
-    }
-}
+    } //end method
+} // end class

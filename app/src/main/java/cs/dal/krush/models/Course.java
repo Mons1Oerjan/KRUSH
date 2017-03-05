@@ -14,6 +14,12 @@ public class Course extends Table{
         super(dbWrite,dbRead);
     }
 
+    /**
+     * Insert row into courses
+     * @param title
+     * @param course_code
+     * @return boolean
+     */
     public boolean insert(String title, String course_code){
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", title);
@@ -25,6 +31,12 @@ public class Course extends Table{
     @Override
     public Cursor getData(int id){
         res = dbRead.rawQuery("SELECT * FROM courses WHERE id="+id+"",null);
+        return res;
+    }
+
+    @Override
+    public Cursor getAll() {
+        res = dbRead.rawQuery("SELECT * FROM courses",null);
         return res;
     }
 

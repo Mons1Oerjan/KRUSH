@@ -14,6 +14,17 @@ public class Tutor extends Table{
         super(dbWrite,dbRead);
     }
 
+    /**
+     * Insert row into tutors table
+     * @param locationId
+     * @param schoolId
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param password
+     * @param rate
+     * @return boolean
+     */
     public boolean insert(int locationId, int schoolId, String firstName, String lastName, String
                           email, String password, int rate){
         ContentValues contentValues = new ContentValues();
@@ -31,6 +42,12 @@ public class Tutor extends Table{
     @Override
     public Cursor getData(int id){
         Cursor res = dbRead.rawQuery("SELECT * FROM tutors WHERE id="+id+"",null);
+        return res;
+    }
+
+    @Override
+    public Cursor getAll() {
+        res = dbRead.rawQuery("SELECT * FROM tutors",null);
         return res;
     }
 

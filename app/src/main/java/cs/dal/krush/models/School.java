@@ -14,6 +14,13 @@ public class School extends Table{
         super(dbWrite,dbRead);
     }
 
+    /**
+     * Insert row into schools table
+     * @param name
+     * @param locationId
+     * @param type
+     * @return boolean
+     */
     public boolean insert(String name, int locationId, String type){
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -26,6 +33,12 @@ public class School extends Table{
     @Override
     public Cursor getData(int id){
         res = dbRead.rawQuery("SELECT * FROM schools WHERE id="+id+"",null);
+        return res;
+    }
+
+    @Override
+    public Cursor getAll() {
+        res = dbRead.rawQuery("SELECT * FROM schools",null);
         return res;
     }
 

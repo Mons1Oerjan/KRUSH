@@ -14,6 +14,14 @@ public class TutoringSession extends Table{
         super(dbWrite,dbRead);
     }
 
+    /**
+     * Insert row into tutoring_sessions
+     * @param studentId
+     * @param tutorId
+     * @param locationId
+     * @param title
+     * @return boolean
+     */
     public boolean insert(int studentId, int tutorId, int locationId, String title){
         ContentValues contentValues = new ContentValues();
         contentValues.put("student_id", studentId);
@@ -27,6 +35,12 @@ public class TutoringSession extends Table{
     @Override
     public Cursor getData(int id){
         Cursor res = dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE id="+id+"",null);
+        return res;
+    }
+
+    @Override
+    public Cursor getAll() {
+        res = dbRead.rawQuery("SELECT * FROM tutoring_sessions",null);
         return res;
     }
 
