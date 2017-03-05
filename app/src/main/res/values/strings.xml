@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">KRUSH</string>
+    <string name="menu_home_text">Home</string>
+    <string name="menu_profile_text">Profile</string>
+    <string name="menu_sessions_text">Sessions</string>
+    <string name="menu_quick_book_text">Quick Book</string>
+    <string name="menu_calendar_text">Calendar</string>
 </resources>
