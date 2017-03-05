@@ -9,30 +9,30 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tutor_login_button"
-        android:text="Tutor Login"
+        android:id="@+id/login_button"
+        android:text="Login"
         android:background="@drawable/button_main"
         android:paddingRight="25dp"
         android:paddingLeft="25dp"
         android:minWidth="170dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif-medium"
-        android:layout_above="@+id/student_login_button"
+        android:layout_above="@+id/signup_button"
         android:layout_centerHorizontal="true"
         android:textColor="@color/bottom_bar_color" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/student_login_button"
-        android:text="Student Login"
+        android:id="@+id/signup_button"
+        android:text="Sign Up"
         android:background="@drawable/button_main"
         android:paddingRight="25dp"
         android:paddingLeft="25dp"
         android:minWidth="170dp"
         android:layout_marginBottom="97dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/tutor_login_button"
+        android:layout_alignStart="@+id/login_button"
         android:textColor="@color/bottom_bar_color" />
 
     <TextView

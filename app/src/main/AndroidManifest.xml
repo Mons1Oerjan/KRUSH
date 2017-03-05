@@ -21,6 +21,9 @@
             android:name=".TutorCalendarFragment"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".LoginMainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".TutorMainActivity"
             android:screenOrientation="portrait"/>
         <activity
