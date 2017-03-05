@@ -30,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
         //setup OnClickListeners:
         tutor_home_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, TutorMainActivity.class);
+                Intent i = new Intent(MainActivity.this, LoginMainActivity.class);
                 startActivity(i);
             }
         });
         student_home_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, StudentMainActivity.class);
+                Intent i = new Intent(MainActivity.this, LoginMainActivity.class);
                 startActivity(i);
             }
         });

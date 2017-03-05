@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"/>
+
+    <TextView
+        android:text="KRUSH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
+        android:id="@+id/krushLogo"
+        tools:text="KRUSH"
+        android:textSize="100sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitLogin"
+        android:text="Login"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:minWidth="170dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/bottom_bar_color"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="78dp" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Username"
+        android:textAlignment="center"
+        android:layout_above="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:nextFocusUp="@id/username"
+        android:nextFocusLeft="@id/password"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:layout_marginBottom="71dp"
+        android:layout_above="@+id/submitLogin"
+        android:layout_alignStart="@+id/username" />
+
+
+</RelativeLayout>
