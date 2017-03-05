@@ -14,14 +14,16 @@ public class Tutor extends Table{
         super(dbWrite,dbRead);
     }
 
-    @Override
-    public boolean insert(Object[] args){
+    public boolean insert(int locationId, int schoolId, String firstName, String lastName, String
+                          email, String password, int rate){
         ContentValues contentValues = new ContentValues();
-        contentValues.put("f_name", (String) args[0]);
-        contentValues.put("l_name", (String) args[1]);
-        contentValues.put("email", (String) args[2]);
-        contentValues.put("password", (String) args[3]);
-        contentValues.put("rate", (int) args[4]);
+        contentValues.put("location_id", locationId);
+        contentValues.put("school_id", schoolId);
+        contentValues.put("f_name", firstName);
+        contentValues.put("l_name", lastName);
+        contentValues.put("email", email);
+        contentValues.put("password", password);
+        contentValues.put("rate", rate);
         dbWrite.insert("tutors", null, contentValues);
         return true;
     }
@@ -30,5 +32,54 @@ public class Tutor extends Table{
     public Cursor getData(int id){
         Cursor res = dbRead.rawQuery("SELECT * FROM tutors WHERE id="+id+"",null);
         return res;
+    }
+
+    /**
+     * Get a tutor by the f_name field
+     * @param firstName
+     * @return Cursor
+     */
+    public Cursor getDataByFirstName(String firstName){
+        res = dbRead.rawQuery("SELECT * FROM tutors WHERE f_name="+firstName+"",null);
+        return res;
+    }
+
+    /**
+     * Get a tutor by the l_name field
+     * @param lastName
+     * @return Cursor
+     */
+    public Cursor getDataByLastName(String lastName){
+        res = dbRead.rawQuery("SELECT * FROM tutors WHERE l_name="+lastName+"",null);
+        return res;
+    }
+
+    /**
+     * Get a tutor by the email field
+     * @param email
+     * @return Cursor
+     */
+    public Cursor getDataEmail(String email){
+        res = dbRead.rawQuery("SELECT * FROM tutors WHERE email="+email+"",null);
+        return res;
+    }
+
+    /**
+     * Get a tutor by the rating field
+     * @param rating
+     * @return Cursor
+     */
+    public Cursor getDataByRating(int rating){
+        res = dbRead.rawQuery("SELECT * FROM tutors WHERE rating="+rating+"",null);
+        return res;
+    }
+
+    /**
+     * Delete a tutor by id
+     * @param id
+     * @return int
+     */
+    public int deleteTutor(int id){
+        return dbWrite.delete("tutors","id = ?",new String[] { Integer.toString(id) });
     }
 }

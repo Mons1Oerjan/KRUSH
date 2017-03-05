@@ -13,10 +13,9 @@ public class Location extends Table{
         super(dbWrite,dbRead);
     }
 
-    @Override
-    public boolean insert(Object[] args) {
+    public boolean insert(String location) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("location", (String) args[0]);
+        contentValues.put("location", location);
         dbWrite.insert("locations", null, contentValues);
         return true;
     }
@@ -27,11 +26,21 @@ public class Location extends Table{
         return res;
     }
 
+    /**
+     * Get a location by the location's name
+     * @param location
+     * @return Cursor
+     */
     public Cursor getDataByLocation(String location){
         res = dbRead.rawQuery("SELECT * FROM locations WHERE location="+location+"",null);
         return res;
     }
 
+    /**
+     * Get a location by the school_id column
+     * @param school_id
+     * @return Cursor
+     */
     public Cursor getLocationBySchool(int school_id){
         //get the school's location_id,
         res = dbRead.rawQuery("SELECT * FROM schools WHERE id="+school_id+"",null);
@@ -46,5 +55,14 @@ public class Location extends Table{
         res = dbRead.rawQuery("SELECT * FROM locations WHERE id="+location_id+"",null);
 
         return res;
+    }
+
+    /**
+     * Delete a location by id
+     * @param id
+     * @return int
+     */
+    public int deleteLocation(int id){
+        return dbWrite.delete("locations","id = ?",new String[] { Integer.toString(id) });
     }
 }

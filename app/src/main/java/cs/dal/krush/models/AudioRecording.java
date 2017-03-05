@@ -15,18 +15,46 @@ public class AudioRecording extends Table {
     }
 
 
-    @Override
-    public boolean insert(Object[] args){
+    public boolean insert(int studentId, int locationId){
         ContentValues contentValues = new ContentValues();
-        contentValues.put("location_id", (int) args[0]);
-        contentValues.put("student_id", (int) args[1]);
+        contentValues.put("student_id", studentId);
+        contentValues.put("location_id", locationId);
         dbWrite.insert("audio_recording", null, contentValues);
         return true;
     }
 
     @Override
     public Cursor getData(int id){
-        Cursor res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE id="+id+"",null);
+        res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE id="+id+"",null);
         return res;
+    }
+
+    /**
+     * Get an audio recording by the location_id field
+     * @param locationId
+     * @return res
+     */
+    public Cursor getDataByLocationId(int locationId){
+        res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE location_id="+locationId+"",null);
+        return res;
+    }
+
+    /**
+     * Get an audio recording by the student_id field
+     * @param studentId
+     * @return res
+     */
+    public Cursor getDataByStudentId(int studentId){
+        res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE student_id="+studentId+"",null);
+        return res;
+    }
+
+    /**
+     * Delete an audio recording from an id
+     * @param id
+     * @return int
+     */
+    public int deleteAudioRecording(int id){
+        return dbWrite.delete("audio_recording","id = ?",new String[] { Integer.toString(id) });
     }
 }

@@ -14,13 +14,13 @@ public class Student extends Table{
         super(dbWrite,dbRead);
     }
 
-    @Override
-    public boolean insert(Object[] args){
+    public boolean insert(int schoolId, String firstName, String lastName, String email, String password){
         ContentValues contentValues = new ContentValues();
-        contentValues.put("f_name", (String) args[0]);
-        contentValues.put("l_name", (String) args[1]);
-        contentValues.put("email", (String) args[2]);
-        contentValues.put("password", (String) args[3]);
+        contentValues.put("school_id", schoolId);
+        contentValues.put("f_name", firstName);
+        contentValues.put("l_name", lastName);
+        contentValues.put("email", email);
+        contentValues.put("password", password);
         dbWrite.insert("students", null, contentValues);
         return true;
     }
@@ -31,4 +31,42 @@ public class Student extends Table{
         return res;
     }
 
+    /**
+     * Get a student from the f_name field
+     * @param firstName
+     * @return Cursor
+     */
+    public Cursor getDataByFirstName(String firstName){
+        res = dbRead.rawQuery("SELECT * FROM students WHERE f_name="+firstName+"",null);
+        return res;
+    }
+
+    /**
+     * Get a student from the l_name field
+     * @param lastName
+     * @return Cursor
+     */
+    public Cursor getDataByLastName(String lastName){
+        res = dbRead.rawQuery("SELECT * FROM students WHERE l_name="+lastName+"",null);
+        return res;
+    }
+
+    /**
+     * Get a student from the email field
+     * @param email
+     * @return Cursor
+     */
+    public Cursor getDataEmail(String email){
+        res = dbRead.rawQuery("SELECT * FROM students WHERE email="+email+"",null);
+        return res;
+    }
+
+    /**
+     * Delete a student by id
+     * @param id
+     * @return int
+     */
+    public int deleteStudent(int id){
+        return dbWrite.delete("students","id = ?",new String[] { Integer.toString(id) });
+    }
 }

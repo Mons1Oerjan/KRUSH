@@ -14,11 +14,10 @@ public class Course extends Table{
         super(dbWrite,dbRead);
     }
 
-    @Override
-    public boolean insert(Object[] args){
+    public boolean insert(String title, String course_code){
         ContentValues contentValues = new ContentValues();
-        contentValues.put("title", (String) args[0]);
-        contentValues.put("course_code", (String) args[1]);
+        contentValues.put("title", title);
+        contentValues.put("course_code", course_code);
         dbWrite.insert("courses", null, contentValues);
         return true;
     }
@@ -29,13 +28,32 @@ public class Course extends Table{
         return res;
     }
 
+    /**
+     * Get a course by the title name
+     * @param title
+     * @return Cursor
+     */
     public Cursor getDataByTitle(String title){
         res = dbRead.rawQuery("SELECT * FROM courses WHERE title="+title+"",null);
         return res;
     }
 
+    /**
+     * Get a course by the course code
+     * @param courseCode
+     * @return Cursor
+     */
     public Cursor getDataByCourseCode(String courseCode){
         res = dbRead.rawQuery("SELECT * FROM courses WHERE course_code="+courseCode+"",null);
         return res;
+    }
+
+    /**
+     * Delete a course from an id
+     * @param id
+     * @return int
+     */
+    public int deleteCourse(int id){
+        return dbWrite.delete("courses","id = ?",new String[] { Integer.toString(id) });
     }
 }

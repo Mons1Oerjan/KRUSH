@@ -18,6 +18,12 @@ public class CoursesTutors {
         this.dbRead = dbRead;
     }
 
+    /**
+     * insert into this table using the tutor_id and course_id fields
+     * @param tutor_id
+     * @param course_id
+     * @return boolean
+     */
     public boolean insertCoursesTutors(int tutor_id, int course_id){
         ContentValues contentValues = new ContentValues();
         contentValues.put("tutor_id", tutor_id);
@@ -26,6 +32,11 @@ public class CoursesTutors {
         return true;
     }
 
+    /**
+     * Get courses from a specific tutor
+     * @param tutor_id
+     * @return Cursor
+     */
     public Cursor getCoursesFromTutor(int tutor_id){
         Cursor res = dbRead.rawQuery(
                 "SELECT c.course_code, c.id " +
@@ -37,6 +48,11 @@ public class CoursesTutors {
         return res;
     }
 
+    /**
+     * Get tutors from a specific course
+     * @param course_id
+     * @return Cursor
+     */
     public Cursor getTutorsFromCourse(int course_id){
         Cursor res = dbRead.rawQuery(
                 "SELECT t.f_name, t.l_name, t.id " +

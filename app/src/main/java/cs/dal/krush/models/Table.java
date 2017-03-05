@@ -20,6 +20,10 @@ public abstract class Table {
         this.dbRead = dbRead;
     }
 
-    public abstract boolean insert(Object[] args);
+    /**
+     * Get field by id
+     * @param id
+     * @return Cursor
+     */
     public abstract Cursor getData(int id);
 }

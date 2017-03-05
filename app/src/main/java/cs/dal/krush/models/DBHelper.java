@@ -14,12 +14,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context){
         super(context,DATABASE_NAME,null,1);
     }
-    public Table student = new Student(this.getWritableDatabase(), this.getReadableDatabase());
-    public Table tutor = new Tutor(this.getWritableDatabase(), this.getReadableDatabase());
-    public Table school = new School(this.getWritableDatabase(), this.getReadableDatabase());
-    public Table course = new Course(this.getWritableDatabase(), this.getReadableDatabase());
-    public Table audioRecording = new AudioRecording(this.getWritableDatabase(), this.getReadableDatabase());
-    public Table tutoringSession = new TutoringSession(this.getWritableDatabase(), this.getReadableDatabase());
+    public Student student = new Student(this.getWritableDatabase(), this.getReadableDatabase());
+    public Tutor tutor = new Tutor(this.getWritableDatabase(), this.getReadableDatabase());
+    public School school = new School(this.getWritableDatabase(), this.getReadableDatabase());
+    public Course course = new Course(this.getWritableDatabase(), this.getReadableDatabase());
+    public AudioRecording audioRecording = new AudioRecording(this.getWritableDatabase(), this.getReadableDatabase());
+    public TutoringSession tutoringSession = new TutoringSession(this.getWritableDatabase(), this.getReadableDatabase());
     public CoursesTutors coursesTutors = new CoursesTutors(this.getWritableDatabase(), this.getReadableDatabase());
     public Location location = new Location(this.getWritableDatabase(), this.getReadableDatabase());
 
@@ -35,6 +35,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CREATE TABLE tutors " +
                         "(id INTEGER PRIMARY KEY," +
                         "location_id INTEGER," +
+                        "school_id INTEGER," +
+                        "profile_pic VARCHAR(255)," +
                         "f_name VARCHAR(255)," +
                         "l_name VARCHAR(255)," +
                         "email VARCHAR(255)," +
@@ -42,19 +44,25 @@ public class DBHelper extends SQLiteOpenHelper {
                         "rating INTEGER," +
                         "rate INTEGER," +
                         "revenue INTEGER," +
+                        "FOREIGN KEY(school_id) REFERENCES schools(id)," +
                         "FOREIGN KEY(location_id) REFERENCES locations(id))"
         );
 
         db.execSQL(
                 "CREATE TABLE students " +
                         "(id INTEGER PRIMARY KEY," +
+                        "school_id INTEGER," +
+                        "audio_recording_id INTEGER," +
+                        "profile_pic VARCHAR(255)" +
                         "f_name VARCHAR(255)," +
                         "l_name VARCHAR(255)," +
                         "email VARCHAR(255)," +
                         "password VARCHAR(255)," +
                         "credit_card_num VARCHAR(255)," +
                         "credit_card_exp_date DATE," +
-                        "credit_card_cvv INTEGER)"
+                        "credit_card_cvv INTEGER," +
+                        "FOREIGN KEY(school_id) REFERENCES schools(id)," +
+                        "FOREIGN KEY(audio_recording_id) REFERENCES audio_recording(id))"
         );
 
         db.execSQL(
@@ -67,8 +75,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         "tutor_id INTEGER," +
                         "location_id INTEGER," +
                         "FOREIGN KEY(location_id) REFERENCES locations(id)," +
-                        "FOREIGN KEY(student_id) REFERENCES students(id)," +
-                        "FOREIGN KEY(tutor_id) REFERENCES tutors(id))"
+                        "FOREIGN KEY(student_id) REFERENCES students(id) ON DELETE CASCADE," +
+                        "FOREIGN KEY(tutor_id) REFERENCES tutors(id) ON DELETE CASCADE)"
         );
 
         db.execSQL(
@@ -93,7 +101,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "student_id INTEGER," +
                         "location_id INTEGER," +
                         "FOREIGN KEY(location_id) REFERENCES locations(id)," +
-                        "FOREIGN KEY(student_id) REFERENCES students(id))"
+                        "FOREIGN KEY(student_id) REFERENCES students(id) ON DELETE CASCADE)"
         );
 
         db.execSQL(
@@ -101,8 +109,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         "(id INTEGER PRIMARY KEY," +
                         "course_id INTEGER NOT NULL," +
                         "tutor_id INTEGER NOT NULL," +
-                        "FOREIGN KEY(course_id) REFERENCES courses(id)," +
-                        "FOREIGN KEY(tutor_id) REFERENCES tutors(id))"
+                        "FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE," +
+                        "FOREIGN KEY(tutor_id) REFERENCES tutors(id) ON DELETE CASCADE)"
         );
 
 
