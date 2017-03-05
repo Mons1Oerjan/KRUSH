@@ -12,7 +12,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class LoginMainActivity extends AppCompatActivity {
-    //student = 1 || student = 2
+    //student = 1 || tutor = 2
     private int profileSelected = 0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class LoginMainActivity extends AppCompatActivity {
                 if(profileSelected == 1){
                     i = new Intent(LoginMainActivity.this, StudentMainActivity.class);
                 }
-                else{
+                else if(profileSelected == 2){
                     i = new Intent(LoginMainActivity.this, TutorMainActivity.class);
                 }
                 startActivity(i);
