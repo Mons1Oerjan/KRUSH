@@ -8,6 +8,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
+import cs.dal.krush.studentFragments.StudentHomeFragment;
+import cs.dal.krush.studentFragments.StudentProfileFragment;
+import cs.dal.krush.studentFragments.StudentQuickBookFragment;
+import cs.dal.krush.studentFragments.StudentSessionsFragment;
 
 
 public class StudentMainActivity extends FragmentActivity {

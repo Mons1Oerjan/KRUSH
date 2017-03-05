@@ -1,4 +1,5 @@
-package cs.dal.krush;
+package cs.dal.krush.studentFragments;
+
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,15 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import cs.dal.krush.R;
+
+
 /**
- * Tutor Sessions History view.
+ * A simple {@link Fragment} subclass.
  */
-public class TutorSessionsFragment extends Fragment {
+public class StudentQuickBookItemFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.tutor_sessions, container, false);
+        return inflater.inflate(R.layout.student_quick_book_item, container, false);
     }
+
 }

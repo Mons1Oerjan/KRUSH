@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TutorCalendarFragment"
+            android:name=".tutorFragments.TutorCalendarFragment"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginMainActivity"
