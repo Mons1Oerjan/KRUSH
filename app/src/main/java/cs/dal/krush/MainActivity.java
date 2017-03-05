@@ -8,11 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import cs.dal.krush.seeders.Initial;
+
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //seed data
+        Initial seederInitial = new Initial(getApplicationContext());
+        seederInitial.insertData();
 
         //fetch UI elements:
         final Button tutor_home_button = (Button) findViewById(R.id.tutor_login_button);
