@@ -11,6 +11,7 @@ public abstract class Table {
 
     protected SQLiteDatabase dbWrite;
     protected SQLiteDatabase dbRead;
+    protected Cursor res;
 
     public Table(){}
 

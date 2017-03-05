@@ -21,20 +21,28 @@ public class DBHelper extends SQLiteOpenHelper {
     public Table audioRecording = new AudioRecording(this.getWritableDatabase(), this.getReadableDatabase());
     public Table tutoringSession = new TutoringSession(this.getWritableDatabase(), this.getReadableDatabase());
     public CoursesTutors coursesTutors = new CoursesTutors(this.getWritableDatabase(), this.getReadableDatabase());
+    public Location location = new Location(this.getWritableDatabase(), this.getReadableDatabase());
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
+                "CREATE TABLE locations " +
+                        "(id INTEGER PRIMARY KEY," +
+                        "location VARCHAR(255))"
+        );
+
+        db.execSQL(
                 "CREATE TABLE tutors " +
                         "(id INTEGER PRIMARY KEY," +
+                        "location_id INTEGER," +
                         "f_name VARCHAR(255)," +
                         "l_name VARCHAR(255)," +
                         "email VARCHAR(255)," +
                         "password VARCHAR(255)," +
                         "rating INTEGER," +
-                        "locations VARCHAR(255)," +
                         "rate INTEGER," +
-                        "revenue INTEGER)"
+                        "revenue INTEGER," +
+                        "FOREIGN KEY(location_id) REFERENCES locations(id))"
         );
 
         db.execSQL(
@@ -55,9 +63,10 @@ public class DBHelper extends SQLiteOpenHelper {
                         "title VARCHAR(255)," +
                         "start_time DATETIME," +
                         "end_time DATETIME," +
-                        "location VARCHAR(255)," +
                         "student_id INTEGER," +
                         "tutor_id INTEGER," +
+                        "location_id INTEGER," +
+                        "FOREIGN KEY(location_id) REFERENCES locations(id)," +
                         "FOREIGN KEY(student_id) REFERENCES students(id)," +
                         "FOREIGN KEY(tutor_id) REFERENCES tutors(id))"
         );
@@ -66,8 +75,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CREATE TABLE schools " +
                         "(id INTEGER PRIMARY KEY," +
                         "name VARCHAR(255)," +
-                        "location VARCHAR(255)," +
-                        "type VARCHAR(255))"
+                        "type VARCHAR(255)," +
+                        "location_id INTEGER," +
+                        "FOREIGN KEY(location_id) REFERENCES locations(id))"
         );
 
         db.execSQL(
@@ -81,7 +91,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CREATE TABLE audio_recording " +
                         "(id INTEGER PRIMARY KEY," +
                         "student_id INTEGER," +
-                        "location VARCHAR(255)," +
+                        "location_id INTEGER," +
+                        "FOREIGN KEY(location_id) REFERENCES locations(id)," +
                         "FOREIGN KEY(student_id) REFERENCES students(id))"
         );
 
@@ -94,6 +105,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY(tutor_id) REFERENCES tutors(id))"
         );
 
+
+
     }
 
     @Override
@@ -105,6 +118,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS courses");
         db.execSQL("DROP TABLE IF EXISTS audio_recording");
         db.execSQL("DROP TABLE IF EXISTS course_tutors");
+        db.execSQL("DROP TABLE IF EXISTS locations");
 
         onCreate(db);
     }

@@ -18,7 +18,7 @@ public class AudioRecording extends Table {
     @Override
     public boolean insert(Object[] args){
         ContentValues contentValues = new ContentValues();
-        contentValues.put("location", (String) args[0]);
+        contentValues.put("location_id", (int) args[0]);
         contentValues.put("student_id", (int) args[1]);
         dbWrite.insert("audio_recording", null, contentValues);
         return true;

@@ -23,6 +23,10 @@ public class Initial {
         args = new Object[10];
         mydb = new DBHelper(context);
 
+        args[0] = "Halifax";
+        mydb.location.insert(args);
+        args[0] = "Stewiacke";
+        mydb.location.insert(args);
         args[0] = "greg";
         args[1] = "miller";
         args[2] = "gregpmillr@gmail.com";
@@ -30,7 +34,7 @@ public class Initial {
         args[4] = 2;
         mydb.tutor.insert(args);
         args[0] = "testsesh";
-        args[1] = "3565 connaught avenue";
+        args[1] = 1;
         mydb.tutoringSession.insert(args);
         args[0] = "Computer Science 3";
         args[1] = "CSCI3110";
@@ -43,11 +47,11 @@ public class Initial {
         args[2] = "gregpmillrstudent@gmail.com";
         args[3] = "password";
         mydb.student.insert(args);
-        args[0] = "Halifax";
+        args[0] = 1;
         args[1] = 1;
         mydb.audioRecording.insert(args);
         args[0] = "CPA";
-        args[1] = "HFX";
+        args[1] = 2;
         args[2] = "Highschool";
         mydb.school.insert(args);
         mydb.coursesTutors.insertCoursesTutors(1, 1);
@@ -58,8 +62,16 @@ public class Initial {
         rs = mydb.audioRecording.getData(1);
         rs.moveToFirst();
         String s;
-        s = rs.getString(rs.getColumnIndex("location"));
+        s = rs.getString(rs.getColumnIndex("location_id"));
         System.out.println(s);
+        if (!rs.isClosed()) {
+            rs.close();
+        }
+
+        rs = mydb.location.getLocationBySchool(1);
+        rs.moveToFirst();
+        s = rs.getString(rs.getColumnIndex("location"));
+        System.out.println("LOCATION:" + s);
         if (!rs.isClosed()) {
             rs.close();
         }

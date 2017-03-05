@@ -18,7 +18,7 @@ public class TutoringSession extends Table{
     public boolean insert(Object[] args){
         ContentValues contentValues = new ContentValues();
         contentValues.put("title", (String) args[0]);
-        contentValues.put("location", (String) args[1]);
+        contentValues.put("location_id", (int) args[1]);
         dbWrite.insert("tutoring_sessions", null, contentValues);
         return true;
     }
