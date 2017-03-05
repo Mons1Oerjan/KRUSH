@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //fetch UI elements:
-        final Button tutor_home_button = (Button) findViewById(R.id.tutor_login_button);
-        final Button student_home_button = (Button) findViewById(R.id.student_login_button);
+        final Button signup_home_button = (Button) findViewById(R.id.signup_button);
+        final Button login_home_button = (Button) findViewById(R.id.login_button);
         final TextView krush_logo_textView = (TextView) findViewById(R.id.krushLogo);
         final TextView krush_slogan_textView = (TextView) findViewById(R.id.krushSlogan);
 
@@ -28,13 +28,12 @@ public class MainActivity extends AppCompatActivity {
         krush_slogan_textView.setTypeface(typeFace);
 
         //setup OnClickListeners:
-        tutor_home_button.setOnClickListener(new View.OnClickListener() {
+        signup_home_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, LoginMainActivity.class);
-                startActivity(i);
+
             }
         });
-        student_home_button.setOnClickListener(new View.OnClickListener() {
+        login_home_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, LoginMainActivity.class);
                 startActivity(i);
