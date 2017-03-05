@@ -53,7 +53,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "(id INTEGER PRIMARY KEY," +
                         "school_id INTEGER," +
                         "audio_recording_id INTEGER," +
-                        "profile_pic VARCHAR(255)" +
+                        "profile_pic VARCHAR(255)," +
                         "f_name VARCHAR(255)," +
                         "l_name VARCHAR(255)," +
                         "email VARCHAR(255)," +
