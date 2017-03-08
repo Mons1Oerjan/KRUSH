@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import cs.dal.krush.seeders.Initial;
+import cs.dal.krush.seeders.DatabaseSeeder;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -17,8 +17,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //seed data
-        Initial seederInitial = new Initial(getApplicationContext());
+        DatabaseSeeder seederInitial = new DatabaseSeeder(getApplicationContext());
         seederInitial.insertData();
+        seederInitial.displayData();
 
         //fetch UI elements:
         final Button signup_home_button = (Button) findViewById(R.id.signup_button);
