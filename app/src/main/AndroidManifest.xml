@@ -29,7 +29,9 @@
         <activity
             android:name=".StudentMainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".RegistrationActivity"></activity>
+        <activity
+            android:name=".RegistrationActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
