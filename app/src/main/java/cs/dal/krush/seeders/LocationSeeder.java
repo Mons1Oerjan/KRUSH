@@ -3,7 +3,7 @@ package cs.dal.krush.seeders;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * Created by greg on 07/03/17.
+ * Seeder for the locations database table
  */
 
 public class LocationSeeder {

@@ -3,7 +3,7 @@ package cs.dal.krush.seeders;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * Created by greg on 07/03/17.
+ * Seeder for the courses_tutors database table
  */
 
 public class CoursesTutorsSeeder {
@@ -19,12 +19,5 @@ public class CoursesTutorsSeeder {
         db.coursesTutors.insertCoursesTutors(2,5);
         db.coursesTutors.insertCoursesTutors(5,1);
         db.coursesTutors.insertCoursesTutors(5,3);
-
-
-
-
-
-
-
     }
 }

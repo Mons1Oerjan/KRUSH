@@ -3,7 +3,7 @@ package cs.dal.krush.seeders;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * Created by greg on 07/03/17.
+ * Seeder for the students database table
  */
 
 public class StudentSeeder {
@@ -16,6 +16,10 @@ public class StudentSeeder {
         db.student.insert(5,"Jack","Daniels","jd@outlook.com","password");
         db.student.insert(6,"Tim","Thompson","tt@hotmail.ca","password");
         db.student.insert(7,"Mike","Jackson","mj@hotmail.ca","password");
+        db.student.insert(8,"Lucy","Patterson","lp@hotmail.ca","password");
+        db.student.insert(7,"Carline","Jenkins","mj@hotmail.ca","password");
+        db.student.insert(3,"McKenzie","Rekker","mk@dal.ca","password");
+        db.student.insert(4,"Darlene","Tims","dt@gmail.ca","password");
 
     }
 }

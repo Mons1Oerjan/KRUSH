@@ -6,9 +6,8 @@ import android.database.Cursor;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * Created by greg on 27/02/17.
+ * Built to initiate seeding
  */
-
 public class DatabaseSeeder {
     /**
      * Declare variables
@@ -44,7 +43,7 @@ public class DatabaseSeeder {
         AudioRecordingSeeder.insert(mydb);
         CoursesTutorsSeeder.insert(mydb);
 
-    } //end method
+    }
 
     /**
      * Display data inserted by seeders
@@ -100,4 +99,4 @@ public class DatabaseSeeder {
         }
     }
 
-} // end class
+}
