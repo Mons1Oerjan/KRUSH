@@ -52,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         //setup OnClickListeners:
         signup_home_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                Intent i = new Intent(MainActivity.this, RegistrationActivity.class);
+                startActivity(i);
             }
         });
         login_home_button.setOnClickListener(new View.OnClickListener() {
