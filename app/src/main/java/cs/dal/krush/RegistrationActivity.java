@@ -1,11 +1,15 @@
 package cs.dal.krush;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * RegistrationActivity is used to register a new user to
@@ -15,6 +19,14 @@ import android.widget.TextView;
  *
  */
 public class RegistrationActivity extends AppCompatActivity {
+
+    private int profileSelected = 0;
+
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String passwordConfirmation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +42,8 @@ public class RegistrationActivity extends AppCompatActivity {
         final EditText  input_password = (EditText) findViewById(R.id.input_password);
         final EditText  input_password_confirm = (EditText) findViewById(R.id.input_password_confirm);
         final Button register_button = (Button) findViewById(R.id.submit_registration);
+        final RadioButton radio_student = (RadioButton) findViewById(R.id.radio_student);
+        final RadioButton radio_tutor = (RadioButton) findViewById(R.id.radio_tutor);
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -37,5 +51,85 @@ public class RegistrationActivity extends AppCompatActivity {
         //set logo font style
         page_title_textView.setTypeface(typeFace);
         radio_label_textView.setTypeface(typeFace);
+
+        //radio button click listeners
+        radio_tutor.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                profileSelected = 1;
+            }
+        });
+        radio_student.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                profileSelected = 2;
+            }
+        });
+
+
+        //setup OnClickListeners:
+        register_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                firstName = first_name_input.getText().toString();
+                lastName = last_name_input.getText().toString();
+                email = email_input.getText().toString();
+                password = input_password.getText().toString();
+                passwordConfirmation = input_password_confirm.getText().toString();
+
+                //validate input fields are not empty
+                if(firstName.length() == 0)
+                    first_name_input.setError("First name is required!");
+                if(lastName.length() == 0)
+                    last_name_input.setError("Last name is required!");
+                if(email.length() == 0)
+                    email_input.setError("Email is required!");
+                if(password.length() == 0)
+                    input_password.setError("Password is required!");
+                if(passwordConfirmation.length() == 0)
+                    input_password_confirm.setError("Password is required!");
+
+                //validate password must match
+                if(!passwordConfirmation.equals(password))
+                    input_password_confirm.setError("Passwords must match");
+
+                //validate email format
+                if(!Email_Validate(email)){
+                    email_input.setError("Invalid email format!");
+                }
+
+                //validate if profile is selected
+                if(profileSelected == 0){
+                    Toast.makeText(getApplicationContext(), "Please select a Role " +
+                            "(Student or Tutor)", Toast.LENGTH_SHORT).show();
+                }
+
+                //validate if email is already used
+                // TODO: 2017-03-09 query DB based on radio selection student/tutor
+
+                //write to db
+                // TODO: 2017-03-09 write to DB
+
+
+
+
+//                Intent i = new Intent(MainActivity.this, RegistrationActivity.class);
+//                startActivity(i);
+            }
+        });
+    }
+
+    /**
+     * Validates if email is of valid format or not
+     *
+     * Source:
+     * [1]"How to get all possible combinations of a list’s elements?",
+     * Stackoverflow.com, 2017. [Online].
+     * Available: http://stackoverflow.com/questions/464864/how-to-get-all-possible-combinations-
+     * of-a-list-s-elements. [Accessed: 08- Mar- 2017].
+     *
+     * @param email
+     * @return true if email is valid
+     */
+    private boolean Email_Validate(String email){
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
