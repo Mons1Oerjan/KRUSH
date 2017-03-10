@@ -1,6 +1,8 @@
 package cs.dal.krush;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,17 +10,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import cs.dal.krush.seeders.Initial;
+import cs.dal.krush.seeders.DatabaseSeeder;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String PREFS_NAME = "MyPrefs" ;
+    SharedPreferences sharedPreferences;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //seed data
-        Initial seederInitial = new Initial(getApplicationContext());
-        seederInitial.insertData();
+        // check to see if user has opened the app before
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        if(!sharedPreferences.contains("first_login")){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("first_login", false);
+            editor.commit();
+
+            //seed data
+            DatabaseSeeder seederInitial = new DatabaseSeeder(getApplicationContext());
+            seederInitial.insertData();
+            seederInitial.displayData();
+        }
 
         //fetch UI elements:
         final Button signup_home_button = (Button) findViewById(R.id.signup_button);
