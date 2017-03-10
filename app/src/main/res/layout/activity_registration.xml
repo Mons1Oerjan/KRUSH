@@ -36,32 +36,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Enter your last name"
-        android:textColorHint="@color/colorPrimary"
-        android:ems="10"
-        android:layout_marginTop="17dp"
-        android:id="@+id/input_last_name"
-        android:layout_below="@+id/input_first_name"
-        android:layout_alignStart="@+id/input_first_name"
-        android:textAlignment="textStart" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="your@email.com"
-        android:textColorHint="@color/colorPrimary"
-        android:ems="10"
-        android:layout_below="@+id/input_last_name"
-        android:layout_alignStart="@+id/input_last_name"
-        android:layout_marginTop="17dp"
-        android:id="@+id/input_email"
-        android:textAlignment="viewStart" />
-
     <TextView
         android:text="What is your role?"
         android:textColor="@color/colorPrimary"
@@ -94,33 +68,6 @@
             android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:hint="Confirm Password"
-        android:textColorHint="@color/colorPrimary"
-        android:layout_marginTop="13dp"
-        android:id="@+id/input_password_confirm"
-        android:layout_below="@+id/input_password"
-        android:layout_alignStart="@+id/input_password"
-        android:textAlignment="viewStart" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:layout_marginTop="17dp"
-        android:id="@+id/input_password"
-        android:hint="Password"
-        android:textColorHint="@color/colorPrimary"
-
-        android:textAlignment="viewStart"
-        android:layout_below="@+id/input_email"
-        android:layout_alignStart="@+id/input_email" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -132,9 +79,78 @@
         android:minWidth="170dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
-        android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter your last name"
+        android:textColorHint="@color/colorPrimary"
+        android:ems="10"
+        android:id="@+id/input_last_name"
+        android:textAlignment="textStart"
+        android:layout_below="@+id/input_first_name"
+        android:layout_alignStart="@+id/input_first_name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="your@email.com"
+        android:textColorHint="@color/colorPrimary"
+        android:ems="10"
+        android:id="@+id/input_email"
+        android:textAlignment="viewStart"
+        android:layout_below="@+id/input_last_name"
+        android:layout_alignStart="@+id/input_last_name" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/school_selecter"
+        android:layout_marginTop="47dp"
+        android:layout_below="@+id/input_email"
+        android:layout_alignStart="@+id/input_email"
+        android:layout_alignEnd="@+id/input_email" />
+
+    <TextView
+        android:text="Select a school:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:id="@+id/school_label"
+        tools:text="Select a school:"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        android:layout_below="@+id/input_email"
+        android:layout_alignStart="@+id/radio_label" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/input_password"
+        android:hint="Password"
+        android:textColorHint="@color/colorPrimary"
+        android:textAlignment="viewStart"
+        android:layout_below="@+id/school_selecter"
+        android:layout_alignStart="@+id/school_selecter"
+        android:layout_marginTop="13dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:textColorHint="@color/colorPrimary"
+        android:id="@+id/input_password_confirm"
+        android:textAlignment="viewStart"
+        android:layout_below="@+id/input_password"
+        android:layout_alignStart="@+id/input_password" />
 
 
 </RelativeLayout>
