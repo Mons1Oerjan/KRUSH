@@ -28,7 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private int profileSelected;
     private int schoolID;
-    private boolean valdated;
+    private boolean isValid;
     private String firstName;
     private String lastName;
     private String email;
@@ -104,7 +104,7 @@ public class RegistrationActivity extends AppCompatActivity {
         register_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                valdated = true;
+                isValid = true;
                 firstName = first_name_input.getText().toString();
                 lastName = last_name_input.getText().toString();
                 email = email_input.getText().toString();
@@ -114,48 +114,48 @@ public class RegistrationActivity extends AppCompatActivity {
                 //validate input fields are not empty
                 if(firstName.length() == 0) {
                     first_name_input.setError("First name is required!");
-                    valdated = false;
+                    isValid = false;
                 }
                 if(lastName.length() == 0) {
                     last_name_input.setError("Last name is required!");
-                    valdated = false;
+                    isValid = false;
                 }
                 if(email.length() == 0) {
                     email_input.setError("Email is required!");
-                    valdated = false;
+                    isValid = false;
                 }
                 if(password.length() == 0) {
                     input_password.setError("Password is required!");
-                    valdated = false;
+                    isValid = false;
                 }
                 if(passwordConfirmation.length() == 0) {
                     input_password_confirm.setError("Password is required!");
-                    valdated = false;
+                    isValid = false;
                 }
 
                 //validate password must match
                 if(!passwordConfirmation.equals(password)) {
                     input_password_confirm.setError("Passwords must match");
-                    valdated = false;
+                    isValid = false;
                 }
 
                 //validate email format
                 if(!Email_Validate(email)) {
                     email_input.setError("Invalid email format!");
-                    valdated = false;
+                    isValid = false;
                 }
 
                 //validate if profile is selected
                 if(profileSelected == 0) {
                     Toast.makeText(getApplicationContext(), "Please select a Role " +
                             "(Student or Tutor)", Toast.LENGTH_SHORT).show();
-                    valdated = false;
+                    isValid = false;
                 }
 
                 //validate if email is already used
                 // TODO: 2017-03-09 request query to lookup existing user emails tutors & students
 
-                if(valdated) {
+                if(isValid) {
                     //get index value of the school
                     schoolID = schoolList.indexOf(school_selecter.getSelectedItem().toString()) + 1;
 
