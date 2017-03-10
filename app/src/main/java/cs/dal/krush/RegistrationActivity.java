@@ -2,10 +2,8 @@ package cs.dal.krush;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.health.SystemHealthManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,7 +45,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         //initialize database connection
         mydb = new DBHelper(getApplicationContext());
-
 
         //fetch UI elements:
         final TextView page_title_textView = (TextView) findViewById(R.id.text_view_page_header);
@@ -103,8 +100,6 @@ public class RegistrationActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         school_selecter.setAdapter(adapter);
 
-
-
         //setup OnClickListeners:
         register_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -115,7 +110,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 email = email_input.getText().toString();
                 password = input_password.getText().toString();
                 passwordConfirmation = input_password_confirm.getText().toString();
-
 
                 //validate input fields are not empty
                 if(firstName.length() == 0) {
