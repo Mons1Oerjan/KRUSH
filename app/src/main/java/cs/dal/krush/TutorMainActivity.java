@@ -6,9 +6,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.view.View;
+
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
+import cs.dal.krush.studentFragments.StudentProfileEditFragment;
+import cs.dal.krush.studentFragments.StudentProfileFragment;
 import cs.dal.krush.tutorFragments.TutorCalendarFragment;
 import cs.dal.krush.tutorFragments.TutorHomeFragment;
+import cs.dal.krush.tutorFragments.TutorProfileEditFragment;
 import cs.dal.krush.tutorFragments.TutorProfileFragment;
 import cs.dal.krush.tutorFragments.TutorSessionsFragment;
 
@@ -40,30 +45,60 @@ public class TutorMainActivity extends FragmentActivity {
                     case R.id.menu_home:
                         TutorHomeFragment home = new TutorHomeFragment();
                         transaction.replace(R.id.tutor_fragment_container, home);
-                        transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_profile:
                         TutorProfileFragment profile = new TutorProfileFragment();
                         transaction.replace(R.id.tutor_fragment_container, profile);
-                        transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_sessions:
                         TutorSessionsFragment sessions = new TutorSessionsFragment();
                         transaction.replace(R.id.tutor_fragment_container, sessions);
-                        transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_calendar:
                         TutorCalendarFragment calendar = new TutorCalendarFragment();
                         transaction.replace(R.id.tutor_fragment_container, calendar);
-                        transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                 }
                 return false;
             }
         });
+    }
+
+    public void editProfile(View view)
+    {
+        try
+        {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            TutorProfileEditFragment edit = new TutorProfileEditFragment();
+            transaction.replace(R.id.tutor_fragment_container, edit);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public void saveProfile(View view)
+    {
+        // Save information in fields to database when functionality is hooked up
+
+        // Return to profile view
+        try
+        {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            TutorProfileFragment profile = new TutorProfileFragment();
+            transaction.replace(R.id.tutor_fragment_container, profile);
+            transaction.commit();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

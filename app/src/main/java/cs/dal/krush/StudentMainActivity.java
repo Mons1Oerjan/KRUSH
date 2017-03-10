@@ -6,9 +6,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.view.View;
 
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
 import cs.dal.krush.studentFragments.StudentHomeFragment;
+import cs.dal.krush.studentFragments.StudentProfileEditFragment;
 import cs.dal.krush.studentFragments.StudentProfileFragment;
 import cs.dal.krush.studentFragments.StudentQuickBookFragment;
 import cs.dal.krush.studentFragments.StudentSessionsFragment;
@@ -41,30 +43,61 @@ public class StudentMainActivity extends FragmentActivity {
                     case R.id.menu_home:
                         StudentHomeFragment home = new StudentHomeFragment();
                         transaction.replace(R.id.student_fragment_container, home);
-                        transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_quick_book:
                         StudentQuickBookFragment quickbook = new StudentQuickBookFragment();
                         transaction.replace(R.id.student_fragment_container, quickbook);
-                        transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_profile:
                         StudentProfileFragment profile = new StudentProfileFragment();
                         transaction.replace(R.id.student_fragment_container, profile);
-                        transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_sessions:
                         StudentSessionsFragment sessions = new StudentSessionsFragment();
                         transaction.replace(R.id.student_fragment_container, sessions);
-                        transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                 }
                 return false;
             }
         });
+    }
+
+
+    public void editProfile(View view)
+    {
+        try
+        {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            StudentProfileEditFragment edit = new StudentProfileEditFragment();
+            transaction.replace(R.id.student_fragment_container, edit);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public void saveProfile(View view)
+    {
+        // Save information in fields to database when functionality is hooked up
+
+        // Return to profile view
+        try
+        {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            StudentProfileFragment profile = new StudentProfileFragment();
+            transaction.replace(R.id.student_fragment_container, profile);
+            transaction.commit();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }
