@@ -57,13 +57,12 @@ public class StudentHomeFragment extends Fragment {
         tutorsListView.setAdapter(profileAdapter);
 
         //get all student sessions:
-        //TODO: Change this to getDataByStudentIdForCursorAdapter() once login system works
-        cursorSessionsResponse = mydb.tutoringSession.getAllForCursorAdapter();
+        //TODO: Change the ID passed in (1) to the logged in studentId once login has been setup
+        cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(1);
 
         //set sessions listview adapter:
         sessionsAdapter = new SessionsCursorAdapter(C, cursorSessionsResponse);
         upcomingSessionsListView.setAdapter(sessionsAdapter);
-
 
         return view;
     }

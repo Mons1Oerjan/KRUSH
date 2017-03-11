@@ -17,6 +17,7 @@ public class Student extends Table{
     /**
      * Insert row into students table
      * @param schoolId
+     * @param profilePic
      * @param firstName
      * @param lastName
      * @param email

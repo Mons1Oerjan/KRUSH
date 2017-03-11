@@ -12,9 +12,13 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 
 /**
- * This is the adapter class for the customized rows in the Upcoming Sessions list view
+ * This is the adapter class for the customized rows in the Upcoming Sessions
+ * list view on the student home page.
  */
 public class SessionsCursorAdapter extends CursorAdapter {
+
+    //store the context set in the constructor
+    private Context mContext;
 
     /**
      * Constructor
@@ -24,6 +28,7 @@ public class SessionsCursorAdapter extends CursorAdapter {
      */
     public SessionsCursorAdapter(Context context, Cursor cursor){
         super(context, cursor, 0);
+        this.mContext = context;
     }
 
     /**
@@ -54,15 +59,20 @@ public class SessionsCursorAdapter extends CursorAdapter {
         ImageView image = (ImageView)view.findViewById(R.id.icon);
 
         //Get the tutor's profile image:
-        //String imageFileName = cursor.getString(cursor.getColumnIndexOrThrow(""));
+        String imageFileName = cursor.getString(cursor.getColumnIndexOrThrow("profile_pic"));
+        if (imageFileName != null){
+            int resourceId = mContext.getResources().getIdentifier(
+                    imageFileName, "drawable", mContext.getPackageName());
+            image.setImageResource(resourceId);
+        }
 
-        //Get the tutor's name:
+        //Get the tutoring session title:
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         text1.setText(title);
 
         //Get the tutor's rate and subject:
         String studentId = cursor.getString(cursor.getColumnIndexOrThrow("student_id"));
-        String tutorId = cursor.getString(cursor.getColumnIndexOrThrow("tutor_id"));
+        String tutorId = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
         String text2content = "studentId: " + studentId + ", tutorId: " + tutorId;
         text2.setText(text2content);
     }

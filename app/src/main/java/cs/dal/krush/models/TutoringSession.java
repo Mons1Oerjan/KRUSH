@@ -5,9 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Created by greg on 27/02/17.
+ * Tutoring Sessions model class.
  */
-
 public class TutoringSession extends Table{
 
     public TutoringSession(SQLiteDatabase dbWrite, SQLiteDatabase dbRead){
@@ -85,7 +84,14 @@ public class TutoringSession extends Table{
      * @return Cursor
      */
     public Cursor getDataByStudentIdForCursorAdapter(int studentId){
-        return dbRead.rawQuery("SELECT id as _id, student_id, tutor_id, location_id, title FROM tutoring_sessions WHERE student_id="+studentId+"",null);
+        return dbRead.rawQuery(
+                "SELECT t.id AS _id, t.location_id, t.school_id, t.profile_pic, t.f_name, t.l_name, " +
+                "t.email, t.password, t.rating, t.rate, t.revenue, ts.student_id, ts.title, ts.id " +
+                "FROM tutors t " +
+                "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
+                "WHERE ts.student_id=" + studentId + ""
+                ,null
+        );
     }
 
     /**
@@ -105,5 +111,4 @@ public class TutoringSession extends Table{
     public int deleteTutoringSession(int id){
         return dbWrite.delete("tutoring_sessions","id = ?",new String[] { Integer.toString(id) });
     }
-
 }

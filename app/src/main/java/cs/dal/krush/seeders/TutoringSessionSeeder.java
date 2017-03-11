@@ -3,13 +3,13 @@ package cs.dal.krush.seeders;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * Created by greg on 07/03/17.
+ * DB Seeders class for Tutoring Sessions.
  */
-
 public class TutoringSessionSeeder {
 
     /**
-     * Function that inserts dummy tutoring sessions into the DB
+     * Function that inserts dummy tutoring sessions into the DB.
+     * Insert format: studentId, tutorId, locationId, title.
      * @param db
      */
     public static void insert(DBHelper db){

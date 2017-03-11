@@ -2,6 +2,7 @@ package cs.dal.krush.studentFragments;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,13 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 
 /**
- * This is the adapter class for the customized rows in the Book Tutor list view
+ * This is the adapter class for the customized rows in the 'Book a Tutor'
+ * list view on the student home page
  */
 public class ProfileCursorAdapter extends CursorAdapter {
+
+    //store the context set in the constructor
+    private Context mContext;
 
     /**
      * Constructor
@@ -24,6 +29,7 @@ public class ProfileCursorAdapter extends CursorAdapter {
      */
     public ProfileCursorAdapter(Context context, Cursor cursor){
         super(context, cursor, 0);
+        this.mContext = context;
     }
 
     /**
@@ -55,6 +61,12 @@ public class ProfileCursorAdapter extends CursorAdapter {
 
         //Get the tutor's profile image:
         String imageFileName = cursor.getString(cursor.getColumnIndexOrThrow("profile_pic"));
+        if (imageFileName != null){
+            int resourceId = mContext.getResources().getIdentifier(
+                    imageFileName, "drawable", mContext.getPackageName());
+            image.setImageResource(resourceId);
+        }
+
 
         //Get the tutor's name:
         String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));

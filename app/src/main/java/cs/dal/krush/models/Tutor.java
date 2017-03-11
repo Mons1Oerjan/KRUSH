@@ -18,6 +18,7 @@ public class Tutor extends Table{
      * Insert row into tutors table
      * @param locationId
      * @param schoolId
+     * @param profilePic
      * @param firstName
      * @param lastName
      * @param email
