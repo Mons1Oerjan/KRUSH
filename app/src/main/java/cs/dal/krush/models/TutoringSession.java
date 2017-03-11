@@ -44,6 +44,11 @@ public class TutoringSession extends Table{
         return res;
     }
 
+    public Cursor getAllForCursorAdapter(){
+        res = dbRead.rawQuery("SELECT id as _id, student_id, tutor_id, location_id, title FROM tutoring_sessions", null);
+        return res;
+    }
+
     /**
      * Get a tutoring session by the title
      * @param title

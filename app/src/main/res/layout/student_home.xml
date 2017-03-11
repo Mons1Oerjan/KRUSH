@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -7,8 +7,43 @@
 
 
     <TextView
+        android:id="@+id/titleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Student Home"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Student Home" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/upcomingSessionsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="Your Upcoming Tutoring Sessions:" />
+
+    <ListView
+        android:id="@+id/upcomingSessionsListView"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/upcomingSessionsLabel" />
+
+    <TextView
+        android:id="@+id/bookTutorLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Book a Tutor:"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/titleLabel" />
+
+    <ListView
+        android:id="@+id/availableTutorsListView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/bookTutorLabel" />
+
+
+</RelativeLayout>

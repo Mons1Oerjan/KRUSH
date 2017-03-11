@@ -52,6 +52,18 @@ public class Tutor extends Table{
     }
 
     /**
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     * Gets all tutors.
+     *
+     * @return Cursor
+     */
+    public Cursor getAllForCursorAdapter() {
+        res = dbRead.rawQuery("SELECT id as _id, location_id, school_id, profile_pic, " +
+                "f_name, l_name, email, password, rating, rate, revenue FROM tutors", null);
+        return res;
+    }
+
+    /**
      * Get a tutor by the f_name field
      * @param firstName
      * @return Cursor
