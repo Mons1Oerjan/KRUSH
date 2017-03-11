@@ -66,14 +66,16 @@ public class SessionsCursorAdapter extends CursorAdapter {
             image.setImageResource(resourceId);
         }
 
-        //Get the tutoring session title:
+        //Set the row's header text:
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
         text1.setText(title);
 
-        //Get the tutor's rate and subject:
-        String studentId = cursor.getString(cursor.getColumnIndexOrThrow("student_id"));
-        String tutorId = cursor.getString(cursor.getColumnIndexOrThrow("_id"));
-        String text2content = "studentId: " + studentId + ", tutorId: " + tutorId;
+        //Set the row's sub-header text:
+        String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
+        String tutorLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
+        String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
+        String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
+        String text2content = tutorFirstName + " " + tutorLastName + ", Rating: " + tutorRating + ", Rate: " + tutorRate + "$";
         text2.setText(text2content);
     }
 }
