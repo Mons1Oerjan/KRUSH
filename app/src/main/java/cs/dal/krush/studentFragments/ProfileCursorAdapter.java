@@ -67,16 +67,16 @@ public class ProfileCursorAdapter extends CursorAdapter {
             image.setImageResource(resourceId);
         }
 
-
-        //Get the tutor's name:
+        //Set the row's header text:
         String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
         String tutorLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
         String tutorName = tutorFirstName + " " + tutorLastName;
         text1.setText(tutorName);
 
-        //Get the tutor's rate and subject:
+        //Set the row's sub-header text:
         String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
-        String text2content = "Rate: " + tutorRate;
+        String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
+        String text2content = "Rating: " + tutorRating + ", Rate: " + tutorRate;
         text2.setText(text2content);
     }
 }
