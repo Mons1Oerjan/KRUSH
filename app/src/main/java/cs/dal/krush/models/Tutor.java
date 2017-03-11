@@ -25,11 +25,12 @@ public class Tutor extends Table{
      * @param rate
      * @return boolean
      */
-    public boolean insert(int locationId, int schoolId, String firstName, String lastName, String
+    public boolean insert(int locationId, int schoolId, String profilePic, String firstName, String lastName, String
                           email, String password, int rate){
         ContentValues contentValues = new ContentValues();
         contentValues.put("location_id", locationId);
         contentValues.put("school_id", schoolId);
+        contentValues.put("profile_pic", profilePic);
         contentValues.put("f_name", firstName);
         contentValues.put("l_name", lastName);
         contentValues.put("email", email);

@@ -79,6 +79,16 @@ public class TutoringSession extends Table{
     }
 
     /**
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     * Get a tutoring session by the student_id field
+     * @param studentId
+     * @return Cursor
+     */
+    public Cursor getDataByStudentIdForCursorAdapter(int studentId){
+        return dbRead.rawQuery("SELECT id as _id, student_id, tutor_id, location_id, title FROM tutoring_sessions WHERE student_id="+studentId+"",null);
+    }
+
+    /**
      * Get a tutoring session by the tutor_id field
      * @param tutorId
      * @return Cursor

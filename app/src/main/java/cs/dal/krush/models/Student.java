@@ -23,9 +23,10 @@ public class Student extends Table{
      * @param password
      * @return boolean
      */
-    public boolean insert(int schoolId, String firstName, String lastName, String email, String password){
+    public boolean insert(int schoolId, String profilePic, String firstName, String lastName, String email, String password){
         ContentValues contentValues = new ContentValues();
         contentValues.put("school_id", schoolId);
+        contentValues.put("profile_pic", profilePic);
         contentValues.put("f_name", firstName);
         contentValues.put("l_name", lastName);
         contentValues.put("email", email);
