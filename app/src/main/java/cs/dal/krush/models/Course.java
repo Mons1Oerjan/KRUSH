@@ -30,14 +30,12 @@ public class Course extends Table{
 
     @Override
     public Cursor getData(int id){
-        res = dbRead.rawQuery("SELECT * FROM courses WHERE id="+id+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM courses WHERE id="+id+"",null);
     }
 
     @Override
     public Cursor getAll() {
-        res = dbRead.rawQuery("SELECT * FROM courses",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM courses",null);
     }
 
     /**
@@ -46,8 +44,7 @@ public class Course extends Table{
      * @return Cursor
      */
     public Cursor getDataByTitle(String title){
-        res = dbRead.rawQuery("SELECT * FROM courses WHERE title="+title+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM courses WHERE title="+title+"",null);
     }
 
     /**
@@ -56,8 +53,7 @@ public class Course extends Table{
      * @return Cursor
      */
     public Cursor getDataByCourseCode(String courseCode){
-        res = dbRead.rawQuery("SELECT * FROM courses WHERE course_code="+courseCode+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM courses WHERE course_code="+courseCode+"",null);
     }
 
     /**

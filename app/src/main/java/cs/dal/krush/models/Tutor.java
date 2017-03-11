@@ -41,14 +41,12 @@ public class Tutor extends Table{
 
     @Override
     public Cursor getData(int id){
-        Cursor res = dbRead.rawQuery("SELECT * FROM tutors WHERE id="+id+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE id="+id+"",null);
     }
 
     @Override
     public Cursor getAll() {
-        res = dbRead.rawQuery("SELECT * FROM tutors",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors",null);
     }
 
     /**
@@ -58,9 +56,8 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getAllForCursorAdapter() {
-        res = dbRead.rawQuery("SELECT id as _id, location_id, school_id, profile_pic, " +
+        return dbRead.rawQuery("SELECT id as _id, location_id, school_id, profile_pic, " +
                 "f_name, l_name, email, password, rating, rate, revenue FROM tutors", null);
-        return res;
     }
 
     /**
@@ -69,8 +66,7 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getDataByFirstName(String firstName){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE f_name="+firstName+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE f_name="+firstName+"",null);
     }
 
     /**
@@ -79,8 +75,7 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getDataByLastName(String lastName){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE l_name="+lastName+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE l_name="+lastName+"",null);
     }
 
     /**
@@ -89,8 +84,7 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getDataEmail(String email){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE email="+email+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE email="+email+"",null);
     }
 
     /**
@@ -99,8 +93,7 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getDataByRating(int rating){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE rating="+rating+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE rating="+rating+"",null);
     }
 
     /**

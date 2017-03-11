@@ -34,19 +34,21 @@ public class TutoringSession extends Table{
 
     @Override
     public Cursor getData(int id){
-        Cursor res = dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE id="+id+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE id="+id+"",null);
     }
 
     @Override
     public Cursor getAll() {
-        res = dbRead.rawQuery("SELECT * FROM tutoring_sessions",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutoring_sessions",null);
     }
 
+    /**
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     * Gets all tutoring sessions.
+     * @return Cursor
+     */
     public Cursor getAllForCursorAdapter(){
-        res = dbRead.rawQuery("SELECT id as _id, student_id, tutor_id, location_id, title FROM tutoring_sessions", null);
-        return res;
+        return dbRead.rawQuery("SELECT id as _id, student_id, tutor_id, location_id, title FROM tutoring_sessions", null);
     }
 
     /**
@@ -55,8 +57,7 @@ public class TutoringSession extends Table{
      * @return Cursor
      */
     public Cursor getDataByTitle(String title){
-        Cursor res = dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE title="+title+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE title="+title+"",null);
     }
 
     /**
@@ -65,8 +66,25 @@ public class TutoringSession extends Table{
      * @return Cursor
      */
     public Cursor getDataByLocationId(int locationId){
-        Cursor res = dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE location_id="+locationId+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE location_id="+locationId+"",null);
+    }
+
+    /**
+     * Get a tutoring session by the student_id field
+     * @param studentId
+     * @return Cursor
+     */
+    public Cursor getDataByStudentId(int studentId){
+        return dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE student_id="+studentId+"",null);
+    }
+
+    /**
+     * Get a tutoring session by the tutor_id field
+     * @param tutorId
+     * @return Cursor
+     */
+    public Cursor getDataByTutorId(int tutorId){
+        return dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE tutor_id="+tutorId+"",null);
     }
 
     /**

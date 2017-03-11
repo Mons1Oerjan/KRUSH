@@ -37,14 +37,13 @@ public class CoursesTutors {
      * @return Cursor
      */
     public Cursor getCoursesFromTutor(int tutor_id){
-        Cursor res = dbRead.rawQuery(
+        return dbRead.rawQuery(
                 "SELECT c.course_code, c.id " +
                         "FROM course_tutors ct " +
                         "INNER JOIN courses c ON c.id = ct.course_id " +
                         "WHERE ct.tutor_id="+tutor_id+""
                 ,null
         );
-        return res;
     }
 
     /**
@@ -53,13 +52,12 @@ public class CoursesTutors {
      * @return Cursor
      */
     public Cursor getTutorsFromCourse(int course_id){
-        Cursor res = dbRead.rawQuery(
+        return dbRead.rawQuery(
                 "SELECT t.f_name, t.l_name, t.id " +
                         "FROM course_tutors ct " +
                         "INNER JOIN tutors t ON t.id = ct.tutor_id " +
                         "WHERE ct.course_id="+course_id+""
                 ,null
         );
-        return res;
     }
 }
