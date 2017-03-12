@@ -81,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Old Email Address"
+                android:textColor="@color/colorPrimary"
                 android:inputType="textEmailAddress"
                 android:id="@+id/profile_email_edit"/>
 
@@ -95,6 +96,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Old School"
+                android:textColor="@color/colorPrimary"
                 android:inputType="textCapCharacters"
                 android:id="@+id/profile_school_edit"
                 android:layout_margin="5dp"/>
@@ -146,8 +148,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/save_profile_button"
                 android:text="@string/save_profile_button_text"
-                android:onClick="saveProfile"
-                />
+                android:background="@drawable/button_main"
+                android:paddingRight="25dp"
+                android:paddingLeft="25dp"
+                android:minWidth="170dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/bottom_bar_color"/>
 
 
         </LinearLayout>

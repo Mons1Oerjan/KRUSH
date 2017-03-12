@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,7 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -33,12 +37,34 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
     Button saveProfile;
     Button changePicture;
     View myView;
+    TextView profile_name;
+    EditText email, school, schedule, rate;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         myView = inflater.inflate(R.layout.tutor_profile_edit, container, false);
+
+        // Get TextViews
+        profile_name = (TextView) myView.findViewById(R.id.profile_name_edit);
+        email = (EditText) myView.findViewById(R.id.profile_email_edit);
+        school = (EditText) myView.findViewById(R.id.profile_school_edit);
+        schedule = (EditText) myView.findViewById(R.id.profile_schedule_edit);
+        rate = (EditText) myView.findViewById(R.id.profile_rate_edit);
+
+        //fetch custom app font
+        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
+
+        //Set custom app font
+        profile_name.setTypeface(typeFace);
+        email.setTypeface(typeFace);
+        school.setTypeface(typeFace);
+        schedule.setTypeface(typeFace);
+        rate.setTypeface(typeFace);
+
         saveProfile = (Button) myView.findViewById(R.id.save_profile_button);
         changePicture = (Button) myView.findViewById(R.id.change_picture_button);
 

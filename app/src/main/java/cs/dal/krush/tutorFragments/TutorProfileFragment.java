@@ -1,5 +1,6 @@
 package cs.dal.krush.tutorFragments;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import cs.dal.krush.R;
 import cs.dal.krush.studentFragments.StudentProfileEditFragment;
@@ -14,12 +16,30 @@ import cs.dal.krush.studentFragments.StudentProfileEditFragment;
 public class TutorProfileFragment extends Fragment implements View.OnClickListener
 {
     ImageView edit_btn;
+    TextView profile_name, email, school, schedule, rate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myView = inflater.inflate(R.layout.tutor_profile, container, false);
+
+        // Get TextViews
+        profile_name = (TextView) myView.findViewById(R.id.profile_name);
+        email = (TextView) myView.findViewById(R.id.tutor_email);
+        school = (TextView) myView.findViewById(R.id.tutor_school);
+        schedule = (TextView) myView.findViewById(R.id.tutor_schedule);
+        rate = (TextView) myView.findViewById(R.id.tutor_rate);
+
+        //fetch custom app font
+        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
+
+        //Set custom app font
+        profile_name.setTypeface(typeFace);
+        email.setTypeface(typeFace);
+        school.setTypeface(typeFace);
+        schedule.setTypeface(typeFace);
+        rate.setTypeface(typeFace);
 
         //Edit profile button listener
         edit_btn = (ImageView) myView.findViewById(R.id.edit_profile_button);
