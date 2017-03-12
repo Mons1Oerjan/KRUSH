@@ -44,7 +44,7 @@ public class StudentMainActivity extends FragmentActivity {
                         transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
-                    case R.id.menu_quick_book:
+                    case R.id.menu_booking:
                         StudentQuickBookFragment quickbook = new StudentQuickBookFragment();
                         transaction.replace(R.id.student_fragment_container, quickbook);
                         transaction.addToBackStack(null);
