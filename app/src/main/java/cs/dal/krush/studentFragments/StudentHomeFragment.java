@@ -52,17 +52,10 @@ public class StudentHomeFragment extends Fragment {
         //fetch custom app font:
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
 
-        //set logo font style:
+        //set font style:
         pageTitle.setTypeface(typeFace);
         sessionsLabel.setTypeface(typeFace);
         bookTutorLabel.setTypeface(typeFace);
-
-        //get all tutors from DB:
-        cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
-
-        //set tutor's listview adapter:
-        profileAdapter = new ProfileCursorAdapter(C, cursorTutorResponse);
-        tutorsListView.setAdapter(profileAdapter);
 
         //get all student sessions:
         //TODO: Change the ID passed in (1) to the logged in studentId once login has been setup
@@ -71,6 +64,13 @@ public class StudentHomeFragment extends Fragment {
         //set sessions listview adapter:
         sessionsAdapter = new SessionsCursorAdapter(C, cursorSessionsResponse);
         upcomingSessionsListView.setAdapter(sessionsAdapter);
+
+        //get all tutors from DB:
+        cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
+
+        //set tutor's listview adapter:
+        profileAdapter = new ProfileCursorAdapter(C, cursorTutorResponse);
+        tutorsListView.setAdapter(profileAdapter);
 
         return view;
     }
