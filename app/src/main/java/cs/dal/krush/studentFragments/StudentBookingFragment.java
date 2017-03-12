@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import cs.dal.krush.R;
 
 /**
- * Sets up the Student Book fragment. This fragment belongs to the StudentMainActivity class
+ * Sets up the Student Booking fragment. This fragment belongs to the StudentMainActivity class
  * and is accessed through the student's bottom navigation bar.
+ *
+ * The student can book a tutoring session through this fragment.
  */
-public class StudentQuickBookFragment extends Fragment {
+public class StudentBookingFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

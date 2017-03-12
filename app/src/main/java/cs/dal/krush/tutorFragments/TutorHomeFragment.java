@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 
 import cs.dal.krush.R;
 
+/**
+ * Sets up the Tutor Home fragment. This fragment belongs to the TutorMainActivity class
+ * and is accessed through the tutor's bottom navigation bar.
+ */
 public class TutorHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

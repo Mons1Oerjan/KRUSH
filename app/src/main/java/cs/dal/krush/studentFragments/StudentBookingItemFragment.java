@@ -11,9 +11,9 @@ import cs.dal.krush.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * Sets up the Student Booking Item fragment.
  */
-public class StudentQuickBookItemFragment extends Fragment {
+public class StudentBookingItemFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

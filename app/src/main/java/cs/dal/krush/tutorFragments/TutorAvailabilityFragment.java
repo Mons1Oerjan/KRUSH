@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import cs.dal.krush.R;
 
 /**
- * Tutor calendar view.
+ * Sets up the Tutor Availability fragment. This fragment belongs to the TutorMainActivity class
+ * and is accessed through the tutor's bottom navigation bar.
+ *
+ * The tutors can set their availability and schedule using this fragment.
  */
-public class TutorCalendarFragment extends Fragment {
+public class TutorAvailabilityFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

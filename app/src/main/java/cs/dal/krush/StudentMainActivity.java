@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
 import cs.dal.krush.studentFragments.StudentHomeFragment;
 import cs.dal.krush.studentFragments.StudentProfileFragment;
-import cs.dal.krush.studentFragments.StudentQuickBookFragment;
+import cs.dal.krush.studentFragments.StudentBookingFragment;
 import cs.dal.krush.studentFragments.StudentSessionsFragment;
 
 
@@ -45,7 +45,7 @@ public class StudentMainActivity extends FragmentActivity {
                         transaction.commit();
                         return true;
                     case R.id.menu_booking:
-                        StudentQuickBookFragment quickbook = new StudentQuickBookFragment();
+                        StudentBookingFragment quickbook = new StudentBookingFragment();
                         transaction.replace(R.id.student_fragment_container, quickbook);
                         transaction.addToBackStack(null);
                         transaction.commit();
