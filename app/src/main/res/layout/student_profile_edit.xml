@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/header_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_background" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_picture_edit"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@+id/header_cover_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-60dp"
+            android:background="@drawable/profile_circle"
+            android:elevation="5dp"
+            android:padding="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_profile_picture"
+            />
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_cover_image"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            android:paddingBottom="24dp">
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_picture_button_text"
+                android:textAllCaps="false"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:onClick="changePicture"/>
+
+            <TextView
+                android:id="@+id/profile_name_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp"
+                android:text="Profile Name"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/button2"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/profile_email_edit"
+                android:text="@string/profile_email_label"
+                android:layout_margin="5dp"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Old Email Address"
+                android:inputType="textEmailAddress"
+                android:id="@+id/profile_email_edit"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/profile_school_edit"
+                android:text="@string/profile_school_label"
+                android:layout_margin="5dp"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Old School"
+                android:inputType="textCapCharacters"
+                android:id="@+id/profile_school_edit"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/current_password"
+                android:text="@string/current_password_label"
+                android:layout_margin="5dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/current_password"
+                android:inputType="textPassword"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/new_password"
+                android:text="@string/new_password_label"
+                android:layout_margin="5dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_password"
+                android:inputType="textPassword"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/new_password_confirmation"
+                android:text="@string/confirm_new_password_label"
+                android:layout_margin="5dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_password_confirmation"
+                android:inputType="textPassword"
+                android:layout_margin="5dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/save_profile_button"
+                android:text="@string/save_profile_button_text"
+                android:onClick="saveProfile"
+                />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</ScrollView>
