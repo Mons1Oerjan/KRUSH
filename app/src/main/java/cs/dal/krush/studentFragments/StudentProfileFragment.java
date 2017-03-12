@@ -11,7 +11,8 @@ import cs.dal.krush.R;
 
 
 /**
- * Student Profile view.
+ * Sets up the Student Profile fragment. This fragment belongs to the StudentMainActivity class
+ * and is accessed through the student's bottom navigation bar.
  */
 public class StudentProfileFragment extends Fragment {
 

@@ -13,8 +13,12 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 
 /**
- * This is the adapter class for the customized rows in the 'Book a Tutor'
- * list view on the student home page
+ * This is the adapter class for the customized rows in the 'Quick Book a Tutor'
+ * list view on the student home page.
+ *
+ * Source:
+ * [4] C. (n.d.). Codepath/android_guides. Retrieved March 12, 2017,
+ * from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
  */
 public class ProfileCursorAdapter extends CursorAdapter {
 
@@ -22,7 +26,7 @@ public class ProfileCursorAdapter extends CursorAdapter {
     private Context mContext;
 
     /**
-     * Constructor
+     * Constructor that initializes the custom cursor adapter.
      *
      * @param context
      * @param cursor

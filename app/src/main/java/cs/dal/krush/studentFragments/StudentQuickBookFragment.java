@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import cs.dal.krush.R;
 
 /**
- * Student quick book view.
+ * Sets up the Student Book fragment. This fragment belongs to the StudentMainActivity class
+ * and is accessed through the student's bottom navigation bar.
  */
 public class StudentQuickBookFragment extends Fragment {
 

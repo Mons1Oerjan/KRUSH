@@ -74,3 +74,5 @@ public class foo() {
 - [1] Prolific Interactive, "Prolific Interactive material-calendarview," in GitHub, GitHub, 2016. [Online]. Available: https://github.com/prolificinteractive/material-calendarview. Accessed: Feb. 8, 2017.
 - [2] M. Brandao, "Fredoka One," in Google fonts, Google. [Online]. Available: https://fonts.google.com/specimen/Fredoka+One?selection.family=Fredoka+One. Accessed: Mar. 4, 2017.
 - [3] "How to get all possible combinations of a list’s elements?", Stackoverflow.com, 2017. [Online]. Available: http://stackoverflow.com/questions/464864/how-to-get-all-possible-combinations-of-a-list-s-elements. [Accessed: 08- Mar- 2017].
+- [4] C. (n.d.). Codepath/android_guides. Retrieved March 12, 2017, from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
+- [5] List View. (n.d.). Retrieved March 12, 2017, from https://developer.android.com/guide/topics/ui/layout/listview.html

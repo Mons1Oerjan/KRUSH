@@ -14,6 +14,14 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
 
+/**
+ * Sets up the Student Home fragment. This fragment belongs to the StudentMainActivity class
+ * and is accessed through the student's bottom navigation bar.
+ *
+ * Source:
+ * [5] List View. (n.d.). Retrieved March 12, 2017,
+ * from https://developer.android.com/guide/topics/ui/layout/listview.html
+ */
 public class StudentHomeFragment extends Fragment {
 
     private ListView upcomingSessionsListView, tutorsListView;
