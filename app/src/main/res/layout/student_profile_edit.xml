@@ -38,14 +38,13 @@
             android:paddingBottom="24dp">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/change_picture_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/change_picture_button_text"
                 android:textAllCaps="false"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:onClick="changePicture"/>
+                android:layout_centerHorizontal="true"/>
 
             <TextView
                 android:id="@+id/profile_name_edit"
@@ -56,7 +55,7 @@
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_below="@+id/button2"
+                android:layout_below="@+id/change_picture_button"
                 android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>

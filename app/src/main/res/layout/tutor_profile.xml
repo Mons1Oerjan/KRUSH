@@ -38,14 +38,13 @@
             android:paddingBottom="24dp">
 
             <ImageView
-                android:id="@+id/edit_profile"
+                android:id="@+id/edit_profile_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_edit_black_24dp"
-                android:onClick="editProfile"/>
+                android:src="@drawable/ic_edit_black_24dp"/>
 
             <TextView
                 android:id="@+id/profile_name"
