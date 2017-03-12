@@ -79,7 +79,7 @@ public class TutoringSession extends Table{
 
     /**
      * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
-     * Get a tutoring session by the student_id field
+     * Get all tutoring sessions by the student_id field
      * @param studentId
      * @return Cursor
      */

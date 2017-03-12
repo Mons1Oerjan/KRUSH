@@ -161,11 +161,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     //create user based on their type (student/tutor)
                     if(profileSelected == 1){
-                        mydb.tutor.insert(1, schoolID, firstName, lastName, email, password, 0);
+                        // TODO: 2017-03-12 make locationID, profilePic, and Rate nullable fields
+                        mydb.tutor.insert(1, schoolID, "sample11", firstName, lastName, email, password, 0);
                         Intent i = new Intent(RegistrationActivity.this, TutorMainActivity.class);
                         startActivity(i);
                     } else {
-                        mydb.student.insert(schoolID, firstName, lastName, email, password);
+                        // TODO: 2017-03-12 make locationID, profilePic, and Rate nullable fields
+                        mydb.student.insert(schoolID, "sample12", firstName, lastName, email, password);
                         Intent i = new Intent(RegistrationActivity.this, StudentMainActivity.class);
                         startActivity(i);
                     }
