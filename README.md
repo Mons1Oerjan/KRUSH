@@ -76,3 +76,4 @@ public class foo() {
 - [3] "How to get all possible combinations of a list’s elements?", Stackoverflow.com, 2017. [Online]. Available: http://stackoverflow.com/questions/464864/how-to-get-all-possible-combinations-of-a-list-s-elements. [Accessed: 08- Mar- 2017].
 - [4] C. (n.d.). Codepath/android_guides. Retrieved March 12, 2017, from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
 - [5] List View. (n.d.). Retrieved March 12, 2017, from https://developer.android.com/guide/topics/ui/layout/listview.html
+- [6] How to disable BottomNavigationView shift mode? (n.d.). Retrieved March 12, 2017, from http://stackoverflow.com/questions/40176244/how-to-disable-bottomnavigationview-shift-mode
