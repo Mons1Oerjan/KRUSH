@@ -6,10 +6,9 @@ import android.database.Cursor;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * Created by greg on 27/02/17.
+ * Built to initiate seeding
  */
-
-public class Initial {
+public class DatabaseSeeder {
     /**
      * Declare variables
      */
@@ -21,7 +20,7 @@ public class Initial {
      * Empty constructor
      * @param context
      */
-    public Initial(Context context){
+    public DatabaseSeeder(Context context){
         this.context = context;
     }
 
@@ -35,17 +34,24 @@ public class Initial {
         /**
          * Insert data
          */
-        mydb.location.insert("Halifax");
-        mydb.location.insert("Stewiacke");
-        mydb.school.insert("CPA",2,"Highschool");
-        mydb.tutor.insert(1,1,"Greg","Miller","gregpmillr@gmail.com","password",2);
-        mydb.student.insert(1,"Greg","Miller","gregpmillr@gmail.com","password");
-        mydb.tutoringSession.insert(1,1,2,"test tutoring session");
-        mydb.course.insert("Computer science 3", "CSCI3110");
-        mydb.course.insert("Server Side Scripting","INFX2670");
-        mydb.audioRecording.insert(1,2);
-        mydb.coursesTutors.insertCoursesTutors(1, 1);
-        mydb.coursesTutors.insertCoursesTutors(1, 2);
+        LocationSeeder.insert(mydb);
+        SchoolSeeder.insert(mydb);
+        TutorSeeder.insert(mydb);
+        StudentSeeder.insert(mydb);
+        TutoringSessionSeeder.insert(mydb);
+        CourseSeeder.insert(mydb);
+        AudioRecordingSeeder.insert(mydb);
+        CoursesTutorsSeeder.insert(mydb);
+
+    }
+
+    /**
+     * Display data inserted by seeders
+     */
+    public void displayData(){
+
+        //instantiate DBHelper
+        mydb = new DBHelper(context);
 
         /**
          * Get and display data
@@ -91,5 +97,6 @@ public class Initial {
         if (!rs.isClosed()) {
             rs.close();
         }
-    } //end method
-} // end class
+    }
+
+}
