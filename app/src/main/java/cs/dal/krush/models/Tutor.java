@@ -52,14 +52,39 @@ public class Tutor extends Table{
     }
 
     /**
-     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
      * Gets all tutors.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
      *
      * @return Cursor
      */
     public Cursor getAllForCursorAdapter() {
         return dbRead.rawQuery("SELECT id as _id, location_id, school_id, profile_pic, " +
                 "f_name, l_name, email, password, rating, rate, revenue FROM tutors", null);
+    }
+
+    /**
+     * Gets all unique tutors that the given student has previously booked sessions with.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @return Cursor
+     */
+    public Cursor getPreviouslyUsedTutorsForCursorAdapter(int studentId) {
+        return dbRead.rawQuery(
+                "SELECT DISTINCT t.id as _id, t.location_id, t.school_id, t.profile_pic, " +
+                "t.f_name, t.l_name, t.email, t.password, t.rating, t.rate, t.revenue " +
+                "FROM tutors t " +
+                "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
+                "WHERE ts.student_id=" + studentId + ""
+                , null
+        );
     }
 
     /**

@@ -57,7 +57,7 @@ public class StudentHomeFragment extends Fragment {
         sessionsLabel.setTypeface(typeFace);
         bookTutorLabel.setTypeface(typeFace);
 
-        //get all student sessions:
+        //get all tutoring sessions by the student:
         //TODO: Change the ID passed in (1) to the logged in studentId once login has been setup
         cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(1);
 
@@ -66,7 +66,7 @@ public class StudentHomeFragment extends Fragment {
         upcomingSessionsListView.setAdapter(sessionsAdapter);
 
         //get all tutors from DB:
-        cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
+        cursorTutorResponse = mydb.tutor.getPreviouslyUsedTutorsForCursorAdapter(1);
 
         //set tutor's listview adapter:
         profileAdapter = new ProfileCursorAdapter(C, cursorTutorResponse);

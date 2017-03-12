@@ -78,8 +78,13 @@ public class TutoringSession extends Table{
     }
 
     /**
+     * Gets all tutors and tutoring sessions by the given student.
      * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
-     * Get all tutoring sessions by the student_id field
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
      * @param studentId
      * @return Cursor
      */
