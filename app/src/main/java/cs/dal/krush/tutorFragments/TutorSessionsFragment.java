@@ -9,10 +9,7 @@ import android.view.ViewGroup;
 import cs.dal.krush.R;
 
 /**
- * Sets up the Tutor Home fragment. This fragment belongs to the TutorMainActivity class
- * and is accessed through the tutor's bottom navigation bar.
- *
- * The tutor can view their session history using this fragment.
+ * Tutor Sessions History view.
  */
 public class TutorSessionsFragment extends Fragment {
 

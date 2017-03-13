@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 /**
  * Created by greg on 27/02/17.
  */
+
 public abstract class Table {
 
     protected SQLiteDatabase dbWrite;

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by greg on 26/02/17.
  */
+
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "mike_casey.db";
@@ -111,6 +112,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE," +
                         "FOREIGN KEY(tutor_id) REFERENCES tutors(id) ON DELETE CASCADE)"
         );
+
+
+
     }
 
     @Override
@@ -126,6 +130,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
+
+
 
     @Override
     public void onDowngrade (SQLiteDatabase db, int oldVersion, int newVersion){

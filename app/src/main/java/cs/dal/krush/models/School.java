@@ -32,12 +32,14 @@ public class School extends Table{
 
     @Override
     public Cursor getData(int id){
-        return dbRead.rawQuery("SELECT * FROM schools WHERE id="+id+"",null);
+        res = dbRead.rawQuery("SELECT * FROM schools WHERE id="+id+"",null);
+        return res;
     }
 
     @Override
     public Cursor getAll() {
-        return dbRead.rawQuery("SELECT * FROM schools",null);
+        res = dbRead.rawQuery("SELECT * FROM schools",null);
+        return res;
     }
 
     /**
@@ -46,7 +48,8 @@ public class School extends Table{
      * @return Cursor
      */
     public Cursor getDataByName(String name){
-        return dbRead.rawQuery("SELECT * FROM schools WHERE name="+name+"",null);
+        res = dbRead.rawQuery("SELECT * FROM schools WHERE name="+name+"",null);
+        return res;
     }
 
     /**
@@ -55,7 +58,8 @@ public class School extends Table{
      * @return Cursor
      */
     public Cursor getDataByType(String type){
-        return dbRead.rawQuery("SELECT * FROM schools WHERE type="+type+"",null);
+        res = dbRead.rawQuery("SELECT * FROM schools WHERE type="+type+"",null);
+        return res;
     }
 
     /**
@@ -64,7 +68,8 @@ public class School extends Table{
      * @return Cursor
      */
     public Cursor getSchoolsByLocation(int location_id){
-        return dbRead.rawQuery("SELECT * FROM schools WHERE location_id="+location_id+"",null);
+        res = dbRead.rawQuery("SELECT * FROM schools WHERE location_id="+location_id+"",null);
+        return res;
     }
 
     /**
