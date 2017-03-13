@@ -9,10 +9,7 @@ import android.view.ViewGroup;
 import cs.dal.krush.R;
 
 /**
- * Sets up the Student Sessions History fragment. This fragment belongs to the StudentMainActivity class
- * and is accessed through the student's bottom navigation bar.
- *
- * The student can view their previous sessions history along with audio recordings using this fragment.
+ * Student Sessions History view.
  */
 public class StudentSessionsFragment extends Fragment {
 

@@ -17,17 +17,15 @@ public class Student extends Table{
     /**
      * Insert row into students table
      * @param schoolId
-     * @param profilePic
      * @param firstName
      * @param lastName
      * @param email
      * @param password
      * @return boolean
      */
-    public boolean insert(int schoolId, String profilePic, String firstName, String lastName, String email, String password){
+    public boolean insert(int schoolId, String firstName, String lastName, String email, String password){
         ContentValues contentValues = new ContentValues();
         contentValues.put("school_id", schoolId);
-        contentValues.put("profile_pic", profilePic);
         contentValues.put("f_name", firstName);
         contentValues.put("l_name", lastName);
         contentValues.put("email", email);
@@ -38,12 +36,14 @@ public class Student extends Table{
 
     @Override
     public Cursor getData(int id){
-        return dbRead.rawQuery("SELECT * FROM students WHERE id="+id+"",null);
+        Cursor res = dbRead.rawQuery("SELECT * FROM students WHERE id="+id+"",null);
+        return res;
     }
 
     @Override
     public Cursor getAll() {
-        return dbRead.rawQuery("SELECT * FROM students",null);
+        res = dbRead.rawQuery("SELECT * FROM students",null);
+        return res;
     }
 
     /**
@@ -52,7 +52,8 @@ public class Student extends Table{
      * @return Cursor
      */
     public Cursor getDataByFirstName(String firstName){
-        return dbRead.rawQuery("SELECT * FROM students WHERE f_name="+firstName+"",null);
+        res = dbRead.rawQuery("SELECT * FROM students WHERE f_name="+firstName+"",null);
+        return res;
     }
 
     /**
@@ -61,7 +62,8 @@ public class Student extends Table{
      * @return Cursor
      */
     public Cursor getDataByLastName(String lastName){
-        return dbRead.rawQuery("SELECT * FROM students WHERE l_name="+lastName+"",null);
+        res = dbRead.rawQuery("SELECT * FROM students WHERE l_name="+lastName+"",null);
+        return res;
     }
 
     /**
@@ -70,7 +72,8 @@ public class Student extends Table{
      * @return Cursor
      */
     public Cursor getDataEmail(String email){
-        return dbRead.rawQuery("SELECT * FROM students WHERE email="+email+"",null);
+        res = dbRead.rawQuery("SELECT * FROM students WHERE email="+email+"",null);
+        return res;
     }
 
     /**

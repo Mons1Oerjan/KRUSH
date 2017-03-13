@@ -8,10 +8,6 @@ import cs.dal.krush.models.DBHelper;
 
 public class SchoolSeeder {
 
-    /**
-     * Function that inserts dummy schools into the DB
-     * @param db
-     */
     public static void insert(DBHelper db){
         db.school.insert("CPA",1,"Highschool");
         db.school.insert("Halifax West",1,"Highschool");
@@ -21,6 +17,5 @@ public class SchoolSeeder {
         db.school.insert("NSCC Institute of Technology",1,"Community College");
         db.school.insert("NSCC Waterfront Campus",5,"Community College");
         db.school.insert("Acadia",6,"University");
-        db.school.insert("NSCAD",1,"University");
     }
 }

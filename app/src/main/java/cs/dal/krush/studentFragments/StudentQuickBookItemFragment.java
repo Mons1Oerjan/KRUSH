@@ -11,15 +11,15 @@ import cs.dal.krush.R;
 
 
 /**
- * Sets up the Student Booking Item fragment.
+ * A simple {@link Fragment} subclass.
  */
-public class StudentBookingItemFragment extends Fragment {
+public class StudentQuickBookItemFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.student_booking_item, container, false);
+        return inflater.inflate(R.layout.student_quick_book_item, container, false);
     }
 
 }

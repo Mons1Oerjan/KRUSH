@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
-import cs.dal.krush.tutorFragments.TutorAvailabilityFragment;
+import cs.dal.krush.tutorFragments.TutorCalendarFragment;
 import cs.dal.krush.tutorFragments.TutorHomeFragment;
 import cs.dal.krush.tutorFragments.TutorProfileFragment;
 import cs.dal.krush.tutorFragments.TutorSessionsFragment;
@@ -55,8 +55,8 @@ public class TutorMainActivity extends FragmentActivity {
                         transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
-                    case R.id.menu_availability:
-                        TutorAvailabilityFragment calendar = new TutorAvailabilityFragment();
+                    case R.id.menu_calendar:
+                        TutorCalendarFragment calendar = new TutorCalendarFragment();
                         transaction.replace(R.id.tutor_fragment_container, calendar);
                         transaction.addToBackStack(null);
                         transaction.commit();
