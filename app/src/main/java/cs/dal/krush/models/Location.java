@@ -27,14 +27,12 @@ public class Location extends Table{
 
     @Override
     public Cursor getData(int id) {
-        res = dbRead.rawQuery("SELECT * FROM locations WHERE id="+id+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM locations WHERE id="+id+"",null);
     }
 
     @Override
     public Cursor getAll() {
-        res = dbRead.rawQuery("SELECT * FROM locations",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM locations",null);
     }
 
     /**
@@ -43,8 +41,7 @@ public class Location extends Table{
      * @return Cursor
      */
     public Cursor getDataByLocation(String location){
-        res = dbRead.rawQuery("SELECT * FROM locations WHERE location="+location+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM locations WHERE location="+location+"",null);
     }
 
     /**
@@ -53,16 +50,12 @@ public class Location extends Table{
      * @return Cursor
      */
     public Cursor getLocationBySchool(int school_id){
-        //get the school's location_id,
-        res = dbRead.rawQuery("SELECT * FROM schools WHERE id="+school_id+"",null);
+        //get the school's location_id:
+        Cursor res = dbRead.rawQuery("SELECT * FROM schools WHERE id="+school_id+"",null);
         res.moveToFirst();
-        int location_id;
-        location_id = res.getInt(res.getColumnIndex("location_id"));
-        System.out.println("locationID:"+location_id);
-        String s = res.getString(res.getColumnIndex("name"));
-        System.out.println("name:"+s);
+        int location_id = res.getInt(res.getColumnIndex("location_id"));
 
-        //get the location from the location_id
+        //get the location from the location_id:
         res = dbRead.rawQuery("SELECT * FROM locations WHERE id="+location_id+"",null);
 
         return res;

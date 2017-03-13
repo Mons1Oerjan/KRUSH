@@ -15,26 +15,27 @@ import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * Sets up the Student Home fragment. This fragment belongs to the StudentMainActivity class
+ * Sets up the Student Booking fragment. This fragment belongs to the StudentMainActivity class
  * and is accessed through the student's bottom navigation bar.
+ *
+ * The student can book a tutoring session through this fragment.
  *
  * Source:
  * [5] List View. (n.d.). Retrieved March 12, 2017,
  * from https://developer.android.com/guide/topics/ui/layout/listview.html
  */
-public class StudentHomeFragment extends Fragment {
+public class StudentBookingFragment extends Fragment {
 
-    private ListView upcomingSessionsListView, tutorsListView;
-    private TextView pageTitle, sessionsLabel, bookTutorLabel;
+    private ListView tutorsListView;
+    private TextView pageTitle;
     private DBHelper mydb;
-    private Cursor cursorTutorResponse, cursorSessionsResponse;
+    private Cursor cursorTutorResponse;
     private ProfileCursorAdapter profileAdapter;
-    private SessionsCursorAdapter sessionsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.student_home, container, false);
+        View view = inflater.inflate(R.layout.student_booking, container, false);
 
         //get Context:
         Context C = getActivity().getApplicationContext();
@@ -43,30 +44,17 @@ public class StudentHomeFragment extends Fragment {
         mydb = new DBHelper(C);
 
         //fetch UI elements:
-        upcomingSessionsListView = (ListView)view.findViewById(R.id.upcomingSessionsListView);
         tutorsListView = (ListView)view.findViewById(R.id.availableTutorsListView);
         pageTitle = (TextView)view.findViewById(R.id.titleLabel);
-        sessionsLabel = (TextView)view.findViewById(R.id.upcomingSessionsLabel);
-        bookTutorLabel = (TextView)view.findViewById(R.id.bookTutorLabel);
 
         //fetch custom app font:
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
 
         //set font style:
         pageTitle.setTypeface(typeFace);
-        sessionsLabel.setTypeface(typeFace);
-        bookTutorLabel.setTypeface(typeFace);
-
-        //get all tutoring sessions by the student:
-        //TODO: Change the ID passed in (1) to the logged in studentId once login has been setup
-        cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(1);
-
-        //set sessions listview adapter:
-        sessionsAdapter = new SessionsCursorAdapter(C, cursorSessionsResponse);
-        upcomingSessionsListView.setAdapter(sessionsAdapter);
 
         //get all tutors from DB:
-        cursorTutorResponse = mydb.tutor.getPreviouslyUsedTutorsForCursorAdapter(1);
+        cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
 
         //set tutor's listview adapter:
         profileAdapter = new ProfileCursorAdapter(C, cursorTutorResponse);
@@ -74,6 +62,5 @@ public class StudentHomeFragment extends Fragment {
 
         return view;
     }
-
 
 }

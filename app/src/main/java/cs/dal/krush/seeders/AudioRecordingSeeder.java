@@ -8,6 +8,10 @@ import cs.dal.krush.models.DBHelper;
 
 public class AudioRecordingSeeder {
 
+    /**
+     * Function that inserts dummy audio recordings for students' tutoring sessions
+     * @param db
+     */
     public static void insert(DBHelper db){
         db.audioRecording.insert(1,2);
         db.audioRecording.insert(2,1);
@@ -18,8 +22,5 @@ public class AudioRecordingSeeder {
         db.audioRecording.insert(5,1);
         db.audioRecording.insert(2,3);
         db.audioRecording.insert(4,3);
-
-
-
     }
 }
