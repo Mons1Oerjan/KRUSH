@@ -5,7 +5,6 @@ import cs.dal.krush.models.DBHelper;
 /**
  * Seeder for the students database table
  */
-
 public class StudentSeeder {
 
     /**

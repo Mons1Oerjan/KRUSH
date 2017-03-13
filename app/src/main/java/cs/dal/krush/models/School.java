@@ -5,9 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Created by greg on 27/02/17.
+ * School Model class.
  */
-
 public class School extends Table{
 
     public School(SQLiteDatabase dbWrite, SQLiteDatabase dbRead){
@@ -32,14 +31,12 @@ public class School extends Table{
 
     @Override
     public Cursor getData(int id){
-        res = dbRead.rawQuery("SELECT * FROM schools WHERE id="+id+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM schools WHERE id="+id+"",null);
     }
 
     @Override
     public Cursor getAll() {
-        res = dbRead.rawQuery("SELECT * FROM schools",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM schools",null);
     }
 
     /**
@@ -48,8 +45,7 @@ public class School extends Table{
      * @return Cursor
      */
     public Cursor getDataByName(String name){
-        res = dbRead.rawQuery("SELECT * FROM schools WHERE name="+name+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM schools WHERE name="+name+"",null);
     }
 
     /**
@@ -58,8 +54,7 @@ public class School extends Table{
      * @return Cursor
      */
     public Cursor getDataByType(String type){
-        res = dbRead.rawQuery("SELECT * FROM schools WHERE type="+type+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM schools WHERE type="+type+"",null);
     }
 
     /**
@@ -68,8 +63,7 @@ public class School extends Table{
      * @return Cursor
      */
     public Cursor getSchoolsByLocation(int location_id){
-        res = dbRead.rawQuery("SELECT * FROM schools WHERE location_id="+location_id+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM schools WHERE location_id="+location_id+"",null);
     }
 
     /**

@@ -67,6 +67,4 @@ public class StudentHomeFragment extends Fragment {
 
         return view;
     }
-
-
 }

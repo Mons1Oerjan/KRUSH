@@ -59,7 +59,7 @@ public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor){
         //fetch UI components:
         TextView header = (TextView)view.findViewById(R.id.firstLine);
-        TextView subheader = (TextView)view.findViewById(R.id.secondLine);
+        TextView subHeader = (TextView)view.findViewById(R.id.secondLine);
         ImageView image = (ImageView)view.findViewById(R.id.icon);
 
         //Get the tutor's profile image:
@@ -80,6 +80,6 @@ public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
         String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
         String text2content = tutorFirstName + " " + tutorLastName + ", Rating: " + tutorRating + ", Rate: " + tutorRate + "$";
-        subheader.setText(text2content);
+        subHeader.setText(text2content);
     }
 }

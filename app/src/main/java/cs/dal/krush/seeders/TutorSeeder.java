@@ -5,7 +5,6 @@ import cs.dal.krush.models.DBHelper;
 /**
  * Seeder for the locations database table
  */
-
 public class TutorSeeder {
 
     /**
