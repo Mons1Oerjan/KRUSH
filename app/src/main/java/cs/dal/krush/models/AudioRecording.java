@@ -30,12 +30,14 @@ public class AudioRecording extends Table {
 
     @Override
     public Cursor getData(int id){
-        return dbRead.rawQuery("SELECT * FROM audio_recording WHERE id="+id+"",null);
+        res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE id="+id+"",null);
+        return res;
     }
 
     @Override
     public Cursor getAll() {
-        return dbRead.rawQuery("SELECT * FROM audio_recording",null);
+        res = dbRead.rawQuery("SELECT * FROM audio_recording",null);
+        return res;
     }
 
     /**
@@ -44,7 +46,8 @@ public class AudioRecording extends Table {
      * @return res
      */
     public Cursor getDataByLocationId(int locationId){
-        return dbRead.rawQuery("SELECT * FROM audio_recording WHERE location_id="+locationId+"",null);
+        res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE location_id="+locationId+"",null);
+        return res;
     }
 
     /**
@@ -53,7 +56,8 @@ public class AudioRecording extends Table {
      * @return res
      */
     public Cursor getDataByStudentId(int studentId){
-        return dbRead.rawQuery("SELECT * FROM audio_recording WHERE student_id="+studentId+"",null);
+        res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE student_id="+studentId+"",null);
+        return res;
     }
 
     /**

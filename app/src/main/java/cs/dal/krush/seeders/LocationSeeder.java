@@ -8,10 +8,6 @@ import cs.dal.krush.models.DBHelper;
 
 public class LocationSeeder {
 
-    /**
-     * Function that inserts dummy locations into the DB
-     * @param db
-     */
     public static void insert(DBHelper db){
         db.location.insert("Halifax");
         db.location.insert("Stewiacke");
@@ -19,5 +15,6 @@ public class LocationSeeder {
         db.location.insert("Bridgewater");
         db.location.insert("Dartmouth");
         db.location.insert("Wolfville");
+        db.location.insert("New Minas");
     }
 }

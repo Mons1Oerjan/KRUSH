@@ -1,5 +1,6 @@
 package cs.dal.krush.studentFragments;
 
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,10 +11,7 @@ import cs.dal.krush.R;
 
 
 /**
- * Sets up the Student Profile fragment. This fragment belongs to the StudentMainActivity class
- * and is accessed through the student's bottom navigation bar.
- *
- * The student can view and edit their user profile using this fragment.
+ * Student Profile view.
  */
 public class StudentProfileFragment extends Fragment {
 

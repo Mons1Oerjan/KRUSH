@@ -8,10 +8,6 @@ import cs.dal.krush.models.DBHelper;
 
 public class CoursesTutorsSeeder {
 
-    /**
-     * Function that connects courses with tutors in the DB
-     * @param db
-     */
     public static void insert(DBHelper db){
         db.coursesTutors.insertCoursesTutors(1, 1);
         db.coursesTutors.insertCoursesTutors(1, 2);
