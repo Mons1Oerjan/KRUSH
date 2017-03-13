@@ -6,7 +6,7 @@
     android:id="@+id/student_home">
 
     <TextView
-        android:id="@+id/titleLabel"
+        android:id="@+id/homeTitleLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Your Upcoming Tutoring Sessions:"
-        android:layout_below="@+id/titleLabel"
+        android:layout_below="@+id/homeTitleLabel"
         android:textColor="@color/colorPrimary"
         android:layout_centerHorizontal="true" />
 

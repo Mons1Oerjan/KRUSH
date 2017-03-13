@@ -24,13 +24,6 @@ import cs.dal.krush.models.DBHelper;
  */
 public class StudentHomeFragment extends Fragment {
 
-    private ListView upcomingSessionsListView, tutorsListView;
-    private TextView pageTitle, sessionsLabel, bookTutorLabel;
-    private DBHelper mydb;
-    private Cursor cursorTutorResponse, cursorSessionsResponse;
-    private ProfileCursorAdapter profileAdapter;
-    private SessionsCursorAdapter sessionsAdapter;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,14 +33,14 @@ public class StudentHomeFragment extends Fragment {
         Context C = getActivity().getApplicationContext();
 
         //init DB connection:
-        mydb = new DBHelper(C);
+        DBHelper mydb = new DBHelper(C);
 
         //fetch UI elements:
-        upcomingSessionsListView = (ListView)view.findViewById(R.id.upcomingSessionsListView);
-        tutorsListView = (ListView)view.findViewById(R.id.availableTutorsListView);
-        pageTitle = (TextView)view.findViewById(R.id.titleLabel);
-        sessionsLabel = (TextView)view.findViewById(R.id.upcomingSessionsLabel);
-        bookTutorLabel = (TextView)view.findViewById(R.id.bookTutorLabel);
+        ListView upcomingSessionsListView = (ListView)view.findViewById(R.id.upcomingSessionsListView);
+        ListView tutorsListView = (ListView)view.findViewById(R.id.availableTutorsListView);
+        TextView pageTitle = (TextView)view.findViewById(R.id.homeTitleLabel);
+        TextView sessionsLabel = (TextView)view.findViewById(R.id.upcomingSessionsLabel);
+        TextView bookTutorLabel = (TextView)view.findViewById(R.id.bookTutorLabel);
 
         //fetch custom app font:
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -59,21 +52,19 @@ public class StudentHomeFragment extends Fragment {
 
         //get all tutoring sessions by the student:
         //TODO: Change the ID passed in (1) to the logged in studentId once login has been setup
-        cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(1);
+        Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(1);
 
         //set sessions listview adapter:
-        sessionsAdapter = new SessionsCursorAdapter(C, cursorSessionsResponse);
+        HomeUpcomingSessionsCursorAdapter sessionsAdapter = new HomeUpcomingSessionsCursorAdapter(C, cursorSessionsResponse);
         upcomingSessionsListView.setAdapter(sessionsAdapter);
 
-        //get all tutors from DB:
-        cursorTutorResponse = mydb.tutor.getPreviouslyUsedTutorsForCursorAdapter(1);
+        //get all distinct tutors that the user has previously had a tutoring session with:
+        Cursor cursorTutorResponse = mydb.tutor.getPreviouslyUsedTutorsForCursorAdapter(1);
 
         //set tutor's listview adapter:
-        profileAdapter = new ProfileCursorAdapter(C, cursorTutorResponse);
-        tutorsListView.setAdapter(profileAdapter);
+        HomeQuickBookCursorAdapter quickBookAdapter = new HomeQuickBookCursorAdapter(C, cursorTutorResponse);
+        tutorsListView.setAdapter(quickBookAdapter);
 
         return view;
     }
-
-
 }

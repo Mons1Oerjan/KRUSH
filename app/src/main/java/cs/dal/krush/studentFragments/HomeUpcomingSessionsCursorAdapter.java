@@ -19,7 +19,7 @@ import cs.dal.krush.R;
  * [4] C. (n.d.). Codepath/android_guides. Retrieved March 12, 2017,
  * from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
  */
-public class SessionsCursorAdapter extends CursorAdapter {
+public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
 
     //store the context set in the constructor
     private Context mContext;
@@ -30,7 +30,7 @@ public class SessionsCursorAdapter extends CursorAdapter {
      * @param context
      * @param cursor
      */
-    public SessionsCursorAdapter(Context context, Cursor cursor){
+    public HomeUpcomingSessionsCursorAdapter(Context context, Cursor cursor){
         super(context, cursor, 0);
         this.mContext = context;
     }
@@ -58,8 +58,8 @@ public class SessionsCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor){
         //fetch UI components:
-        TextView text1 = (TextView)view.findViewById(R.id.firstLine);
-        TextView text2 = (TextView)view.findViewById(R.id.secondLine);
+        TextView header = (TextView)view.findViewById(R.id.firstLine);
+        TextView subheader = (TextView)view.findViewById(R.id.secondLine);
         ImageView image = (ImageView)view.findViewById(R.id.icon);
 
         //Get the tutor's profile image:
@@ -72,7 +72,7 @@ public class SessionsCursorAdapter extends CursorAdapter {
 
         //Set the row's header text:
         String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
-        text1.setText(title);
+        header.setText(title);
 
         //Set the row's sub-header text:
         String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
@@ -80,6 +80,6 @@ public class SessionsCursorAdapter extends CursorAdapter {
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
         String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
         String text2content = tutorFirstName + " " + tutorLastName + ", Rating: " + tutorRating + ", Rate: " + tutorRate + "$";
-        text2.setText(text2content);
+        subheader.setText(text2content);
     }
 }

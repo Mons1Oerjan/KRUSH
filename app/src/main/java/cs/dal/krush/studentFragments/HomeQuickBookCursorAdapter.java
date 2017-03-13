@@ -20,7 +20,7 @@ import cs.dal.krush.R;
  * [4] C. (n.d.). Codepath/android_guides. Retrieved March 12, 2017,
  * from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
  */
-public class ProfileCursorAdapter extends CursorAdapter {
+public class HomeQuickBookCursorAdapter extends CursorAdapter {
 
     //store the context set in the constructor
     private Context mContext;
@@ -31,7 +31,7 @@ public class ProfileCursorAdapter extends CursorAdapter {
      * @param context
      * @param cursor
      */
-    public ProfileCursorAdapter(Context context, Cursor cursor){
+    public HomeQuickBookCursorAdapter(Context context, Cursor cursor){
         super(context, cursor, 0);
         this.mContext = context;
     }
@@ -59,8 +59,8 @@ public class ProfileCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor){
         //fetch UI components:
-        TextView text1 = (TextView)view.findViewById(R.id.firstLine);
-        TextView text2 = (TextView)view.findViewById(R.id.secondLine);
+        TextView header = (TextView)view.findViewById(R.id.firstLine);
+        TextView subHeader = (TextView)view.findViewById(R.id.secondLine);
         ImageView image = (ImageView)view.findViewById(R.id.icon);
 
         //Get the tutor's profile image:
@@ -75,12 +75,12 @@ public class ProfileCursorAdapter extends CursorAdapter {
         String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
         String tutorLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
         String tutorName = tutorFirstName + " " + tutorLastName;
-        text1.setText(tutorName);
+        header.setText(tutorName);
 
         //Set the row's sub-header text:
         String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
         String text2content = "Rating: " + tutorRating + ", Rate: " + tutorRate;
-        text2.setText(text2content);
+        subHeader.setText(text2content);
     }
 }

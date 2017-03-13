@@ -26,12 +26,6 @@ import cs.dal.krush.models.DBHelper;
  */
 public class StudentBookingFragment extends Fragment {
 
-    private ListView tutorsListView;
-    private TextView pageTitle;
-    private DBHelper mydb;
-    private Cursor cursorTutorResponse;
-    private ProfileCursorAdapter profileAdapter;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,11 +35,11 @@ public class StudentBookingFragment extends Fragment {
         Context C = getActivity().getApplicationContext();
 
         //init DB connection:
-        mydb = new DBHelper(C);
+        DBHelper mydb = new DBHelper(C);
 
         //fetch UI elements:
-        tutorsListView = (ListView)view.findViewById(R.id.availableTutorsListView);
-        pageTitle = (TextView)view.findViewById(R.id.titleLabel);
+        ListView tutorsListView = (ListView)view.findViewById(R.id.availableTutorsListView);
+        TextView pageTitle = (TextView)view.findViewById(R.id.bookingTitleLabel);
 
         //fetch custom app font:
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -54,13 +48,12 @@ public class StudentBookingFragment extends Fragment {
         pageTitle.setTypeface(typeFace);
 
         //get all tutors from DB:
-        cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
+        Cursor cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
 
         //set tutor's listview adapter:
-        profileAdapter = new ProfileCursorAdapter(C, cursorTutorResponse);
+        BookingTutorCursorAdapter profileAdapter = new BookingTutorCursorAdapter(C, cursorTutorResponse);
         tutorsListView.setAdapter(profileAdapter);
 
         return view;
     }
-
 }
