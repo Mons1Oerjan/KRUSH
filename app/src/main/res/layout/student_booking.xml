@@ -27,9 +27,11 @@
         android:id="@+id/filterByCoursesSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Filter By Your Courses"
-        android:layout_marginTop="17dp"
+        android:text="Filter By Your School"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="18dp"
         android:layout_below="@+id/bookingTitleLabel"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp" />
 
 </RelativeLayout>

@@ -96,13 +96,14 @@ public class Tutor extends Table{
      *
      * @return Cursor
      */
-    public Cursor getTutorsFilteredByCoursesForCursorAdapter(int studentId) {
+    public Cursor getTutorsFilteredBySchoolForCursorAdapter(int studentId) {
         return dbRead.rawQuery(
                 "SELECT DISTINCT t.id as _id, t.location_id, t.school_id, t.profile_pic, " +
                         "t.f_name, t.l_name, t.email, t.password, t.rating, t.rate, t.revenue " +
                         "FROM tutors t " +
-                        "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
-                        "WHERE ts.student_id=" + studentId + ""
+                        "INNER JOIN schools sc ON t.school_id = sc.id " +
+                        "INNER JOIN students s ON t.school_id = s.school_id " +
+                        "WHERE s.id = " + studentId + ""
                 , null
         );
     }
