@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import cs.dal.krush.R;
+import cs.dal.krush.StudentCursorAdapters.HomeQuickBookCursorAdapter;
+import cs.dal.krush.StudentCursorAdapters.HomeUpcomingSessionsCursorAdapter;
 import cs.dal.krush.models.DBHelper;
 
 /**
