@@ -83,6 +83,9 @@ We currently don't have a way to reset the DB. However, if you wish to reset the
 3. Click on `Wipe Data`. This will wipe all cached data on your emulator, including the pre-seeded data for KRUSH. 
 4. Rerun the app on the emulator. You will now reseed the DB.
 
+## UML Diagram and Architectural Overview
+[Click here](https://drive.google.com/open?id=0B_oCfPfOVbvWUV9GdHV5SXNPV1k) to take a look at KRUSH's UML Diagram. This will help you, as a developer, to get a full understanding of the architectural overview on how the activities and fragments are setup.
+
 ## 3rd Party References
 - [1] Prolific Interactive, "Prolific Interactive material-calendarview," in GitHub, GitHub, 2016. [Online]. Available: https://github.com/prolificinteractive/material-calendarview. Accessed: Feb. 8, 2017.
 - [2] M. Brandao, "Fredoka One," in Google fonts, Google. [Online]. Available: https://fonts.google.com/specimen/Fredoka+One?selection.family=Fredoka+One. Accessed: Mar. 4, 2017.
