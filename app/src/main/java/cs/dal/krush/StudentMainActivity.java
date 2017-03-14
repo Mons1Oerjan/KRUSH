@@ -1,6 +1,5 @@
 package cs.dal.krush;
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,7 +13,8 @@ import cs.dal.krush.studentFragments.StudentQuickBookFragment;
 import cs.dal.krush.studentFragments.StudentSessionsFragment;
 
 
-public class StudentMainActivity extends FragmentActivity {
+public class StudentMainActivity extends FragmentActivity
+{
     BottomNavigationView bottomNav;
 
     @Override
@@ -63,5 +63,6 @@ public class StudentMainActivity extends FragmentActivity {
             }
         });
     }
+
 }
 

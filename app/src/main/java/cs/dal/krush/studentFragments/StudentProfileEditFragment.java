@@ -1,7 +1,9 @@
 package cs.dal.krush.studentFragments;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -13,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +29,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import cs.dal.krush.R;
+import cs.dal.krush.models.DBHelper;
+
 import static android.app.Activity.RESULT_OK;
+import static cs.dal.krush.R.id.profile_name;
 
 
 public class StudentProfileEditFragment extends Fragment implements View.OnClickListener
@@ -37,8 +43,11 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
     Button saveProfile;
     Button changePicture;
     View myView;
-    TextView profile_name;
-    EditText email, school;
+    TextView profile_name_view;
+    EditText email_view, school_view;
+    int user_id;
+    private DBHelper mydb;
+    private Cursor cursor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,18 +56,35 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
         myView = inflater.inflate(R.layout.student_profile_edit, container, false);
 
         // Get TextViews
-        profile_name = (TextView) myView.findViewById(R.id.profile_name_edit);
-        email = (EditText) myView.findViewById(R.id.profile_email_edit);
-        school = (EditText) myView.findViewById(R.id.profile_school_edit);
+        profile_name_view = (TextView) myView.findViewById(R.id.profile_name_edit);
+        email_view = (EditText) myView.findViewById(R.id.profile_email_edit);
+        school_view = (EditText) myView.findViewById(R.id.profile_school_edit);
+
+        //Database connection
+        mydb = new DBHelper(getContext());
+        cursor = mydb.student.getData(user_id);
+        cursor.moveToFirst();
+
+        // Set data
+        String name = cursor.getString(cursor.getColumnIndex("f_name")) + " " + cursor.getString(cursor.getColumnIndex("l_name"));
+        String email = cursor.getString(cursor.getColumnIndex(("email")));
+        int school_id = cursor.getInt(cursor.getColumnIndex("school_id"));
+        Cursor schoolCursor = mydb.school.getData(school_id);
+        schoolCursor.moveToFirst();
+        String school = schoolCursor.getString(schoolCursor.getColumnIndex("name"));
+
+        profile_name_view.setText(name);
+        email_view.setText(email);
+        school_view.setText(school);
 
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
 
         //Set custom app font
-        profile_name.setTypeface(typeFace);
-        email.setTypeface(typeFace);
-        school.setTypeface(typeFace);
+        profile_name_view.setTypeface(typeFace);
+        email_view.setTypeface(typeFace);
+        school_view.setTypeface(typeFace);
 
         saveProfile = (Button) myView.findViewById(R.id.save_profile_button);
         changePicture = (Button) myView.findViewById(R.id.change_picture_button);
@@ -68,6 +94,11 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
 
         return myView;
 
+    }
+
+    public void setUser_id(int id)
+    {
+        user_id = id;
     }
 
     //Button listeners
@@ -80,9 +111,17 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
             case R.id.save_profile_button:
                 // Save information in fields to database when functionality is hooked up
 
-                // Return to profile view
+                // Save data and Return to profile view
                 try
                 {
+                    // Get data from fields
+                    String new_email = email_view.getText().toString();
+
+                    // Write new fields to table
+                    ContentValues cv = new ContentValues();
+                    cv.put("email", new_email);
+                    mydb.getWritableDatabase().update("students", cv,"id="+user_id, null);
+
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     StudentProfileFragment profile = new StudentProfileFragment();
                     transaction.replace(R.id.student_fragment_container, profile);
@@ -202,8 +241,6 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName, ".jpg",storageDir);
 
-        //Save path to db
-        //user.profile = image.getAbsolutePath();
         imagePath = image.getAbsolutePath();
 
         return image;
