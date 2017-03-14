@@ -2,9 +2,9 @@
 Krush is an android native application where students can book tutoring session based on the tutor's hourly rate, availability, and overall rating. Students can record their tutoring sessions and revisit their previous conversations. Tutors can also build their own profile and reputation through Krush. All payment transactions are taken care of by Krush, making it simple and easy to book a new tutor. 
 
 ## Table Of Contents
-- Code Contribution Guidelines
 - Setup Development Environment
 - Virtual Device Testing
+- Code Contribution Guidelines
 - 3rd Party References
 
 ## Setup Development Environment
@@ -69,6 +69,19 @@ public class foo() {
  * Function that ___.
  */
 ```
+
+## KRUSH Database 
+We are currently using SQLite along with Adnroid's DBHelper class for data storage / retrieval. To view the ER Diagram of the KRUSH Database, [Click here](https://drive.google.com/open?id=0B4S0P8KE9IBoQVFrN2hRU0JILVE).
+
+### DB Migrations and Seeding
+We are currently only running the DB seeders on the first time the application gets opened on the emulator (we don't want to run seeders on every application launch, as this would duplicate the data each time the app was tested).
+
+### DB Reset
+We currently don't have a way to reset the DB. However, if you wish to reset the DB and rerun the seeders, you should follow these steps:
+1. Go to Tools --> Android --> AVD Manager
+2. In the "Actions" column, click on the dropdown arrow button.
+3. Click on `Wipe Data`. This will wipe all cached data on your emulator, including the pre-seeded data for KRUSH. 
+4. Rerun the app on the emulator. You will now reseed the DB.
 
 ## 3rd Party References
 - [1] Prolific Interactive, "Prolific Interactive material-calendarview," in GitHub, GitHub, 2016. [Online]. Available: https://github.com/prolificinteractive/material-calendarview. Accessed: Feb. 8, 2017.
