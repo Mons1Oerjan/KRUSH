@@ -6,6 +6,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import java.lang.reflect.Field;
 
+/**
+ * This is a helper class for the bottom navigation view to disable shift mode.
+ *
+ * Source:
+ * [6] How to disable BottomNavigationView shift mode? (n.d.). Retrieved March 12, 2017,
+ * from http://stackoverflow.com/questions/40176244/how-to-disable-bottomnavigationview-shift-mode
+ */
 public class BottomNavigationViewHelper {
 
     public static void disableShiftMode(BottomNavigationView view) {

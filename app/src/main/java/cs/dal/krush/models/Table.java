@@ -4,9 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Created by greg on 27/02/17.
+ * Table abstract class used to get tables in the DB. All Model classes extends this class.
  */
-
 public abstract class Table {
 
     protected SQLiteDatabase dbWrite;

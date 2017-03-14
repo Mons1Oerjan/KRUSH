@@ -5,9 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Created by greg on 27/02/17.
+ * Tutor Model class.
  */
-
 public class Tutor extends Table{
 
     public Tutor(SQLiteDatabase dbWrite, SQLiteDatabase dbRead){
@@ -18,6 +17,7 @@ public class Tutor extends Table{
      * Insert row into tutors table
      * @param locationId
      * @param schoolId
+     * @param profilePic
      * @param firstName
      * @param lastName
      * @param email
@@ -25,11 +25,12 @@ public class Tutor extends Table{
      * @param rate
      * @return boolean
      */
-    public boolean insert(int locationId, int schoolId, String firstName, String lastName, String
+    public boolean insert(int locationId, int schoolId, String profilePic, String firstName, String lastName, String
                           email, String password, int rate){
         ContentValues contentValues = new ContentValues();
         contentValues.put("location_id", locationId);
         contentValues.put("school_id", schoolId);
+        contentValues.put("profile_pic", profilePic);
         contentValues.put("f_name", firstName);
         contentValues.put("l_name", lastName);
         contentValues.put("email", email);
@@ -41,14 +42,48 @@ public class Tutor extends Table{
 
     @Override
     public Cursor getData(int id){
-        Cursor res = dbRead.rawQuery("SELECT * FROM tutors WHERE id="+id+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE id="+id+"",null);
     }
 
     @Override
     public Cursor getAll() {
-        res = dbRead.rawQuery("SELECT * FROM tutors",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors",null);
+    }
+
+    /**
+     * Gets all tutors.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @return Cursor
+     */
+    public Cursor getAllForCursorAdapter() {
+        return dbRead.rawQuery("SELECT id as _id, location_id, school_id, profile_pic, " +
+                "f_name, l_name, email, password, rating, rate, revenue FROM tutors", null);
+    }
+
+    /**
+     * Gets all unique tutors that the given student has previously booked sessions with.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @return Cursor
+     */
+    public Cursor getPreviouslyUsedTutorsForCursorAdapter(int studentId) {
+        return dbRead.rawQuery(
+                "SELECT DISTINCT t.id as _id, t.location_id, t.school_id, t.profile_pic, " +
+                "t.f_name, t.l_name, t.email, t.password, t.rating, t.rate, t.revenue " +
+                "FROM tutors t " +
+                "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
+                "WHERE ts.student_id=" + studentId + ""
+                , null
+        );
     }
 
     /**
@@ -57,8 +92,7 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getDataByFirstName(String firstName){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE f_name="+firstName+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE f_name="+firstName+"",null);
     }
 
     /**
@@ -67,8 +101,7 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getDataByLastName(String lastName){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE l_name="+lastName+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE l_name="+lastName+"",null);
     }
 
     /**
@@ -77,8 +110,7 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getDataEmail(String email){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE email="+email+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE email="+email+"",null);
     }
 
     /**
@@ -87,8 +119,7 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getDataByRating(int rating){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE rating="+rating+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE rating="+rating+"",null);
     }
 
     /**
