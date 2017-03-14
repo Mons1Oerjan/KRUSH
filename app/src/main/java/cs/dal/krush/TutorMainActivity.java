@@ -21,6 +21,9 @@ public class TutorMainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutor_main);
 
+        //Retrieve user id from login activity
+        String userId = getIntent().getStringExtra("UserID");
+        
         //Set initial fragment to tutor home page
         TutorHomeFragment homeFragment = new TutorHomeFragment();
         homeFragment.setArguments(getIntent().getExtras());
