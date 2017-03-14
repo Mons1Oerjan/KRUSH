@@ -2,21 +2,29 @@ package cs.dal.krush;
 
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import cs.dal.krush.models.DBHelper;
+
 public class LoginMainActivity extends AppCompatActivity {
     //student = 1 || tutor = 2
     private int profileSelected = 0;
+    private DBHelper mydb;
+    private Cursor user;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main);
+
+        mydb = new DBHelper(getApplicationContext());
 
         //get UI elements
         final EditText username = (EditText) findViewById(R.id.username);
@@ -47,15 +55,27 @@ public class LoginMainActivity extends AppCompatActivity {
 
         login_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent i = new Intent(LoginMainActivity.this, LoginMainActivity.class);
 
                 if(profileSelected == 1){
+                    user = mydb.student.getDataEmail(username.getText().toString(), password.getText().toString());
                     i = new Intent(LoginMainActivity.this, StudentMainActivity.class);
                 }
                 else if(profileSelected == 2){
+                    user = mydb.tutor.getDataEmail(username.getText().toString(), password.getText().toString());
                     i = new Intent(LoginMainActivity.this, TutorMainActivity.class);
                 }
-                startActivity(i);
+
+                if (user != null && user.moveToFirst()){
+                    i.putExtra("UserID", user.getString(user.getColumnIndex("id")));
+                    startActivity(i);
+                }
+                else {
+                    TextView invalidCredentials = (TextView) findViewById(R.id.invalid);
+                    invalidCredentials.setText("Invalid credentials.");
+                }
+
             }
         });
     }

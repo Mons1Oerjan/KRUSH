@@ -76,8 +76,8 @@ public class Tutor extends Table{
      * @param email
      * @return Cursor
      */
-    public Cursor getDataEmail(String email){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE email="+email+"",null);
+    public Cursor getDataEmail(String email, String password){
+        res = dbRead.rawQuery("SELECT * FROM tutors WHERE email=? AND password=?", new String[]{email, password});
         return res;
     }
 
