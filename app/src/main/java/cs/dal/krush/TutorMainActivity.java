@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
-import cs.dal.krush.tutorFragments.TutorCalendarFragment;
+import cs.dal.krush.tutorFragments.TutorAvailabilityFragment;
 import cs.dal.krush.tutorFragments.TutorHomeFragment;
 import cs.dal.krush.tutorFragments.TutorProfileFragment;
 import cs.dal.krush.tutorFragments.TutorSessionsFragment;
@@ -19,6 +19,9 @@ public class TutorMainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutor_main);
+
+        //Retrieve user id from login activity
+        String userId = getIntent().getStringExtra("UserID");
 
         //Set initial fragment to tutor home page
         TutorHomeFragment homeFragment = new TutorHomeFragment();
@@ -51,8 +54,8 @@ public class TutorMainActivity extends FragmentActivity {
                         transaction.replace(R.id.tutor_fragment_container, sessions);
                         transaction.commit();
                         return true;
-                    case R.id.menu_calendar:
-                        TutorCalendarFragment calendar = new TutorCalendarFragment();
+                    case R.id.menu_availability:
+                        TutorAvailabilityFragment calendar = new TutorAvailabilityFragment();
                         transaction.replace(R.id.tutor_fragment_container, calendar);
                         transaction.commit();
                         return true;

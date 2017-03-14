@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
 import cs.dal.krush.studentFragments.StudentHomeFragment;
 import cs.dal.krush.studentFragments.StudentProfileFragment;
-import cs.dal.krush.studentFragments.StudentQuickBookFragment;
+import cs.dal.krush.studentFragments.StudentBookingFragment;
 import cs.dal.krush.studentFragments.StudentSessionsFragment;
 
 
@@ -21,6 +21,9 @@ public class StudentMainActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_main);
+
+        //Retrieve user id from login activity
+        String userId = getIntent().getStringExtra("UserID");
 
         //Set initial fragment to student home page
         StudentHomeFragment homeFragment = new StudentHomeFragment();
@@ -43,8 +46,8 @@ public class StudentMainActivity extends FragmentActivity
                         transaction.replace(R.id.student_fragment_container, home);
                         transaction.commit();
                         return true;
-                    case R.id.menu_quick_book:
-                        StudentQuickBookFragment quickbook = new StudentQuickBookFragment();
+                    case R.id.menu_booking:
+                        StudentBookingFragment quickbook = new StudentBookingFragment();
                         transaction.replace(R.id.student_fragment_container, quickbook);
                         transaction.commit();
                         return true;

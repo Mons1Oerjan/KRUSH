@@ -13,6 +13,12 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.studentFragments.StudentProfileEditFragment;
 
+/**
+ * Sets up the Tutor Profile fragment. This fragment belongs to the TutorMainActivity class
+ * and is accessed through the tutor's bottom navigation bar.
+ *
+ * The tutor can view and edit their user profile using this fragment.
+ */
 public class TutorProfileFragment extends Fragment implements View.OnClickListener
 {
     ImageView edit_btn;

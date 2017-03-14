@@ -1,13 +1,10 @@
 package cs.dal.krush.studentFragments;
 
-
-import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +14,14 @@ import android.widget.TextView;
 
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
-
-import static android.R.attr.id;
-import static android.R.attr.onClick;
 import static cs.dal.krush.R.id.profile_name;
 
 
 /**
- * Student Profile view.
+ * Sets up the Student Profile fragment. This fragment belongs to the StudentMainActivity class
+ * and is accessed through the student's bottom navigation bar.
+ *
+ * The student can view and edit their user profile using this fragment.
  */
 public class StudentProfileFragment extends Fragment implements View.OnClickListener
 {
