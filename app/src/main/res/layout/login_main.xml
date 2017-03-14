@@ -49,6 +49,26 @@
         android:layout_above="@+id/submitLogin"
         android:layout_alignStart="@+id/username" />
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@+id/submitLogin"
+        android:layout_alignStart="@+id/submitLogin"
+        android:layout_marginBottom="18dp">
+        <RadioButton android:id="@+id/radio_student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_student"/>
+        <RadioButton android:id="@+id/radio_tutor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/login_tutor"/>
+
+
+    </RadioGroup>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,34 +80,20 @@
         android:minWidth="170dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
+        android:layout_marginBottom="97dp"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text=""
+        android:textColor="#990000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/username"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp" />
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/password"
-        android:layout_marginBottom="18dp">
-
-    </RadioGroup>
-
-    <RadioButton android:id="@+id/radio_tutor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_tutor"
-        android:layout_above="@+id/submitLogin"
-        android:layout_alignEnd="@+id/submitLogin"
-        android:layout_marginBottom="30dp" />
-
-    <RadioButton android:id="@+id/radio_student"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_student"
-        android:layout_alignBaseline="@+id/radio_tutor"
-        android:layout_alignBottom="@+id/radio_tutor"
-        android:layout_alignStart="@+id/submitLogin" />
+        android:layout_marginBottom="28dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/invalid" />
 
 
 </RelativeLayout>
