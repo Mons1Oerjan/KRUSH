@@ -22,6 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public TutoringSession tutoringSession = new TutoringSession(this.getWritableDatabase(), this.getReadableDatabase());
     public CoursesTutors coursesTutors = new CoursesTutors(this.getWritableDatabase(), this.getReadableDatabase());
     public Location location = new Location(this.getWritableDatabase(), this.getReadableDatabase());
+    public AvailableTime availableTime = new AvailableTime(this.getWritableDatabase(), this.getReadableDatabase());
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -113,6 +114,15 @@ public class DBHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY(tutor_id) REFERENCES tutors(id) ON DELETE CASCADE)"
         );
 
+        db.execSQL(
+                "CREATE TABLE available_time " +
+                        "(id INTEGER PRIMARY KEY," +
+                        "tutor_id INTEGER NOT NULL," +
+                        "start_time DATETIME NOT NULL," +
+                        "end_time DATETIME NOT NULL," +
+                        "FOREIGN KEY(tutor_id) REFERENCES tutors(id) ON DELETE CASCADE)"
+        );
+
 
 
     }
@@ -127,6 +137,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS audio_recording");
         db.execSQL("DROP TABLE IF EXISTS course_tutors");
         db.execSQL("DROP TABLE IF EXISTS locations");
+        db.execSQL("DROP TABLE IF EXISTS available_time");
 
         onCreate(db);
     }
