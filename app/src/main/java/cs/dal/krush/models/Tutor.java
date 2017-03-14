@@ -110,8 +110,7 @@ public class Tutor extends Table{
      * @return Cursor
      */
     public Cursor getDataEmail(String email, String password){
-        res = dbRead.rawQuery("SELECT * FROM tutors WHERE email=? AND password=?", new String[]{email, password});
-        return res;
+        return dbRead.rawQuery("SELECT * FROM tutors WHERE email=? AND password=?", new String[]{email, password});
     }
 
     /**
