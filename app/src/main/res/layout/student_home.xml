@@ -47,6 +47,5 @@
         android:layout_height="270dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/bookTutorLabel" />
->>>>>>> fb622f5e25d6d3a64ca81045659423e5cffb0a21
 
 </RelativeLayout>

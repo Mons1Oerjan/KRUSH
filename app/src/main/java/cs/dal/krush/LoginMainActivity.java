@@ -1,12 +1,18 @@
 package cs.dal.krush;
-
+/**
+ * This calss is used to properly log a user into the application.
+ * The user inputs email, password and user type.
+ * The class searches the DB for user with matching credentials.
+ * If there is a match, store userID in intent extras.
+ * Then start activity with appropriate intent (Student/Tutor)
+ * If credentials are invalid, displays invalid message
+ */
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
