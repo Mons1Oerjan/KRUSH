@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import cs.dal.krush.R;
 import cs.dal.krush.StudentCursorAdapters.BookingTutorCursorAdapter;
@@ -41,12 +44,34 @@ public class StudentBookingFragment extends Fragment {
         //fetch UI elements:
         ListView tutorsListView = (ListView)view.findViewById(R.id.availableTutorsListView);
         TextView pageTitle = (TextView)view.findViewById(R.id.bookingTitleLabel);
+        Switch filterByCourses = (Switch)view.findViewById(R.id.filterByCoursesSwitch);
+        filterByCourses.setChecked(true);
 
         //fetch custom app font:
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
 
         //set font style:
         pageTitle.setTypeface(typeFace);
+
+        //Set OnCheckListener:
+        filterByCourses.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+//                    //get tutors filtered by the student's course:
+//                    Cursor cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
+//                    //set tutor's listview adapter:
+//                    BookingTutorCursorAdapter profileAdapter = new BookingTutorCursorAdapter(C, cursorTutorResponse);
+//                    tutorsListView.setAdapter(profileAdapter);
+                } else {
+//                    //get all tutors from DB:
+//                    Cursor cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
+//                    //set tutor's listview adapter:
+//                    BookingTutorCursorAdapter profileAdapter = new BookingTutorCursorAdapter(C, cursorTutorResponse);
+//                    tutorsListView.setAdapter(profileAdapter);
+                }
+            }
+        });
 
         //get all tutors from DB:
         Cursor cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
