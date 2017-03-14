@@ -1,7 +1,15 @@
 package cs.dal.krush;
-
+/**
+ * This calss is used to properly log a user into the application.
+ * The user inputs email, password and user type.
+ * The class searches the DB for user with matching credentials.
+ * If there is a match, store userID in intent extras.
+ * Then start activity with appropriate intent (Student/Tutor)
+ * If credentials are invalid, displays invalid message
+ */
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +19,18 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import cs.dal.krush.models.DBHelper;
+
 public class LoginMainActivity extends AppCompatActivity {
     //student = 1 || tutor = 2
     private int profileSelected = 0;
+    private DBHelper mydb;
+    private Cursor user;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_main);
+
+        mydb = new DBHelper(getApplicationContext());
 
         //get UI elements
         final EditText username = (EditText) findViewById(R.id.username);
@@ -47,15 +61,27 @@ public class LoginMainActivity extends AppCompatActivity {
 
         login_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent i = new Intent(LoginMainActivity.this, LoginMainActivity.class);
 
                 if(profileSelected == 1){
+                    user = mydb.student.getDataEmail(username.getText().toString(), password.getText().toString());
                     i = new Intent(LoginMainActivity.this, StudentMainActivity.class);
                 }
                 else if(profileSelected == 2){
+                    user = mydb.tutor.getDataEmail(username.getText().toString(), password.getText().toString());
                     i = new Intent(LoginMainActivity.this, TutorMainActivity.class);
                 }
-                startActivity(i);
+
+                if (user != null && user.moveToFirst()){
+                    i.putExtra("UserID", user.getString(user.getColumnIndex("id")));
+                    startActivity(i);
+                }
+                else {
+                    TextView invalidCredentials = (TextView) findViewById(R.id.invalid);
+                    invalidCredentials.setText("Invalid credentials.");
+                }
+
             }
         });
     }

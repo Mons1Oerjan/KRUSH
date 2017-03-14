@@ -5,9 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Created by greg on 27/02/17.
+ * Audio Recording Model class.
  */
-
 public class AudioRecording extends Table {
 
     public AudioRecording(SQLiteDatabase dbWrite, SQLiteDatabase dbRead){
@@ -30,14 +29,12 @@ public class AudioRecording extends Table {
 
     @Override
     public Cursor getData(int id){
-        res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE id="+id+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM audio_recording WHERE id="+id+"",null);
     }
 
     @Override
     public Cursor getAll() {
-        res = dbRead.rawQuery("SELECT * FROM audio_recording",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM audio_recording",null);
     }
 
     /**
@@ -46,8 +43,7 @@ public class AudioRecording extends Table {
      * @return res
      */
     public Cursor getDataByLocationId(int locationId){
-        res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE location_id="+locationId+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM audio_recording WHERE location_id="+locationId+"",null);
     }
 
     /**
@@ -56,8 +52,7 @@ public class AudioRecording extends Table {
      * @return res
      */
     public Cursor getDataByStudentId(int studentId){
-        res = dbRead.rawQuery("SELECT * FROM audio_recording WHERE student_id="+studentId+"",null);
-        return res;
+        return dbRead.rawQuery("SELECT * FROM audio_recording WHERE student_id="+studentId+"",null);
     }
 
     /**
