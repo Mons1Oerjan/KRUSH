@@ -22,6 +22,9 @@ public class StudentMainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_main);
 
+        //Retrieve user id from login activity
+        String userId = getIntent().getStringExtra("UserID");
+
         //Set initial fragment to student home page
         StudentHomeFragment homeFragment = new StudentHomeFragment();
         homeFragment.setArguments(getIntent().getExtras());
