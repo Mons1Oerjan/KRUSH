@@ -15,10 +15,16 @@ import cs.dal.krush.R;
  * The tutor can view and edit their user profile using this fragment.
  */
 public class TutorProfileFragment extends Fragment {
+
+    private int userId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.tutor_profile, container, false);
+        View view = inflater.inflate(R.layout.tutor_profile, container, false);
+        userId = Integer.parseInt(getArguments().getString("UserID"));
+
+
+        return view;
     }
 }

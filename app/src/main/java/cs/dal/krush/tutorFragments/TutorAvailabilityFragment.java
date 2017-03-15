@@ -48,11 +48,15 @@ public class TutorAvailabilityFragment extends Fragment {
     private GregorianCalendar startTimeCalendar = new GregorianCalendar();
     private GregorianCalendar endTimeCalendar = new GregorianCalendar();
 
+    private int userId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.tutor_availability, container, false);
+        View view = inflater.inflate(R.layout.tutor_availability, container, false);
+        userId = Integer.parseInt(getArguments().getString("UserID"));
+
+
+        return view;
     }
 
     @Override
