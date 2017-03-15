@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
@@ -36,7 +36,7 @@ import cs.dal.krush.models.DBHelper;
  */
 public class TutorAvailabilityFragment extends Fragment {
 
-    Button btnDatePicker, btnStartTimePicker, btnEndTimePicker, btnSubmit;
+    Button btnDatePicker, btnStartTimePicker, btnEndTimePicker, btnSubmit, btnViewCalendar;
     EditText txtDate, txtStartTime, txtEndTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private int sYear, sMonth, sDay, sStartHour, sStartMinute, sEndHour, sEndMinute;
@@ -66,6 +66,7 @@ public class TutorAvailabilityFragment extends Fragment {
         btnStartTimePicker=(Button)getView().findViewById(R.id.btnStartTime);
         btnEndTimePicker=(Button)getView().findViewById(R.id.btnEndTime);
         btnSubmit=(Button)getView().findViewById(R.id.btnSubmit);
+        btnViewCalendar=(Button)getView().findViewById(R.id.btnViewCalendar);
         txtDate=(EditText)getView().findViewById(R.id.txtDate);
         txtStartTime=(EditText)getView().findViewById(R.id.txtStartTime);
         txtEndTime=(EditText)getView().findViewById(R.id.txtEndTime);
@@ -211,6 +212,19 @@ public class TutorAvailabilityFragment extends Fragment {
                 txtEndTime.setText("Select a date");
                 loadSchedule();
 
+            }
+        });
+
+        btnViewCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                TutorCalendarFragment newFragment = new TutorCalendarFragment();
+
+                ft.replace(R.id.tutor_fragment_container, newFragment);
+                ft.addToBackStack(null);
+
+                ft.commit();
             }
         });
 
