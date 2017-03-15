@@ -22,13 +22,13 @@ import cs.dal.krush.models.DBHelper;
  *
  * The tutor can view and edit their user profile using this fragment.
  */
-public class TutorProfileFragment extends Fragment implements View.OnClickListener
-{
-    ImageView edit_btn, profile_picture_view;
-    TextView profile_name_view, email_view, school_view, rate_view;
+public class TutorProfileFragment extends Fragment implements View.OnClickListener {
+
     private DBHelper mydb;
     private Cursor cursor;
     static int USER_ID;
+    ImageView edit_btn, profile_picture_view;
+    TextView profile_name_view, email_view, school_view, rate_view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,8 +62,7 @@ public class TutorProfileFragment extends Fragment implements View.OnClickListen
 
         //Profile Picture
         String imagePath = cursor.getString(cursor.getColumnIndex("profile_pic"));
-        if(imagePath != null && !imagePath.isEmpty())
-        {
+        if(imagePath != null && !imagePath.isEmpty()) {
             Bitmap profile_pic = BitmapFactory.decodeFile(imagePath);
             profile_picture_view.setImageBitmap(profile_pic);
         }
@@ -88,12 +87,13 @@ public class TutorProfileFragment extends Fragment implements View.OnClickListen
         return myView;
     }
 
-    // Edit profile button listener, starts TutorProfileEditFragment
+    /**
+     * Edit profile button listener, starts TutorProfileEditFragment
+     * @param v
+     */
     @Override
-    public void onClick(View v)
-    {
-        try
-        {
+    public void onClick(View v) {
+        try {
             //Create bundle to send USER_ID to edit fragment
             Bundle bundle = new Bundle();
             bundle.putInt("USER_ID", USER_ID);
@@ -105,10 +105,8 @@ public class TutorProfileFragment extends Fragment implements View.OnClickListen
             transaction.addToBackStack(null);
             transaction.commit();
         }
-        catch(Exception ex)
-        {
+        catch(Exception ex) {
             ex.printStackTrace();
         }
     }
-
 }

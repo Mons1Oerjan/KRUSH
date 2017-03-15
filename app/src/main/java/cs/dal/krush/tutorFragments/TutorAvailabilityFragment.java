@@ -16,12 +16,13 @@ import cs.dal.krush.R;
  */
 public class TutorAvailabilityFragment extends Fragment {
 
-    private int userId;
+    static int USER_ID;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tutor_availability, container, false);
-        userId = Integer.parseInt(getArguments().getString("UserID"));
+        USER_ID = getArguments().getInt("USER_ID");
 
 
         return view;
