@@ -81,6 +81,9 @@ public class TutorAvailabilityFragment extends Fragment {
         txtEndTime.setText("Select a date");
         btnEndTimePicker.setEnabled(false);
         txtEndTime.setEnabled(false);
+        txtDate.setFocusable(false);
+        txtStartTime.setFocusable(false);
+        txtEndTime.setFocusable(false);
 
 
         loadSchedule();
