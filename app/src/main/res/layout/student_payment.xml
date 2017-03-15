@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cs.dal.krush.studentFragments.StudentProfileFragment"
+    android:id="@+id/student_payment">
+
+    <TextView
+        android:text="Total tutoring fee:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/costLabel"
+        tools:text="Total tutoring fee:"
+        android:paddingStart="10sp"
+        android:textSize="24sp"
+        android:layout_marginTop="41dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/paymentHeader"
+        android:layout_alignParentStart="true"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="$0.00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tutoringCost"
+        tools:text="$0.00"
+        android:textSize="24sp"
+        android:paddingStart="10sp"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/costLabel"
+        android:layout_alignBottom="@+id/costLabel"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/costLabel" />
+
+    <ImageView
+        android:layout_width="50dp"
+        app:srcCompat="@drawable/mastercard"
+        android:id="@+id/imageView4"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2"
+        android:layout_height="25dp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        app:srcCompat="@drawable/amex"
+        android:id="@+id/imageView3"
+        android:layout_alignTop="@+id/imageView4"
+        android:layout_toEndOf="@+id/imageView4"
+        android:layout_height="25dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="4242 4242 4242 4242"
+        android:ems="10"
+        android:id="@+id/creditNumberInput"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="50dp"
+        app:srcCompat="@drawable/visa"
+        android:layout_marginTop="40dp"
+        android:id="@+id/imageView2"
+        android:layout_height="25dp"
+        android:layout_below="@+id/costLabel"
+        android:layout_toEndOf="@+id/cardLabel" />
+
+    <TextView
+        android:text="Card Number:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:paddingStart="10sp"
+        android:textSize="20sp"
+        tools:text="Card Number:"
+        android:textColor="@color/colorPrimary"
+        android:layout_above="@+id/expDateLabel"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="18dp" />
+
+    <TextView
+        android:text="We accept:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardLabel"
+        tools:text="We accept:"
+        android:textSize="20sp"
+        android:paddingStart="10sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Exp. Date:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10sp"
+        android:id="@+id/expDateLabel"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        tools:text="Exp. Date:"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/editText2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:hint="MM/YY"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/creditNumberInput"
+        android:layout_alignStart="@+id/creditNumberInput" />
+
+    <TextView
+        android:text="Payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/paymentHeader"
+        tools:text="Payment"
+        android:textSize="50sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

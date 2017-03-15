@@ -36,7 +36,7 @@ public class LoginMainActivity extends AppCompatActivity {
         final EditText username = (EditText) findViewById(R.id.username);
         final EditText password = (EditText) findViewById(R.id.password);
         final Button login_button = (Button) findViewById(R.id.submitLogin);
-        final TextView krush_logo_textView = (TextView) findViewById(R.id.krushLogo);
+        final TextView krush_logo_textView = (TextView) findViewById(R.id.paymentHeader);
         final RadioButton student_select = (RadioButton) findViewById(R.id.radio_student);
         final RadioButton tutor_select = (RadioButton) findViewById(R.id.radio_tutor);
 
