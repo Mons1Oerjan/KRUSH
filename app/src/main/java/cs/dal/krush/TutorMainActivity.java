@@ -42,25 +42,29 @@ public class TutorMainActivity extends FragmentActivity {
                 switch(menu_item) {
                     case R.id.menu_home:
                         TutorHomeFragment home = new TutorHomeFragment();
+                        home.setArguments(getIntent().getExtras());
                         transaction.replace(R.id.tutor_fragment_container, home);
                         transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_profile:
                         TutorProfileFragment profile = new TutorProfileFragment();
+                        profile.setArguments(getIntent().getExtras());
                         transaction.replace(R.id.tutor_fragment_container, profile);
                         transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_sessions:
                         TutorSessionsFragment sessions = new TutorSessionsFragment();
+                        sessions.setArguments(getIntent().getExtras());
                         transaction.replace(R.id.tutor_fragment_container, sessions);
                         transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_availability:
-                        TutorAvailabilityFragment calendar = new TutorAvailabilityFragment();
-                        transaction.replace(R.id.tutor_fragment_container, calendar);
+                        TutorAvailabilityFragment availability = new TutorAvailabilityFragment();
+                        availability.setArguments(getIntent().getExtras());
+                        transaction.replace(R.id.tutor_fragment_container, availability);
                         transaction.addToBackStack(null);
                         transaction.commit();
                         return true;

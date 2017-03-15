@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class StudentHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_home, container, false);
+        int userId = Integer.parseInt(getArguments().getString("UserID"));
 
         //get Context:
         Context C = getActivity().getApplicationContext();
@@ -53,15 +55,14 @@ public class StudentHomeFragment extends Fragment {
         bookTutorLabel.setTypeface(typeFace);
 
         //get all tutoring sessions by the student:
-        //TODO: Change the ID passed in (1) to the logged in studentId once login has been setup
-        Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(1);
+        Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(userId);
 
         //set sessions listview adapter:
         HomeUpcomingSessionsCursorAdapter sessionsAdapter = new HomeUpcomingSessionsCursorAdapter(C, cursorSessionsResponse);
         upcomingSessionsListView.setAdapter(sessionsAdapter);
 
         //get all distinct tutors that the user has previously had a tutoring session with:
-        Cursor cursorTutorResponse = mydb.tutor.getPreviouslyUsedTutorsForCursorAdapter(1);
+        Cursor cursorTutorResponse = mydb.tutor.getPreviouslyUsedTutorsForCursorAdapter(userId);
 
         //set tutor's listview adapter:
         HomeQuickBookCursorAdapter quickBookAdapter = new HomeQuickBookCursorAdapter(C, cursorTutorResponse);

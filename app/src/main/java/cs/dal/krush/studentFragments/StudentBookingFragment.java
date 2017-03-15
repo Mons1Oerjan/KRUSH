@@ -38,6 +38,7 @@ public class StudentBookingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_booking, container, false);
+        int userId = Integer.parseInt(getArguments().getString("UserID"));
 
         //get Context:
         C = getActivity().getApplicationContext();
