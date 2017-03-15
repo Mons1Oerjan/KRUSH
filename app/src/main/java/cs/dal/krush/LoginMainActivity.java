@@ -77,7 +77,7 @@ public class LoginMainActivity extends AppCompatActivity {
 
                 //Check if validation is successful:
                 if (user != null && user.moveToFirst()){
-                    i.putExtra("UserID", user.getString(user.getColumnIndex("id"))); //pass userId to mainActivity
+                    i.putExtra("USER_ID", user.getString(user.getColumnIndex("id")));
                     startActivity(i);
                 } else {
                     TextView invalidCredentials = (TextView) findViewById(R.id.invalid);
