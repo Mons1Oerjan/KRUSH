@@ -9,4 +9,16 @@
     <string name="login_user_password">Password</string>
     <string name="login_student">Student</string>
     <string name="login_tutor">Tutor</string>
+    <string name="save_profile_button_text">Save Changes</string>
+    <string name="profile_email_label">Email</string>
+    <string name="profile_school_label">School</string>
+    <string name="current_password_label">Current Password</string>
+    <string name="new_password_label">New Password</string>
+    <string name="confirm_new_password_label">Confirm New Password</string>
+    <string name="change_picture_button_text">Change Picture</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_schedule_label">Schedule</string>
+    <string name="profile_rate_label">Rate</string>
 </resources>

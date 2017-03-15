@@ -12,9 +12,14 @@ import cs.dal.krush.tutorFragments.TutorHomeFragment;
 import cs.dal.krush.tutorFragments.TutorProfileFragment;
 import cs.dal.krush.tutorFragments.TutorSessionsFragment;
 
-
+/**
+ * TutorMainActivity is the main entry point for all tutor features
+ * This activity renders the bottom nav menu and handles the click listeners
+ * When a menu item is clicked the corresponding fragment is inserted into the fragment view
+ */
 public class TutorMainActivity extends FragmentActivity {
     BottomNavigationView bottomNav;
+    static int USER_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +27,15 @@ public class TutorMainActivity extends FragmentActivity {
         setContentView(R.layout.tutor_main);
 
         //Retrieve user id from login activity
-        String userId = getIntent().getStringExtra("UserID");
+        USER_ID = Integer.parseInt(getIntent().getStringExtra("USER_ID"));
+
+        //Create bundle to send USER_ID to other fragments
+        final Bundle bundle = new Bundle();
+        bundle.putInt("USER_ID", USER_ID);
 
         //Set initial fragment to tutor home page
         TutorHomeFragment homeFragment = new TutorHomeFragment();
-        homeFragment.setArguments(getIntent().getExtras());
+        homeFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().add(R.id.tutor_fragment_container, homeFragment).commit();
 
          //Custom bottom nav bar with disabled shifting
@@ -42,30 +51,28 @@ public class TutorMainActivity extends FragmentActivity {
                 switch(menu_item) {
                     case R.id.menu_home:
                         TutorHomeFragment home = new TutorHomeFragment();
-                        home.setArguments(getIntent().getExtras());
+                        home.setArguments(bundle);
                         transaction.replace(R.id.tutor_fragment_container, home);
-                        transaction.addToBackStack(null);
                         transaction.commit();
                         return true;
                     case R.id.menu_profile:
                         TutorProfileFragment profile = new TutorProfileFragment();
                         profile.setArguments(getIntent().getExtras());
                         transaction.replace(R.id.tutor_fragment_container, profile);
-                        transaction.addToBackStack(null);
+                        profile.setArguments(bundle);
                         transaction.commit();
                         return true;
                     case R.id.menu_sessions:
                         TutorSessionsFragment sessions = new TutorSessionsFragment();
                         sessions.setArguments(getIntent().getExtras());
                         transaction.replace(R.id.tutor_fragment_container, sessions);
-                        transaction.addToBackStack(null);
+                        sessions.setArguments(bundle);
                         transaction.commit();
                         return true;
                     case R.id.menu_availability:
-                        TutorAvailabilityFragment availability = new TutorAvailabilityFragment();
-                        availability.setArguments(getIntent().getExtras());
-                        transaction.replace(R.id.tutor_fragment_container, availability);
-                        transaction.addToBackStack(null);
+                        TutorAvailabilityFragment calendar = new TutorAvailabilityFragment();
+                        transaction.replace(R.id.tutor_fragment_container, calendar);
+                        calendar.setArguments(bundle);
                         transaction.commit();
                         return true;
                 }

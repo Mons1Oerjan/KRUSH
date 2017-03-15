@@ -32,7 +32,7 @@ import cs.dal.krush.models.DBHelper;
  * Sets up the Tutor Availability fragment. This fragment belongs to the TutorMainActivity class
  * and is accessed through the tutor's bottom navigation bar.
  *
- * The tutors can set their availability and schedule using this fragment.
+ * The tutors can set their availability and schedule_view using this fragment.
  */
 public class TutorAvailabilityFragment extends Fragment {
 
@@ -49,11 +49,13 @@ public class TutorAvailabilityFragment extends Fragment {
     private GregorianCalendar endTimeCalendar = new GregorianCalendar();
 
     private int userId;
+    static int USER_ID;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tutor_availability, container, false);
-        userId = Integer.parseInt(getArguments().getString("UserID"));
+        USER_ID = getArguments().getInt("USER_ID");
 
 
         return view;

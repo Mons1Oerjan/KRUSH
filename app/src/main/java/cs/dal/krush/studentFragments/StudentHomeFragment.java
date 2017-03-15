@@ -27,13 +27,13 @@ import cs.dal.krush.models.DBHelper;
  */
 public class StudentHomeFragment extends Fragment {
 
-    private int userId;
+    static int USER_ID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_home, container, false);
-        userId = Integer.parseInt(getArguments().getString("UserID"));
+        USER_ID = getArguments().getInt("USER_ID");
 
         //get Context:
         Context C = getActivity().getApplicationContext();
@@ -57,14 +57,14 @@ public class StudentHomeFragment extends Fragment {
         bookTutorLabel.setTypeface(typeFace);
 
         //get all tutoring sessions by the student:
-        Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(userId);
+        Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(USER_ID);
 
         //set sessions listview adapter:
         HomeUpcomingSessionsCursorAdapter sessionsAdapter = new HomeUpcomingSessionsCursorAdapter(C, cursorSessionsResponse);
         upcomingSessionsListView.setAdapter(sessionsAdapter);
 
         //get all distinct tutors that the user has previously had a tutoring session with:
-        Cursor cursorTutorResponse = mydb.tutor.getPreviouslyUsedTutorsForCursorAdapter(userId);
+        Cursor cursorTutorResponse = mydb.tutor.getPreviouslyUsedTutorsForCursorAdapter(USER_ID);
 
         //set tutor's listview adapter:
         HomeQuickBookCursorAdapter quickBookAdapter = new HomeQuickBookCursorAdapter(C, cursorTutorResponse);
