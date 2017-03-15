@@ -51,27 +51,6 @@
         android:layout_toEndOf="@+id/imageView4"
         android:layout_height="25dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="4242 4242 4242 4242"
-        android:ems="10"
-        android:id="@+id/creditNumberInput"
-        android:textSize="20sp"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:layout_width="50dp"
-        app:srcCompat="@drawable/visa"
-        android:layout_marginTop="40dp"
-        android:id="@+id/imageView2"
-        android:layout_height="25dp"
-        android:layout_below="@+id/costLabel"
-        android:layout_toEndOf="@+id/cardLabel" />
-
     <TextView
         android:text="Card Number:"
         android:layout_width="wrap_content"
@@ -83,7 +62,8 @@
         android:textColor="@color/colorPrimary"
         android:layout_above="@+id/expDateLabel"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="18dp" />
+        android:layout_marginBottom="18dp"
+        android:layout_toStartOf="@+id/creditNumberInput" />
 
     <TextView
         android:text="We accept:"
@@ -96,19 +76,6 @@
         android:textColor="@color/colorPrimary"
         android:layout_alignBottom="@+id/imageView2"
         android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Exp. Date:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="10sp"
-        android:id="@+id/expDateLabel"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimary"
-        tools:text="Exp. Date:"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/editText2" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -133,5 +100,76 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Exp. Date:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10sp"
+        android:id="@+id/expDateLabel"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        tools:text="Exp. Date:"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/editText2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:hint="000"
+        android:id="@+id/cvvNumberInput"
+        android:layout_below="@+id/editText2"
+        android:layout_alignStart="@+id/editText2" />
+
+    <TextView
+        android:text="CVV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cvvLabel"
+        tools:text="CVV:"
+        android:paddingStart="10sp"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignBaseline="@+id/cvvNumberInput"
+        android:layout_alignBottom="@+id/cvvNumberInput"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/cvvNumberInput" />
+
+    <ImageView
+        android:layout_width="50dp"
+        app:srcCompat="@drawable/visa"
+        android:id="@+id/imageView2"
+        android:layout_height="25dp"
+        android:layout_marginBottom="26dp"
+        android:layout_above="@+id/creditNumberInput"
+        android:layout_alignStart="@+id/creditNumberInput" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="4242 4242 4242 4242"
+        android:ems="10"
+        android:id="@+id/creditNumberInput"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="59dp"
+        android:id="@+id/button"
+        android:layout_below="@+id/cvvNumberInput"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/bottom_bar_color"/>
 
 </RelativeLayout>
