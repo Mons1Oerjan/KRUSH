@@ -13,11 +13,14 @@ import cs.dal.krush.R;
  * and is accessed through the tutor's bottom navigation bar.
  */
 public class TutorHomeFragment extends Fragment {
+
+    private int userId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tutor_home, container, false);
-        int userId = Integer.parseInt(getArguments().getString("UserID"));
+        userId = Integer.parseInt(getArguments().getString("UserID"));
 
 
         return view;

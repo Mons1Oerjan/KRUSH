@@ -33,12 +33,13 @@ public class StudentBookingFragment extends Fragment {
     private DBHelper mydb;
     private ListView tutorsListView;
     private Context C;
+    private int userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_booking, container, false);
-        int userId = Integer.parseInt(getArguments().getString("UserID"));
+        userId = Integer.parseInt(getArguments().getString("UserID"));
 
         //get Context:
         C = getActivity().getApplicationContext();
@@ -64,8 +65,7 @@ public class StudentBookingFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     //get tutors filtered by the student's school:
-                    //TODO: Pass in the logged in student's ID:
-                    Cursor cursorTutorResponse = mydb.tutor.getTutorsFilteredBySchoolForCursorAdapter(1);
+                    Cursor cursorTutorResponse = mydb.tutor.getTutorsFilteredBySchoolForCursorAdapter(userId);
                     //set tutor's listview adapter:
                     BookingTutorCursorAdapter profileAdapter = new BookingTutorCursorAdapter(C, cursorTutorResponse);
                     tutorsListView.setAdapter(profileAdapter);
