@@ -12,7 +12,7 @@ import cs.dal.krush.R;
  * Sets up the Tutor Availability fragment. This fragment belongs to the TutorMainActivity class
  * and is accessed through the tutor's bottom navigation bar.
  *
- * The tutors can set their availability and schedule using this fragment.
+ * The tutors can set their availability and schedule_view using this fragment.
  */
 public class TutorAvailabilityFragment extends Fragment {
 

@@ -81,8 +81,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Old Email Address"
-                android:textColor="@color/colorPrimary"
                 android:inputType="textEmailAddress"
                 android:id="@+id/profile_email_edit"/>
 
@@ -93,14 +91,12 @@
                 android:text="@string/profile_school_label"
                 android:layout_margin="5dp"/>
 
-            <EditText
-                android:layout_width="fill_parent"
+            <Spinner
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Old School"
-                android:textColor="@color/colorPrimary"
-                android:inputType="textCapCharacters"
                 android:id="@+id/profile_school_edit"
                 android:layout_margin="5dp"/>
+
 
             <TextView
                 android:layout_width="match_parent"

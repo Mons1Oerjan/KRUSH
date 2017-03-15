@@ -1,11 +1,14 @@
 package cs.dal.krush.studentFragments;
 
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
 import static cs.dal.krush.R.id.profile_name;
+import static cs.dal.krush.R.id.profile_picture;
 
 
 /**
@@ -25,11 +29,11 @@ import static cs.dal.krush.R.id.profile_name;
  */
 public class StudentProfileFragment extends Fragment implements View.OnClickListener
 {
-    private ImageView edit_btn;
+    private ImageView edit_btn, profile_picture_view;
     private TextView profile_name_view, email_view, school_view;
     private DBHelper mydb;
     private Cursor cursor;
-    int user_id = 1;
+    static int USER_ID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,13 +41,17 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         // Inflate the layout for this fragment
         View myView = inflater.inflate(R.layout.student_profile, container, false);
 
+        //Get user_id of logged in user
+        USER_ID = getArguments().getInt("USER_ID");
+
         //initialize database connection
         mydb = new DBHelper(getContext());
-        cursor = mydb.student.getData(user_id);
+        cursor = mydb.student.getData(USER_ID);
         cursor.moveToFirst();
 
-        // Get TextViews
+        // Get Views
         profile_name_view = (TextView) myView.findViewById(profile_name);
+        profile_picture_view = (ImageView) myView.findViewById(profile_picture);
         email_view = (TextView) myView.findViewById(R.id.profile_email);
         school_view = (TextView) myView.findViewById(R.id.profile_school);
 
@@ -63,6 +71,14 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         schoolCursor.moveToFirst();
         String school = schoolCursor.getString(schoolCursor.getColumnIndex("name"));
 
+        //Profile Picture
+        String imagePath = cursor.getString(cursor.getColumnIndex("profile_pic"));
+        if(imagePath != null && !imagePath.isEmpty())
+        {
+            Bitmap profile_pic = BitmapFactory.decodeFile(imagePath);
+            profile_picture_view.setImageBitmap(profile_pic);
+        }
+
         profile_name_view.setText(name);
         email_view.setText(email);
         school_view.setText(school);
@@ -80,10 +96,14 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     {
         try
         {
+            //Create bundle to send USER_ID to edit fragment
+            Bundle bundle = new Bundle();
+            bundle.putInt("USER_ID", USER_ID);
+
             StudentProfileEditFragment edit = new StudentProfileEditFragment();
+            edit.setArguments(bundle);
 
             // Set user_id for edit fragment
-            edit.setUser_id(user_id);
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.student_fragment_container, edit);
             transaction.addToBackStack(null);

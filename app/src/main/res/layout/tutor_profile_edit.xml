@@ -54,7 +54,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="75dp"
-                android:text="Profile Name"
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -83,43 +82,15 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Old Email Address"
-                android:textColor="@color/colorPrimary"
                 android:inputType="textEmailAddress"
                 android:id="@+id/profile_email_edit"/>
 
-            <TextView
+            <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:labelFor="@+id/profile_school_edit"
-                android:text="@string/profile_school_label"
-                android:layout_margin="5dp"/>
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Old School"
-                android:textColor="@color/colorPrimary"
-                android:inputType="textCapCharacters"
                 android:id="@+id/profile_school_edit"
                 android:layout_margin="5dp"/>
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:labelFor="@+id/profile_schedule_edit"
-                android:text="@string/profile_schedule_label"
-                android:layout_margin="5dp"/>
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Old Schedule"
-                android:textColor="@color/colorPrimary"
-                android:inputType="text"
-                android:id="@+id/profile_schedule_edit"
-                android:layout_margin="5dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -131,8 +102,6 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Old Rate"
-                android:textColor="@color/colorPrimary"
                 android:inputType="text"
                 android:id="@+id/profile_rate_edit"
                 android:layout_margin="5dp"/>

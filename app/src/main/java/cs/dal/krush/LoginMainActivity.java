@@ -74,7 +74,7 @@ public class LoginMainActivity extends AppCompatActivity {
                 }
 
                 if (user != null && user.moveToFirst()){
-                    i.putExtra("UserID", user.getString(user.getColumnIndex("id")));
+                    i.putExtra("USER_ID", user.getString(user.getColumnIndex("id")));
                     startActivity(i);
                 }
                 else {

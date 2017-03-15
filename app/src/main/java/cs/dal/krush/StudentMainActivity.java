@@ -16,6 +16,7 @@ import cs.dal.krush.studentFragments.StudentSessionsFragment;
 public class StudentMainActivity extends FragmentActivity
 {
     BottomNavigationView bottomNav;
+    static int USER_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +24,15 @@ public class StudentMainActivity extends FragmentActivity
         setContentView(R.layout.student_main);
 
         //Retrieve user id from login activity
-        String userId = getIntent().getStringExtra("UserID");
+        USER_ID = Integer.parseInt(getIntent().getStringExtra("USER_ID"));
+
+        //Create bundle to send userId to other fragments
+        final Bundle bundle = new Bundle();
+        bundle.putInt("USER_ID", USER_ID);
 
         //Set initial fragment to student home page
         StudentHomeFragment homeFragment = new StudentHomeFragment();
-        homeFragment.setArguments(getIntent().getExtras());
+        homeFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().add(R.id.student_fragment_container, homeFragment).commit();
 
         //Custom bottom nav bar with disabled shifting
@@ -43,21 +48,25 @@ public class StudentMainActivity extends FragmentActivity
                 switch(menu_item) {
                     case R.id.menu_home:
                         StudentHomeFragment home = new StudentHomeFragment();
+                        home.setArguments(bundle);
                         transaction.replace(R.id.student_fragment_container, home);
                         transaction.commit();
                         return true;
                     case R.id.menu_booking:
                         StudentBookingFragment quickbook = new StudentBookingFragment();
+                        quickbook.setArguments(bundle);
                         transaction.replace(R.id.student_fragment_container, quickbook);
                         transaction.commit();
                         return true;
                     case R.id.menu_profile:
                         StudentProfileFragment profile = new StudentProfileFragment();
+                        profile.setArguments(bundle);
                         transaction.replace(R.id.student_fragment_container, profile);
                         transaction.commit();
                         return true;
                     case R.id.menu_sessions:
                         StudentSessionsFragment sessions = new StudentSessionsFragment();
+                        sessions.setArguments(bundle);
                         transaction.replace(R.id.student_fragment_container, sessions);
                         transaction.commit();
                         return true;

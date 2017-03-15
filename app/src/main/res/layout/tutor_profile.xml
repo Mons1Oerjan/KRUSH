@@ -52,7 +52,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="76dp"
-                android:text="Profile Name"
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -82,10 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="#fff"
-                android:textColor="@color/colorPrimary"
                 android:elevation="3dp"
-                android:padding="20dp"
-                android:text="Email Address" />
+                android:padding="20dp" />
 
             <TextView
                 android:id="@+id/tutor_school"
@@ -95,23 +92,10 @@
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
                 android:background="#fff"
-                android:textColor="@color/colorPrimary"
                 android:elevation="3dp"
-                android:padding="20dp"
-                android:text="School" />
+                android:padding="20dp" />
 
-            <TextView
-                android:id="@+id/tutor_schedule"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginTop="3dp"
-                android:background="#fff"
-                android:textColor="@color/colorPrimary"
-                android:elevation="3dp"
-                android:padding="20dp"
-                android:text="Schedule" />
+
 
             <TextView
                 android:id="@+id/tutor_rate"
@@ -121,10 +105,8 @@
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
                 android:background="#fff"
-                android:textColor="@color/colorPrimary"
                 android:elevation="3dp"
-                android:padding="20dp"
-                android:text="$Rate" />
+                android:padding="20dp" />
 
         </LinearLayout>
     </RelativeLayout>
