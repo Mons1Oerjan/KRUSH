@@ -29,7 +29,7 @@ public class TutorMainActivity extends FragmentActivity {
         homeFragment.setArguments(getIntent().getExtras());
         getSupportFragmentManager().beginTransaction().add(R.id.tutor_fragment_container, homeFragment).commit();
 
-         //Custom bottom nav bar with disabled shifting
+        //Custom bottom nav bar with disabled shifting
         bottomNav = (BottomNavigationView) findViewById(R.id.tutor_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNav);
 
