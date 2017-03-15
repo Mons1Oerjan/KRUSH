@@ -9,6 +9,7 @@ public class SchoolSeeder {
 
     /**
      * Function that inserts dummy schools into the DB
+     * insert format: school_name, locationID, school_type
      * @param db
      */
     public static void insert(DBHelper db){

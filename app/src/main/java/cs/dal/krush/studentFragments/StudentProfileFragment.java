@@ -31,6 +31,8 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     private Cursor cursor;
     static int USER_ID;
 
+    private int userId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

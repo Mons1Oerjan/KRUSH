@@ -57,12 +57,14 @@ public class TutorMainActivity extends FragmentActivity {
                         return true;
                     case R.id.menu_profile:
                         TutorProfileFragment profile = new TutorProfileFragment();
+                        profile.setArguments(getIntent().getExtras());
                         transaction.replace(R.id.tutor_fragment_container, profile);
                         profile.setArguments(bundle);
                         transaction.commit();
                         return true;
                     case R.id.menu_sessions:
                         TutorSessionsFragment sessions = new TutorSessionsFragment();
+                        sessions.setArguments(getIntent().getExtras());
                         transaction.replace(R.id.tutor_fragment_container, sessions);
                         sessions.setArguments(bundle);
                         transaction.commit();
