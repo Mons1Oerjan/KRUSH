@@ -1,4 +1,4 @@
-package cs.dal.krush.studentFragments;
+package cs.dal.krush.StudentCursorAdapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,14 +12,14 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 
 /**
- * This is the adapter class for the customized rows in the 'Book a Tutor'
- * list view on the student booking page.
+ * This is the adapter class for the customized rows in the Upcoming Sessions
+ * list view on the student home page.
  *
  * Source:
  * [4] C. (n.d.). Codepath/android_guides. Retrieved March 12, 2017,
  * from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
  */
-public class BookingTutorCursorAdapter extends CursorAdapter {
+public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
 
     //store the context set in the constructor
     private Context mContext;
@@ -30,7 +30,7 @@ public class BookingTutorCursorAdapter extends CursorAdapter {
      * @param context
      * @param cursor
      */
-    public BookingTutorCursorAdapter(Context context, Cursor cursor){
+    public HomeUpcomingSessionsCursorAdapter(Context context, Cursor cursor){
         super(context, cursor, 0);
         this.mContext = context;
     }
@@ -71,15 +71,15 @@ public class BookingTutorCursorAdapter extends CursorAdapter {
         }
 
         //Set the row's header text:
-        String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
-        String tutorLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
-        String tutorName = tutorFirstName + " " + tutorLastName;
-        header.setText(tutorName);
+        String title = cursor.getString(cursor.getColumnIndexOrThrow("title"));
+        header.setText(title);
 
         //Set the row's sub-header text:
-        String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
+        String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
+        String tutorLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
-        String text2content = "Rating: " + tutorRating + ", Rate: " + tutorRate;
+        String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
+        String text2content = tutorFirstName + " " + tutorLastName + ", Rating: " + tutorRating + ", Rate: " + tutorRate + "$";
         subHeader.setText(text2content);
     }
 }
