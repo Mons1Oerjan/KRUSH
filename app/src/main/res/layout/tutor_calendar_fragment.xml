@@ -8,66 +8,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cs.dal.krush.tutorFragments.TutorCalendarFragment">
+    tools:context="cs.dal.krush.tutorFragments.TutorAvailabilityFragment">
 
-    <EditText
-        android:layout_width="200dp"
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtDate"
-        android:layout_marginTop="82dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DATE"
-        android:id="@+id/btnDate"
-        android:layout_alignBottom="@+id/txtDate"
-        android:layout_toRightOf="@+id/txtDate"
-        android:layout_toEndOf="@+id/txtDate" />
-
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtStartTime"
-        android:layout_below="@+id/txtDate"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="START TIME"
-        android:id="@+id/btnStartTime"
-        android:layout_below="@+id/btnDate"
-        android:layout_alignLeft="@+id/btnDate"
-        android:layout_alignStart="@+id/btnDate" />
-
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtEndTime"
-        android:layout_below="@+id/txtStartTime"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="END TIME"
-        android:id="@+id/btnEndTime"
-        android:layout_below="@+id/btnStartTime"
-        android:layout_alignLeft="@+id/btnStartTime"
-        android:layout_alignStart="@+id/btnStartTime" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SUBMIT"
-        android:id="@+id/btnSubmit"
-        android:layout_below="@+id/btnEndTime"
-        android:layout_alignStart="@+id/btnEndTime" />
+        app:mcv_showOtherDates="all"
+        app:mcv_selectionColor="@color/colorPrimary"
+        />
 
 </RelativeLayout>

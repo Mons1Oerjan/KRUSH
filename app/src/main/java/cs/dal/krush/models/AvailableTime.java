@@ -46,8 +46,8 @@ public class AvailableTime extends Table{
     }
 
     public Cursor getAllOrderedByDay(){
-        res = dbRead.rawQuery("SELECT id,tutor_id,strftime('%d', start_time) as valDay, start_time FROM available_time " +
-                "ORDER BY valDay",null);
+        res = dbRead.rawQuery("SELECT id,tutor_id,start_time, start_time FROM available_time " +
+                "ORDER BY start_time",null);
         return res;
     }
 
