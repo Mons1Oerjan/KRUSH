@@ -24,7 +24,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -32,12 +31,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
-
-import static android.R.attr.name;
 import static android.app.Activity.RESULT_OK;
-import static cs.dal.krush.R.id.profile_name;
 
-
+/**
+ * Fragment for editing a profile. Sets initial fields from the database and saves new fields
+ * when save button is pressed
+ * Uses camera to take picture to set as profile picture
+ */
 public class TutorProfileEditFragment extends Fragment implements View.OnClickListener
 {
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -54,7 +54,6 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
     private ArrayList<String> schoolList;
     private DBHelper mydb;
     private Cursor cursor;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -157,9 +156,8 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         switch(v.getId())
         {
             case R.id.save_profile_button:
-                // Save information in fields to database when functionality is hooked up
 
-                // Return to profile view
+                // Save values in views and return to profile view
                 try
                 {
                     // Get values from fields
@@ -193,15 +191,18 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
                         }
                     }
 
+                    // Save new values to db
                     mydb.getWritableDatabase().update("tutors", cv,"id="+USER_ID, null);
 
                     //Close DB
                     cursor.close();
                     mydb.close();
 
+                    // Add USER_ID to bundle to pass back to profile fragment
                     Bundle bundle = new Bundle();
                     bundle.putInt("USER_ID", USER_ID);
 
+                    // Switch to profile fragment
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     TutorProfileFragment profile = new TutorProfileFragment();
                     profile.setArguments(bundle);
@@ -221,6 +222,14 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         }
     }
 
+    /**
+     * Uses AlertDialog to prompt user on how they want to change profile picture
+     * by camera or existing image in gallery
+     *
+     * Source:
+     * Jasani, T. (2016). Android Take Photo from Camera and Gallery - Code Sample. “TheAppGuruz”. Retrieved 15 March 2017,
+     * from http://www.theappguruz.com/blog/android-take-photo-camera-gallery-code-sample
+     */
     public void changePicture()
     {
         final String[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
@@ -264,6 +273,15 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         builder.show();
     }
 
+    /**
+     * Creates a new Intent to open the camera
+     * Creates a file to save the image to and includes that in the intent
+     * @throws IOException
+     *
+     * Source:
+     * Taking Photos Simply | Android Developers. (2017). Developer.android.com. Retrieved 15 March 2017,
+     * from https://developer.android.com/training/camera/photobasics.html
+     */
     private void openCamera() throws IOException
     {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -277,6 +295,10 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         }
     }
 
+    /**
+     * Creates new Intent to open gallery and allow user to select existing image
+     * @throws IOException
+     */
     private void openGallery() throws IOException
     {
         Intent galleryIntent = new Intent();
@@ -285,6 +307,13 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         startActivityForResult(Intent.createChooser(galleryIntent, "Select Image"), REQUEST_GALLERY);
     }
 
+    /**
+     * Method to handle any activity intent results
+     * Checks if requestCode is from camera intent or gallery intent and handles accordingly
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -315,6 +344,15 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         }
     }
 
+    /**
+     * Creates a new file to save an image to and saves file path to imagePath for database
+     * @return
+     * @throws IOException
+     *
+     * Source:
+     * Taking Photos Simply | Android Developers. (2017). Developer.android.com. Retrieved 15 March 2017,
+     * from https://developer.android.com/training/camera/photobasics.html
+     */
     protected File createImage() throws IOException
     {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());

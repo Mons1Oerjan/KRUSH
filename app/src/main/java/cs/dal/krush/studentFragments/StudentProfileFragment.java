@@ -4,22 +4,18 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
 import static cs.dal.krush.R.id.profile_name;
 import static cs.dal.krush.R.id.profile_picture;
-
 
 /**
  * Sets up the Student Profile fragment. This fragment belongs to the StudentMainActivity class
@@ -63,7 +59,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         email_view.setTypeface(typeFace);
         school_view.setTypeface(typeFace);
 
-        //Set data
+        //Get values from database
         String name = cursor.getString(cursor.getColumnIndex("f_name")) + " " + cursor.getString(cursor.getColumnIndex("l_name"));
         String email = cursor.getString(cursor.getColumnIndex(("email")));
         int school_id = cursor.getInt(cursor.getColumnIndex("school_id"));
@@ -79,6 +75,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
             profile_picture_view.setImageBitmap(profile_pic);
         }
 
+        // Set values to views
         profile_name_view.setText(name);
         email_view.setText(email);
         school_view.setText(school);
@@ -87,7 +84,6 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         edit_btn = (ImageView) myView.findViewById(R.id.edit_profile_button);
         edit_btn.setOnClickListener(this);
         return myView;
-
     }
 
     // Edit profile button listener, starts StudentProfileEditFragment

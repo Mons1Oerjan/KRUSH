@@ -12,6 +12,11 @@ import cs.dal.krush.tutorFragments.TutorHomeFragment;
 import cs.dal.krush.tutorFragments.TutorProfileFragment;
 import cs.dal.krush.tutorFragments.TutorSessionsFragment;
 
+/**
+ * TutorMainActivity is the main entry point for all tutor features
+ * This activity renders the bottom nav menu and handles the click listeners
+ * When a menu item is clicked the corresponding fragment is inserted into the fragment view
+ */
 public class TutorMainActivity extends FragmentActivity {
     BottomNavigationView bottomNav;
     static int USER_ID;

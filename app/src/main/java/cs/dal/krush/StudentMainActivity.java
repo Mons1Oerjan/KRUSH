@@ -12,7 +12,11 @@ import cs.dal.krush.studentFragments.StudentProfileFragment;
 import cs.dal.krush.studentFragments.StudentBookingFragment;
 import cs.dal.krush.studentFragments.StudentSessionsFragment;
 
-
+/**
+ * StudentMainActivity is the main entry point for all student features
+ * This activity renders the bottom nav menu and handles the click listeners
+ * When a menu item is clicked the corresponding fragment is inserted into the fragment view
+ */
 public class StudentMainActivity extends FragmentActivity
 {
     BottomNavigationView bottomNav;
