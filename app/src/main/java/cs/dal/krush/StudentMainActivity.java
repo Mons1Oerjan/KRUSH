@@ -30,12 +30,12 @@ public class StudentMainActivity extends FragmentActivity
         final Bundle bundle = new Bundle();
         bundle.putInt("USER_ID", USER_ID);
 
-        //Set initial fragment to student home page
+        //Set initial fragment to student home page:
         StudentHomeFragment homeFragment = new StudentHomeFragment();
         homeFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().add(R.id.student_fragment_container, homeFragment).commit();
 
-        //Custom bottom nav bar with disabled shifting
+        //Custom bottom nav bar with disabled shifting:
         bottomNav = (BottomNavigationView) findViewById(R.id.student_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNav);
 

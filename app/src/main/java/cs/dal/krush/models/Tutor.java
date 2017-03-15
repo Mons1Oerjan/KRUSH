@@ -87,6 +87,28 @@ public class Tutor extends Table{
     }
 
     /**
+     * Gets all tutors filtered by the courses the student has signed up for.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @return Cursor
+     */
+    public Cursor getTutorsFilteredBySchoolForCursorAdapter(int studentId) {
+        return dbRead.rawQuery(
+                "SELECT DISTINCT t.id as _id, t.location_id, t.school_id, t.profile_pic, " +
+                        "t.f_name, t.l_name, t.email, t.password, t.rating, t.rate, t.revenue " +
+                        "FROM tutors t " +
+                        "INNER JOIN schools sc ON t.school_id = sc.id " +
+                        "INNER JOIN students s ON t.school_id = s.school_id " +
+                        "WHERE s.id = " + studentId + ""
+                , null
+        );
+    }
+
+    /**
      * Get a tutor by the f_name field
      * @param firstName
      * @return Cursor

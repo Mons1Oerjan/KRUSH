@@ -1,8 +1,7 @@
-package cs.dal.krush.studentFragments;
+package cs.dal.krush.StudentCursorAdapters;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,14 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 
 /**
- * This is the adapter class for the customized rows in the 'Quick Book a Tutor'
- * list view on the student home page.
+ * This is the adapter class for the customized rows in the 'Book a Tutor'
+ * list view on the student booking page.
  *
  * Source:
  * [4] C. (n.d.). Codepath/android_guides. Retrieved March 12, 2017,
  * from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
  */
-public class HomeQuickBookCursorAdapter extends CursorAdapter {
+public class BookingTutorCursorAdapter extends CursorAdapter {
 
     //store the context set in the constructor
     private Context mContext;
@@ -31,7 +30,7 @@ public class HomeQuickBookCursorAdapter extends CursorAdapter {
      * @param context
      * @param cursor
      */
-    public HomeQuickBookCursorAdapter(Context context, Cursor cursor){
+    public BookingTutorCursorAdapter(Context context, Cursor cursor){
         super(context, cursor, 0);
         this.mContext = context;
     }

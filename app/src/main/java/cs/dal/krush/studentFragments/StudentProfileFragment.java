@@ -35,6 +35,8 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     private Cursor cursor;
     static int USER_ID;
 
+    private int userId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,7 +89,6 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         edit_btn = (ImageView) myView.findViewById(R.id.edit_profile_button);
         edit_btn.setOnClickListener(this);
         return myView;
-
     }
 
     // Edit profile button listener, starts StudentProfileEditFragment
