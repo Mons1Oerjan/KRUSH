@@ -38,27 +38,25 @@ import static android.app.Activity.RESULT_OK;
  * when save button is pressed
  * Uses camera to take picture to set as profile picture
  */
-public class TutorProfileEditFragment extends Fragment implements View.OnClickListener
-{
+public class TutorProfileEditFragment extends Fragment implements View.OnClickListener {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_GALLERY = 2;
     static int USER_ID;
     private String imagePath = "";
     private String user_password;
+    private ArrayList<String> schoolList;
+    private DBHelper mydb;
+    private Cursor cursor;
     Button saveProfile, changePicture;
     ImageView profile_picture_view;
     View myView;
     TextView profile_name_view;
     EditText email_view, rate_view, curr_password_view, new_password_view, new_password_view_conf;
     Spinner school_view;
-    private ArrayList<String> schoolList;
-    private DBHelper mydb;
-    private Cursor cursor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         //Get USER_ID
         USER_ID = getArguments().getInt("USER_ID");
 
@@ -84,11 +82,9 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         schoolList = new ArrayList<>();
         Cursor schoolCursor = mydb.school.getAll();
 
-        if(schoolCursor.getCount() != 0)
-        {
+        if(schoolCursor.getCount() != 0) {
             schoolCursor.moveToFirst();
-            do
-            {
+            do {
                 // column id 1 is school_view name
                 schoolList.add(schoolCursor.getString(1));
             }
@@ -117,8 +113,7 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
 
         //Profile Picture
         String imagePath = cursor.getString(cursor.getColumnIndex("profile_pic"));
-        if(imagePath != null && !imagePath.isEmpty())
-        {
+        if(imagePath != null && !imagePath.isEmpty()) {
             Bitmap profile_pic = BitmapFactory.decodeFile(imagePath);
             profile_picture_view.setImageBitmap(profile_pic);
         }
@@ -147,19 +142,14 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         mydb.close();
 
         return myView;
-
     }
 
     @Override
-    public void onClick(View v)
-    {
-        switch(v.getId())
-        {
+    public void onClick(View v) {
+        switch(v.getId()) {
             case R.id.save_profile_button:
-
                 // Save values in views and return to profile view
-                try
-                {
+                try {
                     // Get values from fields
                     String new_email = email_view.getText().toString();
                     String new_rate = rate_view.getText().toString();
@@ -177,15 +167,12 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
 
                     // Check if password is changed
                     String curr_password = curr_password_view.getText().toString();
-                    if(curr_password.equals(user_password))
-                    {
+                    if(curr_password.equals(user_password)) {
                         String new_password = new_password_view.getText().toString();
                         String new_password_conf = new_password_view_conf.getText().toString();
 
-                        if(!new_password.isEmpty() && !new_password_conf.isEmpty())
-                        {
-                            if(new_password.equals(new_password_conf))
-                            {
+                        if(!new_password.isEmpty() && !new_password_conf.isEmpty()) {
+                            if(new_password.equals(new_password_conf)) {
                                 cv.put("password", new_password);
                             }
                         }
@@ -209,13 +196,10 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
                     transaction.replace(R.id.tutor_fragment_container, profile);
                     transaction.commit();
                 }
-                catch(Exception ex)
-                {
+                catch(Exception ex) {
                     ex.printStackTrace();
                 }
-
                 break;
-
             case R.id.change_picture_button:
                 changePicture();
                 break;
@@ -230,36 +214,27 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
      * Jasani, T. (2016). Android Take Photo from Camera and Gallery - Code Sample. “TheAppGuruz”. Retrieved 15 March 2017,
      * from http://www.theappguruz.com/blog/android-take-photo-camera-gallery-code-sample
      */
-    public void changePicture()
-    {
+    public void changePicture() {
         final String[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Change Profile Picture");
-        builder.setItems(options, new DialogInterface.OnClickListener()
-        {
+        builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int item)
-            {
-                switch (options[item])
-                {
+            public void onClick(DialogInterface dialog, int item) {
+                switch (options[item]) {
                     case "Take Photo":
-                        try
-                        {
+                        try {
                             openCamera();
                         }
-                        catch (IOException e)
-                        {
+                        catch (IOException e) {
                             e.printStackTrace();
                         }
                         break;
                     case "Choose from Gallery":
-                        try
-                        {
+                        try {
                             openGallery();
                         }
-                        catch (IOException e)
-                        {
+                        catch (IOException e) {
                             e.printStackTrace();
                         }
                         break;
@@ -268,7 +243,6 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
                         break;
                 }
             }
-
         });
         builder.show();
     }
@@ -282,11 +256,9 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
      * Taking Photos Simply | Android Developers. (2017). Developer.android.com. Retrieved 15 March 2017,
      * from https://developer.android.com/training/camera/photobasics.html
      */
-    private void openCamera() throws IOException
-    {
+    private void openCamera() throws IOException {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(cameraIntent.resolveActivity(getActivity().getPackageManager()) != null)
-        {
+        if(cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             // Create file to save photo
             File imageFile = createImage();
             Uri uri = FileProvider.getUriForFile(getActivity(),"cs.dal.krush.fileprovider", imageFile);
@@ -299,8 +271,7 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
      * Creates new Intent to open gallery and allow user to select existing image
      * @throws IOException
      */
-    private void openGallery() throws IOException
-    {
+    private void openGallery() throws IOException {
         Intent galleryIntent = new Intent();
         galleryIntent.setType("image/*");
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
@@ -315,32 +286,26 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
      * @param data
      */
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK)
-        {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // Set profile picture to image that was just captured
             ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.profile_picture_edit);
             Bitmap profile_pic = BitmapFactory.decodeFile(imagePath);
             profile_picture_view.setImageBitmap(profile_pic);
         }
 
-        if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK)
-        {
+        if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
             ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.profile_picture_edit);
-            try
-            {
+            try {
                 Bitmap profile_pic = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), data.getData());
                 profile_picture_view.setImageBitmap(profile_pic);
 
                 //Save image path to db
                 // TODO: 2017-03-15 move copy of gallery image to location and save in db
             }
-            catch (IOException e)
-            {
+            catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -353,8 +318,7 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
      * Taking Photos Simply | Android Developers. (2017). Developer.android.com. Retrieved 15 March 2017,
      * from https://developer.android.com/training/camera/photobasics.html
      */
-    protected File createImage() throws IOException
-    {
+    protected File createImage() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "profile_picture_" + timeStamp;
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -364,6 +328,5 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         imagePath = image.getAbsolutePath();
 
         return image;
-
     }
 }

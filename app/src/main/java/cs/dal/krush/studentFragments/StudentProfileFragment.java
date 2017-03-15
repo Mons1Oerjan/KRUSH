@@ -23,15 +23,13 @@ import static cs.dal.krush.R.id.profile_picture;
  *
  * The student can view and edit their user profile using this fragment.
  */
-public class StudentProfileFragment extends Fragment implements View.OnClickListener
-{
+public class StudentProfileFragment extends Fragment implements View.OnClickListener {
+
     private ImageView edit_btn, profile_picture_view;
     private TextView profile_name_view, email_view, school_view;
     private DBHelper mydb;
     private Cursor cursor;
     static int USER_ID;
-
-    private int userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,8 +69,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
 
         //Profile Picture
         String imagePath = cursor.getString(cursor.getColumnIndex("profile_pic"));
-        if(imagePath != null && !imagePath.isEmpty())
-        {
+        if(imagePath != null && !imagePath.isEmpty()) {
             Bitmap profile_pic = BitmapFactory.decodeFile(imagePath);
             profile_picture_view.setImageBitmap(profile_pic);
         }
@@ -90,10 +87,8 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
 
     // Edit profile button listener, starts StudentProfileEditFragment
     @Override
-    public void onClick(View v)
-    {
-        try
-        {
+    public void onClick(View v) {
+        try {
             //Create bundle to send USER_ID to edit fragment
             Bundle bundle = new Bundle();
             bundle.putInt("USER_ID", USER_ID);
@@ -107,8 +102,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
             transaction.addToBackStack(null);
             transaction.commit();
         }
-        catch(Exception ex)
-        {
+        catch(Exception ex) {
             ex.printStackTrace();
         }
     }
