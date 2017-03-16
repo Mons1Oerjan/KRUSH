@@ -48,7 +48,6 @@ public class TutorAvailabilityFragment extends Fragment {
     private GregorianCalendar startTimeCalendar = new GregorianCalendar();
     private GregorianCalendar endTimeCalendar = new GregorianCalendar();
 
-    private int userId;
     static int USER_ID;
 
     @Override
@@ -236,6 +235,12 @@ public class TutorAvailabilityFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    /**
+     * Get the name of a month from integer
+     * @param month to convert to String
+     * @param locale default locale
+     * @return formatted month name
+     */
     public String formatMonth(int month, Locale locale) {
         DateFormat formatter = new SimpleDateFormat("MMMM", locale);
         GregorianCalendar calendar = new GregorianCalendar();
@@ -244,6 +249,12 @@ public class TutorAvailabilityFragment extends Fragment {
         return formatter.format(calendar.getTime());
     }
 
+    /**
+     * Get the name of a day from integer
+     * @param day to convert to String
+     * @param locale default locale
+     * @return formatted day name
+     */
     public static String getFullDayName(int day, Locale locale) {
 
         DateFormat formatter = new SimpleDateFormat("EEEE", locale);
@@ -252,6 +263,13 @@ public class TutorAvailabilityFragment extends Fragment {
         return formatter.format(calendar.getTime());
     }
 
+    /**
+     * Get the full date String from params
+     * @param day to convert to String
+     * @param month to convert to String
+     * @param year to convert to String
+     * @return formatted DateTime
+     */
     private String getDate(int day, int month, int year) {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
@@ -263,6 +281,13 @@ public class TutorAvailabilityFragment extends Fragment {
         return formatter.format(calendar.getTime());
     }
 
+    /**
+     * Construct a full date String in the format of "yyyy-MM-dd h:mm a"
+     * using the currently set day of month and year.
+     * @param hour conversion helper to use selected hour
+     * @param minute conversion helper to use selected minute
+     * @return concatendated DateTime
+     */
     public String concatenateDateTime(int hour, int minute){
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
 
@@ -330,12 +355,5 @@ public class TutorAvailabilityFragment extends Fragment {
 
         lvTutorScheduleListView.setAdapter(arrayAdapter);
     }
-
-    public int counvert24to12(int hourOfDay){
-        int converted;
-        converted = hourOfDay-12;
-        return converted;
-    }
-
 
 }

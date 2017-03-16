@@ -5,9 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Created by greg on 13/03/17.
+ * Audio Recording Model class.
  */
-
 public class AvailableTime extends Table{
 
     private String startTime;
