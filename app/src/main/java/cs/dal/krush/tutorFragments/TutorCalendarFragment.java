@@ -83,7 +83,7 @@ public class TutorCalendarFragment extends Fragment {
                 //format the month
                 //look in the db for records that have this month
 
-                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
+                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
                 Calendar calendarStartDate = new GregorianCalendar();
                 calendarStartDate.set(Calendar.MONTH, newMonth-1);
@@ -103,19 +103,20 @@ public class TutorCalendarFragment extends Fragment {
 
                 Cursor rs;
                 db = new DBHelper(getContext());
-                rs = db.tutoringSession.getDataByTutorId(1);
-                String startTime;
-                String endTime;
-                Calendar convertedStartTime = new GregorianCalendar();
-                Calendar convertedEndTime = new GregorianCalendar();
+                rs = db.tutoringSession.getDataBySchedule(1);
+
                 int i = 1;
                 try {
                     while (rs.moveToNext()) {
-                        startTime = rs.getString(rs.getColumnIndex("start_time"));
-                        endTime = rs.getString(rs.getColumnIndex("end_time"));
-                        convertedStartTime.setTime(formatter.parse(startTime));
-                        convertedEndTime.setTime(formatter.parse(endTime));
-                        WeekViewEvent event = new WeekViewEvent(i, getEventTitle(convertedStartTime), convertedStartTime, convertedEndTime);
+                        Calendar convertedStartTime = Calendar.getInstance();
+                        Calendar convertedEndTime = Calendar.getInstance();
+
+                        Date creationDate = formatter.parse(rs.getString(rs.getColumnIndex("start_time")));
+                        Date enDate = formatter.parse(rs.getString(rs.getColumnIndex("end_time")));
+
+                        convertedStartTime.setTime(creationDate);
+                        convertedEndTime.setTime(enDate);
+                        WeekViewEvent event = new WeekViewEvent(i, "", convertedStartTime, convertedEndTime);
                         events.add(event);
                         i++;
                     }
@@ -124,35 +125,6 @@ public class TutorCalendarFragment extends Fragment {
                 } finally {
                     rs.close();
                 }
-
-
-
-
-
-
-//                // Populate the week view with some events.
-//                Calendar startTime = Calendar.getInstance();
-//                startTime.set(Calendar.HOUR_OF_DAY, 3);
-//                startTime.set(Calendar.MINUTE, 0);
-//                startTime.set(Calendar.MONTH, newMonth-1);
-//                startTime.set(Calendar.YEAR, newYear);
-//                Calendar endTime = (Calendar) startTime.clone();
-//                endTime.add(Calendar.HOUR, 1);
-//                endTime.set(Calendar.MONTH, newMonth-1);
-//                WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
-//                events.add(event);
-//
-//                startTime = Calendar.getInstance();
-//                startTime.set(Calendar.HOUR_OF_DAY, 3);
-//                startTime.set(Calendar.MINUTE, 30);
-//                startTime.set(Calendar.MONTH, newMonth-1);
-//                startTime.set(Calendar.YEAR, newYear);
-//                endTime = (Calendar) startTime.clone();
-//                endTime.set(Calendar.HOUR_OF_DAY, 4);
-//                endTime.set(Calendar.MINUTE, 30);
-//                endTime.set(Calendar.MONTH, newMonth-1);
-//                event = new WeekViewEvent(10, getEventTitle(startTime), startTime, endTime);
-//                events.add(event);
 
                 return events;
             }

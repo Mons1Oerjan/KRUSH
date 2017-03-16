@@ -113,14 +113,13 @@ public class TutoringSession extends Table{
     /**
      * Get tutoring sessions for the current month
      * @param tutorId id for specified tutor
-     * @param startTime start of this month
-     * @param endTime end of this month
      * @return
      */
-    public Cursor getDataBySchedule(int tutorId, String startTime, String endTime){
+    public Cursor getDataBySchedule(int tutorId){
         return dbRead.rawQuery("SELECT * FROM tutoring_sessions " +
-                "WHERE strftime('%m',start_time) = '03' AND strftime('%m', end_time) = '03'"+
-                " AND tutor_id="+tutorId+"",null);
+                "WHERE strftime('%m',start_time) = '03' " +
+                "AND strftime('%m',end_time) = '03' " +
+                "AND tutor_id = "+tutorId+"",null);
     }
 
     /**

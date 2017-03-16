@@ -20,7 +20,7 @@ public class TutoringSessionSeeder {
      */
     public static void insert(DBHelper db){
 
-        DateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
+        DateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
         GregorianCalendar calendarStartTime = new GregorianCalendar();
         calendarStartTime.set(Calendar.DAY_OF_MONTH, 5);
@@ -40,8 +40,55 @@ public class TutoringSessionSeeder {
         String endTime = timeFormatter.format(calendarEndTime.getTime());
 
         db.tutoringSession.insert(1,1,1,"Meeting at Starbucks on Robie St", startTime, endTime);
+
+        calendarStartTime = new GregorianCalendar();
+        calendarStartTime.set(Calendar.DAY_OF_MONTH, 1);
+        calendarStartTime.set(Calendar.HOUR_OF_DAY, 11);
+        calendarStartTime.set(Calendar.MONTH, 2);
+        calendarStartTime.set(Calendar.YEAR, 2017);
+        calendarStartTime.set(Calendar.MINUTE, 25);
+
+        calendarEndTime = new GregorianCalendar();
+        calendarEndTime.set(Calendar.DAY_OF_MONTH, 1);
+        calendarEndTime.set(Calendar.HOUR_OF_DAY, 12);
+        calendarEndTime.set(Calendar.MONTH, 2);
+        calendarEndTime.set(Calendar.YEAR, 2017);
+        calendarEndTime.set(Calendar.MINUTE, 25);
+        startTime = timeFormatter.format(calendarStartTime.getTime());
+        endTime = timeFormatter.format(calendarEndTime.getTime());
         db.tutoringSession.insert(2,1,1,"Meeting at Dalhousie CS building", startTime, endTime);
+
+        calendarStartTime = new GregorianCalendar();
+        calendarStartTime.set(Calendar.DAY_OF_MONTH, 7);
+        calendarStartTime.set(Calendar.HOUR_OF_DAY, 11);
+        calendarStartTime.set(Calendar.MONTH, 2);
+        calendarStartTime.set(Calendar.YEAR, 2017);
+        calendarStartTime.set(Calendar.MINUTE, 25);
+
+        calendarEndTime = new GregorianCalendar();
+        calendarEndTime.set(Calendar.DAY_OF_MONTH, 7);
+        calendarEndTime.set(Calendar.HOUR_OF_DAY, 12);
+        calendarEndTime.set(Calendar.MONTH, 2);
+        calendarEndTime.set(Calendar.YEAR, 2017);
+        calendarEndTime.set(Calendar.MINUTE, 25);
+        startTime = timeFormatter.format(calendarStartTime.getTime());
+        endTime = timeFormatter.format(calendarEndTime.getTime());
         db.tutoringSession.insert(1,1,2,"Meeting at Sparkzone", startTime, endTime);
+        calendarStartTime = new GregorianCalendar();
+        calendarStartTime.set(Calendar.DAY_OF_MONTH, 3);
+        calendarStartTime.set(Calendar.HOUR_OF_DAY, 11);
+        calendarStartTime.set(Calendar.MONTH, 2);
+        calendarStartTime.set(Calendar.YEAR, 2017);
+        calendarStartTime.set(Calendar.MINUTE, 25);
+
+        calendarEndTime = new GregorianCalendar();
+        calendarEndTime.set(Calendar.DAY_OF_MONTH, 3);
+        calendarEndTime.set(Calendar.HOUR_OF_DAY, 12);
+        calendarEndTime.set(Calendar.MONTH, 2);
+        calendarEndTime.set(Calendar.YEAR, 2017);
+        calendarEndTime.set(Calendar.MINUTE, 25);
+        startTime = timeFormatter.format(calendarStartTime.getTime());
+        endTime = timeFormatter.format(calendarEndTime.getTime());
         db.tutoringSession.insert(3,1,1,"Meeting at Coburg Coffee", startTime, endTime);
         db.tutoringSession.insert(2,6,6,"Meeting at Acadia library", startTime, endTime);
         db.tutoringSession.insert(2,3,3,"Meeting at Truro Big Stop", startTime, endTime);
