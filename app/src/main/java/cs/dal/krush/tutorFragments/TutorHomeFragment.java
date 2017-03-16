@@ -39,7 +39,6 @@ public class TutorHomeFragment extends Fragment {
         RatingBar tutorRating = (RatingBar) view.findViewById(R.id.rating);
         TextView pageTitle = (TextView)view.findViewById(R.id.homeTitleLabel);
         TextView sessionsLabel = (TextView)view.findViewById(R.id.upcomingSessionsLabel);
-        TextView bookTutorLabel = (TextView)view.findViewById(R.id.bookTutorLabel);
         TextView ratingTitle = (TextView) view.findViewById(R.id.tutorRating);
 
         //fetch custom app font:
@@ -48,7 +47,6 @@ public class TutorHomeFragment extends Fragment {
         //set font style:
         pageTitle.setTypeface(typeFace);
         sessionsLabel.setTypeface(typeFace);
-        bookTutorLabel.setTypeface(typeFace);
         ratingTitle.setTypeface(typeFace);
 
         return view;
