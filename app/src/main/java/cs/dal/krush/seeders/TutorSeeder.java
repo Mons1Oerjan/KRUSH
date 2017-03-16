@@ -13,7 +13,7 @@ public class TutorSeeder {
      * @param db
      */
     public static void insert(DBHelper db){
-        db.tutor.insert(1,1,"egg1","Greg","Miller","gregpmillr@dal.ca","password",2);
+        db.tutor.insert(1,1,"egg1","Greg","Miller","gregpmillr@gmail.com","password",2);
         db.tutor.insert(3,2,"egg1","Michael","Casey","mc@dal.ca","password",2);
         db.tutor.insert(2,1,"egg1","Orjan","Monsen","om@dal.ca","password",5);
         db.tutor.insert(4,5,"egg1","Eric","Desjardins","ed@dal.ca","password",1);
