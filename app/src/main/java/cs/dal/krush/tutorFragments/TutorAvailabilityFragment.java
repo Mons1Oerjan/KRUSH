@@ -3,6 +3,7 @@ package cs.dal.krush.tutorFragments;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
@@ -38,6 +40,7 @@ public class TutorAvailabilityFragment extends Fragment {
 
     Button btnDatePicker, btnStartTimePicker, btnEndTimePicker, btnSubmit, btnViewCalendar;
     EditText txtDate, txtStartTime, txtEndTime;
+    TextView txtTitle, txtSelectAvailability, txtYourAvailability;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private int sYear, sMonth, sDay, sStartHour, sStartMinute, sEndHour, sEndMinute;
     private String startTime,endTime;
@@ -63,6 +66,9 @@ public class TutorAvailabilityFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         db = new DBHelper(getContext());
+        txtTitle=(TextView)getView().findViewById(R.id.txtAvailabilityTitle);
+        txtSelectAvailability=(TextView)getView().findViewById(R.id.txtSelectAvailability);
+        txtYourAvailability=(TextView)getView().findViewById(R.id.txtViewAvailability);
         btnDatePicker=(Button)getView().findViewById(R.id.btnDate);
         btnStartTimePicker=(Button)getView().findViewById(R.id.btnStartTime);
         btnEndTimePicker=(Button)getView().findViewById(R.id.btnEndTime);
@@ -76,14 +82,21 @@ public class TutorAvailabilityFragment extends Fragment {
 
         btnStartTimePicker.setEnabled(false);
         txtStartTime.setEnabled(false);
-        txtStartTime.setText("Select a date");
-        txtEndTime.setText("Select a date");
+        txtStartTime.setText("Select a date first");
+        txtEndTime.setText("Select a date first");
         btnEndTimePicker.setEnabled(false);
         txtEndTime.setEnabled(false);
         txtDate.setFocusable(false);
         txtStartTime.setFocusable(false);
         txtEndTime.setFocusable(false);
 
+        //fetch custom app font
+        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
+
+        //set custom app fonts
+        txtTitle.setTypeface(typeFace);
+        txtSelectAvailability.setTypeface(typeFace);
+        txtYourAvailability.setTypeface(typeFace);
 
         loadSchedule();
 
