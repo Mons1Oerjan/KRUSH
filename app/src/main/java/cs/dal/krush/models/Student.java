@@ -73,6 +73,31 @@ public class Student extends Table{
     }
 
     /**
+     * Validates user registration by checking if the email already exists in the DB.
+     * Returns false if the email is already in the DB.
+     * @param email
+     * @return boolean
+     */
+    public boolean validateEmail(String email){
+        Cursor studentEmails = dbRead.rawQuery("SELECT email FROM students WHERE email=?", new String[]{email});
+        if (studentEmails.moveToFirst()){
+            studentEmails.close();
+            return false;
+        } else {
+            Cursor tutorEmails = dbRead.rawQuery("SELECT email FROM tutors WHERE email=?", new String[]{email});
+            if (tutorEmails.moveToFirst()){
+                studentEmails.close();
+                tutorEmails.close();
+                return false;
+            } else {
+                studentEmails.close();
+                tutorEmails.close();
+                return true;
+            }
+        }
+    }
+
+    /**
      * Delete a student by id
      * @param id
      * @return int
