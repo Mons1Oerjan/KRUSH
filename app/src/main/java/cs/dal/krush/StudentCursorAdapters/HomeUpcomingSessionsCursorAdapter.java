@@ -80,7 +80,7 @@ public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
         String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
         String sessionLocation = cursor.getString(cursor.getColumnIndexOrThrow("location"));
-        String text2content = tutorFirstName + " " + tutorLastName + ", location: " + sessionLocation + ", Rating: " + tutorRating + ", Rate: " + tutorRate + "$";
+        String text2content = tutorFirstName + " " + tutorLastName + ", Location: " + sessionLocation + ", Rating: " + tutorRating + ", Rate: " + tutorRate + "$";
         subHeader.setText(text2content);
     }
 }
