@@ -282,14 +282,14 @@ public class TutorAvailabilityFragment extends Fragment {
     }
 
     /**
-     * Construct a full date String in the format of "yyyy-MM-dd h:mm a"
+     * Construct a full date String in the format of "yyyy-MM-dd HH:mm:ss"
      * using the currently set day of month and year.
      * @param hour conversion helper to use selected hour
      * @param minute conversion helper to use selected minute
      * @return concatendated DateTime
      */
     public String concatenateDateTime(int hour, int minute){
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd h:mm a", Locale.getDefault());
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.set(Calendar.DAY_OF_MONTH, sDay);

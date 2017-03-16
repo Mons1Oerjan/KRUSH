@@ -19,6 +19,7 @@ import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,6 +44,7 @@ public class TutorCalendarFragment extends Fragment {
      * Declare variables
      */
     private WeekView mWeekView;
+    private DBHelper db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,29 +79,52 @@ public class TutorCalendarFragment extends Fragment {
             public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
                 List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
 
-                // Populate the week view with some events.
-                Calendar startTime = Calendar.getInstance();
-                startTime.set(Calendar.HOUR_OF_DAY, 3);
-                startTime.set(Calendar.MINUTE, 0);
-                startTime.set(Calendar.MONTH, newMonth-1);
-                startTime.set(Calendar.YEAR, newYear);
-                Calendar endTime = (Calendar) startTime.clone();
-                endTime.add(Calendar.HOUR, 1);
-                endTime.set(Calendar.MONTH, newMonth-1);
-                WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
-                events.add(event);
+                //get all of the tutoring sessions from the db
+                //format the month
+                //look in the db for records that have this month
 
-                startTime = Calendar.getInstance();
-                startTime.set(Calendar.HOUR_OF_DAY, 3);
-                startTime.set(Calendar.MINUTE, 30);
-                startTime.set(Calendar.MONTH, newMonth-1);
-                startTime.set(Calendar.YEAR, newYear);
-                endTime = (Calendar) startTime.clone();
-                endTime.set(Calendar.HOUR_OF_DAY, 4);
-                endTime.set(Calendar.MINUTE, 30);
-                endTime.set(Calendar.MONTH, newMonth-1);
-                event = new WeekViewEvent(10, getEventTitle(startTime), startTime, endTime);
-                events.add(event);
+                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+                Calendar calendarStartDate = new GregorianCalendar();
+                calendarStartDate.set(Calendar.MONTH, newMonth-1);
+                calendarStartDate.set(Calendar.YEAR, newYear);
+                calendarStartDate.set(Calendar.HOUR_OF_DAY, 0);
+                calendarStartDate.set(Calendar.MINUTE,0);
+                calendarStartDate.set(Calendar.DAY_OF_MONTH,1);
+                String compareStartDate = formatter.format(calendarStartDate.getTime());
+
+                Calendar calendarEndDate = new GregorianCalendar();
+                calendarEndDate.set(Calendar.MONTH, newMonth-1);
+                calendarEndDate.set(Calendar.YEAR, newYear);
+                calendarEndDate.set(Calendar.HOUR_OF_DAY, 23);
+                calendarEndDate.set(Calendar.MINUTE,59);
+                calendarEndDate.set(Calendar.DAY_OF_MONTH,Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH));
+                String compareEndDate = formatter.format(calendarEndDate.getTime());
+
+                Cursor rs;
+                db = new DBHelper(getContext());
+                rs = db.tutoringSession.getDataBySchedule(1);
+
+                int i = 1;
+                try {
+                    while (rs.moveToNext()) {
+                        Calendar convertedStartTime = Calendar.getInstance();
+                        Calendar convertedEndTime = Calendar.getInstance();
+
+                        Date creationDate = formatter.parse(rs.getString(rs.getColumnIndex("start_time")));
+                        Date enDate = formatter.parse(rs.getString(rs.getColumnIndex("end_time")));
+
+                        convertedStartTime.setTime(creationDate);
+                        convertedEndTime.setTime(enDate);
+                        WeekViewEvent event = new WeekViewEvent(i, "", convertedStartTime, convertedEndTime);
+                        events.add(event);
+                        i++;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } finally {
+                    rs.close();
+                }
 
                 return events;
             }
