@@ -8,15 +8,171 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cs.dal.krush.tutorFragments.TutorAvailabilityFragment">
+    tools:context="cs.dal.krush.tutorFragments.TutorCalendarFragment">
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/calendarView"
-        android:layout_width="match_parent"
+
+
+    <TextView
+        android:text="Availability"
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="normal|bold"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:mcv_showOtherDates="all"
-        app:mcv_selectionColor="@color/colorPrimary"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-medium"
+        android:id="@+id/txtAvailabilityTitle" />
+
+    <TextView
+        android:text="Select Availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtAvailabilityTitle"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="10px"
+        android:id="@+id/txtSelectAvailability" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="START TIME"
+        android:id="@+id/btnStartTime"
+        android:minHeight="30dp"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:paddingTop="5px"
+        android:paddingBottom="5px"
+        android:layout_marginBottom="15px"
+        android:layout_marginTop="15dp"
+        android:minWidth="170dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/bottom_bar_color"
+        android:layout_below="@+id/btnDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignEnd="@+id/btnDate" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="END TIME"
+        android:id="@+id/btnEndTime"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingTop="5px"
+        android:paddingBottom="5px"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="25dp"
+        android:minHeight="30dp"
+        android:minWidth="170dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/bottom_bar_color"
+        android:layout_below="@+id/btnStartTime"
+        android:layout_alignRight="@+id/btnStartTime"
+        android:layout_alignEnd="@+id/btnStartTime" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT"
+        android:id="@+id/btnSubmit"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:minHeight="30dp"
+        android:minWidth="170dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/bottom_bar_color"
+        android:layout_below="@+id/txtEndTime"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CALENDAR"
+        android:id="@+id/btnViewCalendar"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:minHeight="30dp"
+        android:minWidth="170dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/bottom_bar_color"
+        android:layout_below="@+id/txtEndTime"
+        android:layout_toEndOf="@id/btnSubmit"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:text="Your Availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSubmit"
+        android:layout_marginTop="30px"
+        android:layout_marginBottom="10px"
+        android:fontFamily="sans-serif-medium"
+        android:id="@+id/txtViewAvailability" />
+
+    <ListView
+        android:id="@+id/lvTutorScheduleListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="sans-serif-medium"
+        android:layout_below="@+id/txtViewAvailability"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DATE"
+        android:id="@+id/btnDate"
+        android:background="@drawable/button_main"
+        android:layout_marginTop="10px"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:paddingTop="5px"
+        android:paddingBottom="5px"
+        android:minWidth="170dp"
+        android:minHeight="30dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/bottom_bar_color"
+        android:layout_alignTop="@+id/txtDate" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtDate"
+        android:paddingTop="15dp"
+        android:textSize="15dp"
+        android:fontFamily="sans-serif-medium"
+        android:layout_below="@+id/txtSelectAvailability"
+        android:layout_toEndOf="@+id/btnDate" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:id="@+id/txtStartTime"
+        android:fontFamily="sans-serif-medium"
+        android:layout_above="@+id/btnEndTime"
+        android:layout_below="@id/txtDate"
+        android:layout_toEndOf="@+id/btnStartTime" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEndTime"
+        android:layout_marginBottom="-15px"
+        android:textSize="15dp"
+        android:fontFamily="sans-serif-medium"
+        android:layout_alignBottom="@+id/btnEndTime"
+        android:layout_toEndOf="@+id/btnEndTime" />
 
 </RelativeLayout>
+
+
