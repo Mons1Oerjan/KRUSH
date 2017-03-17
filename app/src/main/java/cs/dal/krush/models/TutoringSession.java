@@ -19,14 +19,17 @@ public class TutoringSession extends Table{
      * @param tutorId
      * @param locationId
      * @param title
+     * @param sessionBooked
      * @return boolean
      */
-    public boolean insert(int studentId, int tutorId, int locationId, String title, String startTime, String endTime){
+
+    public boolean insert(int studentId, int tutorId, int locationId, int sessionBooked, String title, String startTime, String endTime){
         ContentValues contentValues = new ContentValues();
         contentValues.put("student_id", studentId);
         contentValues.put("tutor_id", tutorId);
         contentValues.put("location_id", locationId);
         contentValues.put("title", title);
+        contentValues.put("session_booked", sessionBooked);
         contentValues.put("start_time", startTime);
         contentValues.put("end_time", endTime);
         dbWrite.insert("tutoring_sessions", null, contentValues);
@@ -98,6 +101,22 @@ public class TutoringSession extends Table{
                 "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
                 "WHERE ts.student_id=" + studentId + ""
                 ,null
+        );
+    }
+
+    public Cursor getDataByTutorIdForCursorAdapter(int tutorId){
+        return dbRead.rawQuery(
+              "SELECT s.id AS _id, s.school_id, s.profile_pic, s.f_name, s.l_name, s.email, " +
+              "ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
+              "l.location, " +
+              "sl.name " +
+              "FROM students s " +
+              "INNER JOIN tutoring_sessions ts ON _id = ts.student_id " +
+              "INNER JOIN locations l ON ts.location_id = l.id " +
+              "INNER JOIN schools sl ON s.school_id = sl.id " +
+              "WHERE ts.tutor_id=" + tutorId +
+              " AND ts.session_booked=1"
+              ,null
         );
     }
 
