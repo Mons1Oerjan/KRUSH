@@ -22,13 +22,16 @@ public class TutoringSession extends Table{
      * @param sessionBooked
      * @return boolean
      */
-    public boolean insert(int studentId, int tutorId, int locationId, int sessionBooked, String title){
+
+    public boolean insert(int studentId, int tutorId, int locationId, int sessionBooked, String title, String startTime, String endTime){
         ContentValues contentValues = new ContentValues();
         contentValues.put("student_id", studentId);
         contentValues.put("tutor_id", tutorId);
         contentValues.put("location_id", locationId);
         contentValues.put("title", title);
         contentValues.put("session_booked", sessionBooked);
+        contentValues.put("start_time", startTime);
+        contentValues.put("end_time", endTime);
         dbWrite.insert("tutoring_sessions", null, contentValues);
         return true;
     }
@@ -123,6 +126,18 @@ public class TutoringSession extends Table{
      */
     public Cursor getDataByTutorId(int tutorId){
         return dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE tutor_id="+tutorId+"",null);
+    }
+
+    /**
+     * Get tutoring sessions for the current month
+     * @param tutorId id for specified tutor
+     * @return
+     */
+    public Cursor getDataBySchedule(int tutorId){
+        return dbRead.rawQuery("SELECT * FROM tutoring_sessions " +
+                "WHERE strftime('%m',start_time) = '03' " +
+                "AND strftime('%m',end_time) = '03' " +
+                "AND tutor_id = "+tutorId+"",null);
     }
 
     /**
