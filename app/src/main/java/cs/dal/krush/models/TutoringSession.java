@@ -96,9 +96,12 @@ public class TutoringSession extends Table{
     public Cursor getDataByStudentIdForCursorAdapter(int studentId){
         return dbRead.rawQuery(
                 "SELECT t.id AS _id, t.location_id, t.school_id, t.profile_pic, t.f_name, t.l_name, " +
-                "t.email, t.password, t.rating, t.rate, t.revenue, ts.student_id, ts.title, ts.id " +
+                "t.email, t.password, t.rating, t.rate, t.revenue, " +
+                "ts.student_id, ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
+                "l.location " +
                 "FROM tutors t " +
                 "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
+                "INNER JOIN locations l ON t.location_id = l.id " +
                 "WHERE ts.student_id=" + studentId + ""
                 ,null
         );
