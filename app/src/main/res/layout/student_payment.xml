@@ -85,7 +85,8 @@
         android:hint="MM/YY"
         android:id="@+id/editText2"
         android:layout_below="@+id/creditNumberInput"
-        android:layout_alignStart="@+id/creditNumberInput" />
+        android:layout_alignStart="@+id/creditNumberInput"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="Payment"
@@ -122,7 +123,8 @@
         android:hint="000"
         android:id="@+id/cvvNumberInput"
         android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/editText2" />
+        android:layout_alignStart="@+id/editText2"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:text="CVV"
