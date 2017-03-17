@@ -26,12 +26,14 @@
 
     <TextView
         android:text="Select Availability"
+        android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtAvailabilityTitle"
         android:fontFamily="sans-serif-medium"
-        android:layout_marginTop="10px"
-        android:id="@+id/txtSelectAvailability" />
+        android:layout_marginTop="13dp"
+        android:id="@+id/txtSelectAvailability"
+        android:layout_below="@+id/txtAvailabilityTitle"
+        android:layout_alignParentStart="true" />
 
 
     <Button
@@ -110,13 +112,13 @@
 
     <TextView
         android:text="Your Availability"
+        android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnSubmit"
-        android:layout_marginTop="30px"
-        android:layout_marginBottom="10px"
         android:fontFamily="sans-serif-medium"
-        android:id="@+id/txtViewAvailability" />
+        android:id="@+id/txtViewAvailability"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:id="@+id/lvTutorScheduleListView"
