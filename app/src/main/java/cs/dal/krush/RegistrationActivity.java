@@ -153,7 +153,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
 
                 //validate if email is already used
-                // TODO: 2017-03-09 request query to lookup existing user emails tutors & students
+                if (!mydb.student.validateEmail(email)) {
+                    email_input.setError("This email is already used!");
+                    isValid = false;
+                }
 
                 if(isValid) {
                     //get index value of the school
@@ -164,11 +167,21 @@ public class RegistrationActivity extends AppCompatActivity {
                         // TODO: 2017-03-12 make locationID, profilePic, and Rate nullable fields
                         mydb.tutor.insert(1, schoolID, "egg1", firstName, lastName, email, password, 0);
                         Intent i = new Intent(RegistrationActivity.this, TutorMainActivity.class);
+                        //get the new user we just inserted to the DB and pass the ID to the next activity:
+                        Cursor newUser = mydb.tutor.getDataEmail(email, password);
+                        newUser.moveToFirst();
+                        i.putExtra("USER_ID", newUser.getString(newUser.getColumnIndex("id")));
+                        newUser.close();
                         startActivity(i);
                     } else {
                         // TODO: 2017-03-12 make locationID, profilePic, and Rate nullable fields
                         mydb.student.insert(schoolID, "egg1", firstName, lastName, email, password);
                         Intent i = new Intent(RegistrationActivity.this, StudentMainActivity.class);
+                        //get the new user we just inserted to the DB and pass the ID to the next activity:
+                        Cursor newUser = mydb.student.getDataEmail(email, password);
+                        newUser.moveToFirst();
+                        i.putExtra("USER_ID", newUser.getString(newUser.getColumnIndex("id")));
+                        newUser.close();
                         startActivity(i);
                     }
                 }

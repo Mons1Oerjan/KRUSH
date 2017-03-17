@@ -16,11 +16,13 @@ import cs.dal.krush.R;
  */
 public class StudentSessionsFragment extends Fragment {
 
+    static int USER_ID;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_sessions, container, false);
-        int userId = Integer.parseInt(getArguments().getString("UserID"));
+        USER_ID = getArguments().getInt("USER_ID");
 
 
         return view;
