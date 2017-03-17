@@ -40,7 +40,7 @@ public class TutorHomeFragment extends Fragment {
         //init DB connection:
         DBHelper mydb = new DBHelper(C);
 
-        Cursor tutor = mydb.tutor.getData(userId);
+        Cursor tutor = mydb.tutor.getData(USER_ID);
         tutor.moveToFirst();
 
         //fetch UI elements:
@@ -63,7 +63,7 @@ public class TutorHomeFragment extends Fragment {
         ratingTitle.setTypeface(typeFace);
 
         //get all tutoring sessions by the tutor:
-        Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByTutorIdForCursorAdapter(userId);
+        Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByTutorIdForCursorAdapter(USER_ID);
 
         //set sessions listview adapter:
         TutorHomeUpcomingSessionsCursorAdapter sessionsAdapter = new TutorHomeUpcomingSessionsCursorAdapter(C, cursorSessionsResponse);

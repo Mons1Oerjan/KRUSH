@@ -114,7 +114,8 @@ public class TutoringSession extends Table{
               "INNER JOIN tutoring_sessions ts ON _id = ts.student_id " +
               "INNER JOIN locations l ON ts.location_id = l.id " +
               "INNER JOIN schools sl ON s.school_id = sl.id " +
-              "WHERE ts.tutor_id=" + tutorId + ""
+              "WHERE ts.tutor_id=" + tutorId +
+              " AND ts.session_booked=1"
               ,null
         );
     }

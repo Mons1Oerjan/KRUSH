@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="55dp"
     android:gravity="center"
     android:id="@+id/student_home">
 
@@ -43,6 +42,7 @@
       android:id="@+id/tutorRating"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="5dp"
       android:text="Current Rating"
       android:textColor="@color/colorPrimary"
       android:textAppearance="?android:attr/textAppearanceMedium"
