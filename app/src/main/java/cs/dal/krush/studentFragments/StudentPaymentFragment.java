@@ -1,8 +1,10 @@
 package cs.dal.krush.studentFragments;
 
 
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import cs.dal.krush.R;
+import cs.dal.krush.models.DBHelper;
 
 public class StudentPaymentFragment extends Fragment {
 
@@ -19,14 +22,18 @@ public class StudentPaymentFragment extends Fragment {
     private String creditCarNumber;
     private String cvvNumbers;
     private String expirationMonth;
+    private DBHelper mydb;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_payment, container, false);
         // TODO: 2017-03-17 Get student and tutor ID from bundle
-//        int userId = Integer.parseInt(getArguments().getString("UserID"));
-//        int tutorId = Integer.parseInt(getArguments().getString("TutorID"));
+        // int userId = Integer.parseInt(getArguments().getString("UserID"));
+        // int tutorId = Integer.parseInt(getArguments().getString("TutorID"));
+
+        //initialize database connection
+        mydb = new DBHelper(getActivity().getApplicationContext());
 
         //fetch UI components
         final TextView pageHeader = (TextView) view.findViewById(R.id.paymentHeader);
@@ -52,7 +59,7 @@ public class StudentPaymentFragment extends Fragment {
 
         //set cost label
         // TODO: 2017-03-17 Get tutoring session cost from bundle 
-        tutoringCost.setText("$99.99");
+        tutoringCost.setText("$" + 99.99);
 
         //submit payment
         submitPayment.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +84,14 @@ public class StudentPaymentFragment extends Fragment {
                     cvvNumberInput.setError("CVV required!");
                     isValid = false;
                 }
+
+                if(isValid) {
+                    // TODO: 2017-03-18  Use tutorID and cost from bundle
+                    mydb.tutor.incrementTutorRevenue(1, 99.99);
+
+                    // TODO: 2017-03-18 Need intend - likely back to the student home
+                }
+
 
             }
         });

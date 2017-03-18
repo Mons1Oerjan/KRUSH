@@ -36,6 +36,7 @@ public class Tutor extends Table{
         contentValues.put("email", email);
         contentValues.put("password", password);
         contentValues.put("rate", rate);
+        contentValues.put("revenue", 0.00);
         dbWrite.insert("tutors", null, contentValues);
         return true;
     }
@@ -142,6 +143,16 @@ public class Tutor extends Table{
      */
     public Cursor getDataByRating(int rating){
         return dbRead.rawQuery("SELECT * FROM tutors WHERE rating="+rating+"",null);
+    }
+
+    /**
+     * Increment a tutors total revenue
+     * @param tutorID
+     * @param revenue
+     * @return Cursor
+     */
+    public void incrementTutorRevenue(int tutorID, double revenue){
+        dbWrite.execSQL("UPDATE tutors SET revenue = revenue+"+revenue+" WHERE id="+tutorID+"");
     }
 
     /**
