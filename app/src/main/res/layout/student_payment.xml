@@ -21,6 +21,7 @@
         android:layout_alignParentStart="true"
         android:textStyle="normal|bold" />
 
+
     <TextView
         android:text="$0.00"
         android:layout_width="wrap_content"
@@ -137,4 +138,47 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/bottom_bar_color"/>
 
+    <ImageView
+    android:id="@+id/visaLogo"
+    android:layout_width="60dp"
+    android:layout_height="fill_parent"
+    android:layout_marginRight="6dip"
+    android:src="@drawable/visa"
+    android:layout_below="@+id/costLabel"
+    android:layout_alignStart="@+id/creditNumberInput"
+    android:layout_above="@+id/creditNumberInput" />
+
+    <ImageView
+        android:id="@+id/masterCardLogo"
+        android:layout_width="60dp"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="6dip"
+        android:src="@drawable/mastercard"
+        android:layout_below="@+id/tutoringCost"
+        android:layout_toEndOf="@+id/visaLogo"
+        android:layout_above="@+id/creditNumberInput" />
+
+    <ImageView
+        android:id="@+id/amexLogo"
+        android:layout_width="60dp"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="6dip"
+        android:src="@drawable/amex"
+        android:layout_below="@+id/tutoringCost"
+        android:layout_toEndOf="@+id/masterCardLogo"
+        android:layout_above="@+id/creditNumberInput" />
+
+    <TextView
+        android:id="@+id/paymentMethodsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:text="We accept:"
+        android:paddingStart="10sp"
+        android:textSize="20sp"
+        android:textStyle="normal|bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/costLabel"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/visaLogo" />
 </RelativeLayout>

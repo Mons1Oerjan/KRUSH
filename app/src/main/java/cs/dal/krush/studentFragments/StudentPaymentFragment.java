@@ -46,6 +46,7 @@ public class StudentPaymentFragment extends Fragment {
         final TextView cardNumberLabel = (TextView) view.findViewById(R.id.cardNumberLabel);
         final TextView expDateLabel = (TextView) view.findViewById(R.id.expDateLabel);
         final TextView cvvLabel = (TextView) view.findViewById(R.id.cvvLabel);
+        final TextView paymentMethodsLabel = (TextView) view.findViewById(R.id.paymentMethodsLabel);
         final EditText creditNumberInput = (EditText) view.findViewById(R.id.creditNumberInput);
         final EditText monthInput = (EditText) view.findViewById(R.id.monthInput);
         final EditText cvvNumberInput = (EditText) view.findViewById(R.id.cvvNumberInput);
@@ -60,6 +61,7 @@ public class StudentPaymentFragment extends Fragment {
         cardNumberLabel.setTypeface(typeFace);
         expDateLabel.setTypeface(typeFace);
         cvvLabel.setTypeface(typeFace);
+        paymentMethodsLabel.setTypeface(typeFace);
 
         //set cost label
         // TODO: 2017-03-17 Get tutoring session cost from bundle 
