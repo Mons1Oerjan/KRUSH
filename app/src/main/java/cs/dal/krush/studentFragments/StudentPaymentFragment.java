@@ -16,6 +16,10 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
 
+/**
+ * StudentPaymentFragment is used to process payments from student's credit cards and increments
+ * the revenue of tutor based on the cost of the session.
+ */
 public class StudentPaymentFragment extends Fragment {
 
     private boolean isValid;

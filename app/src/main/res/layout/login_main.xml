@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="65dp"
-        android:id="@+id/paymentHeader"
+        android:id="@+id/krushLogo"
         tools:text="KRUSH"
         android:textSize="100sp"
         android:textColor="@color/colorPrimary"
