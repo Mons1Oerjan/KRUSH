@@ -85,14 +85,13 @@ public class StudentPaymentFragment extends Fragment {
                     isValid = false;
                 }
 
+                //increment tutor's revenue and return to student home
                 if(isValid) {
                     // TODO: 2017-03-18  Use tutorID and cost from bundle
                     mydb.tutor.incrementTutorRevenue(1, 99.99);
 
                     // TODO: 2017-03-18 Need intend - likely back to the student home
                 }
-
-
             }
         });
 
