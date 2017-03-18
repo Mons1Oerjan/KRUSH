@@ -2,15 +2,19 @@ package cs.dal.krush.studentFragments;
 
 
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import cs.dal.krush.R;
@@ -51,6 +55,9 @@ public class StudentPaymentFragment extends Fragment {
         final EditText monthInput = (EditText) view.findViewById(R.id.monthInput);
         final EditText cvvNumberInput = (EditText) view.findViewById(R.id.cvvNumberInput);
         final Button submitPayment = (Button) view.findViewById(R.id.submitPayment);
+        final ImageView visaLogo = (ImageView) view.findViewById(R.id.visaLogo);
+        final ImageView masterCardLogo = (ImageView) view.findViewById(R.id.masterCardLogo);
+        final ImageView amexLogo = (ImageView) view.findViewById(R.id.amexLogo);
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -67,6 +74,53 @@ public class StudentPaymentFragment extends Fragment {
         // TODO: 2017-03-17 Get tutoring session cost from bundle 
         tutoringCost.setText("$" + 99.99);
 
+        //text listener on credit card TextField to display the credit card type
+        creditNumberInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //on text change check the first character for card type
+                if(s.length() >= 1) {
+                    if(s.charAt(0) == '4') {
+                        //visa card
+                        removeFilter(visaLogo);
+                        grayOut(masterCardLogo);
+                        grayOut(amexLogo);
+                    } else if(s.charAt(0) == '5') {
+                        //mastercard card
+                        removeFilter(masterCardLogo);
+                        grayOut(visaLogo);
+                        grayOut(amexLogo);
+                    } else if(s.charAt(0) == '3') {
+                        //amex card
+                        removeFilter(amexLogo);
+                        grayOut(visaLogo);
+                        grayOut(masterCardLogo);
+                    } else {
+                        //invalid card
+                        grayOut(amexLogo);
+                        grayOut(visaLogo);
+                        grayOut(masterCardLogo);
+                        creditNumberInput.setError("Invalid credit card");
+                    }
+                } else {
+                    //remove filter on card logos
+                    removeFilter(amexLogo);
+                    removeFilter(visaLogo);
+                    removeFilter(masterCardLogo);
+                }
+            }
+        });
+
         //submit payment
         submitPayment.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -76,7 +130,7 @@ public class StudentPaymentFragment extends Fragment {
                 cvvNumbers = cvvNumberInput.getText().toString();
 
                 //validate inputs
-                if(creditCarNumber.length() != 12) {
+                if(creditCarNumber.length() != 16) {
                     creditNumberInput.setError("Credit card number required!");
                     isValid = false;
                 }
@@ -100,7 +154,24 @@ public class StudentPaymentFragment extends Fragment {
                 }
             }
         });
-
         return view;
+    }
+
+    /**
+     * Takes an ImageView and applies a 'grey' filter to it
+     * @param imageView
+     */
+    private void grayOut(ImageView imageView) {
+        // gray out image
+        imageView.setColorFilter(Color.argb(150,200,200,200));
+    }
+
+    /**
+     * Takes an ImageView and removes a filter
+     * @param imageView
+     */
+    private void removeFilter(ImageView imageView) {
+        // remove gray out on image
+        imageView.setColorFilter(null);
     }
 }
