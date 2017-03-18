@@ -1,20 +1,29 @@
 package cs.dal.krush.studentFragments;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import cs.dal.krush.R;
 import cs.dal.krush.StudentCursorAdapters.HomeQuickBookCursorAdapter;
 import cs.dal.krush.StudentCursorAdapters.HomeUpcomingSessionsCursorAdapter;
+import cs.dal.krush.StudentMainActivity;
 import cs.dal.krush.models.DBHelper;
 
 /**
@@ -47,6 +56,7 @@ public class StudentHomeFragment extends Fragment {
         TextView pageTitle = (TextView)view.findViewById(R.id.homeTitleLabel);
         TextView sessionsLabel = (TextView)view.findViewById(R.id.upcomingSessionsLabel);
         TextView bookTutorLabel = (TextView)view.findViewById(R.id.bookTutorLabel);
+        FloatingActionButton helpButton = (FloatingActionButton)view.findViewById(R.id.helpButtonStudent);
 
         //fetch custom app font:
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -69,6 +79,29 @@ public class StudentHomeFragment extends Fragment {
         //set tutor's listview adapter:
         HomeQuickBookCursorAdapter quickBookAdapter = new HomeQuickBookCursorAdapter(C, cursorTutorResponse);
         tutorsListView.setAdapter(quickBookAdapter);
+
+        //display student help dialog
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Create custom dialog object
+                final Dialog dialog = new Dialog(getContext());
+                // Include dialog.xml file
+                dialog.setContentView(R.layout.student_help);
+                // Set dialog title
+                dialog.setTitle("Custom Dialog");
+
+                dialog.show();
+                Button declineButton = (Button) dialog.findViewById(R.id.declineButton);
+                // if decline button is clicked, close the custom dialog
+                declineButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Close dialog
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
 
         return view;
     }

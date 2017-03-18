@@ -24,7 +24,7 @@
             android:textSize="32dp" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
+            android:id="@+id/helpButtonStudent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="18dp"
@@ -39,11 +39,11 @@
         android:id="@+id/upcomingSessionsLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/homeTitleLabel"
         android:layout_marginTop="10dp"
         android:text="Your Upcoming Tutoring Sessions:"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@+id/homeTitleLabel"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/colorPrimary" />
 
     <ListView
         android:id="@+id/upcomingSessionsListView"
