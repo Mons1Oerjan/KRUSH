@@ -74,7 +74,14 @@ public class StudentPaymentFragment extends Fragment {
         // TODO: 2017-03-17 Get tutoring session cost from bundle 
         tutoringCost.setText("$" + 99.99);
 
-        //text listener on credit card TextField to display the credit card type
+        /**
+         * text listener on credit card TextField to display the credit card type
+         *
+         * Source:
+         * [9]D. J, "android on Text Change Listener", Stackoverflow.com, 2017. [Online].
+         * Available: http://stackoverflow.com/questions/20824634/android-on-text-change-listener.
+         * Accessed: 18- Mar- 2017
+         */
         creditNumberInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {

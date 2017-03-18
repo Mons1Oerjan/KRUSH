@@ -94,3 +94,5 @@ We currently don't have a way to reset the DB. However, if you wish to reset the
 - [5] List View. (n.d.). Retrieved March 12, 2017, from https://developer.android.com/guide/topics/ui/layout/listview.html
 - [6] How to disable BottomNavigationView shift mode? (n.d.). Retrieved March 12, 2017, from http://stackoverflow.com/questions/40176244/how-to-disable-bottomnavigationview-shift-mode
 - [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017, from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+- [8]"CSSAuthor", Cssauthor.com, 2017. [Online]. Available: http://www.cssauthor.com/wp-content/uploads/2014/03/Credit-Card-Icons.jpg. Accessed: 18- Mar- 2017.
+- [9]D. J, "android on Text Change Listener", Stackoverflow.com, 2017. [Online]. Available: http://stackoverflow.com/questions/20824634/android-on-text-change-listener. Accessed: 18- Mar- 2017.
