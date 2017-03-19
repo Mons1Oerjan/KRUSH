@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 
 import cs.dal.krush.R;
 import cs.dal.krush.StudentCursorAdapters.HomeQuickBookCursorAdapter;
-import cs.dal.krush.StudentCursorAdapters.HomeUpcomingSessionsCursorAdapter;
+import cs.dal.krush.StudentCursorAdapters.SessionCursorAdapter;
 import cs.dal.krush.models.DBHelper;
 
 /**
@@ -60,7 +59,7 @@ public class StudentHomeFragment extends Fragment {
         Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(USER_ID);
 
         //set sessions listview adapter:
-        HomeUpcomingSessionsCursorAdapter sessionsAdapter = new HomeUpcomingSessionsCursorAdapter(C, cursorSessionsResponse);
+        SessionCursorAdapter sessionsAdapter = new SessionCursorAdapter(C, cursorSessionsResponse);
         upcomingSessionsListView.setAdapter(sessionsAdapter);
 
         //get all distinct tutors that the user has previously had a tutoring session with:

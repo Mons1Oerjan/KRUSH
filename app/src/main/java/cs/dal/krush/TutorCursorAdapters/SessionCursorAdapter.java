@@ -1,4 +1,4 @@
-package cs.dal.krush.StudentCursorAdapters;
+package cs.dal.krush.TutorCursorAdapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -13,13 +13,14 @@ import cs.dal.krush.R;
 
 /**
  * This is the adapter class for the customized rows in the Upcoming Sessions
- * list view on the student home page.
+ * list view on the tutor home page.
  *
  * Source:
  * [4] C. (n.d.). Codepath/android_guides. Retrieved March 12, 2017,
  * from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
  */
-public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
+
+public class SessionCursorAdapter extends CursorAdapter {
 
     //store the context set in the constructor
     private Context mContext;
@@ -30,7 +31,7 @@ public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
      * @param context
      * @param cursor
      */
-    public HomeUpcomingSessionsCursorAdapter(Context context, Cursor cursor){
+    public SessionCursorAdapter(Context context, Cursor cursor){
         super(context, cursor, 0);
         this.mContext = context;
     }
@@ -45,7 +46,7 @@ public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
      */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent){
-        return LayoutInflater.from(context).inflate(R.layout.student_home_listentry, parent, false);
+                                return LayoutInflater.from(context).inflate(R.layout.student_home_listentry, parent, false);
     }
 
     /**
@@ -62,7 +63,7 @@ public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
         TextView subHeader = (TextView)view.findViewById(R.id.secondLine);
         ImageView image = (ImageView)view.findViewById(R.id.icon);
 
-        //Get the tutor's profile image:
+        //Get the student's profile image:
         String imageFileName = cursor.getString(cursor.getColumnIndexOrThrow("profile_pic"));
         if (imageFileName != null){
             int resourceId = mContext.getResources().getIdentifier(
@@ -75,12 +76,10 @@ public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
         header.setText(title);
 
         //Set the row's sub-header text:
-        String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
-        String tutorLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
-        String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
-        String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
-        String sessionLocation = cursor.getString(cursor.getColumnIndexOrThrow("location"));
-        String text2content = tutorFirstName + " " + tutorLastName + ", Location: " + sessionLocation + ", Rating: " + tutorRating + ", Rate: " + tutorRate + "$";
+        String studentFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
+        String studentLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
+        String studentSchool = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+        String text2content = studentFirstName + " " + studentLastName + ", University: " + studentSchool;
         subHeader.setText(text2content);
     }
 }
