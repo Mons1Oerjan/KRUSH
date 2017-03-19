@@ -38,14 +38,15 @@
             android:id="@+id/homeStudentHelpLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/studentHelpIntro"
+            android:layout_marginTop="11dp"
             android:paddingEnd="10sp"
             android:paddingStart="10sp"
             android:text="Home"
-            android:textStyle="bold"
-            android:layout_below="@+id/studentHelpIntro"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="11dp"
-            android:layout_alignParentEnd="true" />
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/homeStudentHelpText"
@@ -62,13 +63,14 @@
             android:id="@+id/bookingStudentHelpLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="10sp"
-            android:paddingEnd="10sp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/homeStudentHelpText"
             android:layout_marginTop="10dp"
+            android:paddingEnd="10sp"
+            android:paddingStart="10sp"
             android:text="Booking"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
         <TextView
@@ -87,12 +89,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:paddingStart="10sp"
-            android:paddingEnd="10sp"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/bookingStudentHelpText"
             android:layout_marginTop="12dp"
+            android:paddingEnd="10sp"
+            android:paddingStart="10sp"
             android:text="Sessions"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
         <TextView
@@ -110,13 +113,14 @@
             android:id="@+id/profileStudentHelpLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="10sp"
-            android:paddingEnd="10sp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/sessionsStudentHelpText"
             android:layout_marginTop="10dp"
+            android:paddingEnd="10sp"
+            android:paddingStart="10sp"
             android:text="Profile"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
         <TextView
