@@ -5,9 +5,11 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -80,11 +82,35 @@ public class StudentBookingFragment extends Fragment {
         });
 
         //get all tutors from DB:
-        Cursor cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
+        final Cursor cursorTutorResponse = mydb.tutor.getAllForCursorAdapter();
 
         //set tutor's listview adapter:
         BookingTutorCursorAdapter profileAdapter = new BookingTutorCursorAdapter(C, cursorTutorResponse);
         tutorsListView.setAdapter(profileAdapter);
+
+        // Click listener for tutors list
+        tutorsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                // Get tutor id
+                cursorTutorResponse.moveToPosition(position);
+                int TUTOR_ID = cursorTutorResponse.getInt(cursorTutorResponse.getColumnIndex("_id"));
+
+                // Add USER_ID and TUTOR_ID to session details fragment for displaying
+                Bundle bundle = new Bundle();
+                bundle.putInt("USER_ID", USER_ID);
+                bundle.putInt("TUTOR_ID", TUTOR_ID);
+
+                // Swap into new fragment
+                StudentTutorDetailsFragment tutor = new StudentTutorDetailsFragment();
+                tutor.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.student_fragment_container, tutor);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            }
+        });
 
         return view;
     }
