@@ -80,7 +80,7 @@ public class StudentHomeFragment extends Fragment {
         HomeQuickBookCursorAdapter quickBookAdapter = new HomeQuickBookCursorAdapter(C, cursorTutorResponse);
         tutorsListView.setAdapter(quickBookAdapter);
 
-
+        // TODO: 2017-03-18 We need to write the instructions once the actual functionality is implemented to accurately write to be
         final String text = "Lorem ipsum dolor sit amet, pri magna delicata an. An " +
                 "imperdiet, vitae nemore duo eu. Sed ne etiam inermis, aperiam convenire " +
                 "appellantur ad ius, quo elit consequat vulputate eu. Eu cum choro " +
