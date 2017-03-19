@@ -83,7 +83,7 @@ public class TutoringSession extends Table{
     }
 
     /**
-     * Gets all tutors and tutoring sessions by the given student.
+     * Gets all upcoming tutoring sessions by the given student.
      * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
      *
      * Source:
@@ -102,11 +102,22 @@ public class TutoringSession extends Table{
                 "FROM tutors t " +
                 "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
                 "INNER JOIN locations l ON t.location_id = l.id " +
-                "WHERE ts.student_id=" + studentId + ""
+                "WHERE ts.student_id=" + studentId +
+                " AND ts.start_time>datetime('now')"
                 ,null
         );
     }
-
+    /**
+     * Gets all upcoming tutoring sessions by the given tutor.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @param tutorId
+     * @return Cursor
+     */
     public Cursor getDataByTutorIdForCursorAdapter(int tutorId){
         return dbRead.rawQuery(
               "SELECT s.id AS _id, s.school_id, s.profile_pic, s.f_name, s.l_name, s.email, " +
@@ -118,10 +129,67 @@ public class TutoringSession extends Table{
               "INNER JOIN locations l ON ts.location_id = l.id " +
               "INNER JOIN schools sl ON s.school_id = sl.id " +
               "WHERE ts.tutor_id=" + tutorId +
-              " AND ts.session_booked=1"
+              " AND ts.session_booked=1" +
+              " AND ts.start_time>datetime('now')"
               ,null
         );
     }
+    /**
+     * Gets all past tutoring sessions by the given student.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @param studentId
+     * @return Cursor
+     */
+    public Cursor getSessionHistoryByStudentIdForCursorAdapter(int studentId){
+        return dbRead.rawQuery(
+                "SELECT t.id AS _id, t.school_id, t.profile_pic, " +
+                "t.rating, t.rate, t.f_name, t.l_name, t.email, " +
+                "ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
+                "l.location, " +
+                "sl.name " +
+                "FROM tutors t " +
+                "INNER JOIN tutoring_sessions ts ON _id = ts.student_id " +
+                "INNER JOIN locations l ON ts.location_id = l.id " +
+                "INNER JOIN schools sl ON t.school_id = sl.id " +
+                "WHERE ts.tutor_id=" + studentId +
+                " AND ts.session_booked=1" +
+                " AND ts.end_time<datetime('now')"
+                ,null
+        );
+    }
+    /**
+     * Gets all past tutoring sessions by the given tutor.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @param tutorId
+     * @return Cursor
+     */
+    public Cursor getSessionHistoryByTutorIdForCursorAdapter(int tutorId){
+        return dbRead.rawQuery(
+                "SELECT s.id AS _id, s.school_id, s.profile_pic, s.f_name, s.l_name, s.email, " +
+                "ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
+                "l.location, " +
+                "sl.name " +
+                "FROM students s " +
+                "INNER JOIN tutoring_sessions ts ON _id = ts.student_id " +
+                "INNER JOIN locations l ON ts.location_id = l.id " +
+                "INNER JOIN schools sl ON s.school_id = sl.id " +
+                "WHERE ts.tutor_id=" + tutorId +
+                " AND ts.session_booked=1" +
+                " AND ts.end_time<datetime('now')"
+                ,null
+        );
+    }
+
 
     /**
      * Get a tutoring session by the tutor_id field

@@ -1,36 +1,27 @@
 package cs.dal.krush.studentFragments;
 
 import android.app.Dialog;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import cs.dal.krush.R;
 import cs.dal.krush.StudentCursorAdapters.HomeQuickBookCursorAdapter;
-import cs.dal.krush.StudentCursorAdapters.HomeUpcomingSessionsCursorAdapter;
-import cs.dal.krush.StudentMainActivity;
+import cs.dal.krush.StudentCursorAdapters.SessionCursorAdapter;
 import cs.dal.krush.appFragments.SessionDetailsFragment;
 import cs.dal.krush.models.DBHelper;
 
-import static android.R.attr.id;
 
 /**
  * Sets up the Student Home fragment. This fragment belongs to the StudentMainActivity class
@@ -76,7 +67,7 @@ public class StudentHomeFragment extends Fragment {
         final Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByStudentIdForCursorAdapter(USER_ID);
 
         //set sessions listview adapter:
-        HomeUpcomingSessionsCursorAdapter sessionsAdapter = new HomeUpcomingSessionsCursorAdapter(C, cursorSessionsResponse);
+        SessionCursorAdapter sessionsAdapter = new SessionCursorAdapter(C, cursorSessionsResponse);
         upcomingSessionsListView.setAdapter(sessionsAdapter);
 
         //get all distinct tutors that the user has previously had a tutoring session with:

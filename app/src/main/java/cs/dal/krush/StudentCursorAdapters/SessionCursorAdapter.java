@@ -19,7 +19,7 @@ import cs.dal.krush.R;
  * [4] C. (n.d.). Codepath/android_guides. Retrieved March 12, 2017,
  * from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
  */
-public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
+public class SessionCursorAdapter extends CursorAdapter {
 
     //store the context set in the constructor
     private Context mContext;
@@ -30,7 +30,7 @@ public class HomeUpcomingSessionsCursorAdapter extends CursorAdapter {
      * @param context
      * @param cursor
      */
-    public HomeUpcomingSessionsCursorAdapter(Context context, Cursor cursor){
+    public SessionCursorAdapter(Context context, Cursor cursor){
         super(context, cursor, 0);
         this.mContext = context;
     }

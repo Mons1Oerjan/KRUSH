@@ -16,7 +16,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import cs.dal.krush.R;
-import cs.dal.krush.StudentCursorAdapters.TutorHomeUpcomingSessionsCursorAdapter;
+import cs.dal.krush.TutorCursorAdapters.SessionCursorAdapter;
 import cs.dal.krush.models.DBHelper;
 
 /**
@@ -71,7 +71,7 @@ public class TutorHomeFragment extends Fragment {
         Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByTutorIdForCursorAdapter(USER_ID);
 
         //set sessions listview adapter:
-        TutorHomeUpcomingSessionsCursorAdapter sessionsAdapter = new TutorHomeUpcomingSessionsCursorAdapter(C, cursorSessionsResponse);
+        SessionCursorAdapter sessionsAdapter = new SessionCursorAdapter(C, cursorSessionsResponse);
         upcomingSessionsListView.setAdapter(sessionsAdapter);
 
         // TODO: 2017-03-18 We need to write the instructions once the actual functionality is implemented to accurately write to be
