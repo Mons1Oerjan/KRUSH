@@ -59,7 +59,7 @@ public class StudentHomeFragment extends Fragment {
         FloatingActionButton helpButton = (FloatingActionButton)view.findViewById(R.id.helpButtonStudent);
 
         //fetch custom app font:
-        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
+        final Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
 
         //set font style:
         pageTitle.setTypeface(typeFace);
@@ -80,6 +80,14 @@ public class StudentHomeFragment extends Fragment {
         HomeQuickBookCursorAdapter quickBookAdapter = new HomeQuickBookCursorAdapter(C, cursorTutorResponse);
         tutorsListView.setAdapter(quickBookAdapter);
 
+
+        final String text = "Lorem ipsum dolor sit amet, pri magna delicata an. An " +
+                "imperdiet, vitae nemore duo eu. Sed ne etiam inermis, aperiam convenire " +
+                "appellantur ad ius, quo elit consequat vulputate eu. Eu cum choro " +
+                "constituto, at per justo nostrum abhorreant. Ridens lobortis vix an." +
+                " Impetus salutatus pro ea, ex recteque neglegentur signiferumque vim. " +
+                "Vim ex scaevola scriptorem, usu te quando nonumes delectus.";
+
         //display student help dialog
         helpButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -89,11 +97,38 @@ public class StudentHomeFragment extends Fragment {
                 dialog.setContentView(R.layout.student_help);
                 // Set dialog title
                 dialog.setTitle("Custom Dialog");
-
                 dialog.show();
-                Button declineButton = (Button) dialog.findViewById(R.id.declineButton);
+
+                //fetch UI components
+                TextView studentHelpHeader = (TextView) dialog.findViewById(R.id.studentHelpHeader);
+                TextView studentHelpIntro = (TextView) dialog.findViewById(R.id.studentHelpIntro);
+                TextView homeStudentHelpLabel = (TextView) dialog.findViewById(R.id.homeStudentHelpLabel);
+                TextView homeStudentHelpText = (TextView) dialog.findViewById(R.id.homeStudentHelpText);
+                TextView bookingStudentHelpLabel = (TextView) dialog.findViewById(R.id.bookingStudentHelpLabel);
+                TextView bookingStudentHelpText = (TextView) dialog.findViewById(R.id.bookingStudentHelpText);
+                TextView seesionsStudentHelpLabel = (TextView) dialog.findViewById(R.id.seesionsStudentHelpLabel);
+                TextView sessionsStudentHelpText = (TextView) dialog.findViewById(R.id.sessionsStudentHelpText);
+                TextView profileStudentHelpLabel = (TextView) dialog.findViewById(R.id.profileStudentHelpLabel);
+                TextView profileStudentHelpText = (TextView) dialog.findViewById(R.id.profileStudentHelpText);
+
+
+                //set logo font style
+                studentHelpHeader.setTypeface(typeFace);
+                homeStudentHelpLabel.setTypeface(typeFace);
+                bookingStudentHelpLabel.setTypeface(typeFace);
+                seesionsStudentHelpLabel.setTypeface(typeFace);
+                profileStudentHelpLabel.setTypeface(typeFace);
+
+                //set text in dialogue
+                studentHelpIntro.setText(text);
+                homeStudentHelpText.setText(text);
+                bookingStudentHelpText.setText(text);
+                sessionsStudentHelpText.setText(text);
+                profileStudentHelpText.setText(text);
+
+                Button closeButton = (Button) dialog.findViewById(R.id.declineButton);
                 // if decline button is clicked, close the custom dialog
-                declineButton.setOnClickListener(new View.OnClickListener() {
+                closeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Close dialog
