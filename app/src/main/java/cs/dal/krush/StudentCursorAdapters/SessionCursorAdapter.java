@@ -77,8 +77,10 @@ public class SessionCursorAdapter extends CursorAdapter {
         //Set the row's sub-header text:
         String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
         String tutorLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
+        String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
+        String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
         String sessionLocation = cursor.getString(cursor.getColumnIndexOrThrow("location"));
-        String text2content = tutorFirstName + " " + tutorLastName + ", Location: " + sessionLocation;
+        String text2content = tutorFirstName + " " + tutorLastName + ", Location: " + sessionLocation + ", Rating: " + tutorRating + ", Rate: " + tutorRate + "$";
         subHeader.setText(text2content);
     }
 }

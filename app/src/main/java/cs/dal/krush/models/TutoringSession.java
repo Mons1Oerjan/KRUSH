@@ -147,7 +147,8 @@ public class TutoringSession extends Table{
      */
     public Cursor getSessionHistoryByStudentIdForCursorAdapter(int studentId){
         return dbRead.rawQuery(
-                "SELECT t.id AS _id, t.school_id, t.profile_pic, t.f_name, t.l_name, t.email, " +
+                "SELECT t.id AS _id, t.school_id, t.profile_pic, " +
+                "t.rating, t.rate, t.f_name, t.l_name, t.email, " +
                 "ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
                 "l.location, " +
                 "sl.name " +
