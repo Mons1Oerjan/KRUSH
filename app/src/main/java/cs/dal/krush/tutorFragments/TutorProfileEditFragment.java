@@ -1,8 +1,10 @@
 package cs.dal.krush.tutorFragments;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,8 +13,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -130,6 +134,19 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         profile_name_view.setTypeface(typeFace);
         email_view.setTypeface(typeFace);
         rate_view.setTypeface(typeFace);
+
+        //request permission to use camera if not already given
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    Manifest.permission.CAMERA)) {
+            } else {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.CAMERA},
+                        1);
+            }
+        }
 
         saveProfile = (Button) myView.findViewById(R.id.save_profile_button);
         changePicture = (Button) myView.findViewById(R.id.change_picture_button);
