@@ -126,6 +126,7 @@ public class StudentHomeFragment extends Fragment {
                 sessionsStudentHelpText.setText(text);
                 profileStudentHelpText.setText(text);
 
+                //close dialogue button
                 Button closeButton = (Button) dialog.findViewById(R.id.declineButton);
                 // if decline button is clicked, close the custom dialog
                 closeButton.setOnClickListener(new View.OnClickListener() {
