@@ -83,46 +83,46 @@ public class TutorHomeFragment extends Fragment {
                 "Vim ex scaevola scriptorem, usu te quando nonumes delectus.";
 
 
-        //display student help dialog
+        //display tutor help dialog
         tutorHelpButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Create custom dialog object
                 final Dialog dialog = new Dialog(getContext());
                 // Include dialog.xml file
-                dialog.setContentView(R.layout.student_help);
+                dialog.setContentView(R.layout.tutor_help);
                 // Set dialog title
                 dialog.setTitle("Custom Dialog");
                 dialog.show();
 
                 //fetch UI components
-                TextView studentHelpHeader = (TextView) dialog.findViewById(R.id.studentHelpHeader);
-                TextView studentHelpIntro = (TextView) dialog.findViewById(R.id.studentHelpIntro);
-                TextView homeStudentHelpLabel = (TextView) dialog.findViewById(R.id.homeStudentHelpLabel);
-                TextView homeStudentHelpText = (TextView) dialog.findViewById(R.id.homeStudentHelpText);
-                TextView bookingStudentHelpLabel = (TextView) dialog.findViewById(R.id.bookingStudentHelpLabel);
-                TextView bookingStudentHelpText = (TextView) dialog.findViewById(R.id.bookingStudentHelpText);
-                TextView seesionsStudentHelpLabel = (TextView) dialog.findViewById(R.id.seesionsStudentHelpLabel);
-                TextView sessionsStudentHelpText = (TextView) dialog.findViewById(R.id.sessionsStudentHelpText);
-                TextView profileStudentHelpLabel = (TextView) dialog.findViewById(R.id.profileStudentHelpLabel);
-                TextView profileStudentHelpText = (TextView) dialog.findViewById(R.id.profileStudentHelpText);
+                TextView tutorHelpHeader = (TextView) dialog.findViewById(R.id.tutorHelpHeader);
+                TextView tutorHelpIntro = (TextView) dialog.findViewById(R.id.tutorHelpIntro);
+                TextView homeTutorHelpLabel = (TextView) dialog.findViewById(R.id.homeTutorHelpLabel);
+                TextView homeTutorHelpText = (TextView) dialog.findViewById(R.id.homeTutorHelpText);
+                TextView bookingTutorHelpLabel = (TextView) dialog.findViewById(R.id.bookingTutorHelpLabel);
+                TextView bookingTutorHelpText = (TextView) dialog.findViewById(R.id.bookingTutorHelpText);
+                TextView seesionsTutorHelpLabel = (TextView) dialog.findViewById(R.id.seesionsTutorHelpLabel);
+                TextView sessionsTutorHelpText = (TextView) dialog.findViewById(R.id.sessionsTutorHelpText);
+                TextView profileTutorHelpLabel = (TextView) dialog.findViewById(R.id.profileTutorHelpLabel);
+                TextView profileTutorHelpText = (TextView) dialog.findViewById(R.id.profileTutorHelpText);
 
 
                 //set logo font style
-                studentHelpHeader.setTypeface(typeFace);
-                homeStudentHelpLabel.setTypeface(typeFace);
-                bookingStudentHelpLabel.setTypeface(typeFace);
-                seesionsStudentHelpLabel.setTypeface(typeFace);
-                profileStudentHelpLabel.setTypeface(typeFace);
+                tutorHelpHeader.setTypeface(typeFace);
+                homeTutorHelpLabel.setTypeface(typeFace);
+                bookingTutorHelpLabel.setTypeface(typeFace);
+                seesionsTutorHelpLabel.setTypeface(typeFace);
+                profileTutorHelpLabel.setTypeface(typeFace);
 
                 //set text in dialogue
-                studentHelpIntro.setText(text);
-                homeStudentHelpText.setText(text);
-                bookingStudentHelpText.setText(text);
-                sessionsStudentHelpText.setText(text);
-                profileStudentHelpText.setText(text);
+                tutorHelpIntro.setText(text);
+                homeTutorHelpText.setText(text);
+                bookingTutorHelpText.setText(text);
+                sessionsTutorHelpText.setText(text);
+                profileTutorHelpText.setText(text);
 
                 //close dialogue button
-                Button closeButton = (Button) dialog.findViewById(R.id.declineButton);
+                Button closeButton = (Button) dialog.findViewById(R.id.declineTutorButton);
                 // if decline button is clicked, close the custom dialog
                 closeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
