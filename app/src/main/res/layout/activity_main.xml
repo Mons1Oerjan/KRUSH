@@ -51,7 +51,7 @@
         android:text="KRUSH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="66dp"
         android:id="@+id/krushLogo"
         tools:text="KRUSH"
         android:textSize="100sp"
