@@ -213,6 +213,29 @@ public class TutoringSession extends Table{
     }
 
     /**
+     * Given a userId, it returns the last session in the db
+     * Used after a student has just booked a session and
+     * need the session id to pass to the session details fragment
+     * @param userId
+     * @return
+     */
+    public int getLastBookedSessionIdByUserId(int userId) {
+        int session_id;
+        Cursor res = dbRead.rawQuery("SELECT id " +
+                "FROM tutoring_sessions " +
+                "WHERE student_id="+userId,null);
+        if (res != null){
+            res.moveToLast();
+            session_id = res.getInt(res.getColumnIndex("id"));
+            res.close();
+            return session_id;
+        }
+        else {
+            return -1;
+        }
+    }
+
+    /**
      * Delete tutoring session by id
      * @param id
      * @return int

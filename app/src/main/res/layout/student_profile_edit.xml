@@ -16,7 +16,7 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/header_cover_image"
+            android:id="@+id/student_profile_cover_image_edit"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -24,10 +24,10 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
 
         <!-- Source: https://github.com/hdodenhof/CircleImageView -->
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_picture_edit"
+            android:id="@+id/student_profile_picture_edit"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_below="@+id/header_cover_image"
+            android:layout_below="@+id/student_profile_cover_image_edit"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-60dp"
             android:background="@drawable/profile_circle"
@@ -41,7 +41,7 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/header_cover_image"
+            android:layout_below="@+id/student_profile_cover_image_edit"
             android:background="@color/colorPrimary"
             android:elevation="4dp"
             android:paddingBottom="24dp">
@@ -60,7 +60,6 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="75dp"
-                android:text="Profile Name"
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -160,9 +159,6 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/bottom_bar_color"/>
 
-
         </LinearLayout>
-
-
     </RelativeLayout>
 </ScrollView>

@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
@@ -73,7 +74,7 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
 
         // Get Views
         profile_name_view = (TextView) myView.findViewById(R.id.profile_name_edit);
-        profile_picture_view = (ImageView) myView.findViewById(R.id.profile_picture_edit);
+        profile_picture_view = (ImageView) myView.findViewById(R.id.student_profile_picture_edit);
         email_view = (EditText) myView.findViewById(R.id.profile_email_edit);
         school_view = (Spinner) myView.findViewById(R.id.profile_school_edit);
         curr_password_view = (EditText) myView.findViewById(R.id.current_password);
@@ -301,9 +302,11 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
                 Bitmap profile_pic = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), data.getData());
                 profile_picture_view.setImageBitmap(profile_pic);
 
-                //Save image path to db
-                // TODO: 2017-03-15 move copy of gallery image to location and save in db
-
+                // Copy selected image to our app storage and save file path
+                File imageFile = createImage();
+                FileOutputStream outStream = new FileOutputStream(imageFile);
+                profile_pic.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+                outStream.close();
             }
             catch (IOException e) {
                 e.printStackTrace();
