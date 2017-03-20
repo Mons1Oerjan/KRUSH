@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -256,6 +257,19 @@ public class TutorAvailabilityFragment extends Fragment {
             }
         });
 
+        lvTutorScheduleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                TutorSingleDayAvailabilityFragment newFragment = new TutorSingleDayAvailabilityFragment();
+
+                ft.replace(R.id.tutor_fragment_container, newFragment);
+                ft.addToBackStack(null);
+
+                ft.commit();
+            }
+        });
+
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -378,6 +392,7 @@ public class TutorAvailabilityFragment extends Fragment {
                 dateTimes );
 
         lvTutorScheduleListView.setAdapter(arrayAdapter);
+
     }
 
     /**

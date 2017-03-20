@@ -44,6 +44,20 @@ public class AvailableTime extends Table{
         return res;
     }
 
+    public Cursor getByDay(String year, String month, String day){
+        //get all records with the same day, month and year to display the times.
+        res = dbRead.rawQuery("SELECT strftime('%H:%M',start_time) as start, " +
+                "strftime('%H:%M',end_time) as end, " +
+                "strftime('%Y', start_time) as year, " +
+                "strftime('%m', start_time) as month, " +
+                "strftime('%d', start_time) as day " +
+                "FROM available_time " +
+                "WHERE year='"+year+"' " +
+                "AND month='"+month+"' " +
+                "AND day='"+day+"'",null);
+        return res;
+    }
+
     public Cursor getAllOrderedByDay(){
         res = dbRead.rawQuery("SELECT id,tutor_id,start_time, start_time FROM available_time " +
                 "WHERE start_time > datetime('now','-1 day') " +

@@ -74,7 +74,6 @@ public class DBHelper extends SQLiteOpenHelper {
                         "student_id INTEGER," +
                         "tutor_id INTEGER," +
                         "location_id INTEGER," +
-                        "session_booked INTEGER," +
                         "FOREIGN KEY(location_id) REFERENCES locations(id)," +
                         "FOREIGN KEY(student_id) REFERENCES students(id) ON DELETE CASCADE," +
                         "FOREIGN KEY(tutor_id) REFERENCES tutors(id) ON DELETE CASCADE)"
@@ -120,6 +119,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "tutor_id INTEGER NOT NULL," +
                         "start_time DATETIME NOT NULL," +
                         "end_time DATETIME NOT NULL," +
+                        "booked INTEGER," +
                         "FOREIGN KEY(tutor_id) REFERENCES tutors(id) ON DELETE CASCADE)"
         );
 
