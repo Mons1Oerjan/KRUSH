@@ -7,9 +7,11 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.TutorCursorAdapters.SessionCursorAdapter;
 import cs.dal.krush.models.DBHelper;
+import cs.dal.krush.studentFragments.StudentTutorDetailsFragment;
 
 /**
  * Sets up the Tutor Home fragment. This fragment belongs to the TutorMainActivity class
@@ -68,7 +71,7 @@ public class TutorHomeFragment extends Fragment {
         ratingTitle.setTypeface(typeFace);
 
         //get all tutoring sessions by the tutor:
-        Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByTutorIdForCursorAdapter(USER_ID);
+        final Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByTutorIdForCursorAdapter(USER_ID);
 
         //set sessions listview adapter:
         SessionCursorAdapter sessionsAdapter = new SessionCursorAdapter(C, cursorSessionsResponse);
@@ -131,6 +134,30 @@ public class TutorHomeFragment extends Fragment {
                         dialog.dismiss();
                     }
                 });
+            }
+        });
+
+        // Click listener for tutors list
+        upcomingSessionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                // Get tutor id
+                cursorSessionsResponse.moveToPosition(position);
+                int SESSION_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("id"));
+
+                // Add USER_ID and TUTOR_ID to session details fragment for displaying
+                Bundle bundle = new Bundle();
+                bundle.putInt("USER_ID", USER_ID);
+                bundle.putInt("SESSION_ID", SESSION_ID);
+
+                // Swap into new fragment
+                TutorSessionsDetailsFragment session = new TutorSessionsDetailsFragment();
+                session.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.tutor_fragment_container, session);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
             }
         });
 
