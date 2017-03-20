@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -80,12 +81,9 @@ public class TutorAvailabilityFragment extends Fragment {
         lvTutorScheduleListView=(ListView)getView().findViewById(R.id.lvTutorScheduleListView);
         rl = (RelativeLayout)getView().findViewById(R.id.activity_tutor_calendar);
 
-        btnStartTimePicker.setEnabled(false);
         txtStartTime.setEnabled(false);
-        txtStartTime.setText("Select a date first");
-        txtEndTime.setText("Select a date first");
-        btnEndTimePicker.setEnabled(false);
         txtEndTime.setEnabled(false);
+        txtDate.setEnabled(false);
         txtDate.setFocusable(false);
         txtStartTime.setFocusable(false);
         txtEndTime.setFocusable(false);
@@ -123,13 +121,6 @@ public class TutorAvailabilityFragment extends Fragment {
                                 sDay = dayOfMonth;
 
                                 txtDate.setText( nameMonth + " " + dayOfMonth + ", " + nameDay );
-
-                                btnStartTimePicker.setEnabled(true);
-                                txtStartTime.setEnabled(true);
-                                btnEndTimePicker.setEnabled(true);
-                                txtEndTime.setEnabled(true);
-                                txtStartTime.setText("");
-                                txtEndTime.setText("");
 
                             }
                         }, mYear, mMonth, mDay);
@@ -207,26 +198,46 @@ public class TutorAvailabilityFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.availableTime.insert(startTime,endTime,1);
-                txtDate.setText("");
-                txtStartTime.setText("");
-                txtEndTime.setText("");
-                startTime = null;
-                endTime = null;
-                sYear = 0;
-                sMonth = 0;
-                sDay = 0;
-                sStartHour = 0;
-                sStartMinute = 0;
-                sEndHour = 0;
-                sEndMinute = 0;
+                boolean isValid = true;
 
-                btnStartTimePicker.setEnabled(false);
-                txtStartTime.setEnabled(false);
-                btnEndTimePicker.setEnabled(false);
-                txtEndTime.setEnabled(false);
-                txtStartTime.setText("Select a date");
-                txtEndTime.setText("Select a date");
+                if(txtStartTime.length() == 0){
+                    txtStartTime.setError("Start time is required!");
+                    isValid = false;
+                }else{
+                    txtStartTime.setError(null);
+                }
+
+                if(txtEndTime.length() == 0){
+                    txtEndTime.setError("End time is required!");
+                    isValid = false;
+                }else{
+                    txtEndTime.setError(null);
+                }
+
+                if(txtDate.length() == 0){
+                    txtDate.setError("Date is required!");
+                    isValid = false;
+                }else{
+                    txtDate.setError(null);
+                }
+
+                if(isValid){
+                    db.availableTime.insert(startTime,endTime,1);
+                    Toast.makeText(getContext(), "Time slot added successfully!", Toast.LENGTH_SHORT).show();
+                    txtDate.setText("");
+                    txtStartTime.setText("");
+                    txtEndTime.setText("");
+                    startTime = null;
+                    endTime = null;
+                    sYear = 0;
+                    sMonth = 0;
+                    sDay = 0;
+                    sStartHour = 0;
+                    sStartMinute = 0;
+                    sEndHour = 0;
+                    sEndMinute = 0;
+                }
+
                 loadSchedule();
 
             }
@@ -305,7 +316,7 @@ public class TutorAvailabilityFragment extends Fragment {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.DAY_OF_MONTH, sDay);
+        calendar.set(Calendar.DAY_OF_MONTH, sDay-1);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MONTH, sMonth);
         calendar.set(Calendar.YEAR, sYear);
@@ -334,19 +345,19 @@ public class TutorAvailabilityFragment extends Fragment {
 
                 //set first run data to prevent missing first item
                 if(firstRun){
-                    tempDate = result[0] + ": " + result[1] + result[2] + ", ";
+                    tempDate = result[0] + ": " + stripTime(result[1]) +", ";
                     previousDate = result[0];
                     firstRun = false;
                 }else{
                     //check if the date is the same (e.g. check if temp is 2017-01-10 against the result)
                     if(previousDate.equals(result[0])){
                         //same date, new time. So append the time.
-                        tempDate = tempDate + result[1] + result[2] + ", ";
+                        tempDate = tempDate + stripTime(result[1]) + ", ";
                     }else{
                         //new date, so add the old date, reset, then re-assign new date
                         dateTimes.add(tempDate);
                         tempDate = "";
-                        tempDate = result[0] + ": " + result[1] + result[2] + ", ";
+                        tempDate = result[0] + ": " + stripTime(result[1]) + ", ";
 
                         previousDate = result[0];
 
@@ -367,6 +378,36 @@ public class TutorAvailabilityFragment extends Fragment {
                 dateTimes );
 
         lvTutorScheduleListView.setAdapter(arrayAdapter);
+    }
+
+    /**
+     * Strips the leading zeros and seconds from a given time String.
+     * @param time To convert from
+     * @return convertedNewTime a stripped version of the original time argument
+     */
+    public String stripTime(String time){
+        int index = 0;
+        char[] splitTime = time.toCharArray();
+
+        //strip leading zero
+        for(char c : splitTime){
+            //remove leading zero
+            if(index == 0 && c == '0'){
+                splitTime[index] = ' ';
+                break;
+            }
+            index++;
+        }
+
+        //initialize new array minus the seconds (:ss part of time String)
+        char[] newTime = new char[splitTime.length - 3];
+        for(int i = 0;i<newTime.length;i++){
+            newTime[i] = splitTime[i];
+        }
+
+        //convert char array to String
+        String convertedNewTime = String.valueOf(newTime);
+        return convertedNewTime;
     }
 
 }

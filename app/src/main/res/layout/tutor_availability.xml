@@ -85,11 +85,11 @@
         android:paddingRight="25dp"
         android:paddingLeft="25dp"
         android:minHeight="30dp"
-        android:minWidth="170dp"
+        android:minWidth="70dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
         android:layout_below="@+id/txtEndTime"
-        android:layout_marginLeft="20px"
+        android:layout_marginLeft="115px"
         android:layout_marginTop="12dp" />
 
     <Button
@@ -101,12 +101,12 @@
         android:paddingRight="25dp"
         android:paddingLeft="25dp"
         android:minHeight="30dp"
-        android:minWidth="170dp"
+        android:minWidth="70dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
         android:layout_below="@+id/txtEndTime"
         android:layout_toEndOf="@id/btnSubmit"
-        android:layout_marginLeft="5px"
+        android:layout_marginLeft="40px"
         android:layout_marginRight="10px"
         android:layout_marginTop="12dp" />
 
@@ -114,6 +114,7 @@
         android:text="Your Availability"
         android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"
+        android:paddingTop="30dp"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:id="@+id/txtViewAvailability"
