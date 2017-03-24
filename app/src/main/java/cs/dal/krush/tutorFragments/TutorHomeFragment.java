@@ -137,7 +137,7 @@ public class TutorHomeFragment extends Fragment {
             }
         });
 
-        // Click listener for tutors list
+        // Click listener for upcoming session list:
         upcomingSessionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {

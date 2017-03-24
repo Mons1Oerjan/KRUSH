@@ -1,9 +1,9 @@
 package cs.dal.krush.tutorFragments;
 
-import android.graphics.Typeface;
-import android.support.v4.app.Fragment;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +13,10 @@ import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * This fragment displays the details of a session when a tutor clicks on an
- * upcoming session in the tutor home upcoming sessions list view
+ * This fragment displays the details of a session when a tutor clicks on a
+ * completed session in the tutor Sessions History list view
  */
-public class TutorSessionsDetailsFragment extends Fragment {
-
+public class TutorHistoryDetailsFragment extends Fragment {
     static int USER_ID;
     static int SESSION_ID;
     DBHelper mydb;
@@ -45,7 +44,7 @@ public class TutorSessionsDetailsFragment extends Fragment {
         tutorIdView = (TextView) view.findViewById(R.id.session_tutor_id);
 
         //fetch custom app font
-        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
+        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/FredokaOne-Regular.ttf");
 
         //Set custom app font
         titleView.setTypeface(typeFace);
@@ -67,5 +66,4 @@ public class TutorSessionsDetailsFragment extends Fragment {
 
         return view;
     }
-
 }
