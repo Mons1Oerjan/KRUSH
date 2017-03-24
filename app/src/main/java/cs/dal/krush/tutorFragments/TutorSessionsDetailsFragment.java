@@ -25,7 +25,7 @@ public class TutorSessionsDetailsFragment extends Fragment {
     TextView titleView, studentIdView, tutorIdView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.session_details, container, false);
 
         // Get USER_ID and SESSION_ID
@@ -64,7 +64,6 @@ public class TutorSessionsDetailsFragment extends Fragment {
 
         sessionCursor.close();
         mydb.close();
-
 
         return view;
     }
