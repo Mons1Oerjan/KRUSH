@@ -109,7 +109,6 @@ public class TutorHomeFragment extends Fragment {
                 TextView profileTutorHelpLabel = (TextView) dialog.findViewById(R.id.profileTutorHelpLabel);
                 TextView profileTutorHelpText = (TextView) dialog.findViewById(R.id.profileTutorHelpText);
 
-
                 //set logo font style
                 tutorHelpHeader.setTypeface(typeFace);
                 homeTutorHelpLabel.setTypeface(typeFace);

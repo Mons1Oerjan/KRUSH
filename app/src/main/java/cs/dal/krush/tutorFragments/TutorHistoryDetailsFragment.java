@@ -26,7 +26,7 @@ public class TutorHistoryDetailsFragment extends Fragment {
     DBHelper mydb;
     Cursor sessionCursor;
     TextView titleField, studentNameField, studentEmailField, locationField,
-            startField, endField, studentLabel, sessionInfoLabel;
+            startField, endField, studentLabel, sessionInfoLabel, schoolField;
     ImageView studentPicture;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +54,7 @@ public class TutorHistoryDetailsFragment extends Fragment {
         endField = (TextView) view.findViewById(R.id.tutor_history_details_end);
         studentLabel = (TextView) view.findViewById(R.id.tutor_history_details_student_label);
         sessionInfoLabel = (TextView) view.findViewById(R.id.tutor_history_details_session_label);
+        schoolField = (TextView)view.findViewById(R.id.tutor_history_details_school);
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/FredokaOne-Regular.ttf");
@@ -67,6 +68,7 @@ public class TutorHistoryDetailsFragment extends Fragment {
         endField.setTypeface(typeFace);
         studentLabel.setTypeface(typeFace);
         sessionInfoLabel.setTypeface(typeFace);
+        schoolField.setTypeface(typeFace);
 
         // Get values from database
         String title = sessionCursor.getString(sessionCursor.getColumnIndex("title"));
@@ -77,7 +79,8 @@ public class TutorHistoryDetailsFragment extends Fragment {
         String endTime = sessionCursor.getString(sessionCursor.getColumnIndex("end_time"));
         String location = sessionCursor.getString(sessionCursor.getColumnIndex("location"));
         String imgPath = sessionCursor.getString(sessionCursor.getColumnIndex("profile_pic"));
-
+        String school = sessionCursor.getString(sessionCursor.getColumnIndex("name")) + " " +
+                sessionCursor.getString(sessionCursor.getColumnIndex("type"));
 
         // Set values to view
         titleField.setText(title);
@@ -86,6 +89,7 @@ public class TutorHistoryDetailsFragment extends Fragment {
         startField.setText("Started At: " + startTime);
         endField.setText("Ended At: " + endTime);
         locationField.setText("Meeting Location: " + location);
+        schoolField.setText("School: " + school);
         if(imgPath != null && !imgPath.isEmpty()) {
             Bitmap profilePic = BitmapFactory.decodeFile(imgPath);
             studentPicture.setImageBitmap(profilePic);

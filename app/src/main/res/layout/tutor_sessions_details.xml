@@ -92,5 +92,14 @@
         android:layout_below="@+id/tutor_history_details_student_picture"
         android:layout_alignStart="@+id/tutor_history_details_student_picture" />
 
+    <TextView
+        android:id="@+id/tutor_history_details_school"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tutor_history_details_end"
+        android:layout_below="@+id/tutor_history_details_end"
+        android:layout_marginTop="16dp"
+        android:text="school" />
+
 
 </RelativeLayout>
