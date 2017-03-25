@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.text.NumberFormat;
+
 import cs.dal.krush.R;
 import cs.dal.krush.appFragments.SessionDetailsFragment;
 import cs.dal.krush.models.DBHelper;
@@ -77,7 +80,11 @@ public class StudentPaymentFragment extends Fragment {
         paymentMethodsLabel.setTypeface(typeFace);
 
         //set cost label
-        tutoringCost.setText("$" + COST + "0");
+        String costDisplay;
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        costDisplay = currencyFormatter.format(COST);
+
+        tutoringCost.setText(costDisplay);
 
         /**
          * text listener on credit card TextField to display the credit card type

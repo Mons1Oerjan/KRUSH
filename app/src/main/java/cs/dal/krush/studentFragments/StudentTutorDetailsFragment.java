@@ -18,6 +18,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -187,7 +188,7 @@ public class StudentTutorDetailsFragment extends Fragment implements View.OnClic
             Date endDate = format.parse(END_TIME);
 
             // Get difference between start and end times in hours
-            float diff = (float) round(((endDate.getTime() - startDate.getTime()) / (1000.00*60.00*60.00)));
+            float diff = (float) ((endDate.getTime() - startDate.getTime()) / (1000.00*60.00*60.00));
 
             // rates are per half hour, so double the difference and multiply by the tutors rate
             COST = diff*2*tutorRate;
