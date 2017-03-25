@@ -41,13 +41,13 @@ public class StudentHistoryDetailsFragment extends Fragment {
         // Get USER_ID and SESSION_ID
         USER_ID = getArguments().getInt("USER_ID");
         SESSION_ID = getArguments().getInt("SESSION_ID");
-        TUTOR_ID = getArguments().getInt("SESSION_ID");
+        TUTOR_ID = getArguments().getInt("TUTOR_ID");
 
         // Initialize db connection
         mydb = new DBHelper(getContext());
 
         // Get session
-        sessionCursor = mydb.tutoringSession.getSessionHistoryDetailsBySessionIdForCursorAdapter(SESSION_ID);
+        sessionCursor = mydb.tutoringSession.getSessionHistoryDetailsBySessionIdForTutorCursorAdapter(SESSION_ID);
         sessionCursor.moveToFirst();
 
         // Get Views
@@ -119,7 +119,6 @@ public class StudentHistoryDetailsFragment extends Fragment {
                         mydb.tutorRating.updateTutorRating(rating, USER_ID, TUTOR_ID);
                     else
                         mydb.tutorRating.insert(rating, USER_ID, TUTOR_ID);
-                    Log.e("Rating", ""+rating);
                     Cursor tutorRatingFromDB = mydb.tutorRating.getTutorRatingByTutorId(TUTOR_ID);
                     Cursor tutor = mydb.tutor.getData(TUTOR_ID);
                     tutorRatingFromDB.moveToFirst();
@@ -127,14 +126,11 @@ public class StudentHistoryDetailsFragment extends Fragment {
                     int n = tutorRatingFromDB.getCount();
                     float newTutorRating = 0;
                     for (int i = 0; i < n; i++) {
-                        Log.e("each rating", ""+Float.parseFloat(tutorRatingFromDB.getString(tutorRatingFromDB.getColumnIndex("rating"))));
                         newTutorRating += Float.parseFloat(tutorRatingFromDB.getString(tutorRatingFromDB.getColumnIndex("rating")));
                         tutorRatingFromDB.move(1);
                     }
-                    Log.e("Tutor Rating", ""+newTutorRating);
                     newTutorRating = newTutorRating/n;
                     newTutorRating = Float.parseFloat(String.format("%.1f", newTutorRating));
-                    Log.e("Final Rating", ""+newTutorRating);
 
                     mydb.tutor.updateTutorRating(TUTOR_ID, newTutorRating);
                     ratingBarView.setRating(rating);

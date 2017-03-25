@@ -219,6 +219,20 @@ public class TutoringSession extends Table{
         );
     }
 
+    public Cursor getSessionHistoryDetailsBySessionIdForTutorCursorAdapter(int sessionId){
+        return dbRead.rawQuery(
+                "SELECT t.id AS _id, t.school_id, t.profile_pic, t.f_name, t.l_name, t.email, " +
+                        "ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
+                        "l.location, " +
+                        "sl.name, sl.type " +
+                        "FROM tutors t " +
+                        "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
+                        "INNER JOIN locations l ON ts.location_id = l.id " +
+                        "INNER JOIN schools sl ON t.school_id = sl.id " +
+                        "WHERE ts.id=" + sessionId + ""
+                ,null
+        );
+    }
 
     /**
      * Get a tutoring session by the tutor_id field

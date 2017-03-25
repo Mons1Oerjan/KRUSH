@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,14 +64,14 @@ public class StudentSessionsFragment extends Fragment {
                 // Get tutor id
                 cursorSessionsResponse.moveToPosition(position);
                 int SESSION_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("id"));
-//                int TUTOR_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("tutor_id"));
-
+                int TUTOR_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("_id"));
+                Log.e("Tutor ID", ""+TUTOR_ID);
 
                 // Add USER_ID and TUTOR_ID to session details fragment for displaying
                 Bundle bundle = new Bundle();
                 bundle.putInt("USER_ID", USER_ID);
                 bundle.putInt("SESSION_ID", SESSION_ID);
-//                bundle.putInt("TUTOR_ID", TUTOR_ID);
+                bundle.putInt("TUTOR_ID", TUTOR_ID);
 
                 // Swap into new fragment
                 StudentHistoryDetailsFragment session = new StudentHistoryDetailsFragment();
