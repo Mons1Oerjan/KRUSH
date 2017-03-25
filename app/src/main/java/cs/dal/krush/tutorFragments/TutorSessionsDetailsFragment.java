@@ -105,7 +105,7 @@ public class TutorSessionsDetailsFragment extends Fragment {
 
         //Build the "Are you sure?" dialog window:
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Are you sure?").setTitle("Cancel Session");
+        builder.setMessage("Are you sure you want to cancel this session?").setTitle("Cancel Session");
         builder.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {

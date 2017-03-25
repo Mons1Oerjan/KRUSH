@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#27ae60</color>
     <color name="colorAccent">#FF4081</color>
     <color name="bottom_bar_color">#ecf0f1</color>
-    <color name="colorNegativeAction">#c7050f</color>
+    <color name="colorNegativeAction">#e74c3c</color>
+    <color name="color_white">#FFFFFF</color>
 </resources>

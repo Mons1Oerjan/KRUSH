@@ -109,7 +109,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
         android:background="@drawable/button_cancel"
-        android:text="Cancel Session" />
+        android:textColor="@color/color_white"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:minWidth="170dp"
+        android:text="Cancel" />
 
 
 </RelativeLayout>
