@@ -17,6 +17,11 @@
     <string name="confirm_new_password_label">Confirm New Password</string>
     <string name="change_picture_button_text">Change Picture</string>
 
+    <!-- Alert Dialog: -->
+    <string name="dialog_are_you_sure">Are you sure?</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_schedule_label">Schedule</string>

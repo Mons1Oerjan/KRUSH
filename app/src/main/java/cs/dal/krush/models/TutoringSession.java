@@ -130,8 +130,8 @@ public class TutoringSession extends Table{
               "INNER JOIN locations l ON ts.location_id = l.id " +
               "INNER JOIN schools sl ON s.school_id = sl.id " +
               "WHERE ts.tutor_id=" + tutorId +
-              " AND ts.session_booked=1" +
-              " AND ts.start_time>datetime('now')"
+              " AND ts.session_booked=1" //+
+              //" AND ts.start_time>datetime('now')"
               ,null
         );
     }
@@ -244,9 +244,8 @@ public class TutoringSession extends Table{
     /**
      * Delete tutoring session by id
      * @param id
-     * @return int
      */
-    public int deleteTutoringSession(int id){
-        return dbWrite.delete("tutoring_sessions","id = ?",new String[] { Integer.toString(id) });
+    public void deleteTutoringSession(int id) {
+        dbWrite.delete("tutoring_sessions","id = ?",new String[] { String.valueOf(id) });
     }
 }
