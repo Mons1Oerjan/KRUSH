@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 /**
  * Courses-Tutors pivot table Model class.
  */
@@ -43,6 +45,33 @@ public class CoursesTutors {
                         "WHERE ct.tutor_id="+tutor_id+""
                 ,null
         );
+    }
+
+    /**
+     * Give a tutor id, returns an ArrayList of strings of the tutors course names
+     * @param tutor_id
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getCourseNamesFromTutor(int tutor_id){
+        ArrayList<String> courseNames;
+        Cursor res = dbRead.rawQuery(
+                "SELECT c.title " +
+                        "FROM courses c " +
+                        "INNER JOIN course_tutors ct on ct.course_id = c.id " +
+                        "INNER JOIN tutors t on t.id = ct.tutor_id " +
+                        "WHERE t.id="+tutor_id, null);
+        if(res != null) {
+            res.moveToFirst();
+            courseNames = new ArrayList<>();
+            do {
+                courseNames.add(res.getString(res.getColumnIndex("title")));
+            } while(res.moveToNext());
+            res.close();
+            return courseNames;
+        }
+        else{
+            return null;
+        }
     }
 
     /**

@@ -31,6 +31,15 @@ public class AvailableTime extends Table{
         return true;
     }
 
+    /**
+     * Gets all available times for given tutor
+     * @param tutorId
+     * @return
+     */
+    public Cursor getDataByTutorId(int tutorId) {
+        return dbRead.rawQuery("SELECT * FROM available_time WHERE tutor_id="+tutorId, null);
+    }
+
 
     @Override
     public Cursor getData(int id) {

@@ -15,7 +15,7 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/header_cover_image"
+            android:id="@+id/student_profile_cover_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -23,10 +23,10 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
 
         <!-- Source: https://github.com/hdodenhof/CircleImageView -->
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_picture"
+            android:id="@+id/student_profile_picture"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_below="@+id/header_cover_image"
+            android:layout_below="@+id/student_profile_cover_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-60dp"
             android:background="@drawable/profile_circle"
@@ -40,7 +40,7 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/header_cover_image"
+            android:layout_below="@+id/student_profile_cover_image"
             android:background="@color/colorPrimary"
             android:elevation="4dp"
             android:paddingBottom="24dp">
@@ -61,13 +61,11 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="76dp"
-                android:text="Profile Name"
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
-
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -84,8 +82,7 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:background="#fff"
                 android:textColor="@color/colorPrimary"
                 android:elevation="3dp"
-                android:padding="20dp"
-                android:text="Email Address" />
+                android:padding="20dp"/>
 
             <TextView
                 android:id="@+id/profile_school"
@@ -97,9 +94,7 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:background="#fff"
                 android:textColor="@color/colorPrimary"
                 android:elevation="3dp"
-                android:padding="20dp"
-                android:text="School" />
-
+                android:padding="20dp"/>
 
         </LinearLayout>
     </RelativeLayout>

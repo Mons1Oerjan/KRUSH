@@ -46,7 +46,7 @@ public class TutorProfileFragment extends Fragment implements View.OnClickListen
 
         // Get TextViews
         profile_name_view = (TextView) myView.findViewById(R.id.profile_name);
-        profile_picture_view = (ImageView) myView.findViewById(R.id.profile_picture);
+        profile_picture_view = (ImageView) myView.findViewById(R.id.tutor_profile_picture);
         email_view = (TextView) myView.findViewById(R.id.tutor_email);
         school_view = (TextView) myView.findViewById(R.id.tutor_school);
         rate_view = (TextView) myView.findViewById(R.id.tutor_rate);
