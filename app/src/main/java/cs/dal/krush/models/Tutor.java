@@ -3,6 +3,7 @@ package cs.dal.krush.models;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 /**
  * Tutor Model class.
@@ -151,8 +152,75 @@ public class Tutor extends Table{
      * @param revenue
      * @return Cursor
      */
-    public void incrementTutorRevenue(int tutorID, double revenue){
+    public void incrementTutorRevenue(int tutorID, float revenue){
         dbWrite.execSQL("UPDATE tutors SET revenue = revenue+"+revenue+" WHERE id="+tutorID+"");
+    }
+
+    /**
+     * Given a tutorID, returns the location_id of tutor
+     * @param tutorId
+     * @return
+     */
+    public int getLocationId(int tutorId) {
+        int location_id;
+        Cursor res = dbRead.rawQuery("SELECT location_id " +
+                "FROM tutors " +
+                "WHERE id="+tutorId, null);
+        if(res != null) {
+            res.moveToFirst();
+            location_id = res.getInt(res.getColumnIndex("location_id"));
+            res.close();
+            return location_id;
+        }
+        else{
+            return -1;
+        }
+    }
+
+    /**
+     * Gets the set location of a tutor by their tutorID
+     * @param tutorID
+     * @return
+     */
+    public String getLocationName(int tutorID) {
+        String location;
+        Cursor res = dbRead.rawQuery("SELECT l.location " +
+                "FROM locations l " +
+                "INNER JOIN tutors t on t.location_id = l.id " +
+                "WHERE t.id="+tutorID, null);
+        if(res != null) {
+            res.moveToFirst();
+            location = res.getString(res.getColumnIndex("location"));
+            res.close();
+            return location;
+        }
+        else {
+            return "Location Not Found";
+        }
+    }
+
+    /**
+     * Given a tutorID, returns a string of the school name associated
+     * with this tutors location_id
+     * @param tutorId
+     * @return
+     */
+    public String getSchoolName(int tutorId) {
+        String school;
+        Cursor res = dbRead.rawQuery("SELECT s.name " +
+                "FROM schools s " +
+                "INNER JOIN tutors t on t.school_id = s.id " +
+                "WHERE t.id="+tutorId, null);
+        if(res != null) {
+            res.moveToFirst();
+            school = res.getString(res.getColumnIndex("name"));
+            res.close();
+            return school;
+        }
+        else {
+            return "School Not Found";
+        }
+
     }
 
     /**

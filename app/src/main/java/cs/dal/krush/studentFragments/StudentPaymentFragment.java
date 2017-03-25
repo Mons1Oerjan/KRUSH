@@ -1,12 +1,10 @@
 package cs.dal.krush.studentFragments;
 
-
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,7 +15,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
+
 import cs.dal.krush.R;
+import cs.dal.krush.appFragments.SessionDetailsFragment;
 import cs.dal.krush.models.DBHelper;
 
 /**
@@ -31,14 +32,22 @@ public class StudentPaymentFragment extends Fragment {
     private String cvvNumbers;
     private String expirationMonth;
     private DBHelper mydb;
+    static int USER_ID, TUTOR_ID, LOCATION_ID;
+    static String START_TIME, END_TIME, TITLE;
+    static float COST;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.student_payment, container, false);
-        // TODO: 2017-03-17 Get student and tutor ID from bundle
-        // int userId = Integer.parseInt(getArguments().getString("UserID"));
-        // int tutorId = Integer.parseInt(getArguments().getString("TutorID"));
+
+        // Get arguments from bundle
+        USER_ID = getArguments().getInt("USER_ID");
+        TUTOR_ID = getArguments().getInt("USER_ID");
+        START_TIME = getArguments().getString("START_TIME");
+        END_TIME = getArguments().getString("END_TIME");
+        TITLE = getArguments().getString("TITLE");
+        COST = getArguments().getFloat("COST");
 
         //initialize database connection
         mydb = new DBHelper(getActivity().getApplicationContext());
@@ -71,8 +80,11 @@ public class StudentPaymentFragment extends Fragment {
         paymentMethodsLabel.setTypeface(typeFace);
 
         //set cost label
-        // TODO: 2017-03-17 Get tutoring session cost from bundle 
-        tutoringCost.setText("$" + 99.99);
+        String costDisplay;
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        costDisplay = currencyFormatter.format(COST);
+
+        tutoringCost.setText(costDisplay);
 
         /**
          * text listener on credit card TextField to display the credit card type
@@ -154,10 +166,27 @@ public class StudentPaymentFragment extends Fragment {
 
                 //increment tutor's revenue and return to student home
                 if(isValid) {
-                    // TODO: 2017-03-18  Use tutorID and cost from bundle
-                    mydb.tutor.incrementTutorRevenue(1, 99.99);
+                    mydb.tutor.incrementTutorRevenue(TUTOR_ID, COST);
 
-                    // TODO: 2017-03-18 Need intend - likely back to the student home
+                    // Create a new session
+                    mydb.tutoringSession.insert(USER_ID,TUTOR_ID,LOCATION_ID,1,TITLE,START_TIME,END_TIME);
+
+                    // Get the session_id
+                    int SESSION_ID = mydb.tutoringSession.getLastBookedSessionIdByUserId(USER_ID);
+
+                    // Set arguments in bundle for session details fragment
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("USER_ID", USER_ID);
+                    bundle.putInt("SESSION_ID", SESSION_ID);
+
+                    // Swap into new fragment
+                    SessionDetailsFragment session = new SessionDetailsFragment();
+                    session.setArguments(bundle);
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.student_fragment_container, session);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
                 }
             }
         });
