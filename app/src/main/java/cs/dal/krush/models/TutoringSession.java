@@ -155,10 +155,10 @@ public class TutoringSession extends Table{
                 "l.location, " +
                 "sl.name " +
                 "FROM tutors t " +
-                "INNER JOIN tutoring_sessions ts ON _id = ts.student_id " +
+                "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
                 "INNER JOIN locations l ON ts.location_id = l.id " +
                 "INNER JOIN schools sl ON t.school_id = sl.id " +
-                "WHERE ts.tutor_id=" + studentId +
+                "WHERE ts.student_id=" + studentId +
                 " AND ts.session_booked=1" +
                 " AND ts.end_time<datetime('now')"
                 ,null

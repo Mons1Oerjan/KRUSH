@@ -5,9 +5,11 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import cs.dal.krush.StudentCursorAdapters.SessionCursorAdapter;
@@ -37,9 +39,6 @@ public class StudentSessionsFragment extends Fragment {
         //init DB connection:
         DBHelper mydb = new DBHelper(C);
 
-        Cursor student = mydb.tutor.getData(USER_ID);
-        student.moveToFirst();
-
         //fetch UI elements:
         ListView sessionHistoryListView = (ListView)view.findViewById(R.id.sessionHistoryListView);
         TextView pageTitle = (TextView)view.findViewById(R.id.sessionHistoryTitle);
@@ -51,12 +50,38 @@ public class StudentSessionsFragment extends Fragment {
         pageTitle.setTypeface(typeFace);
 
         //get all tutoring sessions by the student:
-        Cursor cursorSessionsResponse = mydb.tutoringSession.getSessionHistoryByStudentIdForCursorAdapter(USER_ID);
+        final Cursor cursorSessionsResponse = mydb.tutoringSession.getSessionHistoryByStudentIdForCursorAdapter(USER_ID);
 
         //set sessions listview adapter:
         SessionCursorAdapter sessionsAdapter = new SessionCursorAdapter(C, cursorSessionsResponse);
         sessionHistoryListView.setAdapter(sessionsAdapter);
 
+        // Click listener for sessions history list:
+        sessionHistoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                // Get tutor id
+                cursorSessionsResponse.moveToPosition(position);
+                int SESSION_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("id"));
+//                int TUTOR_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("tutor_id"));
+
+
+                // Add USER_ID and TUTOR_ID to session details fragment for displaying
+                Bundle bundle = new Bundle();
+                bundle.putInt("USER_ID", USER_ID);
+                bundle.putInt("SESSION_ID", SESSION_ID);
+//                bundle.putInt("TUTOR_ID", TUTOR_ID);
+
+                // Swap into new fragment
+                StudentHistoryDetailsFragment session = new StudentHistoryDetailsFragment();
+                session.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.student_fragment_container, session);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            }
+        });
         return view;
     }
 }

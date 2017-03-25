@@ -120,39 +120,7 @@ public class StudentTutorDetailsFragment extends Fragment implements View.OnClic
             tutorAvailability.add(time);
         }
 
-        final Cursor hasRatedBefore = mydb.tutorRating.getTutorRatingByTutorAndStudentId(TUTOR_ID, USER_ID);
-        hasRatedBefore.moveToFirst();
 
-        if(hasRatedBefore.getCount() > 0)
-            ratingBarView.setRating(Float.parseFloat(hasRatedBefore.getString(hasRatedBefore.getColumnIndex("rating"))));
-
-        ratingBarView.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                if(fromUser) {
-                    mydb = new DBHelper(getContext());
-                    if (hasRatedBefore.getCount() > 0)
-                        mydb.tutorRating.updateTutorRating(rating, USER_ID, TUTOR_ID);
-                    else
-                        mydb.tutorRating.insert(rating, USER_ID, TUTOR_ID);
-                    Cursor tutorRatingFromDB = mydb.tutorRating.getTutorRatingByTutorId(TUTOR_ID);
-                    Cursor tutor = mydb.tutor.getData(TUTOR_ID);
-                    tutorRatingFromDB.moveToFirst();
-                    tutor.moveToFirst();
-                    int n = tutorRatingFromDB.getCount();
-                    float newTutorRating = 0;
-                    for (int i = 0; i < n; i++) {
-                        newTutorRating += Float.parseFloat(tutorRatingFromDB.getString(tutorRatingFromDB.getColumnIndex("rating")));
-                        tutorRatingFromDB.move(1);
-                    }
-                    newTutorRating = newTutorRating/n;
-                    newTutorRating = Float.parseFloat(String.format("%.1f", newTutorRating));
-                    mydb.tutor.updateTutorRating(TUTOR_ID, newTutorRating);
-                    ratingBarView.setRating(rating);
-                    mydb.close();
-                }
-            }
-        });
 
         // Set values
         nameView.setText(name);
