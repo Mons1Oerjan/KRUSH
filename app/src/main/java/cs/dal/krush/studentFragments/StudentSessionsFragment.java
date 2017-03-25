@@ -65,7 +65,6 @@ public class StudentSessionsFragment extends Fragment {
                 cursorSessionsResponse.moveToPosition(position);
                 int SESSION_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("id"));
                 int TUTOR_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("_id"));
-                Log.e("Tutor ID", ""+TUTOR_ID);
 
                 // Add USER_ID and TUTOR_ID to session details fragment for displaying
                 Bundle bundle = new Bundle();
