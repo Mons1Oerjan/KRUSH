@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import cs.dal.krush.models.DBHelper;
+import cs.dal.krush.models.TutorRating;
 
 /**
  * Database Seeder class built to initiate seeding
@@ -39,6 +40,7 @@ public class DatabaseSeeder {
         TutorSeeder.insert(mydb);
         StudentSeeder.insert(mydb);
         TutoringSessionSeeder.insert(mydb);
+        TutorRatingSeeder.insert(mydb);
         CourseSeeder.insert(mydb);
         AudioRecordingSeeder.insert(mydb);
         CoursesTutorsSeeder.insert(mydb);

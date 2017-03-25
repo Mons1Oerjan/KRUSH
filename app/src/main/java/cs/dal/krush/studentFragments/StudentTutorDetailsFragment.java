@@ -4,9 +4,11 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
@@ -57,6 +59,41 @@ public class StudentTutorDetailsFragment extends Fragment {
         schoolCursor.moveToFirst();
         String school = schoolCursor.getString(schoolCursor.getColumnIndex("name"));
         String rate = tutorCursor.getString(tutorCursor.getColumnIndex("rate"));
+
+        final RatingBar tutorRating = (RatingBar) view.findViewById(R.id.rating);
+        final Cursor hasRatedBefore = mydb.tutorRating.getTutorRatingByTutorAndStudentId(TUTOR_ID, USER_ID);
+        hasRatedBefore.moveToFirst();
+
+        if(hasRatedBefore.getCount() > 0)
+            tutorRating.setRating(Float.parseFloat(hasRatedBefore.getString(hasRatedBefore.getColumnIndex("rating"))));
+
+        tutorRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                if(fromUser) {
+                    mydb = new DBHelper(getContext());
+                    if (hasRatedBefore.getCount() > 0)
+                        mydb.tutorRating.updateTutorRating(rating, USER_ID, TUTOR_ID);
+                    else
+                        mydb.tutorRating.insert(rating, USER_ID, TUTOR_ID);
+                    Cursor tutorRatingFromDB = mydb.tutorRating.getTutorRatingByTutorId(TUTOR_ID);
+                    Cursor tutor = mydb.tutor.getData(TUTOR_ID);
+                    tutorRatingFromDB.moveToFirst();
+                    tutor.moveToFirst();
+                    int n = tutorRatingFromDB.getCount();
+                    float newTutorRating = 0;
+                    for (int i = 0; i < n; i++) {
+                        newTutorRating += Float.parseFloat(tutorRatingFromDB.getString(tutorRatingFromDB.getColumnIndex("rating")));
+                        tutorRatingFromDB.move(1);
+                    }
+                    newTutorRating = newTutorRating/n;
+                    newTutorRating = Float.parseFloat(String.format("%.1f", newTutorRating));
+                    mydb.tutor.updateTutorRating(TUTOR_ID, newTutorRating);
+                    tutorRating.setRating(rating);
+                    mydb.close();
+                }
+            }
+        });
 
         // Set values
         nameView.setText(name);

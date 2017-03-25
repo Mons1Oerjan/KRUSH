@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +55,8 @@ public class TutorHomeFragment extends Fragment {
         TextView ratingTitle = (TextView) view.findViewById(R.id.tutorRating);
         FloatingActionButton tutorHelpButton = (FloatingActionButton)view.findViewById(R.id.tutorHelpButton);
 
-
         String currentTutorRating = tutor.getString(tutor.getColumnIndex("rating"));
-        if (currentTutorRating != null)
+        if(currentTutorRating != null)
             tutorRating.setRating(Float.parseFloat(currentTutorRating));
 
         //fetch custom app font:

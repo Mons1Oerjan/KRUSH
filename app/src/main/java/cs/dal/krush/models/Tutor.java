@@ -26,7 +26,7 @@ public class Tutor extends Table{
      * @return boolean
      */
     public boolean insert(int locationId, int schoolId, String profilePic, String firstName, String lastName, String
-                          email, String password, int rate){
+                          email, String password, int rate, float rating){
         ContentValues contentValues = new ContentValues();
         contentValues.put("location_id", locationId);
         contentValues.put("school_id", schoolId);
@@ -36,8 +36,17 @@ public class Tutor extends Table{
         contentValues.put("email", email);
         contentValues.put("password", password);
         contentValues.put("rate", rate);
+        contentValues.put("rating", rating);
         contentValues.put("revenue", 0.00);
         dbWrite.insert("tutors", null, contentValues);
+        return true;
+    }
+
+    public boolean updateTutorRating(int tutorId, float rating){
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("rating", rating);
+        dbWrite.update("tutors", contentValues, "id=?", new String[] { "" + tutorId});
         return true;
     }
 
