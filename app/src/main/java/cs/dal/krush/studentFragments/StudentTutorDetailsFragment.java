@@ -28,6 +28,8 @@ import cs.dal.krush.R;
 import cs.dal.krush.helpers.DateFormatHelper;
 import cs.dal.krush.models.DBHelper;
 
+import static java.lang.Math.round;
+
 /**
  * This fragment displays the details of a tutor when a student clicks on their profile
  */
@@ -185,7 +187,7 @@ public class StudentTutorDetailsFragment extends Fragment implements View.OnClic
             Date endDate = format.parse(END_TIME);
 
             // Get difference between start and end times in hours
-            float diff = (float) ((endDate.getTime() - startDate.getTime()) / (1000.00*60.00*60.00));
+            float diff = (float) round(((endDate.getTime() - startDate.getTime()) / (1000.00*60.00*60.00)));
 
             // rates are per half hour, so double the difference and multiply by the tutors rate
             COST = diff*2*tutorRate;

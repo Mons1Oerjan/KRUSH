@@ -314,13 +314,13 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // Set profile picture to image that was just captured
-            ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.profile_picture_edit);
+            ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.student_profile_picture_edit);
             Bitmap profile_pic = BitmapFactory.decodeFile(imagePath);
             profile_picture_view.setImageBitmap(profile_pic);
         }
 
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
-            ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.profile_picture_edit);
+            ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.student_profile_picture_edit);
             try {
                 Bitmap profile_pic = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), data.getData());
                 profile_picture_view.setImageBitmap(profile_pic);
