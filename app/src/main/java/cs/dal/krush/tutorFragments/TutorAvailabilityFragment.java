@@ -21,6 +21,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,7 +48,7 @@ import cs.dal.krush.models.DBHelper;
  */
 public class TutorAvailabilityFragment extends Fragment {
 
-    Button btnDatePicker, btnStartTimePicker, btnEndTimePicker, btnSubmit, btnViewCalendar;
+    Button btnDatePicker, btnStartTimePicker, btnEndTimePicker, btnSubmit, btnViewCalendar, btnViewLocation;
     EditText txtDate, txtStartTime, txtEndTime;
     TextView txtTitle, txtSelectAvailability, txtYourAvailability;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -75,6 +83,7 @@ public class TutorAvailabilityFragment extends Fragment {
         btnEndTimePicker=(Button)getView().findViewById(R.id.btnEndTime);
         btnSubmit=(Button)getView().findViewById(R.id.btnSubmit);
         btnViewCalendar=(Button)getView().findViewById(R.id.btnViewCalendar);
+        btnViewLocation=(Button)getView().findViewById(R.id.btnViewLocation);
         txtDate=(EditText)getView().findViewById(R.id.txtDate);
         txtStartTime=(EditText)getView().findViewById(R.id.txtStartTime);
         txtEndTime=(EditText)getView().findViewById(R.id.txtEndTime);
@@ -253,6 +262,25 @@ public class TutorAvailabilityFragment extends Fragment {
                 ft.replace(R.id.tutor_fragment_container, newFragment);
                 ft.addToBackStack(null);
 
+                ft.commit();
+            }
+        });
+
+        btnViewLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Add USER_ID to be passed to new view
+                Bundle bundle = new Bundle();
+                bundle.putInt("USER_ID", USER_ID);
+
+                // Swap into new fragment
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                TutorLocationFragment newFragment = new TutorLocationFragment();
+
+                newFragment.setArguments(bundle);
+
+                ft.replace(R.id.tutor_fragment_container, newFragment);
+                ft.addToBackStack(null);
                 ft.commit();
             }
         });
@@ -442,5 +470,4 @@ public class TutorAvailabilityFragment extends Fragment {
         String convertedNewTime = String.valueOf(newTime);
         return convertedNewTime;
     }
-
 }
