@@ -189,6 +189,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/bottom_bar_color"/>
 
+
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>
