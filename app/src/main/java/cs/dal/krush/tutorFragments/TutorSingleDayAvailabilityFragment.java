@@ -94,6 +94,9 @@ public class TutorSingleDayAvailabilityFragment extends Fragment {
             rs.close();
         }
 
+        /**
+         * Attach custom adapter to listview
+         */
         CustomTutorDayTimeAdapter adapter = new CustomTutorDayTimeAdapter(
                 getActivity(),
                 R.layout.tutor_single_day_availability_row_layout,

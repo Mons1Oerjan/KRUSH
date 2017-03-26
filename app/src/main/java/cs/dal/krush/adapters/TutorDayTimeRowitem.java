@@ -1,12 +1,21 @@
 package cs.dal.krush.adapters;
 
 /**
- * Created by greg on 25/03/17.
+ *  Represents a single row item in the CustomTutorDayTimeAdapter class. This may
+ *  also be used to represent items in a ViewHolder, or an ArrayList to attach to adapters.
  */
 
 public class TutorDayTimeRowitem {
+
+    /**
+     * Instance varialbes
+     */
     private String text;
 
+    /**
+     * Overloaded constructor
+     * @param text time for the row item
+     */
     public TutorDayTimeRowitem(String text){
         this.text = text;
     }

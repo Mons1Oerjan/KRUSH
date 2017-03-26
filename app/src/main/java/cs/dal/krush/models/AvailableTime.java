@@ -57,6 +57,13 @@ public class AvailableTime extends Table{
         return res;
     }
 
+    /**
+     * Get the available times for a tutor from the given dates
+     * @param year as String
+     * @param month of the year
+     * @param day of the month
+     * @return Cursor of start time
+     */
     public Cursor getByDay(String year, String month, String day){
         //get all records with the same day, month and year to display the times.
         res = dbRead.rawQuery("SELECT strftime('%H:%M',start_time) as start, " +
@@ -71,6 +78,11 @@ public class AvailableTime extends Table{
         return res;
     }
 
+    /**
+     * Get all available times from the specified tutor, ordered by day
+     * @param tutor_id of times to retrieve
+     * @return Cursor of ordered available dates
+     */
     public Cursor getAllOrderedByDay(int tutor_id){
         res = dbRead.rawQuery("SELECT id,tutor_id,start_time, end_time FROM available_time " +
                 "WHERE start_time > datetime('now','-2 day') " +
@@ -79,6 +91,12 @@ public class AvailableTime extends Table{
         return res;
     }
 
+    /**
+     * Delete a record from the database. This method first finds the id
+     * of the record, then deletes the id.
+     * @param date of record to delete
+     * @param tutor_id of associated tutor to retrieve id
+     */
     public void deleteRecord(String date, int tutor_id){
         res = dbRead.rawQuery("SELECT id, start_time FROM available_time " +
                 "WHERE start_time='"+date+"' " +

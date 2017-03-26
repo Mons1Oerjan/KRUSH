@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,20 +18,31 @@ import java.util.List;
 import java.util.Locale;
 
 import cs.dal.krush.R;
-import cs.dal.krush.adapters.TutorDayTimeRowitem;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * Created by greg on 25/03/17.
+ * Custom array adapter used to contain the textview of a specific time,
+ * and a delete icon for the specific time.
  */
 
 public class CustomTutorDayTimeAdapter extends ArrayAdapter<TutorDayTimeRowitem>{
 
+    /**
+     * Declare variables
+     */
     Context context;
     List<TutorDayTimeRowitem> items;
     String date;
     int USER_ID;
 
+    /**
+     * Overload constructor
+     * @param context of the application
+     * @param resourceId
+     * @param items times to display
+     * @param date current date from previous bundle
+     * @param USER_ID of current logged in user
+     */
     public CustomTutorDayTimeAdapter(Context context, int resourceId,
                                      List<TutorDayTimeRowitem> items,
                                      String date,
@@ -44,11 +54,22 @@ public class CustomTutorDayTimeAdapter extends ArrayAdapter<TutorDayTimeRowitem>
         this.USER_ID = USER_ID;
     }
 
+    /**
+     * For much faster processing time, holder for item views.
+     */
     private class ViewHolder{
         ImageView imageView;
         TextView txtText;
     }
 
+    /**
+     * Allows attachment of a specified view for interactions,
+     * also inflates this view for display purposes.
+     * @param position of item being manipulated
+     * @param convertView handle of current view
+     * @param parent viewgroup for layout of parent
+     * @return inflated, modified view
+     */
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         TutorDayTimeRowitem rowItem = getItem(position);
@@ -66,6 +87,9 @@ public class CustomTutorDayTimeAdapter extends ArrayAdapter<TutorDayTimeRowitem>
 
         holder.txtText.setText(rowItem.getText());
 
+        /**
+         * Delete handler
+         */
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,20 +110,29 @@ public class CustomTutorDayTimeAdapter extends ArrayAdapter<TutorDayTimeRowitem>
         return convertView;
     }
 
+    /**
+     * Formatter to match Java date with sqlite, this makes
+     * it much easier to query dates in sqlite.
+     * @param date selected date
+     * @param time specific time of day
+     * @return
+     */
     public String formatDate(String date, String time){
-        //I have 2017-03-25 and 11:30 - 12:30
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
+        // split and parse
         String[] splitDate = date.split("[-]");
         int year = Integer.parseInt(splitDate[0]);
         int month = Integer.parseInt(splitDate[1]);
         int day = Integer.parseInt(splitDate[2]);
 
+        // get the hour and minute of day
         String[] splitTime = time.split("\\s");
         String[] splitStartTime = splitTime[0].split("[:]");
         int hourOfDay = Integer.parseInt(splitStartTime[0]);
         int minute = Integer.parseInt(splitStartTime[1]);
 
+        // convert to calendar, then format
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.set(Calendar.DAY_OF_MONTH, day);
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
