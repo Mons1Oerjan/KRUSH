@@ -24,6 +24,7 @@ public class Tutor extends Table{
      * @param email
      * @param password
      * @param rate
+     * @param rating
      * @return boolean
      */
     public boolean insert(int locationId, int schoolId, String profilePic, String firstName, String lastName, String
@@ -43,6 +44,12 @@ public class Tutor extends Table{
         return true;
     }
 
+    /**
+     * Updates the rating for a given tutor
+     * @param tutorId
+     * @param rating
+     * @return
+     */
     public boolean updateTutorRating(int tutorId, float rating){
 
         ContentValues contentValues = new ContentValues();

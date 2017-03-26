@@ -219,6 +219,17 @@ public class TutoringSession extends Table{
         );
     }
 
+    /**
+     * Gets the details of a specific (past) session for tutors.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @param sessionId
+     * @return Cursor
+     */
     public Cursor getSessionHistoryDetailsBySessionIdForTutorCursorAdapter(int sessionId){
         return dbRead.rawQuery(
                 "SELECT t.id AS _id, t.school_id, t.profile_pic, t.f_name, t.l_name, t.email, " +

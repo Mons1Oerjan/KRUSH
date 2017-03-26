@@ -5,14 +5,20 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Tutor rating modal
+ * Tutor rating model
  */
 
 public class TutorRating extends Table {
 
     public TutorRating(SQLiteDatabase dbWrite, SQLiteDatabase dbRead) { super(dbWrite,dbRead); }
 
-
+    /**
+     * Adds a new rating of a tutor to the tutor_ratings table
+     * @param rating
+     * @param studentId
+     * @param tutorId
+     * @return
+     */
     public boolean insert(float rating, int studentId, int tutorId){
         ContentValues contentValues = new ContentValues();
         contentValues.put("rating", rating);
@@ -22,6 +28,13 @@ public class TutorRating extends Table {
         return true;
     }
 
+    /**
+     * Updates the rating a student has previously given
+     * @param rating
+     * @param studentId
+     * @param tutorId
+     * @return
+     */
     public boolean updateTutorRating(float rating, int studentId, int tutorId){
 
         ContentValues contentValues = new ContentValues();
@@ -52,6 +65,18 @@ public class TutorRating extends Table {
         );
     }
 
+    /**
+     * Gets the rating of a tutor given by the student
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @param tutorId
+     * @param studentId
+     * @return Cursor
+     */
     public Cursor getTutorRatingByTutorAndStudentId(int tutorId, int studentId){
         return dbRead.rawQuery(
                 "SELECT id AS _id, tutor_id, student_id, rating " +
