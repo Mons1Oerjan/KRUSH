@@ -20,7 +20,6 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.TutorCursorAdapters.SessionCursorAdapter;
 import cs.dal.krush.models.DBHelper;
-import cs.dal.krush.studentFragments.StudentTutorDetailsFragment;
 
 /**
  * Sets up the Tutor Home fragment. This fragment belongs to the TutorMainActivity class
@@ -57,9 +56,8 @@ public class TutorHomeFragment extends Fragment {
         TextView ratingTitle = (TextView) view.findViewById(R.id.tutorRating);
         FloatingActionButton tutorHelpButton = (FloatingActionButton)view.findViewById(R.id.tutorHelpButton);
 
-
         String currentTutorRating = tutor.getString(tutor.getColumnIndex("rating"));
-        if (currentTutorRating != null)
+        if(currentTutorRating != null)
             tutorRating.setRating(Float.parseFloat(currentTutorRating));
 
         //fetch custom app font:

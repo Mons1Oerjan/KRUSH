@@ -19,6 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Course course = new Course(this.getWritableDatabase(), this.getReadableDatabase());
     public AudioRecording audioRecording = new AudioRecording(this.getWritableDatabase(), this.getReadableDatabase());
     public TutoringSession tutoringSession = new TutoringSession(this.getWritableDatabase(), this.getReadableDatabase());
+    public TutorRating tutorRating = new TutorRating(this.getWritableDatabase(), this.getReadableDatabase());
     public CoursesTutors coursesTutors = new CoursesTutors(this.getWritableDatabase(), this.getReadableDatabase());
     public Location location = new Location(this.getWritableDatabase(), this.getReadableDatabase());
     public AvailableTime availableTime = new AvailableTime(this.getWritableDatabase(), this.getReadableDatabase());
@@ -79,6 +80,16 @@ public class DBHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY(tutor_id) REFERENCES tutors(id) ON DELETE CASCADE)"
         );
 
+        db.execSQL(
+                "CREATE TABLE tutor_ratings " +
+                        "(id INTEGER PRIMARY KEY," +
+                        "rating INTEGER," +
+                        "student_id INTEGER," +
+                        "tutor_id INTEGER," +
+                        "FOREIGN KEY(student_id) REFERENCES students(id) ON DELETE CASCADE," +
+                        "FOREIGN KEY(tutor_id) REFERENCES tutors(id) ON DELETE CASCADE)"
+        );
+        
         db.execSQL(
                 "CREATE TABLE schools " +
                         "(id INTEGER PRIMARY KEY," +

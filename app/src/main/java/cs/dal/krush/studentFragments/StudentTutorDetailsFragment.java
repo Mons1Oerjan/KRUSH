@@ -7,18 +7,16 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,7 +27,6 @@ import cs.dal.krush.R;
 import cs.dal.krush.helpers.DateFormatHelper;
 import cs.dal.krush.models.DBHelper;
 
-import static java.lang.Math.round;
 
 /**
  * This fragment displays the details of a tutor when a student clicks on their profile
@@ -122,6 +119,8 @@ public class StudentTutorDetailsFragment extends Fragment implements View.OnClic
             // Add to list of time slots
             tutorAvailability.add(time);
         }
+
+
 
         // Set values
         nameView.setText(name);
