@@ -15,7 +15,7 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
 import static cs.dal.krush.R.id.profile_name;
-import static cs.dal.krush.R.id.profile_picture;
+import static cs.dal.krush.R.id.tutor_details_profile_picture;
 
 /**
  * Sets up the Student Profile fragment. This fragment belongs to the StudentMainActivity class
@@ -47,7 +47,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
 
         // Get Views
         profile_name_view = (TextView) myView.findViewById(profile_name);
-        profile_picture_view = (ImageView) myView.findViewById(profile_picture);
+        profile_picture_view = (ImageView) myView.findViewById(R.id.student_profile_picture);
         email_view = (TextView) myView.findViewById(R.id.profile_email);
         school_view = (TextView) myView.findViewById(R.id.profile_school);
 

@@ -38,12 +38,12 @@ public class TutoringSession extends Table{
 
     @Override
     public Cursor getData(int id){
-        return dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE id="+id+"",null);
+        return dbRead.rawQuery("SELECT * FROM tutoring_sessions WHERE id="+id+"", null);
     }
 
     @Override
     public Cursor getAll() {
-        return dbRead.rawQuery("SELECT * FROM tutoring_sessions",null);
+        return dbRead.rawQuery("SELECT * FROM tutoring_sessions", null);
     }
 
     /**
@@ -107,6 +107,7 @@ public class TutoringSession extends Table{
                 ,null
         );
     }
+
     /**
      * Gets all upcoming tutoring sessions by the given tutor.
      * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
@@ -134,6 +135,7 @@ public class TutoringSession extends Table{
               ,null
         );
     }
+
     /**
      * Gets all past tutoring sessions by the given student.
      * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
@@ -153,15 +155,16 @@ public class TutoringSession extends Table{
                 "l.location, " +
                 "sl.name " +
                 "FROM tutors t " +
-                "INNER JOIN tutoring_sessions ts ON _id = ts.student_id " +
+                "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
                 "INNER JOIN locations l ON ts.location_id = l.id " +
                 "INNER JOIN schools sl ON t.school_id = sl.id " +
-                "WHERE ts.tutor_id=" + studentId +
+                "WHERE ts.student_id=" + studentId +
                 " AND ts.session_booked=1" +
                 " AND ts.end_time<datetime('now')"
                 ,null
         );
     }
+
     /**
      * Gets all past tutoring sessions by the given tutor.
      * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
@@ -190,6 +193,57 @@ public class TutoringSession extends Table{
         );
     }
 
+    /**
+     * Gets the details of a specific (past) session.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @param sessionId
+     * @return Cursor
+     */
+    public Cursor getSessionHistoryDetailsBySessionIdForCursorAdapter(int sessionId){
+        return dbRead.rawQuery(
+                "SELECT s.id AS _id, s.school_id, s.profile_pic, s.f_name, s.l_name, s.email, " +
+                        "ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
+                        "l.location, " +
+                        "sl.name, sl.type " +
+                        "FROM students s " +
+                        "INNER JOIN tutoring_sessions ts ON _id = ts.student_id " +
+                        "INNER JOIN locations l ON ts.location_id = l.id " +
+                        "INNER JOIN schools sl ON s.school_id = sl.id " +
+                        "WHERE ts.id=" + sessionId + ""
+                ,null
+        );
+    }
+
+    /**
+     * Gets the details of a specific (past) session for tutors.
+     * This is a query specifically meant for Cursor Adapters (renaming the id column to _id).
+     *
+     * Source:
+     * [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017,
+     * from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
+     *
+     * @param sessionId
+     * @return Cursor
+     */
+    public Cursor getSessionHistoryDetailsBySessionIdForTutorCursorAdapter(int sessionId){
+        return dbRead.rawQuery(
+                "SELECT t.id AS _id, t.school_id, t.profile_pic, t.f_name, t.l_name, t.email, " +
+                        "ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
+                        "l.location, " +
+                        "sl.name, sl.type " +
+                        "FROM tutors t " +
+                        "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
+                        "INNER JOIN locations l ON ts.location_id = l.id " +
+                        "INNER JOIN schools sl ON t.school_id = sl.id " +
+                        "WHERE ts.id=" + sessionId + ""
+                ,null
+        );
+    }
 
     /**
      * Get a tutoring session by the tutor_id field
@@ -213,11 +267,33 @@ public class TutoringSession extends Table{
     }
 
     /**
+     * Given a userId, it returns the last session in the db
+     * Used after a student has just booked a session and
+     * need the session id to pass to the session details fragment
+     * @param userId
+     * @return
+     */
+    public int getLastBookedSessionIdByUserId(int userId) {
+        int session_id;
+        Cursor res = dbRead.rawQuery("SELECT id " +
+                "FROM tutoring_sessions " +
+                "WHERE student_id="+userId,null);
+        if (res != null){
+            res.moveToLast();
+            session_id = res.getInt(res.getColumnIndex("id"));
+            res.close();
+            return session_id;
+        }
+        else {
+            return -1;
+        }
+    }
+
+    /**
      * Delete tutoring session by id
      * @param id
-     * @return int
      */
-    public int deleteTutoringSession(int id){
-        return dbWrite.delete("tutoring_sessions","id = ?",new String[] { Integer.toString(id) });
+    public void deleteTutoringSession(int id) {
+        dbWrite.delete("tutoring_sessions","id = ?",new String[] { String.valueOf(id) });
     }
 }
