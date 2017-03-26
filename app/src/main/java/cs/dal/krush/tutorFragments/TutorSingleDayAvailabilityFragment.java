@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class TutorSingleDayAvailabilityFragment extends Fragment {
     private String year,month,day; // ex: 2017 03 20
     static int USER_ID;
     private ItemTouchHelper mItemTouchHelper;
+    private TextView tvAvailableDayTitle;
 
 
     @Override
@@ -45,12 +47,13 @@ public class TutorSingleDayAvailabilityFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         db = new DBHelper(getActivity().getBaseContext());
         lvTutorDaySchedule=(ListView)getView().findViewById(R.id.lvTutorDaySchedule);
-
+        tvAvailableDayTitle=(TextView)getView().findViewById(R.id.tvAvailableDayTitle);
         String date = getArguments().getString("DATE");
         USER_ID = getArguments().getInt("USER_ID");
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
+        tvAvailableDayTitle.setTypeface(typeFace);
 
         loadSchedule(date);
 

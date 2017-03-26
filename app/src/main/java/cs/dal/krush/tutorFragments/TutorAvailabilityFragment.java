@@ -222,7 +222,8 @@ public class TutorAvailabilityFragment extends Fragment {
                 }
 
                 if(isValid){
-                    db.availableTime.insert(startTime,endTime,1);
+                    int id = USER_ID;
+                    db.availableTime.insert(startTime,endTime,USER_ID);
                     Toast.makeText(getContext(), "Time slot added successfully!", Toast.LENGTH_SHORT).show();
                     txtDate.setText("");
                     txtStartTime.setText("");
@@ -261,21 +262,23 @@ public class TutorAvailabilityFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView tv = (TextView) view;
                 String date = tv.getText().toString();
+                if(!date.equals("")){
+                    String[] splitDate = date.split("[:]");
+                    date = splitDate[0];
 
-                String[] splitDate = date.split("[:]");
-                date = splitDate[0];
+                    Bundle bundle = new Bundle();
+                    bundle.putString("DATE", date);
+                    bundle.putInt("USER_ID",USER_ID);
+                    TutorSingleDayAvailabilityFragment newFragment = new TutorSingleDayAvailabilityFragment();
+                    newFragment.setArguments(bundle);
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("DATE", date);
-                bundle.putInt("USER_ID",USER_ID);
-                TutorSingleDayAvailabilityFragment newFragment = new TutorSingleDayAvailabilityFragment();
-                newFragment.setArguments(bundle);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.tutor_fragment_container, newFragment);
+                    transaction.addToBackStack(null);
 
-                transaction.replace(R.id.tutor_fragment_container, newFragment);
-                transaction.addToBackStack(null);
+                    transaction.commit();
+                }
 
-                transaction.commit();
             }
         });
 
@@ -339,12 +342,13 @@ public class TutorAvailabilityFragment extends Fragment {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.DAY_OF_MONTH, sDay-1);
+        calendar.set(Calendar.DAY_OF_MONTH, sDay);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MONTH, sMonth);
         calendar.set(Calendar.YEAR, sYear);
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.HOUR, hour);
+        calendar.set(Calendar.SECOND,0);
 
         return formatter.format(calendar.getTime());
 
