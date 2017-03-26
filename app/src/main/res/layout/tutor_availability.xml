@@ -10,8 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="cs.dal.krush.tutorFragments.TutorCalendarFragment">
 
-
-
     <TextView
         android:text="Availability"
         android:textSize="30sp"
@@ -90,9 +88,9 @@
         android:textColor="@color/bottom_bar_color"
         android:layout_marginLeft="115px"
         android:layout_marginEnd="15dp"
+        android:layout_marginTop="51dp"
         android:layout_below="@+id/txtEndTime"
-        android:layout_alignEnd="@+id/txtEndTime"
-        android:layout_marginTop="17dp" />
+        android:layout_alignEnd="@+id/txtEndTime" />
 
     <Button
         android:layout_width="wrap_content"
@@ -116,11 +114,12 @@
         android:text="Your Availability"
         android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"
-        android:paddingTop="30dp"
+        android:paddingTop="10dp"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:id="@+id/txtViewAvailability"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btnViewLocation"
         android:layout_alignParentStart="true" />
 
     <ListView
@@ -128,6 +127,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/txtViewAvailability"
         android:layout_alignParentStart="true" />
 
@@ -159,10 +159,9 @@
         android:paddingRight="25dp"
         android:text="Location"
         android:textColor="@color/bottom_bar_color"
-        android:layout_marginTop="11dp"
         android:layout_below="@+id/btnViewCalendar"
         android:layout_alignStart="@+id/btnViewCalendar"
-        android:layout_toStartOf="@+id/txtEndTime" />
+        android:layout_marginTop="20dp" />
 
     <EditText
         android:layout_width="200dp"
