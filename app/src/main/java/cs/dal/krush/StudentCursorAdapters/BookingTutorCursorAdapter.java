@@ -2,6 +2,8 @@ package cs.dal.krush.StudentCursorAdapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,10 +66,9 @@ public class BookingTutorCursorAdapter extends CursorAdapter {
 
         //Get the tutor's profile image:
         String imageFileName = cursor.getString(cursor.getColumnIndexOrThrow("profile_pic"));
-        if (imageFileName != null){
-            int resourceId = mContext.getResources().getIdentifier(
-                    imageFileName, "drawable", mContext.getPackageName());
-            image.setImageResource(resourceId);
+        if(imageFileName != null && !imageFileName.isEmpty()) {
+            Bitmap profile_pic = BitmapFactory.decodeFile(imageFileName);
+            image.setImageBitmap(profile_pic);
         }
 
         //Set the row's header text:
