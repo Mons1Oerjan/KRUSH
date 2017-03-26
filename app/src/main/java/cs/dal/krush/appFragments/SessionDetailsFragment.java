@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
@@ -22,6 +23,7 @@ public class SessionDetailsFragment extends Fragment {
     DBHelper mydb;
     Cursor sessionCursor;
     TextView titleView, studentIdView, tutorIdView;
+    Button locationButton;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class SessionDetailsFragment extends Fragment {
         titleView = (TextView) view.findViewById(R.id.session_title);
         studentIdView = (TextView) view.findViewById(R.id.session_student_id);
         tutorIdView = (TextView) view.findViewById(R.id.session_tutor_id);
+        locationButton = (Button) view.findViewById(R.id.sessionDetailLocation);
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -60,6 +63,13 @@ public class SessionDetailsFragment extends Fragment {
         titleView.setText(title);
         studentIdView.setText(studentId);
         tutorIdView.setText(tutorId);
+
+        //setup OnClickListeners:
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
 
         sessionCursor.close();
         mydb.close();
