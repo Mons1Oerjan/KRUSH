@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
+import cs.dal.krush.tutorFragments.TutorLocationFragment;
 
 /**
  * This fragment displays the details of a tutoring session.
@@ -67,7 +69,19 @@ public class SessionDetailsFragment extends Fragment {
         //setup OnClickListeners:
         locationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // Add USER_ID to be passed to new view
+                Bundle bundle = new Bundle();
+                bundle.putInt("USER_ID", USER_ID);
 
+                // Swap into new fragment
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                TutorLocationFragment newFragment = new TutorLocationFragment();
+
+                newFragment.setArguments(bundle);
+
+                ft.replace(R.id.student_fragment_container, newFragment);
+                ft.addToBackStack(null);
+                ft.commit();
             }
         });
 
