@@ -45,7 +45,6 @@ import cs.dal.krush.models.DBHelper;
  *
  * The tutors can set their availability and schedule_view using this fragment.
  */
-//public class TutorAvailabilityFragment extends Fragment implements OnMapReadyCallback {
 public class TutorAvailabilityFragment extends Fragment {
 
     Button btnDatePicker, btnStartTimePicker, btnEndTimePicker, btnSubmit, btnViewCalendar, btnViewLocation;
@@ -60,7 +59,6 @@ public class TutorAvailabilityFragment extends Fragment {
     private DateFormat timeFormatter = new SimpleDateFormat("h:mm a", Locale.getDefault());
     private GregorianCalendar startTimeCalendar = new GregorianCalendar();
     private GregorianCalendar endTimeCalendar = new GregorianCalendar();
-    private GoogleMap mMap;
 
     static int USER_ID;
 
@@ -91,9 +89,6 @@ public class TutorAvailabilityFragment extends Fragment {
         txtEndTime=(EditText)getView().findViewById(R.id.txtEndTime);
         lvTutorScheduleListView=(ListView)getView().findViewById(R.id.lvTutorScheduleListView);
         rl = (RelativeLayout)getView().findViewById(R.id.activity_tutor_calendar);
-
-//        SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-//        mapFrag.getMapAsync(this);
 
         txtStartTime.setEnabled(false);
         txtEndTime.setEnabled(false);
@@ -273,12 +268,18 @@ public class TutorAvailabilityFragment extends Fragment {
         btnViewLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Add USER_ID to be passed to new view
+                Bundle bundle = new Bundle();
+                bundle.putInt("USER_ID", USER_ID);
+
+                // Swap into new fragment
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 TutorLocationFragment newFragment = new TutorLocationFragment();
 
+                newFragment.setArguments(bundle);
+
                 ft.replace(R.id.tutor_fragment_container, newFragment);
                 ft.addToBackStack(null);
-
                 ft.commit();
             }
         });
@@ -436,18 +437,4 @@ public class TutorAvailabilityFragment extends Fragment {
         String convertedNewTime = String.valueOf(newTime);
         return convertedNewTime;
     }
-
-
-//    private void setUpMap() {
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//    }
-//
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        mMap = googleMap;
-//        setUpMap();
-//    }
 }
