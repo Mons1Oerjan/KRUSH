@@ -8,7 +8,7 @@ package cs.dal.krush.adapters;
 public class TutorDayTimeRowitem {
 
     /**
-     * Instance varialbes
+     * Instance variables
      */
     private String text;
 

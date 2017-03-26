@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 
 import cs.dal.krush.R;
+import cs.dal.krush.helpers.DateFormatHelper;
 import cs.dal.krush.models.DBHelper;
 
 /**
@@ -34,6 +35,7 @@ public class CustomTutorDayTimeAdapter extends ArrayAdapter<TutorDayTimeRowitem>
     List<TutorDayTimeRowitem> items;
     String date;
     int USER_ID;
+    DateFormatHelper formatHelper;
 
     /**
      * Overload constructor
@@ -96,7 +98,7 @@ public class CustomTutorDayTimeAdapter extends ArrayAdapter<TutorDayTimeRowitem>
                 TutorDayTimeRowitem item = items.get(position);
 
                 //get the full date for sqlite
-                String formattedDate = formatDate(date,item.getText());
+                String formattedDate = formatHelper.formatForSqlite(date,item.getText());
 
                 DBHelper db = new DBHelper(context);
                 db.availableTime.deleteRecord(formattedDate,USER_ID);
@@ -110,37 +112,5 @@ public class CustomTutorDayTimeAdapter extends ArrayAdapter<TutorDayTimeRowitem>
         return convertView;
     }
 
-    /**
-     * Formatter to match Java date with sqlite, this makes
-     * it much easier to query dates in sqlite.
-     * @param date selected date
-     * @param time specific time of day
-     * @return
-     */
-    public String formatDate(String date, String time){
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
-        // split and parse
-        String[] splitDate = date.split("[-]");
-        int year = Integer.parseInt(splitDate[0]);
-        int month = Integer.parseInt(splitDate[1]);
-        int day = Integer.parseInt(splitDate[2]);
-
-        // get the hour and minute of day
-        String[] splitTime = time.split("\\s");
-        String[] splitStartTime = splitTime[0].split("[:]");
-        int hourOfDay = Integer.parseInt(splitStartTime[0]);
-        int minute = Integer.parseInt(splitStartTime[1]);
-
-        // convert to calendar, then format
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        calendar.set(Calendar.MONTH, month-1);
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
-
-        return formatter.format(calendar.getTime());
-    }
 }

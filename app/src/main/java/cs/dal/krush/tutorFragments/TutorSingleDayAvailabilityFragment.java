@@ -22,11 +22,16 @@ import cs.dal.krush.adapters.TutorDayTimeRowitem;
 import cs.dal.krush.models.DBHelper;
 
 /**
- * Created by greg on 19/03/17.
+ * Fragment to show the availability for a specific day chosen in the previous
+ * fragment. This class uses a ListView with a custom adapter to add
+ * delete functionality on an icon click.
  */
 
 public class TutorSingleDayAvailabilityFragment extends Fragment {
 
+    /**
+     * Declare variables
+     */
     private DBHelper db;
     private ListView lvTutorDaySchedule;
     private String year,month,day; // ex: 2017 03 20
@@ -95,7 +100,7 @@ public class TutorSingleDayAvailabilityFragment extends Fragment {
         }
 
         /**
-         * Attach custom adapter to listview
+         * Attach custom adapter to ListView
          */
         CustomTutorDayTimeAdapter adapter = new CustomTutorDayTimeAdapter(
                 getActivity(),
