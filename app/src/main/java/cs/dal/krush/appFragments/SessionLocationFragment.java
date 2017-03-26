@@ -37,7 +37,8 @@ import cs.dal.krush.models.DBHelper;
 import static cs.dal.krush.R.id.map;
 
 /**
- * TutorLocationFragment allows a user to set their preferred based on a location.
+ * SessionLocationFragment allows a user to view the location of an upcoming
+ * session and get directions.
  *
  */
 public class SessionLocationFragment extends Fragment implements OnMapReadyCallback {

@@ -71,7 +71,7 @@ public class SessionDetailsFragment extends Fragment {
         //setup OnClickListeners:
         locationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Add USER_ID to be passed to new view
+                // Add LOCATION_ID to be passed to new view
                 Bundle bundle = new Bundle();
                 bundle.putInt("LOCATION_ID", Integer.parseInt(locationId));
 
