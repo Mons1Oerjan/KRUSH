@@ -47,7 +47,7 @@ public class TutorSingleDayAvailabilityFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         db = new DBHelper(getActivity().getBaseContext());
         lvTutorDaySchedule=(ListView)getView().findViewById(R.id.lvTutorDaySchedule);
-        tvAvailableDayTitle=(TextView)getView().findViewById(R.id.tvAvailableDayTitle);
+        tvAvailableDayTitle=(TextView)getView().findViewById(R.id.tutor_individual_tv);
         String date = getArguments().getString("DATE");
         USER_ID = getArguments().getInt("USER_ID");
 

@@ -363,7 +363,7 @@ public class TutorAvailabilityFragment extends Fragment {
         List<String> dateTimes = new ArrayList<String>();
         boolean firstRun = true;
         Cursor rs;
-        rs = db.availableTime.getAllOrderedByDay();
+        rs = db.availableTime.getAllOrderedByDay(USER_ID);
         try {
             while (rs.moveToNext()) {
                 String startTime, endTime;

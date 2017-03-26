@@ -121,18 +121,18 @@ public class TutoringSession extends Table{
      */
     public Cursor getDataByTutorIdForCursorAdapter(int tutorId){
         return dbRead.rawQuery(
-              "SELECT s.id AS _id, s.school_id, s.profile_pic, s.f_name, s.l_name, s.email, " +
-              "ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
-              "l.location, " +
-              "sl.name " +
-              "FROM students s " +
-              "INNER JOIN tutoring_sessions ts ON _id = ts.student_id " +
-              "INNER JOIN locations l ON ts.location_id = l.id " +
-              "INNER JOIN schools sl ON s.school_id = sl.id " +
-              "WHERE ts.tutor_id=" + tutorId +
-              " AND ts.session_booked=1" +
-              " AND ts.start_time>datetime('now')"
-              ,null
+                "SELECT s.id AS _id, s.school_id, s.profile_pic, s.f_name, s.l_name, s.email, " +
+                        "ts.title, ts.id, ts.start_time, ts.end_time, ts.location_id, " +
+                        "l.location, " +
+                        "sl.name " +
+                        "FROM students s " +
+                        "INNER JOIN tutoring_sessions ts ON _id = ts.student_id " +
+                        "INNER JOIN locations l ON ts.location_id = l.id " +
+                        "INNER JOIN schools sl ON s.school_id = sl.id " +
+                        "WHERE ts.tutor_id=" + tutorId +
+                        " AND ts.session_booked=1" +
+                        " AND ts.start_time>datetime('now')"
+                ,null
         );
     }
     /**

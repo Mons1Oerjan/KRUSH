@@ -71,9 +71,10 @@ public class AvailableTime extends Table{
         return res;
     }
 
-    public Cursor getAllOrderedByDay(){
+    public Cursor getAllOrderedByDay(int tutor_id){
         res = dbRead.rawQuery("SELECT id,tutor_id,start_time, end_time FROM available_time " +
                 "WHERE start_time > datetime('now','-2 day') " +
+                "AND tutor_id="+tutor_id+" " +
                 "ORDER BY start_time",null);
         return res;
     }
