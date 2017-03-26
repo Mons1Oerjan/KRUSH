@@ -45,9 +45,10 @@ import cs.dal.krush.models.DBHelper;
  *
  * The tutors can set their availability and schedule_view using this fragment.
  */
-public class TutorAvailabilityFragment extends Fragment implements OnMapReadyCallback {
+//public class TutorAvailabilityFragment extends Fragment implements OnMapReadyCallback {
+public class TutorAvailabilityFragment extends Fragment {
 
-    Button btnDatePicker, btnStartTimePicker, btnEndTimePicker, btnSubmit, btnViewCalendar;
+    Button btnDatePicker, btnStartTimePicker, btnEndTimePicker, btnSubmit, btnViewCalendar, btnViewLocation;
     EditText txtDate, txtStartTime, txtEndTime;
     TextView txtTitle, txtSelectAvailability, txtYourAvailability;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -84,14 +85,15 @@ public class TutorAvailabilityFragment extends Fragment implements OnMapReadyCal
         btnEndTimePicker=(Button)getView().findViewById(R.id.btnEndTime);
         btnSubmit=(Button)getView().findViewById(R.id.btnSubmit);
         btnViewCalendar=(Button)getView().findViewById(R.id.btnViewCalendar);
+        btnViewLocation=(Button)getView().findViewById(R.id.btnViewLocation);
         txtDate=(EditText)getView().findViewById(R.id.txtDate);
         txtStartTime=(EditText)getView().findViewById(R.id.txtStartTime);
         txtEndTime=(EditText)getView().findViewById(R.id.txtEndTime);
         lvTutorScheduleListView=(ListView)getView().findViewById(R.id.lvTutorScheduleListView);
         rl = (RelativeLayout)getView().findViewById(R.id.activity_tutor_calendar);
 
-        SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        mapFrag.getMapAsync(this);
+//        SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+//        mapFrag.getMapAsync(this);
 
         txtStartTime.setEnabled(false);
         txtEndTime.setEnabled(false);
@@ -268,6 +270,19 @@ public class TutorAvailabilityFragment extends Fragment implements OnMapReadyCal
             }
         });
 
+        btnViewLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                TutorLocationFragment newFragment = new TutorLocationFragment();
+
+                ft.replace(R.id.tutor_fragment_container, newFragment);
+                ft.addToBackStack(null);
+
+                ft.commit();
+            }
+        });
+
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -423,16 +438,16 @@ public class TutorAvailabilityFragment extends Fragment implements OnMapReadyCal
     }
 
 
-    private void setUpMap() {
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        setUpMap();
-    }
+//    private void setUpMap() {
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-34, 151);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//    }
+//
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//        setUpMap();
+//    }
 }

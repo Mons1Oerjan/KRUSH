@@ -24,16 +24,6 @@
         android:fontFamily="sans-serif-medium"
         android:id="@+id/txtAvailabilityTitle" />
 
-    <fragment
-        android:id="@+id/map"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_below="@+id/btnViewCalendar"
-        android:layout_above="@+id/txtViewAvailability"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
-
     <TextView
         android:text="Select Availability"
         android:textColor="@color/colorPrimary"
@@ -98,9 +88,11 @@
         android:minWidth="70dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
-        android:layout_below="@+id/txtEndTime"
         android:layout_marginLeft="115px"
-        android:layout_marginTop="12dp" />
+        android:layout_marginEnd="22dp"
+        android:layout_below="@+id/txtEndTime"
+        android:layout_alignEnd="@+id/txtEndTime"
+        android:layout_marginTop="13dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -114,11 +106,10 @@
         android:minWidth="70dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
-        android:layout_below="@+id/txtEndTime"
-        android:layout_toEndOf="@id/btnSubmit"
         android:layout_marginLeft="40px"
         android:layout_marginRight="10px"
-        android:layout_marginTop="12dp" />
+        android:layout_above="@+id/txtViewAvailability"
+        android:layout_toStartOf="@+id/txtEndTime" />
 
     <TextView
         android:text="Your Availability"
@@ -155,6 +146,22 @@
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
         android:layout_alignTop="@+id/txtDate" />
+
+    <Button
+        android:id="@+id/btnViewLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnViewCalendar"
+        android:layout_alignBottom="@+id/btnViewCalendar"
+        android:layout_alignEnd="@+id/btnSubmit"
+        android:layout_marginEnd="27dp"
+        android:background="@drawable/button_main"
+        android:minHeight="30dp"
+        android:minWidth="70dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:text="Location"
+        android:textColor="@color/bottom_bar_color" />
 
     <EditText
         android:layout_width="200dp"
