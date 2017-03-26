@@ -96,3 +96,4 @@ We currently don't have a way to reset the DB. However, if you wish to reset the
 - [7] Android column '_id' does not exist? (n.d.). Retrieved March 12, 2017, from http://stackoverflow.com/questions/3359414/android-column-id-does-not-exist
 - [8]"CSSAuthor", Cssauthor.com, 2017. [Online]. Available: http://www.cssauthor.com/wp-content/uploads/2014/03/Credit-Card-Icons.jpg. Accessed: 18- Mar- 2017.
 - [9]D. J, "android on Text Change Listener", Stackoverflow.com, 2017. [Online]. Available: http://stackoverflow.com/questions/20824634/android-on-text-change-listener. Accessed: 18- Mar- 2017.
+- [10]"how to Search Address by Name on Google Map Android", Stackoverflow.com, 2017. [Online]. Available: http://stackoverflow.com/questions/17160508/how-to-search-address-by-name-on-google-map-android. [Accessed: 26- Mar- 2017].

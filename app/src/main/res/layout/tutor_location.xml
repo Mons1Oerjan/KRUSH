@@ -19,20 +19,34 @@
         android:layout_height="match_parent"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/editText"
+        android:layout_above="@+id/editTextAddress"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/tutorLocationHeader" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="65dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Enter location address here..."
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/setTutorLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_main"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:text="Set Location"
+        android:textColor="@color/bottom_bar_color" />
 
 </RelativeLayout>

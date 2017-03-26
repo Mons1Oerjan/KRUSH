@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,6 +30,7 @@ import java.util.Locale;
 
 import cs.dal.krush.R;
 import cs.dal.krush.TutorCursorAdapters.SessionCursorAdapter;
+import cs.dal.krush.appFragments.SessionDetailsFragment;
 import cs.dal.krush.models.DBHelper;
 
 import static cs.dal.krush.R.id.map;
@@ -49,7 +52,9 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
 
         //fetch UI elements:
         TextView pageTitle = (TextView)view.findViewById(R.id.tutorLocationHeader);
+        final EditText editTextAddress = (EditText)view.findViewById(R.id.editTextAddress);
         SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.tutorMap);
+        Button setTutorLocation = (Button)view.findViewById(R.id.setTutorLocation);
         mapFrag.getMapAsync(this);
 
 
@@ -60,42 +65,44 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
         pageTitle.setTypeface(typeFace);
 
 
-
+        //set location based on user input
+        setTutorLocation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setAddress(editTextAddress.getText().toString());
+            }
+        });
 
         return view;
     }
 
+    /**
+     * setUpMap prepares the map onCreate() this fragment
+     */
     private void setUpMap() {
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(44.651070, -63.582687);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Halifax"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
+        LatLng halifax = new LatLng(44.651070, -63.582687);
+        mMap.addMarker(new MarkerOptions().position(halifax).title("Halifax"));
         // Zoom in, animating the camera.
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
-        // Zoom out to zoom level 10.
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), null);
-
-        setAddres("6050 University Avenue B3H");
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(halifax,15));
     }
 
-    private void setAddres(String address) {
-//        String address = "6050 University Avenue B3H";
-        // get address in string for used location for the map
-
-        /* get latitude and longitude from the adderress */
-
+    /**
+     * setAddress takes an address string and sets the map to that location
+     *
+     * [10]"how to Search Address by Name on Google Map Android", Stackoverflow.com, 2017. [Online].
+     * Available: http://stackoverflow.com/questions/17160508/how-to-search-address-by-name-on-google-map-android.
+     * [Accessed: 26- Mar- 2017].
+     * @param address
+     */
+    private void setAddress(String address) {
         Geocoder geoCoder = new Geocoder(getActivity(), Locale.getDefault());
         try
         {
             List<Address> addresses = geoCoder.getFromLocationName(address, 5);
-            if (addresses.size() > 0)
-            {
+            if (addresses.size() > 0) {
                 Double lat = (double) (addresses.get(0).getLatitude());
                 Double lon = (double) (addresses.get(0).getLongitude());
-
+                //Log Long and Lat
                 Log.d("lat-long", "" + lat + "......." + lon);
                 final LatLng user = new LatLng(lat, lon);
                 /*used marker for show the location */
@@ -108,9 +115,7 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
                 // Move the camera instantly to address with a zoom of 15.
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 15));
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
