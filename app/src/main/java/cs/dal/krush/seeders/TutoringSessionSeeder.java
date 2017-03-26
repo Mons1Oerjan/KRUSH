@@ -114,13 +114,12 @@ public class TutoringSessionSeeder {
         calendarEndTime.set(Calendar.MINUTE, 25);
         startTime = timeFormatter.format(calendarStartTime.getTime());
         endTime = timeFormatter.format(calendarEndTime.getTime());
-        db.tutoringSession.insert(1,1,1,1,"Meeting at Coburg Coffee", startTime, endTime);
-        db.tutoringSession.insert(1,6,6,1,"Meeting at Acadia library", startTime, endTime);
-        db.tutoringSession.insert(1,3,3,1,"Meeting at Truro Big Stop", startTime, endTime);
-        db.tutoringSession.insert(1,2,1,1,"Meeting at Dal Math Learning Centre", startTime, endTime);
-        db.tutoringSession.insert(1,2,1,1,"Meeting at Dal Killam Library", startTime, endTime);
-        db.tutoringSession.insert(1,3,1,1,"Meeting at Public Library 4th floor", startTime, endTime);
-        db.tutoringSession.insert(1,5,1,1,"Meeting at Dal CS Learning Centre", startTime, endTime);
-        db.tutoringSession.insert(1,6,1,1,"Meeting at Dal Student Union Building", startTime, endTime);
+        db.tutoringSession.insert(1,1,2,1,"Meeting at Starbucks Coffee", startTime, endTime);
+        db.tutoringSession.insert(1,6,2,1,"Meeting at Starbucks Coffee", startTime, endTime);
+        db.tutoringSession.insert(1,3,6,1,"Meeting at Humani-T Cafe", startTime, endTime);
+        db.tutoringSession.insert(1,2,6,1,"Meeting at Humani-T Cafe", startTime, endTime);
+        db.tutoringSession.insert(1,3,4,1,"Meeting at Killam Library", startTime, endTime);
+        db.tutoringSession.insert(1,5,4,1,"Meeting at Killam Library", startTime, endTime);
+        db.tutoringSession.insert(1,6,3,1,"Meeting at Public Library", startTime, endTime);
     }
 }
