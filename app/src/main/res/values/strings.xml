@@ -32,4 +32,5 @@
     <string name="select_courses_label">Select course for tutoring session:</string>
     <string name="book_tutor_button_text">Book Now</string>
     <string name="select_time_slot_label">Select time slot for tutoring session:</string>
+    <string name="title_activity_tutor_maps">Map</string>
 </resources>

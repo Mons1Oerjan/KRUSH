@@ -58,6 +58,17 @@ public class Tutor extends Table{
         return true;
     }
 
+    /**
+     * Updates the location of given tutor
+     * @param tutorId
+     * @param locationId
+     */
+    public void updateTutorLocation(int tutorId, int locationId){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("location_id", locationId);
+        dbWrite.update("tutors", contentValues, "id=?", new String[] { "" + tutorId});
+    }
+
     @Override
     public Cursor getData(int id){
         return dbRead.rawQuery("SELECT * FROM tutors WHERE id="+id+"",null);

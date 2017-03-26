@@ -41,7 +41,7 @@ public class Location extends Table{
      * @return Cursor
      */
     public Cursor getDataByLocation(String location){
-        return dbRead.rawQuery("SELECT * FROM locations WHERE location="+location+"",null);
+        return dbRead.rawQuery("SELECT * FROM locations WHERE location='"+location+"'",null);
     }
 
     /**
