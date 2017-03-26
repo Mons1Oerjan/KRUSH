@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,36 +17,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs.dal.krush.R;
+import cs.dal.krush.adapters.RecyclerDataAdapter;
+import cs.dal.krush.helpers.OnStartDragListener;
+import cs.dal.krush.helpers.SimpleItemTouchHelperCallback;
 import cs.dal.krush.models.DBHelper;
 
 /**
  * Created by greg on 19/03/17.
  */
 
-public class TutorSingleDayAvailabilityFragment extends Fragment {
+public class TutorSingleDayAvailabilityFragment extends Fragment implements OnStartDragListener {
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    protected RecyclerDataAdapter mAdapter;
     private DBHelper db;
     private ListView lvTutorDaySchedule;
-
+    private String year,month,day; // ex: 2017 03 20
     static int USER_ID;
+    private ItemTouchHelper mItemTouchHelper;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.student_single_day_availability, container, false);
+        View view = inflater.inflate(R.layout.tutor_single_day_availability, container, false);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        String date = getArguments().getString("DATE");
+
+        db = new DBHelper(getActivity().getBaseContext());
+
+        //fetch custom app font
+        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
+
+        loadSchedule(date);
 
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        db = new DBHelper(getActivity().getBaseContext());
-        lvTutorDaySchedule=(ListView)getView().findViewById(R.id.lvTutorDaySchedule);
 
-        //fetch custom app font
-        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
-
-        loadSchedule();
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -51,14 +70,19 @@ public class TutorSingleDayAvailabilityFragment extends Fragment {
     /**
      * Loads the ListView of the tutor's availability
      */
-    public void loadSchedule(){
-        String previousDate = "";
-        String tempDate = "";
-        List<String> dateTimes = new ArrayList<String>();
-        boolean firstRun = true;
+    public void loadSchedule(String date){
+        ArrayList<String> dateTimes = new ArrayList<String>();
+
         Cursor rs;
         String time;
-        rs = db.availableTime.getByDay("2017","03","20");
+
+        String[] splitDate = date.split("[-]");
+
+        year = splitDate[0];
+        month = splitDate[1];
+        day = splitDate[2];
+
+        rs = db.availableTime.getByDay(year, month, day);
         try {
             while (rs.moveToNext()) {
 
@@ -74,13 +98,18 @@ public class TutorSingleDayAvailabilityFragment extends Fragment {
             rs.close();
         }
 
+        mAdapter = new RecyclerDataAdapter();
+        // Set CustomAdapter as the adapter for RecyclerView.
+        mRecyclerView.setAdapter(mAdapter);
 
+        ItemTouchHelper.Callback callback =
+                new SimpleItemTouchHelperCallback(mAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
+    }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                dateTimes );
-
-        lvTutorDaySchedule.setAdapter(arrayAdapter);
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
     }
 }

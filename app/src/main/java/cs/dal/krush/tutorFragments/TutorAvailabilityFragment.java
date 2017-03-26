@@ -61,7 +61,6 @@ public class TutorAvailabilityFragment extends Fragment {
         View view = inflater.inflate(R.layout.tutor_availability, container, false);
         USER_ID = getArguments().getInt("USER_ID");
 
-
         return view;
     }
 
@@ -260,13 +259,23 @@ public class TutorAvailabilityFragment extends Fragment {
         lvTutorScheduleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                TextView tv = (TextView) view;
+                String date = tv.getText().toString();
+
+                String[] splitDate = date.split("[:]");
+                date = splitDate[0];
+
+                Bundle bundle = new Bundle();
+                bundle.putString("DATE", date);
+
                 TutorSingleDayAvailabilityFragment newFragment = new TutorSingleDayAvailabilityFragment();
+                newFragment.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                ft.replace(R.id.tutor_fragment_container, newFragment);
-                ft.addToBackStack(null);
+                transaction.replace(R.id.tutor_fragment_container, newFragment);
+                transaction.addToBackStack(null);
 
-                ft.commit();
+                transaction.commit();
             }
         });
 
@@ -353,32 +362,37 @@ public class TutorAvailabilityFragment extends Fragment {
         rs = db.availableTime.getAllOrderedByDay();
         try {
             while (rs.moveToNext()) {
-                String s;
-                s = rs.getString(rs.getColumnIndex("start_time"));
-                String[] result = s.split("\\s");
+                String startTime, endTime;
+                startTime = rs.getString(rs.getColumnIndex("start_time"));
+                endTime = rs.getString(rs.getColumnIndex("end_time"));
+
+                String[] resultStartTime = startTime.split("\\s");
+                String[] resultEndTime = endTime.split("\\s");
 
                 //set first run data to prevent missing first item
                 if(firstRun){
-                    tempDate = result[0] + ": " + stripTime(result[1]) +", ";
-                    previousDate = result[0];
+                    tempDate = resultStartTime[0] + ": " + stripTime(resultStartTime[1]) + "-" +
+                            stripTime(resultEndTime[1]) + ", ";
+                    previousDate = resultStartTime[0];
                     firstRun = false;
                 }else{
                     //check if the date is the same (e.g. check if temp is 2017-01-10 against the result)
-                    if(previousDate.equals(result[0])){
+                    if(previousDate.equals(resultStartTime[0])){
                         //same date, new time. So append the time.
-                        tempDate = tempDate + stripTime(result[1]) + ", ";
+                        tempDate = tempDate + stripTime(resultStartTime[1]) + "-" +
+                                stripTime(resultEndTime[1]) + ", ";
                     }else{
                         //new date, so add the old date, reset, then re-assign new date
                         dateTimes.add(tempDate);
                         tempDate = "";
-                        tempDate = result[0] + ": " + stripTime(result[1]) + ", ";
+                        tempDate = resultStartTime[0] + ": " + stripTime(resultStartTime[1]) + "-" +
+                                stripTime(resultEndTime[1]) + ", ";
 
-                        previousDate = result[0];
+                        previousDate = resultStartTime[0];
 
                     }
                 }
-
-            }
+            } // end while
         } finally {
             rs.close();
         }
