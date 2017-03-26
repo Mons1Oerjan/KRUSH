@@ -68,7 +68,11 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
         //set location based on user input
         setTutorLocation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setAddress(editTextAddress.getText().toString());
+                if(editTextAddress.length() <= 3) {
+                    editTextAddress.setError("Invalid address");
+                } else {
+                    setAddress(editTextAddress.getText().toString());
+                }
             }
         });
 
@@ -79,7 +83,7 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
      * setUpMap prepares the map onCreate() this fragment
      */
     private void setUpMap() {
-        // Add a marker in Sydney and move the camera
+        // Add a marker in Halifax and move the camera
         LatLng halifax = new LatLng(44.651070, -63.582687);
         mMap.addMarker(new MarkerOptions().position(halifax).title("Halifax"));
         // Zoom in, animating the camera.
