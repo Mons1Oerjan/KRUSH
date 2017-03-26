@@ -40,7 +40,7 @@ public class TutorHomeFragment extends Fragment {
         USER_ID = getArguments().getInt("USER_ID");
 
         //get Context:
-        Context C = getActivity().getApplicationContext();
+        Context C = getContext();
 
         //init DB connection:
         DBHelper mydb = new DBHelper(C);

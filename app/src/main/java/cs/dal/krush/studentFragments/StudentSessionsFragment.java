@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,7 @@ public class StudentSessionsFragment extends Fragment {
         USER_ID = getArguments().getInt("USER_ID");
 
         //get Context:
-        Context C = getActivity().getApplicationContext();
+        Context C = getContext();
 
         //init DB connection:
         DBHelper mydb = new DBHelper(C);
