@@ -43,12 +43,18 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
 
     static int USER_ID;
     private GoogleMap mMap;
+    private DBHelper mydb;
+    private Cursor cursor;
+    private String address;
+    private String locationId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tutor_location, container, false);
         USER_ID = getArguments().getInt("USER_ID");
 
+        //initialize database connection
+        mydb = new DBHelper(getContext());
 
         //fetch UI elements:
         TextView pageTitle = (TextView)view.findViewById(R.id.tutorLocationHeader);
@@ -68,10 +74,18 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
         //set location based on user input
         setTutorLocation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(editTextAddress.length() <= 3) {
+                // Validate to a minimum a postal code for an address
+                if(editTextAddress.length() <= 6) {
                     editTextAddress.setError("Invalid address");
                 } else {
-                    setAddress(editTextAddress.getText().toString());
+                    address = editTextAddress.getText().toString();
+                    setAddress(address);
+                    //add location to DB
+                    mydb.location.insert(address);
+                    cursor = mydb.location.getDataByLocation(address+"");
+                    cursor.moveToFirst();
+                    locationId = cursor.getString(cursor.getColumnIndex("id"));
+                    mydb.tutor.updateTutorLocation(USER_ID, Integer.parseInt(locationId));
                 }
             }
         });
