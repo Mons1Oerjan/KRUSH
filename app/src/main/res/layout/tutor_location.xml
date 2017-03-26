@@ -7,7 +7,11 @@
         android:id="@+id/tutorLocationHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Set Location" />
+        android:text="Set Location"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="32dp"
+        android:textStyle="bold" />
 
     <fragment
         android:id="@+id/tutorMap"

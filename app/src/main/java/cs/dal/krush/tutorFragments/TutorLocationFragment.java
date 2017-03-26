@@ -29,16 +29,25 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
 
     static int USER_ID;
     private GoogleMap mMap;
-    private SupportMapFragment mapFrag;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tutor_location, container, false);
         USER_ID = getArguments().getInt("USER_ID");
 
-        mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.tutorMap);
+
+        //fetch UI elements:
+        TextView pageTitle = (TextView)view.findViewById(R.id.tutorLocationHeader);
+        SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.tutorMap);
         mapFrag.getMapAsync(this);
+
+
+        //fetch custom app font:
+        final Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
+
+        //set font style:
+        pageTitle.setTypeface(typeFace);
+
 
 
 
@@ -47,9 +56,16 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
 
     private void setUpMap() {
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng sydney = new LatLng(44.651070, -63.582687);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Halifax"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        mMap.animateCamera( CameraUpdateFactory.zoomTo( 15.0f ) );
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15));
+        // Zoom in, animating the camera.
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+        // Zoom out to zoom level 10.
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), null);
     }
 
     @Override
