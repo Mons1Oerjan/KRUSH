@@ -44,7 +44,7 @@ public class StudentBookingFragment extends Fragment {
         USER_ID = getArguments().getInt("USER_ID");
 
         //get Context:
-        C = getActivity().getApplicationContext();
+        C = getContext();
 
         //init DB connection:
         mydb = new DBHelper(C);

@@ -34,7 +34,7 @@ public class TutorSessionsFragment extends Fragment {
         USER_ID = getArguments().getInt("USER_ID");
 
         //get Context:
-        Context C = getActivity().getApplicationContext();
+        Context C = getContext();
 
         //init DB connection:
         DBHelper mydb = new DBHelper(C);
@@ -63,11 +63,11 @@ public class TutorSessionsFragment extends Fragment {
         sessionHistoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                // Get tutor id
+                // Get session id
                 cursorSessionsResponse.moveToPosition(position);
                 int SESSION_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("id"));
 
-                // Add USER_ID and TUTOR_ID to session details fragment for displaying
+                // Add USER_ID and SESSION_ID to session details fragment for displaying
                 Bundle bundle = new Bundle();
                 bundle.putInt("USER_ID", USER_ID);
                 bundle.putInt("SESSION_ID", SESSION_ID);
