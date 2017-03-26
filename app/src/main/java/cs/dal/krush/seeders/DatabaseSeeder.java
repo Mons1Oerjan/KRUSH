@@ -3,6 +3,7 @@ package cs.dal.krush.seeders;
 import android.content.Context;
 import android.database.Cursor;
 
+import cs.dal.krush.models.AvailableTime;
 import cs.dal.krush.models.DBHelper;
 
 /**
@@ -42,6 +43,7 @@ public class DatabaseSeeder {
         CourseSeeder.insert(mydb);
         AudioRecordingSeeder.insert(mydb);
         CoursesTutorsSeeder.insert(mydb);
+        AvailableTimeSeeder.insert(mydb);
     }
 
     /**

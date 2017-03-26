@@ -5,9 +5,11 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -51,11 +53,35 @@ public class TutorSessionsFragment extends Fragment {
         pageTitle.setTypeface(typeFace);
 
         //get all tutoring sessions by the tutor:
-        Cursor cursorSessionsResponse = mydb.tutoringSession.getSessionHistoryByTutorIdForCursorAdapter(USER_ID);
+        final Cursor cursorSessionsResponse = mydb.tutoringSession.getSessionHistoryByTutorIdForCursorAdapter(USER_ID);
 
         //set sessions listview adapter:
         SessionCursorAdapter sessionsAdapter = new SessionCursorAdapter(C, cursorSessionsResponse);
         sessionHistoryListView.setAdapter(sessionsAdapter);
+
+        // Click listener for sessions history list:
+        sessionHistoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                // Get tutor id
+                cursorSessionsResponse.moveToPosition(position);
+                int SESSION_ID = cursorSessionsResponse.getInt(cursorSessionsResponse.getColumnIndex("id"));
+
+                // Add USER_ID and TUTOR_ID to session details fragment for displaying
+                Bundle bundle = new Bundle();
+                bundle.putInt("USER_ID", USER_ID);
+                bundle.putInt("SESSION_ID", SESSION_ID);
+
+                // Swap into new fragment
+                TutorHistoryDetailsFragment session = new TutorHistoryDetailsFragment();
+                session.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.tutor_fragment_container, session);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            }
+        });
 
         return view;
     }
