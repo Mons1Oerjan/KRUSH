@@ -133,9 +133,8 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
                 Marker location = mMap.addMarker(new MarkerOptions()
                         .position(user)
                         .title(address)
-                        // TODO: 2017-03-25 Create custom marker (if we have time) 
-                        // .icon(BitmapDescriptorFactory.fromResource(R.drawable.star))
-                        .icon(getMarkerIcon("#2ecc71"))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
+                        // .icon(getMarkerIcon("#2ecc71")) - google marker
                 );
                 // Move the camera instantly to address with a zoom of 15.
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 15));
