@@ -58,10 +58,8 @@ public class SessionLocationFragment extends Fragment implements OnMapReadyCallb
         mydb = new DBHelper(getContext());
 
         //fetch UI elements:
-        TextView pageTitle = (TextView)view.findViewById(R.id.tutorLocationHeader);
-        final EditText editTextAddress = (EditText)view.findViewById(R.id.editTextAddress);
-        SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.tutorMap);
-        Button setTutorLocation = (Button)view.findViewById(R.id.setTutorLocation);
+        TextView pageTitle = (TextView)view.findViewById(R.id.sessionLocationHeader);
+        SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.sessionMap);
         mapFrag.getMapAsync(this);
 
 
@@ -70,30 +68,6 @@ public class SessionLocationFragment extends Fragment implements OnMapReadyCallb
 
         //set font style:
         pageTitle.setTypeface(typeFace);
-
-
-        //set location based on user input
-        setTutorLocation.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Validate to a minimum a postal code for an address
-                if(editTextAddress.length() <= 6) {
-                    editTextAddress.setError("Invalid address");
-                } else {
-                    address = editTextAddress.getText().toString();
-                    setAddress(address);
-                    //add location to DB
-                    mydb.location.insert(address);
-                    //associate locations with current tutor
-                    cursor = mydb.location.getDataByLocation(address+"");
-                    cursor.moveToFirst();
-                    locationId = cursor.getString(cursor.getColumnIndex("id"));
-                    mydb.tutor.updateTutorLocation(USER_ID, Integer.parseInt(locationId));
-                    //confirm completion
-                    Toast toast = Toast.makeText(getContext(), "Location saved", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            }
-        });
 
         return view;
     }

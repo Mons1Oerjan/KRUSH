@@ -75,7 +75,7 @@ public class SessionDetailsFragment extends Fragment {
 
                 // Swap into new fragment
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                TutorLocationFragment newFragment = new TutorLocationFragment();
+                SessionLocationFragment newFragment = new SessionLocationFragment();
 
                 newFragment.setArguments(bundle);
 
