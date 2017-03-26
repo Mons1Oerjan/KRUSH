@@ -267,7 +267,7 @@ public class TutorAvailabilityFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("DATE", date);
-
+                bundle.putInt("USER_ID",USER_ID);
                 TutorSingleDayAvailabilityFragment newFragment = new TutorSingleDayAvailabilityFragment();
                 newFragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();

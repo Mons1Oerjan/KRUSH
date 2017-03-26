@@ -14,23 +14,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cs.dal.krush.R;
-import cs.dal.krush.adapters.RecyclerDataAdapter;
-import cs.dal.krush.helpers.OnStartDragListener;
-import cs.dal.krush.helpers.SimpleItemTouchHelperCallback;
+import cs.dal.krush.adapters.CustomTutorDayTimeAdapter;
+import cs.dal.krush.adapters.TutorDayTimeRowitem;
 import cs.dal.krush.models.DBHelper;
 
 /**
  * Created by greg on 19/03/17.
  */
 
-public class TutorSingleDayAvailabilityFragment extends Fragment implements OnStartDragListener {
+public class TutorSingleDayAvailabilityFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
-    protected RecyclerDataAdapter mAdapter;
     private DBHelper db;
     private ListView lvTutorDaySchedule;
     private String year,month,day; // ex: 2017 03 20
@@ -43,26 +38,21 @@ public class TutorSingleDayAvailabilityFragment extends Fragment implements OnSt
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tutor_single_day_availability, container, false);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        String date = getArguments().getString("DATE");
-
-        db = new DBHelper(getActivity().getBaseContext());
-
-        //fetch custom app font
-        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
-
-        loadSchedule(date);
-
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        db = new DBHelper(getActivity().getBaseContext());
+        lvTutorDaySchedule=(ListView)getView().findViewById(R.id.lvTutorDaySchedule);
 
+        String date = getArguments().getString("DATE");
+        USER_ID = getArguments().getInt("USER_ID");
+
+        //fetch custom app font
+        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
+
+        loadSchedule(date);
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -71,7 +61,8 @@ public class TutorSingleDayAvailabilityFragment extends Fragment implements OnSt
      * Loads the ListView of the tutor's availability
      */
     public void loadSchedule(String date){
-        ArrayList<String> dateTimes = new ArrayList<String>();
+        ArrayList<TutorDayTimeRowitem> items = new ArrayList<TutorDayTimeRowitem>();
+        TutorDayTimeRowitem newItem;
 
         Cursor rs;
         String time;
@@ -90,7 +81,9 @@ public class TutorSingleDayAvailabilityFragment extends Fragment implements OnSt
                 time += " - ";
                 time += rs.getString(rs.getColumnIndex("end"));
 
-                dateTimes.add(time);
+                newItem = new TutorDayTimeRowitem(time);
+
+                items.add(newItem);
 
                 time = "";
             }
@@ -98,18 +91,14 @@ public class TutorSingleDayAvailabilityFragment extends Fragment implements OnSt
             rs.close();
         }
 
-        mAdapter = new RecyclerDataAdapter();
-        // Set CustomAdapter as the adapter for RecyclerView.
-        mRecyclerView.setAdapter(mAdapter);
+        CustomTutorDayTimeAdapter adapter = new CustomTutorDayTimeAdapter(
+                getActivity(),
+                R.layout.tutor_single_day_availability_row_layout,
+                items,
+                date,
+                USER_ID);
 
-        ItemTouchHelper.Callback callback =
-                new SimpleItemTouchHelperCallback(mAdapter);
-        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-        touchHelper.attachToRecyclerView(mRecyclerView);
+        lvTutorDaySchedule.setAdapter(adapter);
     }
 
-    @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
-    }
 }

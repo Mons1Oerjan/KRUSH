@@ -6,20 +6,14 @@
     android:fitsSystemWindows="true"
     tools:context="cs.dal.krush.tutorFragments.TutorAvailabilityFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
-        android:scrollbars="vertical"
+    <FrameLayout
+        android:id="@+id/tutor_individual_schedule_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent" />
 
-    <!--<FrameLayout-->
-        <!--android:id="@+id/tutor_individual_schedule_fragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
-
-    <!--<ListView-->
-        <!--android:id="@+id/lvTutorDaySchedule"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
+    <ListView
+        android:id="@+id/lvTutorDaySchedule"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </android.support.design.widget.CoordinatorLayout>

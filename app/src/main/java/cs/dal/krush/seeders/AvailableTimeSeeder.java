@@ -20,6 +20,8 @@ public class AvailableTimeSeeder {
         calendarStartTime.set(Calendar.MONTH, 3);
         calendarStartTime.set(Calendar.YEAR, 2017);
         calendarStartTime.set(Calendar.MINUTE, 0);
+        calendarStartTime.set(Calendar.SECOND, 0);
+
 
         GregorianCalendar calendarEndTime = new GregorianCalendar();
         calendarEndTime.set(Calendar.DAY_OF_MONTH, 20);
@@ -27,6 +29,7 @@ public class AvailableTimeSeeder {
         calendarEndTime.set(Calendar.MONTH, 3);
         calendarEndTime.set(Calendar.YEAR, 2017);
         calendarEndTime.set(Calendar.MINUTE, 0);
+        calendarStartTime.set(Calendar.SECOND, 0);
 
         String startTime = timeFormatter.format(calendarStartTime.getTime());
         String endTime = timeFormatter.format(calendarEndTime.getTime());
@@ -38,12 +41,14 @@ public class AvailableTimeSeeder {
         calendarStartTime.set(Calendar.MONTH, 3);
         calendarStartTime.set(Calendar.YEAR, 2017);
         calendarStartTime.set(Calendar.MINUTE, 0);
+        calendarStartTime.set(Calendar.SECOND, 0);
 
         calendarEndTime.set(Calendar.DAY_OF_MONTH, 20);
         calendarEndTime.set(Calendar.HOUR_OF_DAY, 13);
         calendarEndTime.set(Calendar.MONTH, 3);
         calendarEndTime.set(Calendar.YEAR, 2017);
         calendarEndTime.set(Calendar.MINUTE, 0);
+        calendarStartTime.set(Calendar.SECOND, 0);
 
         startTime = timeFormatter.format(calendarStartTime.getTime());
         endTime = timeFormatter.format(calendarEndTime.getTime());
@@ -57,12 +62,14 @@ public class AvailableTimeSeeder {
         calendarStartTime.set(Calendar.MONTH, 3);
         calendarStartTime.set(Calendar.YEAR, 2017);
         calendarStartTime.set(Calendar.MINUTE, 0);
+        calendarStartTime.set(Calendar.SECOND, 0);
 
         calendarEndTime.set(Calendar.DAY_OF_MONTH, 21);
         calendarEndTime.set(Calendar.HOUR_OF_DAY, 16);
         calendarEndTime.set(Calendar.MONTH, 3);
         calendarEndTime.set(Calendar.YEAR, 2017);
         calendarEndTime.set(Calendar.MINUTE, 0);
+        calendarStartTime.set(Calendar.SECOND, 0);
 
         startTime = timeFormatter.format(calendarStartTime.getTime());
         endTime = timeFormatter.format(calendarEndTime.getTime());
@@ -76,12 +83,14 @@ public class AvailableTimeSeeder {
         calendarStartTime.set(Calendar.MONTH, 3);
         calendarStartTime.set(Calendar.YEAR, 2017);
         calendarStartTime.set(Calendar.MINUTE, 0);
+        calendarStartTime.set(Calendar.SECOND, 0);
 
         calendarEndTime.set(Calendar.DAY_OF_MONTH, 22);
         calendarEndTime.set(Calendar.HOUR_OF_DAY, 16);
         calendarEndTime.set(Calendar.MONTH, 3);
         calendarEndTime.set(Calendar.YEAR, 2017);
         calendarEndTime.set(Calendar.MINUTE, 30);
+        calendarStartTime.set(Calendar.SECOND, 0);
 
         startTime = timeFormatter.format(calendarStartTime.getTime());
         endTime = timeFormatter.format(calendarEndTime.getTime());

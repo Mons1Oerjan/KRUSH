@@ -3,6 +3,7 @@ package cs.dal.krush.models;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 /**
  * Available Time Model class.
@@ -75,6 +76,19 @@ public class AvailableTime extends Table{
                 "WHERE start_time > datetime('now','-1 day') " +
                 "ORDER BY start_time",null);
         return res;
+    }
+
+    public void deleteRecord(String date, int tutor_id){
+        res = dbRead.rawQuery("SELECT id, start_time FROM available_time " +
+                "WHERE start_time='"+date+"' " +
+                "AND tutor_id="+tutor_id+"",null);
+
+        Integer id = null;
+        res.moveToFirst();
+        id = res.getInt(res.getColumnIndex("id"));
+
+        dbWrite.execSQL("DELETE FROM available_time " +
+                "WHERE id="+id+"");
     }
 
 }

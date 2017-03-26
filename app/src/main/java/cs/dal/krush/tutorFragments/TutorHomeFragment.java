@@ -71,11 +71,11 @@ public class TutorHomeFragment extends Fragment {
         ratingTitle.setTypeface(typeFace);
 
         //get all tutoring sessions by the tutor:
-        //Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByTutorIdForCursorAdapter(USER_ID);
+        final Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByTutorIdForCursorAdapter(USER_ID);
 
         //set sessions listview adapter:
-        //SessionCursorAdapter sessionsAdapter = new SessionCursorAdapter(C, cursorSessionsResponse);
-        //upcomingSessionsListView.setAdapter(sessionsAdapter);
+        SessionCursorAdapter sessionsAdapter = new SessionCursorAdapter(C, cursorSessionsResponse);
+        upcomingSessionsListView.setAdapter(sessionsAdapter);
 
         // TODO: 2017-03-18 We need to write the instructions once the actual functionality is implemented to accurately write to be
         final String text = "Lorem ipsum dolor sit amet, pri magna delicata an. An " +
