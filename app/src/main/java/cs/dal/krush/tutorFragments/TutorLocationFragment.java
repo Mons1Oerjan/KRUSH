@@ -2,6 +2,7 @@ package cs.dal.krush.tutorFragments;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
@@ -14,11 +15,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -29,8 +32,6 @@ import java.util.List;
 import java.util.Locale;
 
 import cs.dal.krush.R;
-import cs.dal.krush.TutorCursorAdapters.SessionCursorAdapter;
-import cs.dal.krush.appFragments.SessionDetailsFragment;
 import cs.dal.krush.models.DBHelper;
 
 import static cs.dal.krush.R.id.map;
@@ -82,10 +83,14 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
                     setAddress(address);
                     //add location to DB
                     mydb.location.insert(address);
+                    //associate locations with current tutor
                     cursor = mydb.location.getDataByLocation(address+"");
                     cursor.moveToFirst();
                     locationId = cursor.getString(cursor.getColumnIndex("id"));
                     mydb.tutor.updateTutorLocation(USER_ID, Integer.parseInt(locationId));
+                    //confirm completion
+                    Toast toast = Toast.makeText(getContext(), "Location saved", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });
@@ -99,7 +104,9 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
     private void setUpMap() {
         // Add a marker in Halifax and move the camera
         LatLng halifax = new LatLng(44.651070, -63.582687);
-        mMap.addMarker(new MarkerOptions().position(halifax).title("Halifax"));
+        mMap.addMarker(new MarkerOptions().position(halifax)
+                                          .title("Halifax")
+                                          .icon(getMarkerIcon("#2ecc71")));
         // Zoom in, animating the camera.
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(halifax,15));
     }
@@ -114,8 +121,7 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
      */
     private void setAddress(String address) {
         Geocoder geoCoder = new Geocoder(getActivity(), Locale.getDefault());
-        try
-        {
+        try {
             List<Address> addresses = geoCoder.getFromLocationName(address, 5);
             if (addresses.size() > 0) {
                 Double lat = (double) (addresses.get(0).getLatitude());
@@ -124,11 +130,12 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
                 Log.d("lat-long", "" + lat + "......." + lon);
                 final LatLng user = new LatLng(lat, lon);
                 /*used marker for show the location */
-                Marker hamburg = mMap.addMarker(new MarkerOptions()
+                Marker location = mMap.addMarker(new MarkerOptions()
                         .position(user)
                         .title(address)
                         // TODO: 2017-03-25 Create custom marker (if we have time) 
                         // .icon(BitmapDescriptorFactory.fromResource(R.drawable.star))
+                        .icon(getMarkerIcon("#2ecc71"))
                 );
                 // Move the camera instantly to address with a zoom of 15.
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 15));
@@ -142,5 +149,16 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         setUpMap();
+    }
+
+    /**
+     * Takes a color and returns hue format for Google Maps Marker
+     * @param color
+     * @return hue color
+     */
+    public BitmapDescriptor getMarkerIcon(String color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(Color.parseColor(color), hsv);
+        return BitmapDescriptorFactory.defaultMarker(hsv[0]);
     }
 }
