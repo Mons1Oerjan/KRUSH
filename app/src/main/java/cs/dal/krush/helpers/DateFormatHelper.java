@@ -118,4 +118,38 @@ public class DateFormatHelper
 
     }
 
+    /**
+     * Formatter to match Java date with sqlite, this makes
+     * it much easier to query dates in sqlite.
+     * @param date selected date
+     * @param time specific time of day
+     * @return
+     */
+    public String formatForSqlite(String date, String time){
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+        // split and parse
+        String[] splitDate = date.split("[-]");
+        int year = Integer.parseInt(splitDate[0]);
+        int month = Integer.parseInt(splitDate[1]);
+        int day = Integer.parseInt(splitDate[2]);
+
+        // get the hour and minute of day
+        String[] splitTime = time.split("\\s");
+        String[] splitStartTime = splitTime[0].split("[:]");
+        int hourOfDay = Integer.parseInt(splitStartTime[0]);
+        int minute = Integer.parseInt(splitStartTime[1]);
+
+        // convert to calendar, then format
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MONTH, month-1);
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+
+        return formatter.format(calendar.getTime());
+    }
+
 }
