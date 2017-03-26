@@ -3,8 +3,11 @@ package cs.dal.krush.tutorFragments;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +17,20 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import cs.dal.krush.R;
 import cs.dal.krush.TutorCursorAdapters.SessionCursorAdapter;
 import cs.dal.krush.models.DBHelper;
+
+import static cs.dal.krush.R.id.map;
 
 /**
  * TutorLocationFragment allows a user to set their preferred based on a location.
@@ -66,6 +77,42 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
         mMap.animateCamera(CameraUpdateFactory.zoomIn());
         // Zoom out to zoom level 10.
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15), null);
+
+        setAddres("6050 University Avenue B3H");
+    }
+
+    private void setAddres(String address) {
+//        String address = "6050 University Avenue B3H";
+        // get address in string for used location for the map
+
+        /* get latitude and longitude from the adderress */
+
+        Geocoder geoCoder = new Geocoder(getActivity(), Locale.getDefault());
+        try
+        {
+            List<Address> addresses = geoCoder.getFromLocationName(address, 5);
+            if (addresses.size() > 0)
+            {
+                Double lat = (double) (addresses.get(0).getLatitude());
+                Double lon = (double) (addresses.get(0).getLongitude());
+
+                Log.d("lat-long", "" + lat + "......." + lon);
+                final LatLng user = new LatLng(lat, lon);
+                /*used marker for show the location */
+                Marker hamburg = mMap.addMarker(new MarkerOptions()
+                        .position(user)
+                        .title(address)
+                        // TODO: 2017-03-25 Create custom marker (if we have time) 
+                        // .icon(BitmapDescriptorFactory.fromResource(R.drawable.star))
+                );
+                // Move the camera instantly to address with a zoom of 15.
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(user, 15));
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
