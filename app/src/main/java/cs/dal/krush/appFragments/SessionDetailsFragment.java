@@ -60,6 +60,8 @@ public class SessionDetailsFragment extends Fragment {
         String title = sessionCursor.getString(sessionCursor.getColumnIndex("title"));
         String studentId = sessionCursor.getString(sessionCursor.getColumnIndex("student_id"));
         String tutorId = sessionCursor.getString(sessionCursor.getColumnIndex("tutor_id"));
+        final String locationId = sessionCursor.getString(sessionCursor.getColumnIndex("location_id"));
+        System.out.println("LOCATION ID--> " + locationId);
 
         // Set values to view
         titleView.setText(title);
@@ -71,7 +73,7 @@ public class SessionDetailsFragment extends Fragment {
             public void onClick(View v) {
                 // Add USER_ID to be passed to new view
                 Bundle bundle = new Bundle();
-                bundle.putInt("USER_ID", USER_ID);
+                bundle.putInt("LOCATION_ID", Integer.parseInt(locationId));
 
                 // Swap into new fragment
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();

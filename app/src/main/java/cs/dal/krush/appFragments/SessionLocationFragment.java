@@ -42,7 +42,7 @@ import static cs.dal.krush.R.id.map;
  */
 public class SessionLocationFragment extends Fragment implements OnMapReadyCallback {
 
-    static int USER_ID;
+    static int LOCATION_ID;
     private GoogleMap mMap;
     private DBHelper mydb;
     private Cursor cursor;
@@ -52,7 +52,7 @@ public class SessionLocationFragment extends Fragment implements OnMapReadyCallb
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.session_location, container, false);
-        USER_ID = getArguments().getInt("USER_ID");
+        LOCATION_ID = getArguments().getInt("LOCATION_ID");
 
         //initialize database connection
         mydb = new DBHelper(getContext());
@@ -69,6 +69,11 @@ public class SessionLocationFragment extends Fragment implements OnMapReadyCallb
         //set font style:
         pageTitle.setTypeface(typeFace);
 
+        cursor = mydb.location.getData(LOCATION_ID);
+        cursor.moveToFirst();
+
+        address = cursor.getString(cursor.getColumnIndex("location"));
+
         return view;
     }
 
@@ -83,6 +88,8 @@ public class SessionLocationFragment extends Fragment implements OnMapReadyCallb
                 .icon(getMarkerIcon("#2ecc71")));
         // Zoom in, animating the camera.
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(halifax,15));
+
+
     }
 
     /**
@@ -123,6 +130,7 @@ public class SessionLocationFragment extends Fragment implements OnMapReadyCallb
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         setUpMap();
+        setAddress(address);
     }
 
     /**
