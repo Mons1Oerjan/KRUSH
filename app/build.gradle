@@ -17,7 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets { main { java.srcDirs = ['src/main/java', 'src/main/java/cs.dal.krush/helpers'] } }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/java/cs.dal.krush/helpers', 'src/main/java/cs.dal.krush/cs.dal.krush.adapters']
+        }
+    }
 }
 
 dependencies {

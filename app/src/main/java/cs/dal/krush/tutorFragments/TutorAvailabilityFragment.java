@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -67,7 +68,6 @@ public class TutorAvailabilityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tutor_availability, container, false);
         USER_ID = getArguments().getInt("USER_ID");
-
 
         return view;
     }
@@ -231,7 +231,8 @@ public class TutorAvailabilityFragment extends Fragment {
                 }
 
                 if(isValid){
-                    db.availableTime.insert(startTime,endTime,1);
+                    int id = USER_ID;
+                    db.availableTime.insert(startTime,endTime,USER_ID);
                     Toast.makeText(getContext(), "Time slot added successfully!", Toast.LENGTH_SHORT).show();
                     txtDate.setText("");
                     txtStartTime.setText("");
@@ -281,6 +282,31 @@ public class TutorAvailabilityFragment extends Fragment {
                 ft.replace(R.id.tutor_fragment_container, newFragment);
                 ft.addToBackStack(null);
                 ft.commit();
+            }
+        });
+
+        lvTutorScheduleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView tv = (TextView) view;
+                String date = tv.getText().toString();
+                if(!date.equals("")){
+                    String[] splitDate = date.split("[:]");
+                    date = splitDate[0];
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("DATE", date);
+                    bundle.putInt("USER_ID",USER_ID);
+                    TutorSingleDayAvailabilityFragment newFragment = new TutorSingleDayAvailabilityFragment();
+                    newFragment.setArguments(bundle);
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                    transaction.replace(R.id.tutor_fragment_container, newFragment);
+                    transaction.addToBackStack(null);
+
+                    transaction.commit();
+                }
+
             }
         });
 
@@ -344,12 +370,13 @@ public class TutorAvailabilityFragment extends Fragment {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.DAY_OF_MONTH, sDay-1);
+        calendar.set(Calendar.DAY_OF_MONTH, sDay);
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MONTH, sMonth);
         calendar.set(Calendar.YEAR, sYear);
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.HOUR, hour);
+        calendar.set(Calendar.SECOND,0);
 
         return formatter.format(calendar.getTime());
 
@@ -364,35 +391,40 @@ public class TutorAvailabilityFragment extends Fragment {
         List<String> dateTimes = new ArrayList<String>();
         boolean firstRun = true;
         Cursor rs;
-        rs = db.availableTime.getAllOrderedByDay();
+        rs = db.availableTime.getAllOrderedByDay(USER_ID);
         try {
             while (rs.moveToNext()) {
-                String s;
-                s = rs.getString(rs.getColumnIndex("start_time"));
-                String[] result = s.split("\\s");
+                String startTime, endTime;
+                startTime = rs.getString(rs.getColumnIndex("start_time"));
+                endTime = rs.getString(rs.getColumnIndex("end_time"));
+
+                String[] resultStartTime = startTime.split("\\s");
+                String[] resultEndTime = endTime.split("\\s");
 
                 //set first run data to prevent missing first item
                 if(firstRun){
-                    tempDate = result[0] + ": " + stripTime(result[1]) +", ";
-                    previousDate = result[0];
+                    tempDate = resultStartTime[0] + ": " + stripTime(resultStartTime[1]) + "-" +
+                            stripTime(resultEndTime[1]) + ", ";
+                    previousDate = resultStartTime[0];
                     firstRun = false;
                 }else{
                     //check if the date is the same (e.g. check if temp is 2017-01-10 against the result)
-                    if(previousDate.equals(result[0])){
+                    if(previousDate.equals(resultStartTime[0])){
                         //same date, new time. So append the time.
-                        tempDate = tempDate + stripTime(result[1]) + ", ";
+                        tempDate = tempDate + stripTime(resultStartTime[1]) + "-" +
+                                stripTime(resultEndTime[1]) + ", ";
                     }else{
                         //new date, so add the old date, reset, then re-assign new date
                         dateTimes.add(tempDate);
                         tempDate = "";
-                        tempDate = result[0] + ": " + stripTime(result[1]) + ", ";
+                        tempDate = resultStartTime[0] + ": " + stripTime(resultStartTime[1]) + "-" +
+                                stripTime(resultEndTime[1]) + ", ";
 
-                        previousDate = result[0];
+                        previousDate = resultStartTime[0];
 
                     }
                 }
-
-            }
+            } // end while
         } finally {
             rs.close();
         }
@@ -406,6 +438,7 @@ public class TutorAvailabilityFragment extends Fragment {
                 dateTimes );
 
         lvTutorScheduleListView.setAdapter(arrayAdapter);
+
     }
 
     /**
