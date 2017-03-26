@@ -20,6 +20,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,7 +45,7 @@ import cs.dal.krush.models.DBHelper;
  *
  * The tutors can set their availability and schedule_view using this fragment.
  */
-public class TutorAvailabilityFragment extends Fragment {
+public class TutorAvailabilityFragment extends Fragment implements OnMapReadyCallback {
 
     Button btnDatePicker, btnStartTimePicker, btnEndTimePicker, btnSubmit, btnViewCalendar;
     EditText txtDate, txtStartTime, txtEndTime;
@@ -51,6 +59,7 @@ public class TutorAvailabilityFragment extends Fragment {
     private DateFormat timeFormatter = new SimpleDateFormat("h:mm a", Locale.getDefault());
     private GregorianCalendar startTimeCalendar = new GregorianCalendar();
     private GregorianCalendar endTimeCalendar = new GregorianCalendar();
+    private GoogleMap mMap;
 
     static int USER_ID;
 
@@ -80,6 +89,9 @@ public class TutorAvailabilityFragment extends Fragment {
         txtEndTime=(EditText)getView().findViewById(R.id.txtEndTime);
         lvTutorScheduleListView=(ListView)getView().findViewById(R.id.lvTutorScheduleListView);
         rl = (RelativeLayout)getView().findViewById(R.id.activity_tutor_calendar);
+
+        SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        mapFrag.getMapAsync(this);
 
         txtStartTime.setEnabled(false);
         txtEndTime.setEnabled(false);
@@ -410,4 +422,17 @@ public class TutorAvailabilityFragment extends Fragment {
         return convertedNewTime;
     }
 
+
+    private void setUpMap() {
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        setUpMap();
+    }
 }
