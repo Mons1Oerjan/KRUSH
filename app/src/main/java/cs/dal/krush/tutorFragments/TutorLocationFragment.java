@@ -127,9 +127,8 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
                 Double lat = (double) (addresses.get(0).getLatitude());
                 Double lon = (double) (addresses.get(0).getLongitude());
                 //Log Long and Lat
-                Log.d("lat-long", "" + lat + "......." + lon);
                 final LatLng user = new LatLng(lat, lon);
-                /*used marker for show the location */
+                //used marker for show the location
                 Marker location = mMap.addMarker(new MarkerOptions()
                         .position(user)
                         .title(address)
