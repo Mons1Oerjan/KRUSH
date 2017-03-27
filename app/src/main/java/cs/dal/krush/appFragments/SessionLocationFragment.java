@@ -1,4 +1,4 @@
-package cs.dal.krush.tutorFragments;
+package cs.dal.krush.appFragments;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -37,12 +37,13 @@ import cs.dal.krush.models.DBHelper;
 import static cs.dal.krush.R.id.map;
 
 /**
- * TutorLocationFragment allows a user to set their preferred based on a location.
+ * SessionLocationFragment allows a user to view the location of an upcoming
+ * session and get directions.
  *
  */
-public class TutorLocationFragment extends Fragment implements OnMapReadyCallback {
+public class SessionLocationFragment extends Fragment implements OnMapReadyCallback {
 
-    static int USER_ID;
+    static int LOCATION_ID;
     private GoogleMap mMap;
     private DBHelper mydb;
     private Cursor cursor;
@@ -51,17 +52,15 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tutor_location, container, false);
-        USER_ID = getArguments().getInt("USER_ID");
+        View view = inflater.inflate(R.layout.session_location, container, false);
+        LOCATION_ID = getArguments().getInt("LOCATION_ID");
 
         //initialize database connection
         mydb = new DBHelper(getContext());
 
         //fetch UI elements:
-        TextView pageTitle = (TextView)view.findViewById(R.id.tutorLocationHeader);
-        final EditText editTextAddress = (EditText)view.findViewById(R.id.editTextAddress);
-        SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.tutorMap);
-        Button setTutorLocation = (Button)view.findViewById(R.id.setTutorLocation);
+        TextView pageTitle = (TextView)view.findViewById(R.id.sessionLocationHeader);
+        SupportMapFragment mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.sessionMap);
         mapFrag.getMapAsync(this);
 
 
@@ -71,29 +70,10 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
         //set font style:
         pageTitle.setTypeface(typeFace);
 
+        cursor = mydb.location.getData(LOCATION_ID);
+        cursor.moveToFirst();
 
-        //set location based on user input
-        setTutorLocation.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Validate to a minimum a postal code for an address
-                if(editTextAddress.length() <= 6) {
-                    editTextAddress.setError("Invalid address");
-                } else {
-                    address = editTextAddress.getText().toString();
-                    setAddress(address);
-                    //add location to DB
-                    mydb.location.insert(address);
-                    //associate locations with current tutor
-                    cursor = mydb.location.getDataByLocation(address+"");
-                    cursor.moveToFirst();
-                    locationId = cursor.getString(cursor.getColumnIndex("id"));
-                    mydb.tutor.updateTutorLocation(USER_ID, Integer.parseInt(locationId));
-                    //confirm completion
-                    Toast toast = Toast.makeText(getContext(), "Location saved", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            }
-        });
+        address = cursor.getString(cursor.getColumnIndex("location"));
 
         return view;
     }
@@ -105,10 +85,12 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
         // Add a marker in Halifax and move the camera
         LatLng halifax = new LatLng(44.651070, -63.582687);
         mMap.addMarker(new MarkerOptions().position(halifax)
-                                          .title("Halifax")
-                                          .icon(getMarkerIcon("#2ecc71")));
+                .title("Halifax")
+                .icon(getMarkerIcon("#2ecc71")));
         // Zoom in, animating the camera.
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(halifax,15));
+
+
     }
 
     /**
@@ -147,6 +129,7 @@ public class TutorLocationFragment extends Fragment implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         setUpMap();
+        setAddress(address);
     }
 
     /**

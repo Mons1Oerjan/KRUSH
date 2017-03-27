@@ -19,4 +19,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/session_tutor_id"/>
 
+    <Button
+        android:id="@+id/sessionDetailLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location" />
+
 </LinearLayout>
