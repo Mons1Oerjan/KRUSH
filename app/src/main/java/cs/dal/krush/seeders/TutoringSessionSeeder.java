@@ -100,16 +100,16 @@ public class TutoringSessionSeeder {
         db.tutoringSession.insert(1,6,1,1,"Meeting at Dal Student Union Building", startTime, endTime);
 
         calendarStartTime = new GregorianCalendar();
-        calendarStartTime.set(Calendar.DAY_OF_MONTH, 3);
+        calendarStartTime.set(Calendar.DAY_OF_MONTH, 20);
         calendarStartTime.set(Calendar.HOUR_OF_DAY, 11);
-        calendarStartTime.set(Calendar.MONTH, 4);
+        calendarStartTime.set(Calendar.MONTH, 5);
         calendarStartTime.set(Calendar.YEAR, 2017);
         calendarStartTime.set(Calendar.MINUTE, 25);
 
         calendarEndTime = new GregorianCalendar();
-        calendarEndTime.set(Calendar.DAY_OF_MONTH, 3);
+        calendarEndTime.set(Calendar.DAY_OF_MONTH, 20);
         calendarEndTime.set(Calendar.HOUR_OF_DAY, 12);
-        calendarEndTime.set(Calendar.MONTH, 4);
+        calendarEndTime.set(Calendar.MONTH, 5);
         calendarEndTime.set(Calendar.YEAR, 2017);
         calendarEndTime.set(Calendar.MINUTE, 25);
         startTime = timeFormatter.format(calendarStartTime.getTime());
