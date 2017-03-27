@@ -164,8 +164,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     //create user based on their type (student/tutor)
                     if(profileSelected == 1){
-                        // TODO: 2017-03-12 make locationID, profilePic, and Rate nullable fields
-                        mydb.tutor.insert(1, schoolID, "egg1", firstName, lastName, email, password, 0, 0);
+                        mydb.tutor.insert(0, schoolID, null, firstName, lastName, email, password, 0, 0);
                         Intent i = new Intent(RegistrationActivity.this, TutorMainActivity.class);
                         //get the new user we just inserted to the DB and pass the ID to the next activity:
                         Cursor newUser = mydb.tutor.getDataEmail(email, password);
@@ -174,8 +173,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         newUser.close();
                         startActivity(i);
                     } else {
-                        // TODO: 2017-03-12 make locationID, profilePic, and Rate nullable fields
-                        mydb.student.insert(schoolID, "egg1", firstName, lastName, email, password);
+                        mydb.student.insert(schoolID, null, firstName, lastName, email, password);
                         Intent i = new Intent(RegistrationActivity.this, StudentMainActivity.class);
                         //get the new user we just inserted to the DB and pass the ID to the next activity:
                         Cursor newUser = mydb.student.getDataEmail(email, password);

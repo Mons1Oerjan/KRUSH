@@ -44,9 +44,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".tutorFragments.TutorAvailabilityFragment"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".LoginMainActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -59,6 +56,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".RegistrationActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait" />
 
         <!--
