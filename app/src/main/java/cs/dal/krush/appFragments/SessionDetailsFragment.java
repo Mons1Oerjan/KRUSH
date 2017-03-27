@@ -61,7 +61,6 @@ public class SessionDetailsFragment extends Fragment {
         String studentId = sessionCursor.getString(sessionCursor.getColumnIndex("student_id"));
         String tutorId = sessionCursor.getString(sessionCursor.getColumnIndex("tutor_id"));
         final String locationId = sessionCursor.getString(sessionCursor.getColumnIndex("location_id"));
-        System.out.println("LOCATION ID--> " + locationId);
 
         // Set values to view
         titleView.setText(title);
