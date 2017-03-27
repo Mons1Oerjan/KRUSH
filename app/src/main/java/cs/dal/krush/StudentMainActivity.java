@@ -11,7 +11,7 @@ import cs.dal.krush.helpers.BottomNavigationViewHelper;
 import cs.dal.krush.studentFragments.StudentHomeFragment;
 import cs.dal.krush.studentFragments.StudentProfileFragment;
 import cs.dal.krush.studentFragments.StudentBookingFragment;
-import cs.dal.krush.studentFragments.StudentSessionsFragment;
+import cs.dal.krush.studentFragments.StudentHistoryFragment;
 
 /**
  * StudentMainActivity is the main entry point for all student features
@@ -72,7 +72,7 @@ public class StudentMainActivity extends FragmentActivity
                         transaction.commit();
                         return true;
                     case R.id.menu_sessions:
-                        StudentSessionsFragment sessions = new StudentSessionsFragment();
+                        StudentHistoryFragment sessions = new StudentHistoryFragment();
                         sessions.setArguments(bundle);
                         transaction.replace(R.id.student_fragment_container, sessions);
                         transaction.commit();

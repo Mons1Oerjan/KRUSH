@@ -1,4 +1,4 @@
-package cs.dal.krush.appFragments;
+package cs.dal.krush.studentFragments;
 
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -11,14 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import cs.dal.krush.R;
+import cs.dal.krush.appFragments.SessionLocationFragment;
 import cs.dal.krush.models.DBHelper;
-import cs.dal.krush.tutorFragments.TutorLocationFragment;
 
 /**
  * This fragment displays the details of a tutoring session.
  * It is passed the SESSION_ID that corresponds to the session clicked on the home fragment
  */
-public class SessionDetailsFragment extends Fragment {
+public class StudentUpcSessionsDetailsFragment extends Fragment {
 
     static int USER_ID;
     static int SESSION_ID;
@@ -29,7 +29,7 @@ public class SessionDetailsFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.session_details, container, false);
+        View view = inflater.inflate(R.layout.student_home_upc_session_details, container, false);
 
         // Get USER_ID and SESSION_ID
         USER_ID = getArguments().getInt("USER_ID");
