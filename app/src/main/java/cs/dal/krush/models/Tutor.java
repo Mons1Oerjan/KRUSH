@@ -30,14 +30,18 @@ public class Tutor extends Table{
     public boolean insert(int locationId, int schoolId, String profilePic, String firstName, String lastName, String
                           email, String password, int rate, float rating){
         ContentValues contentValues = new ContentValues();
-        contentValues.put("location_id", locationId);
+        if (locationId != 0) {
+            contentValues.put("location_id", locationId);
+        }
         contentValues.put("school_id", schoolId);
         contentValues.put("profile_pic", profilePic);
         contentValues.put("f_name", firstName);
         contentValues.put("l_name", lastName);
         contentValues.put("email", email);
         contentValues.put("password", password);
-        contentValues.put("rate", rate);
+        if (rate != 0) {
+            contentValues.put("rate", rate);
+        }
         contentValues.put("rating", rating);
         contentValues.put("revenue", 0.00);
         dbWrite.insert("tutors", null, contentValues);
