@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 import cs.dal.krush.helpers.BottomNavigationViewHelper;
@@ -47,7 +48,9 @@ public class TutorMainActivity extends FragmentActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int menu_item = item.getItemId();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                FragmentManager manager = getSupportFragmentManager();
+                manager.popBackStack();
+                FragmentTransaction transaction = manager.beginTransaction();
                 switch(menu_item) {
                     case R.id.menu_home:
                         TutorHomeFragment home = new TutorHomeFragment();
