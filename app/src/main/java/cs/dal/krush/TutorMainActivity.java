@@ -11,7 +11,7 @@ import cs.dal.krush.helpers.BottomNavigationViewHelper;
 import cs.dal.krush.tutorFragments.TutorAvailabilityFragment;
 import cs.dal.krush.tutorFragments.TutorHomeFragment;
 import cs.dal.krush.tutorFragments.TutorProfileFragment;
-import cs.dal.krush.tutorFragments.TutorSessionsFragment;
+import cs.dal.krush.tutorFragments.TutorHistoryFragment;
 
 /**
  * TutorMainActivity is the main entry point for all tutor features
@@ -66,7 +66,7 @@ public class TutorMainActivity extends FragmentActivity {
                         transaction.commit();
                         return true;
                     case R.id.menu_sessions:
-                        TutorSessionsFragment sessions = new TutorSessionsFragment();
+                        TutorHistoryFragment sessions = new TutorHistoryFragment();
                         sessions.setArguments(getIntent().getExtras());
                         transaction.replace(R.id.tutor_fragment_container, sessions);
                         sessions.setArguments(bundle);

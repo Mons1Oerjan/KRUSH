@@ -148,7 +148,7 @@ public class TutorHomeFragment extends Fragment {
                 bundle.putInt("SESSION_ID", SESSION_ID);
 
                 // Swap into new fragment
-                TutorSessionsDetailsFragment session = new TutorSessionsDetailsFragment();
+                TutorUpcSessionsDetailsFragment session = new TutorUpcSessionsDetailsFragment();
                 session.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.tutor_fragment_container, session);

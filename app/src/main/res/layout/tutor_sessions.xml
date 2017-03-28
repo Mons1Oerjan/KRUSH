@@ -5,7 +5,7 @@ android:orientation="vertical"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:gravity="center"
-tools:context="cs.dal.krush.tutorFragments.TutorSessionsFragment">
+tools:context="cs.dal.krush.tutorFragments.TutorHistoryFragment">
 
 <TextView
     android:id="@+id/sessionHistoryTitle"

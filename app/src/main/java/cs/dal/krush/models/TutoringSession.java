@@ -101,7 +101,7 @@ public class TutoringSession extends Table{
                 "l.location " +
                 "FROM tutors t " +
                 "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
-                "INNER JOIN locations l ON t.location_id = l.id " +
+                "INNER JOIN locations l ON ts.location_id = l.id " +
                 "WHERE ts.student_id=" + studentId +
                 " AND ts.start_time>datetime('now')"
                 ,null
