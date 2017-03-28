@@ -54,6 +54,7 @@ public class CustomTutorDayTimeAdapter extends ArrayAdapter<TutorDayTimeRowitem>
         this.context = context;
         this.date = date;
         this.USER_ID = USER_ID;
+        this.formatHelper = new DateFormatHelper();
     }
 
     /**
