@@ -46,7 +46,7 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.student_tutor_details, container, false);
+        View view = inflater.inflate(R.layout.student_booking_details, container, false);
 
         // Get USER_ID and TUTOR_ID
         USER_ID = getArguments().getInt("USER_ID");
