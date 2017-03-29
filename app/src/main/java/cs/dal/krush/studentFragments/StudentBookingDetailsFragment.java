@@ -31,7 +31,7 @@ import cs.dal.krush.models.DBHelper;
 /**
  * This fragment displays the details of a tutor when a student clicks on their profile
  */
-public class StudentTutorDetailsFragment extends Fragment implements View.OnClickListener {
+public class StudentBookingDetailsFragment extends Fragment implements View.OnClickListener {
 
     static int USER_ID;
     static int TUTOR_ID;
