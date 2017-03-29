@@ -19,7 +19,6 @@ import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.StudentCursorAdapters.HomeQuickBookCursorAdapter;
 import cs.dal.krush.StudentCursorAdapters.SessionCursorAdapter;
-import cs.dal.krush.appFragments.SessionDetailsFragment;
 import cs.dal.krush.models.DBHelper;
 
 
@@ -94,7 +93,7 @@ public class StudentHomeFragment extends Fragment {
                 bundle.putInt("SESSION_ID", SESSION_ID);
 
                 // Swap into new fragment
-                SessionDetailsFragment session = new SessionDetailsFragment();
+                StudentUpcSessionsDetailsFragment session = new StudentUpcSessionsDetailsFragment();
                 session.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.student_fragment_container, session);

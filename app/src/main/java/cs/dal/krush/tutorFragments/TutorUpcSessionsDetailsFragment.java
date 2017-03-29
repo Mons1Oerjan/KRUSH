@@ -23,7 +23,7 @@ import cs.dal.krush.models.DBHelper;
  * This fragment displays the details of a session when a tutor clicks on an
  * upcoming session in the tutor home upcoming sessions list view
  */
-public class TutorSessionsDetailsFragment extends Fragment {
+public class TutorUpcSessionsDetailsFragment extends Fragment {
 
     static int USER_ID;
     static int SESSION_ID;
