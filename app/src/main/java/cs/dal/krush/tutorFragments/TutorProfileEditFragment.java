@@ -174,51 +174,75 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
             case R.id.save_profile_button:
                 // Save values in views and return to profile view
                 try {
+                    boolean isValid = true;
+
                     // Get values from fields
                     String new_email = email_view.getText().toString();
                     String new_rate = rate_view.getText().toString();
                     int new_school = schoolList.indexOf(school_view.getSelectedItem().toString()) + 1;
 
-                    // Write new fields to table
-                    ContentValues cv = new ContentValues();
-                    cv.put("email", new_email);
-                    cv.put("rate", new_rate);
-                    cv.put("school_id", new_school);
-
-                    // Check if profile picture was changed
-                    if(!imagePath.equals(""))
-                        cv.put("profile_pic", imagePath);
-
-                    // Check if password is changed
-                    String curr_password = curr_password_view.getText().toString();
-                    if(curr_password.equals(user_password)) {
-                        String new_password = new_password_view.getText().toString();
-                        String new_password_conf = new_password_view_conf.getText().toString();
-
-                        if(!new_password.isEmpty() && !new_password_conf.isEmpty()) {
-                            if(new_password.equals(new_password_conf)) {
-                                cv.put("password", new_password);
-                            }
+                    // Validate input fields
+                    if (new_email.length() <= 5 || (!new_email.contains("@") || !new_email.contains("."))) {
+                        email_view.setError("Email is required and must be a valid address!");
+                        isValid = false;
+                    }
+                    if (new_rate.length() == 0) {
+                        rate_view.setError("Hourly rate is required and must be a number!");
+                        isValid = false;
+                    } else {
+                        try {
+                            double newRate = Double.parseDouble(new_rate);
+                            new_rate = String.valueOf(newRate);
+                        } catch (NumberFormatException e) {
+                            isValid = false;
+                            rate_view.setError("Hourly rate is required and must be a number!");
+                            e.printStackTrace();
                         }
                     }
 
-                    // Save new values to db
-                    mydb.getWritableDatabase().update("tutors", cv,"id="+USER_ID, null);
+                    // Update the profile if valid input
+                    if (isValid) {
+                        // Write new fields to table
+                        ContentValues cv = new ContentValues();
+                        cv.put("email", new_email);
+                        cv.put("rate", new_rate);
+                        cv.put("school_id", new_school);
 
-                    //Close DB
-                    cursor.close();
-                    mydb.close();
+                        // Check if profile picture was changed
+                        if(!imagePath.equals(""))
+                            cv.put("profile_pic", imagePath);
 
-                    // Add USER_ID to bundle to pass back to profile fragment
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("USER_ID", USER_ID);
+                        // Check if password is changed
+                        String curr_password = curr_password_view.getText().toString();
+                        if(curr_password.equals(user_password)) {
+                            String new_password = new_password_view.getText().toString();
+                            String new_password_conf = new_password_view_conf.getText().toString();
 
-                    // Switch to profile fragment
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    TutorProfileFragment profile = new TutorProfileFragment();
-                    profile.setArguments(bundle);
-                    transaction.replace(R.id.tutor_fragment_container, profile);
-                    transaction.commit();
+                            if(!new_password.isEmpty() && !new_password_conf.isEmpty()) {
+                                if(new_password.equals(new_password_conf)) {
+                                    cv.put("password", new_password);
+                                }
+                            }
+                        }
+
+                        // Save new values to db
+                        mydb.getWritableDatabase().update("tutors", cv,"id="+USER_ID, null);
+
+                        //Close DB
+                        cursor.close();
+                        mydb.close();
+
+                        // Add USER_ID to bundle to pass back to profile fragment
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("USER_ID", USER_ID);
+
+                        // Switch to profile fragment
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        TutorProfileFragment profile = new TutorProfileFragment();
+                        profile.setArguments(bundle);
+                        transaction.replace(R.id.tutor_fragment_container, profile);
+                        transaction.commit();
+                    }
                 }
                 catch(Exception ex) {
                     ex.printStackTrace();

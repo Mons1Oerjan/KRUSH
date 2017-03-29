@@ -120,8 +120,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     last_name_input.setError("Last name is required!");
                     isValid = false;
                 }
-                if(email.length() == 0) {
-                    email_input.setError("Email is required!");
+                if(email.length() <= 5 || (!email.contains("@") || !email.contains("."))) {
+                    email_input.setError("Email is required and must be a valid address!");
                     isValid = false;
                 }
                 if(password.length() == 0) {
