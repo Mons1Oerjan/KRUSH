@@ -72,9 +72,9 @@ public class TutorHistoryDetailsFragment extends Fragment {
 
         // Get values from database
         String title = sessionCursor.getString(sessionCursor.getColumnIndex("title"));
-        String studentName = sessionCursor.getString(sessionCursor.getColumnIndex("t.f_name")) + " " +
-                sessionCursor.getString(sessionCursor.getColumnIndex("t.l_name"));
-        String studentEmail = sessionCursor.getString(sessionCursor.getColumnIndex("t.email"));
+        String studentName = sessionCursor.getString(sessionCursor.getColumnIndex("f_name")) + " " +
+                sessionCursor.getString(sessionCursor.getColumnIndex("l_name"));
+        String studentEmail = sessionCursor.getString(sessionCursor.getColumnIndex("email"));
         String startTime = sessionCursor.getString(sessionCursor.getColumnIndex("start_time"));
         String endTime = sessionCursor.getString(sessionCursor.getColumnIndex("end_time"));
         String location = sessionCursor.getString(sessionCursor.getColumnIndex("location"));
