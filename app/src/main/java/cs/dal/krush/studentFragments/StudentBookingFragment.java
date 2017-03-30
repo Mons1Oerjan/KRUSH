@@ -102,7 +102,7 @@ public class StudentBookingFragment extends Fragment {
                 bundle.putInt("TUTOR_ID", TUTOR_ID);
 
                 // Swap into new fragment
-                StudentTutorDetailsFragment tutor = new StudentTutorDetailsFragment();
+                StudentBookingDetailsFragment tutor = new StudentBookingDetailsFragment();
                 tutor.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.student_fragment_container, tutor);
