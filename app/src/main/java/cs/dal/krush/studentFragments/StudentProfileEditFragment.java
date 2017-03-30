@@ -39,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import cs.dal.krush.R;
+import cs.dal.krush.helpers.ValidationHelper;
 import cs.dal.krush.models.DBHelper;
 
 import static android.R.attr.name;
@@ -182,8 +183,12 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
                     int new_school = schoolList.indexOf(school_view.getSelectedItem().toString()) + 1;
 
                     // Validate input fields
-                    if (new_email.length() <= 5 || (!new_email.contains("@") || !new_email.contains("."))) {
-                        email_view.setError("Email is required and must be a valid address!");
+                    if (new_email.length() == 0) {
+                        email_view.setError("Email is required!");
+                        isValid = false;
+                    }
+                    if (!ValidationHelper.Email_Validate(new_email)) {
+                        email_view.setError("Invalid email format!");
                         isValid = false;
                     }
 

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.database.Cursor;
 import java.util.ArrayList;
-
+import cs.dal.krush.helpers.ValidationHelper;
 import cs.dal.krush.models.DBHelper;
 
 /**
@@ -120,8 +120,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     last_name_input.setError("Last name is required!");
                     isValid = false;
                 }
-                if(email.length() <= 5 || (!email.contains("@") || !email.contains("."))) {
-                    email_input.setError("Email is required and must be a valid address!");
+                if(email.length() == 0) {
+                    email_input.setError("Email is required.");
                     isValid = false;
                 }
                 if(password.length() == 0) {
@@ -140,7 +140,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
 
                 //validate email format
-                if(!Email_Validate(email)) {
+                if(!ValidationHelper.Email_Validate(email)) {
                     email_input.setError("Invalid email format!");
                     isValid = false;
                 }
@@ -185,21 +185,5 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    /**
-     * Validates if email is of valid format or not
-     *
-     * Source:
-     * [1]"How to get all possible combinations of a list’s elements?",
-     * Stackoverflow.com, 2017. [Online].
-     * Available: http://stackoverflow.com/questions/464864/how-to-get-all-possible-combinations-
-     * of-a-list-s-elements. [Accessed: 08- Mar- 2017].
-     *
-     * @param email
-     * @return true if email is valid
-     */
-    private boolean Email_Validate(String email){
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }
