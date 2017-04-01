@@ -90,7 +90,8 @@ public class RegistrationActivity extends AppCompatActivity {
         if(rs.getCount() != 0){
             rs.moveToFirst();
             do{
-                schoolList.add(rs.getString(1));
+                schoolList.add(rs.getString(1) + " "
+                + rs.getString(2));
             }while (rs.moveToNext());
         }
 

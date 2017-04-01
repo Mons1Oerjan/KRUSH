@@ -255,6 +255,28 @@ public class Tutor extends Table{
     }
 
     /**
+     * Given a tutorID, returns a string of the school name associated
+     * with this tutors location_id
+     * @param tutorId
+     * @return
+     */
+    public String getSchoolNameAndType(int tutorId) {
+        String school = null;
+        Cursor res = dbRead.rawQuery("SELECT s.name, s.type " +
+                "FROM schools s " +
+                "INNER JOIN tutors t on t.school_id = s.id " +
+                "WHERE t.id="+tutorId, null);
+        if(res.moveToFirst()) {
+            school = res.getString(res.getColumnIndex("name")) + " "
+                    + res.getString(res.getColumnIndex("type"));
+        }
+        res.close();
+        return school;
+
+
+    }
+
+    /**
      * Delete a tutor by id
      * @param id
      * @return int

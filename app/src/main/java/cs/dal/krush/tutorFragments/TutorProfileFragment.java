@@ -55,10 +55,7 @@ public class TutorProfileFragment extends Fragment implements View.OnClickListen
         String name = cursor.getString(cursor.getColumnIndex("f_name")) + " " + cursor.getString(cursor.getColumnIndex("l_name"));
         String email = cursor.getString(cursor.getColumnIndex(("email")));
         String rate = cursor.getString(cursor.getColumnIndex(("rate")));
-        int school_id = cursor.getInt(cursor.getColumnIndex("school_id"));
-        Cursor schoolCursor = mydb.school.getData(school_id);
-        schoolCursor.moveToFirst();
-        String school = schoolCursor.getString(schoolCursor.getColumnIndex("name"));
+        String school = mydb.tutor.getSchoolNameAndType(USER_ID);
 
         //Profile Picture
         String imagePath = cursor.getString(cursor.getColumnIndex("profile_pic"));

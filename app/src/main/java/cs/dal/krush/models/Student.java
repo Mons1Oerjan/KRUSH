@@ -98,6 +98,25 @@ public class Student extends Table{
     }
 
     /**
+     * Returns school name and type for a student given their id
+     * @param id
+     * @return
+     */
+    public String getSchoolAndType(int id){
+        String school = null;
+        Cursor res = dbRead.rawQuery("SELECT s.name, s.type " +
+                "FROM schools s " +
+                "INNER JOIN students st on st.school_id = s.id " +
+                "WHERE st.id="+id, null);
+        if(res.moveToFirst()){
+            school = res.getString(res.getColumnIndex("name")) + " " +
+                    res.getString(res.getColumnIndex("type"));
+        }
+        res.close();
+        return school;
+    }
+
+    /**
      * Delete a student by id
      * @param id
      * @return int

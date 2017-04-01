@@ -91,8 +91,9 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         if(schoolCursor.getCount() != 0) {
             schoolCursor.moveToFirst();
             do {
-                // column id 1 is school_view name
-                schoolList.add(schoolCursor.getString(1));
+                // column id 1 is school name, 2 is school type
+                schoolList.add(schoolCursor.getString(1) + " "
+                + schoolCursor.getString(2));
             }
             while(schoolCursor.moveToNext());
         }

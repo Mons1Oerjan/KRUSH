@@ -32,6 +32,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
     static int USER_ID;
 
     @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -62,10 +63,7 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         //Get values from database
         String name = cursor.getString(cursor.getColumnIndex("f_name")) + " " + cursor.getString(cursor.getColumnIndex("l_name"));
         String email = cursor.getString(cursor.getColumnIndex(("email")));
-        int school_id = cursor.getInt(cursor.getColumnIndex("school_id"));
-        Cursor schoolCursor = mydb.school.getData(school_id);
-        schoolCursor.moveToFirst();
-        String school = schoolCursor.getString(schoolCursor.getColumnIndex("name"));
+        String school = mydb.student.getSchoolAndType(USER_ID);
 
         //Profile Picture
         String imagePath = cursor.getString(cursor.getColumnIndex("profile_pic"));

@@ -91,7 +91,7 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
 
         // Get values from database
         name = tutorCursor.getString(tutorCursor.getColumnIndex("f_name")) + " " + tutorCursor.getString(tutorCursor.getColumnIndex("l_name"));
-        String school = mydb.tutor.getSchoolName(TUTOR_ID);
+        String school = mydb.tutor.getSchoolNameAndType(TUTOR_ID);
         rate = tutorCursor.getString(tutorCursor.getColumnIndex("rate"));
         String rating = tutorCursor.getString(tutorCursor.getColumnIndex("rating"));
         location = mydb.tutor.getLocationName(TUTOR_ID);
