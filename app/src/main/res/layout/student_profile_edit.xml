@@ -53,6 +53,9 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:text="@string/change_picture_button_text"
                 android:textAllCaps="false"
                 android:layout_centerVertical="true"
+                android:minWidth="150dp"
+                android:fontFamily="sans-serif-medium"
+                android:background="@drawable/button_change_picture"
                 android:layout_centerHorizontal="true"/>
 
             <TextView

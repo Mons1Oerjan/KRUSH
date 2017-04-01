@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ import java.util.Locale;
 import cs.dal.krush.R;
 import cs.dal.krush.helpers.DateFormatHelper;
 import cs.dal.krush.models.DBHelper;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static cs.dal.krush.studentFragments.StudentPaymentFragment.COST;
 
 
 /**
@@ -45,6 +49,7 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
     Spinner courseSpinnerView, timeSpinnerView;
     Button bookButton;
     String name, location, rate;
+    boolean isValid = true;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,17 +96,27 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
         coursesLabel.setTypeface(typeFace);
         timeLabel.setTypeface(typeFace);
 
+        // Currency formatter for rate
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+
         // Get values from database
         name = tutorCursor.getString(tutorCursor.getColumnIndex("f_name")) + " " + tutorCursor.getString(tutorCursor.getColumnIndex("l_name"));
         String school = mydb.tutor.getSchoolNameAndType(TUTOR_ID);
-        rate = TextUtils.isEmpty(tutorCursor.getString(tutorCursor.getColumnIndex(("rate")))) ? "Tutor has not set a rate"
-                : tutorCursor.getString(tutorCursor.getColumnIndex(("rate")));
+        rate = tutorCursor.getString(tutorCursor.getColumnIndex(("rate")));
+        String rateDisplay;
+        if(TextUtils.isEmpty(rate)){
+            rateDisplay = "Tutor has not set a rate";
+            bookButton.setEnabled(false);
+        }
+        else{
+            rateDisplay = currencyFormatter.format(Float.parseFloat(rate));
+        }
         String rating = tutorCursor.getString(tutorCursor.getColumnIndex("rating"));
         location = mydb.tutor.getLocationName(TUTOR_ID);
         ArrayList<String> courseNames = mydb.coursesTutors.getCourseNamesFromTutor(TUTOR_ID);
 
         // Tutor availability
-        timeCursor = mydb.availableTime.getDataByTutorId(TUTOR_ID);
+        timeCursor = mydb.availableTime.getUpcomingDataByTutorId(TUTOR_ID);
         ArrayList<String> tutorAvailability = new ArrayList<>();
         String time, start, end;
         while(timeCursor.moveToNext())
@@ -123,25 +138,33 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
             tutorAvailability.add(time);
         }
 
-
-
         // Set values
         nameView.setText(name);
         schoolView.setText(school);
-        rateView.setText("$" + rate);
+        rateView.setText(rateDisplay);
         locationView.setText(location);
 
         // Set list of course names
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                getContext(), android.R.layout.simple_spinner_item, courseNames);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        courseSpinnerView.setAdapter(adapter);
+        if(courseNames != null) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    getContext(), android.R.layout.simple_spinner_item, courseNames);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            courseSpinnerView.setAdapter(adapter);
+        }
+        else{
+            bookButton.setEnabled(false);
+        }
 
         // Set list of time slots
-        ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(
-                getContext(), android.R.layout.simple_spinner_item, tutorAvailability);
-        timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        timeSpinnerView.setAdapter(timeAdapter);
+        if(!tutorAvailability.isEmpty()) {
+            ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(
+                    getContext(), android.R.layout.simple_spinner_item, tutorAvailability);
+            timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            timeSpinnerView.setAdapter(timeAdapter);
+        }
+        else {
+            bookButton.setEnabled(false);
+        }
 
         // Set Profile Picture
         String imagePath = tutorCursor.getString(tutorCursor.getColumnIndex("profile_pic"));

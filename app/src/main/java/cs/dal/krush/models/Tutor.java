@@ -214,20 +214,16 @@ public class Tutor extends Table{
      * @return
      */
     public String getLocationName(int tutorID) {
-        String location;
+        String location = null;
         Cursor res = dbRead.rawQuery("SELECT l.location " +
                 "FROM locations l " +
                 "INNER JOIN tutors t on t.location_id = l.id " +
                 "WHERE t.id="+tutorID, null);
-        if(res != null) {
-            res.moveToFirst();
+        if(res.moveToFirst()) {
             location = res.getString(res.getColumnIndex("location"));
-            res.close();
-            return location;
         }
-        else {
-            return "Location Not Found";
-        }
+        res.close();
+        return location;
     }
 
     /**

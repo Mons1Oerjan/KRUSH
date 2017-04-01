@@ -3,7 +3,11 @@ package cs.dal.krush.models;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Available Time Model class.
@@ -31,6 +35,7 @@ public class AvailableTime extends Table{
         contentValues.put("tutor_id", tutor_id);
         contentValues.put("start_time", startTime);
         contentValues.put("end_time", endTime);
+        contentValues.put("booked", 0);
         dbWrite.insert("available_time", null, contentValues);
         return true;
     }
@@ -42,6 +47,15 @@ public class AvailableTime extends Table{
      */
     public Cursor getDataByTutorId(int tutorId) {
         return dbRead.rawQuery("SELECT * FROM available_time WHERE tutor_id="+tutorId, null);
+    }
+
+    public Cursor getUpcomingDataByTutorId(int tutorId){
+        SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String now = "\"" + simple.format(new Date()) + "\"";
+        return dbRead.rawQuery("SELECT * FROM available_time " +
+                "WHERE tutor_id="+tutorId
+                + " AND start_time > "+now
+                + " AND booked=0", null);
     }
 
 
