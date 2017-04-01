@@ -2,7 +2,6 @@ package cs.dal.krush.studentFragments;
 
 import android.Manifest;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,7 +19,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,22 +28,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import cs.dal.krush.R;
 import cs.dal.krush.helpers.ValidationHelper;
 import cs.dal.krush.models.DBHelper;
-
-import static android.R.attr.name;
 import static android.app.Activity.RESULT_OK;
-import static cs.dal.krush.R.id.profile_name;
-import static cs.dal.krush.R.id.school_selecter;
 
 /**
  * Fragment for editing a profile. Sets initial fields from the database and saves new fields
@@ -65,7 +57,7 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
     Button saveProfile, changePicture;
     ImageView profile_picture_view;
     View myView;
-    TextView profile_name_view;
+    TextView profile_name_view, email_label, school_label, current_password_label, new_password_label, new_password_confirmation_label;
     EditText email_view, curr_password_view, new_password_view, new_password_view_conf;
     Spinner school_view;
 
@@ -85,6 +77,11 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
         curr_password_view = (EditText) myView.findViewById(R.id.current_password);
         new_password_view = (EditText) myView.findViewById(R.id.new_password);
         new_password_view_conf = (EditText) myView.findViewById(R.id.new_password_confirmation);
+        email_label = (TextView) myView.findViewById(R.id.student_profile_edit_email_label);
+        school_label = (TextView) myView.findViewById(R.id.student_profile_edit_school_label);
+        current_password_label = (TextView) myView.findViewById(R.id.student_profile_edit_current_password_label);
+        new_password_label = (TextView) myView.findViewById(R.id.student_profile_edit_new_password_label);
+        new_password_confirmation_label = (TextView) myView.findViewById(R.id.student_profile_edit_new_password_confirmation_label);
 
         //Database connection
         mydb = new DBHelper(getContext());
@@ -141,6 +138,12 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
         //Set custom app font
         profile_name_view.setTypeface(typeFace);
         email_view.setTypeface(typeFace);
+        email_label.setTypeface(typeFace);
+        school_label.setTypeface(typeFace);
+        current_password_label.setTypeface(typeFace);
+        new_password_label.setTypeface(typeFace);
+        new_password_confirmation_label.setTypeface(typeFace);
+
         saveProfile = (Button) myView.findViewById(R.id.save_profile_button);
         changePicture = (Button) myView.findViewById(R.id.change_picture_button);
 
@@ -193,6 +196,44 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
                         isValid = false;
                     }
 
+                    // Check if password is changed
+                    boolean changePassword = false;
+                    String curr_password = curr_password_view.getText().toString();
+                    String new_password = new_password_view.getText().toString();
+                    String new_password_conf = new_password_view_conf.getText().toString();
+
+                    // If user is attempting to change password
+                    if(!curr_password.isEmpty()) {
+                        // Validate if current password matches database
+                        if (curr_password.equals(user_password)) {
+                            // Validate if new password fields have been filled in
+                            if (!new_password.isEmpty() || !new_password_conf.isEmpty()) {
+                                // Validate if new password matches confirmation
+                                if (new_password.equals(new_password_conf)) {
+                                    changePassword = true;
+                                }
+                                else {
+                                    new_password_view.setError("New password did not match confirmation");
+                                    isValid = false;
+                                }
+                            }
+                            // If current password valid but missing new password or confirmation
+                            else {
+                                new_password_view.setError("Please enter a new password and confirmation");
+                                isValid = false;
+                            }
+                        }
+                        else {
+                            curr_password_view.setError("Incorrect password!");
+                            isValid = false;
+                        }
+                    }
+                    // If new passwords are provided but current password field is empty
+                    else if(!new_password.isEmpty() || !new_password_conf.isEmpty()) {
+                        curr_password_view.setError("Please enter your current password!");
+                        isValid = false;
+                    }
+
                     // Update profile if the input is valid
                     if (isValid) {
                         // Write new fields to table
@@ -204,17 +245,9 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
                         if(!imagePath.equals(""))
                             cv.put("profile_pic", imagePath);
 
-                        // Check if password was changed
-                        String curr_password = curr_password_view.getText().toString();
-                        if(curr_password.equals(user_password)) {
-                            String new_password = new_password_view.getText().toString();
-                            String new_password_conf = new_password_view_conf.getText().toString();
-
-                            if(!new_password.isEmpty() && !new_password_conf.isEmpty()) {
-                                if(new_password.equals(new_password_conf)) {
-                                    cv.put("password", new_password);
-                                }
-                            }
+                        // Check if new password is set
+                        if(changePassword){
+                            cv.put("password", new_password);
                         }
 
                         // Save new values to db

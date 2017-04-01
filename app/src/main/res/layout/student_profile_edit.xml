@@ -78,6 +78,8 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
             android:gravity="center">
 
             <TextView
+                android:id="@+id/student_profile_edit_email_label"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:labelFor="@+id/profile_email_edit"
@@ -92,6 +94,8 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:id="@+id/profile_email_edit"/>
 
             <TextView
+                android:id="@+id/student_profile_edit_school_label"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:labelFor="@+id/profile_school_edit"
@@ -106,6 +110,8 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
 
 
             <TextView
+                android:id="@+id/student_profile_edit_current_password_label"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:labelFor="@+id/current_password"
@@ -120,6 +126,8 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:layout_margin="5dp"/>
 
             <TextView
+                android:id="@+id/student_profile_edit_new_password_label"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:labelFor="@+id/new_password"
@@ -134,6 +142,8 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:layout_margin="5dp"/>
 
             <TextView
+                android:id="@+id/student_profile_edit_new_password_confirmation_label"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:labelFor="@+id/new_password_confirmation"

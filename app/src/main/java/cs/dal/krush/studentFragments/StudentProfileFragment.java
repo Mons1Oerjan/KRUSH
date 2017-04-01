@@ -14,8 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
-import static cs.dal.krush.R.id.profile_name;
-import static cs.dal.krush.R.id.tutor_details_profile_picture;
+import static cs.dal.krush.R.id.student_profile_name;
 
 /**
  * Sets up the Student Profile fragment. This fragment belongs to the StudentMainActivity class
@@ -26,7 +25,7 @@ import static cs.dal.krush.R.id.tutor_details_profile_picture;
 public class StudentProfileFragment extends Fragment implements View.OnClickListener {
 
     private ImageView edit_btn, profile_picture_view;
-    private TextView profile_name_view, email_view, school_view;
+    private TextView profile_name_view, email_view, school_view, email_label, school_label;
     private DBHelper mydb;
     private Cursor cursor;
     static int USER_ID;
@@ -47,10 +46,13 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         cursor.moveToFirst();
 
         // Get Views
-        profile_name_view = (TextView) myView.findViewById(profile_name);
+        profile_name_view = (TextView) myView.findViewById(student_profile_name);
         profile_picture_view = (ImageView) myView.findViewById(R.id.student_profile_picture);
-        email_view = (TextView) myView.findViewById(R.id.profile_email);
-        school_view = (TextView) myView.findViewById(R.id.profile_school);
+        email_view = (TextView) myView.findViewById(R.id.student_profile_email);
+        school_view = (TextView) myView.findViewById(R.id.student_profile_school);
+        email_label = (TextView) myView.findViewById(R.id.student_profile_email_label);
+        school_label = (TextView) myView.findViewById(R.id.student_profile_school_label);
+
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -59,6 +61,8 @@ public class StudentProfileFragment extends Fragment implements View.OnClickList
         profile_name_view.setTypeface(typeFace);
         email_view.setTypeface(typeFace);
         school_view.setTypeface(typeFace);
+        email_label.setTypeface(typeFace);
+        school_label.setTypeface(typeFace);
 
         //Get values from database
         String name = cursor.getString(cursor.getColumnIndex("f_name")) + " " + cursor.getString(cursor.getColumnIndex("l_name"));

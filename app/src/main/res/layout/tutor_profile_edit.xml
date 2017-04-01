@@ -14,7 +14,7 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/tutor_profile_cover_image_edit"
+            android:id="@+id/tutor_profile_edit_cover_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
@@ -22,10 +22,10 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
 
         <!-- Source: https://github.com/hdodenhof/CircleImageView -->
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/tutor_profile_picture_edit"
+            android:id="@+id/tutor_profile_edit_picture"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_below="@+id/tutor_profile_cover_image_edit"
+            android:layout_below="@+id/tutor_profile_edit_cover_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-60dp"
             android:background="@drawable/profile_circle"
@@ -38,13 +38,13 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tutor_profile_cover_image_edit"
+            android:layout_below="@+id/tutor_profile_edit_cover_image"
             android:background="@color/colorPrimary"
             android:elevation="4dp"
             android:paddingBottom="24dp">
 
             <Button
-                android:id="@+id/change_picture_button"
+                android:id="@+id/tutor_profile_edit_change_picture_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/change_picture_button_text"
@@ -57,14 +57,14 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:fontFamily="sans-serif-medium"/>
 
             <TextView
-                android:id="@+id/profile_name_edit"
+                android:id="@+id/tutor_profile_edit_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="75dp"
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_below="@+id/change_picture_button"
+                android:layout_below="@+id/tutor_profile_edit_change_picture_button"
                 android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
@@ -79,86 +79,108 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tutor_profile_edit_email_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:labelFor="@+id/profile_email_edit"
+                android:labelFor="@+id/tutor_profile_edit_email"
                 android:text="@string/profile_email_label"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:inputType="textEmailAddress"
-                android:id="@+id/profile_email_edit"/>
+                android:id="@+id/tutor_profile_edit_email"/>
+
+            <TextView
+                android:id="@+id/tutor_profile_edit_school_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/tutor_profile_edit_school"
+                android:text="@string/school_label"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimary"/>
+
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/profile_school_edit"
+                android:id="@+id/tutor_profile_edit_school"
                 android:layout_margin="5dp"/>
-
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tutor_profile_edit_rate_label"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:labelFor="@+id/profile_rate_edit"
-                android:text="@string/profile_rate_label"
-                android:layout_margin="5dp"/>
+                android:labelFor="@+id/tutor_profile_edit_rate"
+                android:text="@string/rate_label"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimary"/>
+
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:id="@+id/profile_rate_edit"
+                android:id="@+id/tutor_profile_edit_rate"
                 android:layout_margin="5dp"/>
 
             <TextView
+                android:id="@+id/tutor_profile_edit_current_password_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:labelFor="@+id/current_password"
+                android:labelFor="@+id/tutor_profile_edit_current_password"
                 android:text="@string/current_password_label"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/current_password"
+                android:id="@+id/tutor_profile_edit_current_password"
                 android:inputType="textPassword"
                 android:layout_margin="5dp"/>
 
             <TextView
+                android:id="@+id/tutor_profile_edit_new_password_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:labelFor="@+id/new_password"
+                android:labelFor="@+id/tutor_profile_edit_new_password"
                 android:text="@string/new_password_label"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/new_password"
+                android:id="@+id/tutor_profile_edit_new_password"
                 android:inputType="textPassword"
                 android:layout_margin="5dp"/>
 
             <TextView
+                android:id="@+id/tutor_profile_edit_new_password_confirmation_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:labelFor="@+id/new_password_confirmation"
+                android:labelFor="@+id/tutor_profile_edit_new_password_confirmation"
                 android:text="@string/confirm_new_password_label"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/new_password_confirmation"
+                android:id="@+id/tutor_profile_edit_new_password_confirmation"
                 android:inputType="textPassword"
                 android:layout_margin="5dp"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/save_profile_button"
+                android:id="@+id/tutor_profile_edit_save_profile_button"
                 android:text="@string/save_profile_button_text"
                 android:background="@drawable/button_main"
                 android:paddingRight="25dp"

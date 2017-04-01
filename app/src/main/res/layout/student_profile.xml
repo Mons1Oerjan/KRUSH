@@ -56,7 +56,7 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 />
 
             <TextView
-                android:id="@+id/profile_name"
+                android:id="@+id/student_profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -75,24 +75,42 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/profile_email"
+                android:id="@+id/student_profile_email_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/student_profile_email"
+                android:text="@string/profile_email_label"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/student_profile_email"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="#fff"
-                android:textColor="@color/colorPrimary"
                 android:elevation="3dp"
                 android:padding="20dp"/>
 
             <TextView
-                android:id="@+id/profile_school"
+                android:id="@+id/student_profile_school_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/student_profile_school"
+                android:text="@string/profile_school_label"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/student_profile_school"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_marginBottom="3dp"
                 android:layout_marginTop="3dp"
                 android:background="#fff"
-                android:textColor="@color/colorPrimary"
                 android:elevation="3dp"
                 android:padding="20dp"/>
 

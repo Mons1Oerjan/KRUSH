@@ -7,6 +7,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,7 +94,8 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
         // Get values from database
         name = tutorCursor.getString(tutorCursor.getColumnIndex("f_name")) + " " + tutorCursor.getString(tutorCursor.getColumnIndex("l_name"));
         String school = mydb.tutor.getSchoolNameAndType(TUTOR_ID);
-        rate = tutorCursor.getString(tutorCursor.getColumnIndex("rate"));
+        rate = TextUtils.isEmpty(tutorCursor.getString(tutorCursor.getColumnIndex(("rate")))) ? "Tutor has not set a rate"
+                : tutorCursor.getString(tutorCursor.getColumnIndex(("rate")));
         String rating = tutorCursor.getString(tutorCursor.getColumnIndex("rating"));
         location = mydb.tutor.getLocationName(TUTOR_ID);
         ArrayList<String> courseNames = mydb.coursesTutors.getCourseNamesFromTutor(TUTOR_ID);
