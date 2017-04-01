@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import cs.dal.krush.R;
@@ -47,7 +48,7 @@ public class BookingTutorCursorAdapter extends CursorAdapter {
      */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent){
-        return LayoutInflater.from(context).inflate(R.layout.student_home_listentry, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.student_booking_listentry, parent, false);
     }
 
     /**
@@ -63,6 +64,7 @@ public class BookingTutorCursorAdapter extends CursorAdapter {
         TextView header = (TextView)view.findViewById(R.id.firstLine);
         TextView subHeader = (TextView)view.findViewById(R.id.secondLine);
         ImageView image = (ImageView)view.findViewById(R.id.icon);
+        RatingBar ratingBar = (RatingBar)view.findViewById(R.id.ratingBar);
 
         //Get the tutor's profile image:
         String imageFileName = cursor.getString(cursor.getColumnIndexOrThrow("profile_pic"));
@@ -80,7 +82,8 @@ public class BookingTutorCursorAdapter extends CursorAdapter {
         //Set the row's sub-header text:
         String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
-        String text2content = "Rating: " + tutorRating + ", Rate: " + tutorRate;
+        String text2content = "$"+tutorRate+"/hr";
         subHeader.setText(text2content);
+        ratingBar.setRating(Float.parseFloat(tutorRating));
     }
 }

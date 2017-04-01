@@ -38,4 +38,6 @@
         android:text="Example application"
         android:textSize="16sp" />
 
+
+
 </RelativeLayout>

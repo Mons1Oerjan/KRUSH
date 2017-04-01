@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import cs.dal.krush.R;
@@ -47,7 +48,7 @@ public class SessionCursorAdapter extends CursorAdapter {
      */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent){
-        return LayoutInflater.from(context).inflate(R.layout.student_home_listentry, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.student_session_listentry, parent, false);
     }
 
     /**
@@ -81,7 +82,7 @@ public class SessionCursorAdapter extends CursorAdapter {
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
         String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
         String sessionLocation = cursor.getString(cursor.getColumnIndexOrThrow("location"));
-        String text2content = tutorFirstName + " " + tutorLastName + ", Location: " + sessionLocation + ", Rating: " + tutorRating + ", Rate: " + tutorRate + "$";
+        String text2content = "$"+tutorRate+"/hr with "+tutorFirstName+" "+tutorLastName+" at "+sessionLocation.split(",")[0];
         subHeader.setText(text2content);
     }
 }
