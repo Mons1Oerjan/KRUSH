@@ -124,30 +124,28 @@
 
     <Button
         android:id="@+id/sessionRecordStart"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
         android:layout_below="@+id/student_cancel_session_button"
         android:text="Start Recording"/>
 
     <Button
         android:id="@+id/sessionRecordStop"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sessionRecordStart"
+        android:background="@drawable/button_cancel"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
+        android:layout_below="@+id/student_cancel_session_button"
         android:text="Stop Recording"/>
-
-    <Button
-        android:id="@+id/sessionPlayRecording"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sessionRecordStop"
-        android:text="Play"/>
-
-    <Button
-        android:id="@+id/sessionStopRecording"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sessionPlayRecording"
-        android:text="Stop"/>
 
 </RelativeLayout>

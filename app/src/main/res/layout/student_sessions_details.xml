@@ -122,5 +122,31 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp" />
 
+    <Button
+        android:id="@+id/sessionPlayRecording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
+        android:layout_below="@+id/tutor_details_rating"
+        android:text="Play Recording"/>
+
+    <Button
+        android:id="@+id/sessionStopRecording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_cancel"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
+        android:layout_below="@id/tutor_details_rating"
+        android:text="Stop Recording"/>
+
 
 </RelativeLayout>

@@ -24,6 +24,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import cs.dal.krush.R;
 import cs.dal.krush.appFragments.SessionLocationFragment;
@@ -43,11 +47,11 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
     static int SESSION_ID;
     String AudioSavePathInDevice = null;
     DBHelper mydb;
-    Cursor sessionCursor, student;
+    Cursor sessionCursor, student, hasRecorded;
     TextView titleField, tutorNameField, tutorEmailField, locationField,
             startField, endField, tutorLabel, sessionInfoLabel, schoolField;
     ImageView tutorPicture;
-    Button cancelButton, sessionDetailLocation, sessionRecordStart, sessionRecordStop, sessionPlayRecording, sessionStopRecording;
+    Button cancelButton, sessionDetailLocation, sessionRecordStart, sessionRecordStop;
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
     public static final int RequestPermissionCode = 1;
@@ -86,10 +90,8 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         sessionDetailLocation = (Button) view.findViewById(R.id.sessionDetailLocation);
         sessionRecordStart = (Button) view.findViewById(R.id.sessionRecordStart);
         sessionRecordStop = (Button) view.findViewById(R.id.sessionRecordStop);
-        sessionPlayRecording = (Button) view.findViewById(R.id.sessionPlayRecording);
-        sessionStopRecording = (Button) view.findViewById(R.id.sessionStopRecording);
-        sessionRecordStop.setEnabled(false);
-        sessionStopRecording.setEnabled(false);
+//        sessionRecordStart.setVisibility(view.INVISIBLE);
+        sessionRecordStop.setVisibility(view.INVISIBLE);
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -105,6 +107,8 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         sessionInfoLabel.setTypeface(typeFace);
         schoolField.setTypeface(typeFace);
         cancelButton.setTypeface(typeFace);
+        sessionRecordStart.setTypeface(typeFace);
+        sessionRecordStop.setTypeface(typeFace);
 
         // Get values from database
         String title = sessionCursor.getString(sessionCursor.getColumnIndex("title"));
@@ -131,6 +135,21 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
             Bitmap profilePic = BitmapFactory.decodeFile(imgPath);
             tutorPicture.setImageBitmap(profilePic);
         }
+
+        DateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date now = new Date();
+        String currentTime = timeFormatter.format(now);
+        boolean hasStarted = true;
+
+        try {
+            hasStarted = timeFormatter.parse(startTime).before(timeFormatter.parse(currentTime));
+        }
+        catch (Exception e){
+            // TODO Auto-generated catch block
+        }
+
+        if(hasStarted)
+            sessionRecordStart.setVisibility(view.VISIBLE);
 
         //setup OnClickListeners:
         sessionDetailLocation.setOnClickListener(new View.OnClickListener() {
@@ -189,6 +208,7 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
             }
         });
 
+        // Record session, save to file on device with title student name + session time
         sessionRecordStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,10 +240,18 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
                         e.printStackTrace();
                     }
 
-                    sessionRecordStart.setEnabled(false);
-                    sessionRecordStop.setEnabled(true);
+                    hasRecorded = mydb.audioRecording.getDataByStudentAndSessionId(USER_ID, SESSION_ID);
+                    hasRecorded.moveToFirst();
+                    if(hasRecorded.getCount() > 0)
+                        mydb.audioRecording.update(USER_ID, SESSION_ID);
+                    else
+                        mydb.audioRecording.insert(USER_ID, SESSION_ID);
+
+                    sessionRecordStart.setVisibility(v.INVISIBLE);
+                    sessionRecordStop.setVisibility(v.VISIBLE);
                     sessionCursor.close();
                     student.close();
+                    hasRecorded.close();
                     mydb.close();
                 }else {
                     requestPermission();
@@ -236,32 +264,8 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mediaRecorder.stop();
-                sessionRecordStop.setEnabled(false);
-                sessionPlayRecording.setEnabled(true);
-                sessionRecordStart.setEnabled(true);
-                sessionStopRecording.setEnabled(false);
-
-            }
-        });
-
-        sessionPlayRecording.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) throws IllegalArgumentException,
-                    SecurityException, IllegalStateException {
-
-                sessionRecordStart.setEnabled(false);
-                sessionRecordStop.setEnabled(false);
-                sessionStopRecording.setEnabled(true);
-
-                mediaPlayer = new MediaPlayer();
-                try {
-                    mediaPlayer.setDataSource(AudioSavePathInDevice);
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                mediaPlayer.start();
+                sessionRecordStart.setVisibility(view.VISIBLE);
+                sessionRecordStop.setVisibility(view.INVISIBLE);
 
             }
         });
@@ -270,7 +274,7 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
 
         return view;
     }
-
+    // init media recorder
     public void MediaRecorderReady(){
         mediaRecorder=new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -279,7 +283,7 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
 
     }
-
+    // check device permissions
     public boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getContext(),
                 WRITE_EXTERNAL_STORAGE);
@@ -288,6 +292,7 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         return result == PackageManager.PERMISSION_GRANTED &&
                 result1 == PackageManager.PERMISSION_GRANTED;
     }
+    // set device permissions
     private void requestPermission() {
         ActivityCompat.requestPermissions(getActivity(), new
                 String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, RequestPermissionCode);

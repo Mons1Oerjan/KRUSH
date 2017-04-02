@@ -4,15 +4,21 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 import cs.dal.krush.R;
 import cs.dal.krush.models.DBHelper;
@@ -26,13 +32,15 @@ public class StudentHistoryDetailsFragment extends Fragment {
     static int USER_ID;
     static int SESSION_ID;
     static int TUTOR_ID;
-
+    String AudioSavePathInDevice = null;
     DBHelper mydb;
-    Cursor sessionCursor;
+    Cursor student, sessionCursor;
     TextView titleField, tutorNameField, tutorEmailField, locationField,
             startField, endField, tutorLabel, sessionInfoLabel, schoolField, rateTutor;
     ImageView tutorPicture;
     RatingBar ratingBarView;
+    Button playRecording, stopRecording;
+    MediaPlayer mediaPlayer;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,6 +71,10 @@ public class StudentHistoryDetailsFragment extends Fragment {
         schoolField = (TextView)view.findViewById(R.id.student_history_details_school);
         rateTutor = (TextView)view.findViewById(R.id.student_history_details_rate_tutor);
         ratingBarView = (RatingBar) view.findViewById(R.id.tutor_details_rating);
+        playRecording = (Button) view.findViewById(R.id.sessionPlayRecording);
+        stopRecording = (Button) view.findViewById(R.id.sessionStopRecording);
+        playRecording.setVisibility(view.INVISIBLE);
+        stopRecording.setVisibility(view.INVISIBLE);
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/FredokaOne-Regular.ttf");
@@ -78,6 +90,8 @@ public class StudentHistoryDetailsFragment extends Fragment {
         sessionInfoLabel.setTypeface(typeFace);
         schoolField.setTypeface(typeFace);
         rateTutor.setTypeface(typeFace);
+        playRecording.setTypeface(typeFace);
+        stopRecording.setTypeface(typeFace);
 
         // Get values from database
         String title = sessionCursor.getString(sessionCursor.getColumnIndex("title"));
@@ -103,6 +117,12 @@ public class StudentHistoryDetailsFragment extends Fragment {
             Bitmap profilePic = BitmapFactory.decodeFile(imgPath);
             tutorPicture.setImageBitmap(profilePic);
         }
+
+        Cursor hasRecording = mydb.audioRecording.getDataByStudentAndSessionId(USER_ID, SESSION_ID);
+        hasRecording.moveToFirst();
+
+        if (hasRecording.getCount() > 0)
+            playRecording.setVisibility(view.VISIBLE);
 
         final Cursor hasRatedBefore = mydb.tutorRating.getTutorRatingByTutorAndStudentId(TUTOR_ID, USER_ID);
         hasRatedBefore.moveToFirst();
@@ -136,6 +156,53 @@ public class StudentHistoryDetailsFragment extends Fragment {
                     ratingBarView.setRating(rating);
                     mydb.close();
                 }
+            }
+        });
+
+
+        playRecording.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) throws IllegalArgumentException,
+                    SecurityException, IllegalStateException {
+
+                // Initialize db connection
+                mydb = new DBHelper(getContext());
+
+                // Get session
+                sessionCursor = mydb.tutoringSession.getSessionHistoryDetailsBySessionIdForTutorCursorAdapter(SESSION_ID);
+                sessionCursor.moveToFirst();
+
+                //Get student
+                student = mydb.student.getData(USER_ID);
+                student.moveToFirst();
+
+                playRecording.setVisibility(view.INVISIBLE);
+                stopRecording.setVisibility(view.VISIBLE);
+                AudioSavePathInDevice =
+                        Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + student.getString(student.getColumnIndex("f_name")) +
+                                student.getString(student.getColumnIndex("l_name")) + sessionCursor.getString(sessionCursor.getColumnIndex("start_time")) + ".3gp";
+                mediaPlayer = new MediaPlayer();
+                try {
+                    mediaPlayer.setDataSource(AudioSavePathInDevice);
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                sessionCursor.close();
+                student.close();
+                mydb.close();
+                mediaPlayer.start();
+
+            }
+        });
+
+        stopRecording.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.release();
+                mediaPlayer = null;
+                playRecording.setVisibility(v.VISIBLE);
+                stopRecording.setVisibility(v.INVISIBLE);
             }
         });
 

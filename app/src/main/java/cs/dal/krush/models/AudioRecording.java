@@ -16,17 +16,29 @@ public class AudioRecording extends Table {
     /**
      * Insert row into audio_recordings table
      * @param studentId
-     * @param locationId
+     * @param sessionId
      * @return boolean
      */
-    public boolean insert(int studentId, int locationId){
+    public boolean insert(int studentId, int sessionId){
         ContentValues contentValues = new ContentValues();
         contentValues.put("student_id", studentId);
-        contentValues.put("location_id", locationId);
+        contentValues.put("session_id", sessionId);
         dbWrite.insert("audio_recording", null, contentValues);
         return true;
     }
-
+    /**
+     * Update row in audio_recordings table
+     * @param studentId
+     * @param sessionId
+     * @return boolean
+     */
+    public boolean update(int studentId, int sessionId){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("student_id", studentId);
+        contentValues.put("session_id", sessionId);
+        dbWrite.update("audio_recording", contentValues, "student_id=? AND session_id=?", new String[] { "" + studentId, "" + sessionId});
+        return true;
+    }
     @Override
     public Cursor getData(int id){
         return dbRead.rawQuery("SELECT * FROM audio_recording WHERE id="+id+"",null);
@@ -39,11 +51,11 @@ public class AudioRecording extends Table {
 
     /**
      * Get an audio recording by the location_id field
-     * @param locationId
+     * @param sessionId
      * @return res
      */
-    public Cursor getDataByLocationId(int locationId){
-        return dbRead.rawQuery("SELECT * FROM audio_recording WHERE location_id="+locationId+"",null);
+    public Cursor getDataBySessionId(int sessionId){
+        return dbRead.rawQuery("SELECT * FROM audio_recording WHERE session_id="+sessionId+"",null);
     }
 
     /**
@@ -53,6 +65,16 @@ public class AudioRecording extends Table {
      */
     public Cursor getDataByStudentId(int studentId){
         return dbRead.rawQuery("SELECT * FROM audio_recording WHERE student_id="+studentId+"",null);
+    }
+
+    /**
+     * Get an audio recording by the student_id and session_id fields
+     * @param studentId
+     * @param sessionId
+     * @return res
+     */
+    public Cursor getDataByStudentAndSessionId(int studentId, int sessionId){
+        return dbRead.rawQuery("SELECT * FROM audio_recording WHERE student_id="+studentId+" AND session_id="+sessionId+"",null);
     }
 
     /**

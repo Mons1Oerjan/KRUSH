@@ -121,5 +121,23 @@ public class TutoringSessionSeeder {
         db.tutoringSession.insert(1,3,4,1,"Meeting at Killam Library", startTime, endTime);
         db.tutoringSession.insert(1,5,4,1,"Meeting at Killam Library", startTime, endTime);
         db.tutoringSession.insert(1,6,3,1,"Meeting at Public Library", startTime, endTime);
+
+        calendarStartTime = new GregorianCalendar();
+        calendarStartTime.set(Calendar.DAY_OF_MONTH, 29);
+        calendarStartTime.set(Calendar.HOUR_OF_DAY, 4);
+        calendarStartTime.set(Calendar.MONTH, 2);
+        calendarStartTime.set(Calendar.YEAR, 2017);
+        calendarStartTime.set(Calendar.MINUTE, 00);
+
+        calendarEndTime = new GregorianCalendar();
+        calendarEndTime.set(Calendar.DAY_OF_MONTH, 29);
+        calendarEndTime.set(Calendar.HOUR_OF_DAY, 4);
+        calendarEndTime.set(Calendar.MONTH, 2);
+        calendarEndTime.set(Calendar.YEAR, 2017);
+        calendarEndTime.set(Calendar.MINUTE, 30);
+        startTime = timeFormatter.format(calendarStartTime.getTime());
+        endTime = timeFormatter.format(calendarEndTime.getTime());
+
+        db.tutoringSession.insert(1,1,2,1,"Meeting at Starbucks Coffee", startTime, endTime);
     }
 }
