@@ -54,7 +54,7 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:src="@drawable/ic_edit_black_24dp"/>
 
             <TextView
-                android:id="@+id/profile_name"
+                android:id="@+id/tutor_profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -62,15 +62,6 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tutor_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/profile_name"
-                android:layout_centerHorizontal="true"
-                android:text="* * * * *"
-                android:textSize="24sp"/>
 
         </RelativeLayout>
 
@@ -83,6 +74,16 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tutor_profile_email_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/tutor_email"
+                android:text="@string/school_label"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
                 android:id="@+id/tutor_email"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -90,6 +91,16 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:background="#fff"
                 android:elevation="3dp"
                 android:padding="20dp" />
+
+            <TextView
+                android:id="@+id/tutor_profile_school_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/tutor_school"
+                android:text="@string/profile_email_label"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/tutor_school"
@@ -102,7 +113,15 @@ from http://www.viralandroid.com/2016/03/android-material-design-profile-screen-
                 android:elevation="3dp"
                 android:padding="20dp" />
 
-
+            <TextView
+                android:id="@+id/tutor_profile_rate_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/tutor_rate"
+                android:text="@string/rate_label"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/colorPrimary"/>
 
             <TextView
                 android:id="@+id/tutor_rate"

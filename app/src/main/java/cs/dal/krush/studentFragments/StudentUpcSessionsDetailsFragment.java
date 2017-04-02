@@ -1,5 +1,6 @@
 package cs.dal.krush.studentFragments;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -114,7 +115,7 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         String tutorName = sessionCursor.getString(sessionCursor.getColumnIndex("f_name")) + " " +
                 sessionCursor.getString(sessionCursor.getColumnIndex("l_name"));
         String tutorEmail = sessionCursor.getString(sessionCursor.getColumnIndex("email"));
-        String startTime = sessionCursor.getString(sessionCursor.getColumnIndex("start_time"));
+        final String startTime = sessionCursor.getString(sessionCursor.getColumnIndex("start_time"));
         String endTime = sessionCursor.getString(sessionCursor.getColumnIndex("end_time"));
         String location = sessionCursor.getString(sessionCursor.getColumnIndex("location"));
         String imgPath = sessionCursor.getString(sessionCursor.getColumnIndex("profile_pic"));
@@ -177,6 +178,12 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 // user clicked on "Yes" - destroy the tutoring session
                 mydb.tutoringSession.deleteTutoringSession(SESSION_ID);
+
+                // Set tutors available time booked to 0
+                ContentValues cv = new ContentValues();
+                cv.put("booked", "0");
+                String start = "\"" + startTime + "\"";
+                mydb.getWritableDatabase().update("available_time", cv, "start_time="+start, null);
 
                 // return to home fragment
                 Bundle bundle = new Bundle();

@@ -19,6 +19,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import cs.dal.krush.R;
 import cs.dal.krush.helpers.ValidationHelper;
 import cs.dal.krush.models.DBHelper;
 import static android.app.Activity.RESULT_OK;
+import static cs.dal.krush.R.id.new_password;
 
 /**
  * Fragment for editing a profile. Sets initial fields from the database and saves new fields
@@ -56,7 +58,8 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
     Button saveProfile, changePicture;
     ImageView profile_picture_view;
     View myView;
-    TextView profile_name_view;
+    TextView profile_name_view, email_label, school_label, rate_label, current_password_label,
+            new_password_label, new_password_confirmation_label;
     EditText email_view, rate_view, curr_password_view, new_password_view, new_password_view_conf;
     Spinner school_view;
 
@@ -75,14 +78,21 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         cursor.moveToFirst();
 
         // Get Views
-        profile_name_view = (TextView) myView.findViewById(R.id.profile_name_edit);
-        profile_picture_view = (ImageView) myView.findViewById(R.id.tutor_profile_picture_edit);
-        email_view = (EditText) myView.findViewById(R.id.profile_email_edit);
-        school_view = (Spinner) myView.findViewById(R.id.profile_school_edit);
-        rate_view = (EditText) myView.findViewById(R.id.profile_rate_edit);
-        curr_password_view = (EditText) myView.findViewById(R.id.current_password);
-        new_password_view = (EditText) myView.findViewById(R.id.new_password);
-        new_password_view_conf = (EditText) myView.findViewById(R.id.new_password_confirmation);
+        profile_name_view = (TextView) myView.findViewById(R.id.tutor_profile_edit_name);
+        profile_picture_view = (ImageView) myView.findViewById(R.id.tutor_profile_edit_picture);
+        email_view = (EditText) myView.findViewById(R.id.tutor_profile_edit_email);
+        school_view = (Spinner) myView.findViewById(R.id.tutor_profile_edit_school);
+        rate_view = (EditText) myView.findViewById(R.id.tutor_profile_edit_rate);
+        curr_password_view = (EditText) myView.findViewById(R.id.tutor_profile_edit_current_password);
+        new_password_view = (EditText) myView.findViewById(R.id.tutor_profile_edit_new_password);
+        new_password_view_conf = (EditText) myView.findViewById(R.id.tutor_profile_edit_new_password_confirmation);
+        email_label = (TextView) myView.findViewById(R.id.tutor_profile_edit_email_label);
+        school_label = (TextView) myView.findViewById(R.id.tutor_profile_edit_school_label);
+        rate_label = (TextView) myView.findViewById(R.id.tutor_profile_edit_rate_label);
+        current_password_label = (TextView) myView.findViewById(R.id.tutor_profile_edit_current_password_label);
+        new_password_label = (TextView) myView.findViewById(R.id.tutor_profile_edit_new_password_label);
+        new_password_confirmation_label = (TextView) myView.findViewById(R.id.tutor_profile_edit_new_password_confirmation_label);
+
 
         //Get list of schools
         schoolList = new ArrayList<>();
@@ -91,8 +101,9 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         if(schoolCursor.getCount() != 0) {
             schoolCursor.moveToFirst();
             do {
-                // column id 1 is school_view name
-                schoolList.add(schoolCursor.getString(1));
+                // column id 1 is school name, 2 is school type
+                schoolList.add(schoolCursor.getString(1) + " "
+                + schoolCursor.getString(2));
             }
             while(schoolCursor.moveToNext());
         }
@@ -136,6 +147,12 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         profile_name_view.setTypeface(typeFace);
         email_view.setTypeface(typeFace);
         rate_view.setTypeface(typeFace);
+        email_label.setTypeface(typeFace);
+        school_label.setTypeface(typeFace);
+        rate_label.setTypeface(typeFace);
+        current_password_label.setTypeface(typeFace);
+        new_password_label.setTypeface(typeFace);
+        new_password_confirmation_label.setTypeface(typeFace);
 
         //request permission to use camera if not already given
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -156,8 +173,8 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
             }
         }
 
-        saveProfile = (Button) myView.findViewById(R.id.save_profile_button);
-        changePicture = (Button) myView.findViewById(R.id.change_picture_button);
+        saveProfile = (Button) myView.findViewById(R.id.tutor_profile_edit_save_profile_button);
+        changePicture = (Button) myView.findViewById(R.id.tutor_profile_edit_change_picture_button);
 
         saveProfile.setOnClickListener(this);
         changePicture.setOnClickListener(this);
@@ -165,6 +182,7 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
         //Close db
         cursor.close();
         mydb.close();
+        sc.close();
 
         return myView;
     }
@@ -172,7 +190,7 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.save_profile_button:
+            case R.id.tutor_profile_edit_save_profile_button:
                 // Save values in views and return to profile view
                 try {
                     boolean isValid = true;
@@ -205,6 +223,44 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
                         }
                     }
 
+                    // Check if password is changed
+                    boolean changePassword = false;
+                    String curr_password = curr_password_view.getText().toString();
+                    String new_password = new_password_view.getText().toString();
+                    String new_password_conf = new_password_view_conf.getText().toString();
+
+                    // If user is attempting to change password
+                    if(!curr_password.isEmpty()) {
+                        // Validate if current password matches database
+                        if (curr_password.equals(user_password)) {
+                            // Validate if new password fields have been filled in
+                            if (!new_password.isEmpty() || !new_password_conf.isEmpty()) {
+                                // Validate if new password matches confirmation
+                                if (new_password.equals(new_password_conf)) {
+                                    changePassword = true;
+                                }
+                                else {
+                                    new_password_view.setError("Passwords don't match!");
+                                    isValid = false;
+                                }
+                            }
+                            // If current password valid but missing new password or confirmation
+                            else {
+                                new_password_view.setError("Please enter a new password!");
+                                isValid = false;
+                            }
+                        }
+                        else {
+                            curr_password_view.setError("Incorrect password!");
+                            isValid = false;
+                        }
+                    }
+                    // If new passwords are provided but current password field is empty
+                    else if(!new_password.isEmpty() || !new_password_conf.isEmpty()) {
+                        curr_password_view.setError("Please enter your current password!");
+                        isValid = false;
+                    }
+
                     // Update the profile if valid input
                     if (isValid) {
                         // Write new fields to table
@@ -217,17 +273,9 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
                         if(!imagePath.equals(""))
                             cv.put("profile_pic", imagePath);
 
-                        // Check if password is changed
-                        String curr_password = curr_password_view.getText().toString();
-                        if(curr_password.equals(user_password)) {
-                            String new_password = new_password_view.getText().toString();
-                            String new_password_conf = new_password_view_conf.getText().toString();
-
-                            if(!new_password.isEmpty() && !new_password_conf.isEmpty()) {
-                                if(new_password.equals(new_password_conf)) {
-                                    cv.put("password", new_password);
-                                }
-                            }
+                        // Check if new password is set
+                        if(changePassword){
+                            cv.put("password", new_password);
                         }
 
                         // Save new values to db
@@ -253,7 +301,7 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
                     ex.printStackTrace();
                 }
                 break;
-            case R.id.change_picture_button:
+            case R.id.tutor_profile_edit_change_picture_button:
                 changePicture();
                 break;
         }
@@ -342,13 +390,13 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // Set profile picture to image that was just captured
-            ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.tutor_profile_picture_edit);
+            ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.tutor_profile_edit_picture);
             Bitmap profile_pic = BitmapFactory.decodeFile(imagePath);
             profile_picture_view.setImageBitmap(profile_pic);
         }
 
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
-            ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.tutor_profile_picture_edit);
+            ImageView profile_picture_view = (ImageView) myView.findViewById(R.id.tutor_profile_edit_picture);
             try {
                 Bitmap profile_pic = MediaStore.Images.Media.getBitmap(getActivity().getApplicationContext().getContentResolver(), data.getData());
                 profile_picture_view.setImageBitmap(profile_pic);
