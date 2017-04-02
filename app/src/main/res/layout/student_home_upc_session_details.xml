@@ -118,7 +118,7 @@
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
         android:layout_below="@+id/student_upc_details_school"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="15dp"
         android:layout_alignEnd="@+id/student_cancel_session_button"
         android:layout_alignStart="@+id/student_cancel_session_button" />
 
@@ -126,7 +126,7 @@
         android:id="@+id/student_cancel_session_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/button_cancel"
         android:textColor="@color/color_white"
         android:paddingRight="25dp"
@@ -160,6 +160,32 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/color_white"
         android:layout_below="@+id/student_cancel_session_button"
+        android:text="Stop Recording"/>
+
+    <Button
+        android:id="@+id/sessionPlayRecording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
+        android:layout_below="@+id/sessionRecordStart"
+        android:text="Play Recording"/>
+
+    <Button
+        android:id="@+id/sessionStopRecording"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_cancel"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
+        android:layout_below="@id/sessionRecordStart"
         android:text="Stop Recording"/>
 
 </RelativeLayout>
