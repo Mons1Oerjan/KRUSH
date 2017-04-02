@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
+
 import cs.dal.krush.R;
 
 /**
@@ -23,6 +25,10 @@ import cs.dal.krush.R;
  * from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
  */
 public class SessionCursorAdapter extends CursorAdapter {
+
+    // Currency formatter for tutor rate
+    NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+
 
     //store the context set in the constructor
     private Context mContext;
@@ -80,9 +86,9 @@ public class SessionCursorAdapter extends CursorAdapter {
         String tutorFirstName = cursor.getString(cursor.getColumnIndexOrThrow("f_name"));
         String tutorLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
-        String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
+        Float tutorRate = cursor.getFloat(cursor.getColumnIndexOrThrow("rate"));
         String sessionLocation = cursor.getString(cursor.getColumnIndexOrThrow("location"));
-        String text2content = "$"+tutorRate+"/hr with "+tutorFirstName+" "+tutorLastName+" at "+sessionLocation.split(",")[0];
+        String text2content = currencyFormatter.format(tutorRate)+"/hr with "+tutorFirstName+" "+tutorLastName+" at "+sessionLocation.split(",")[0];
         subHeader.setText(text2content);
     }
 }

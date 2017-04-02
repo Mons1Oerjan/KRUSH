@@ -49,6 +49,11 @@ public class AvailableTime extends Table{
         return dbRead.rawQuery("SELECT * FROM available_time WHERE tutor_id="+tutorId, null);
     }
 
+    /**
+     * Returns upcoming available times that are not already booked
+     * @param tutorId
+     * @return
+     */
     public Cursor getUpcomingDataByTutorId(int tutorId){
         SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String now = "\"" + simple.format(new Date()) + "\"";

@@ -240,13 +240,13 @@ public class TutorProfileEditFragment extends Fragment implements View.OnClickLi
                                     changePassword = true;
                                 }
                                 else {
-                                    new_password_view.setError("New password did not match confirmation");
+                                    new_password_view.setError("Passwords don't match!");
                                     isValid = false;
                                 }
                             }
                             // If current password valid but missing new password or confirmation
                             else {
-                                new_password_view.setError("Please enter a new password and confirmation");
+                                new_password_view.setError("Please enter a new password!");
                                 isValid = false;
                             }
                         }

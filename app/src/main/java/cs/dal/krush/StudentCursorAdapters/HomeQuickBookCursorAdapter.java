@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
+
 import cs.dal.krush.R;
 
 /**
@@ -23,6 +25,9 @@ import cs.dal.krush.R;
  * from https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
  */
 public class HomeQuickBookCursorAdapter extends CursorAdapter {
+
+    // Currency formatter for tutor rate
+    NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
 
     //store the context set in the constructor
     private Context mContext;
@@ -80,9 +85,9 @@ public class HomeQuickBookCursorAdapter extends CursorAdapter {
         header.setText(tutorName);
 
         //Set the row's sub-header text:
-        String tutorRate = cursor.getString(cursor.getColumnIndexOrThrow("rate"));
+        Float tutorRate = cursor.getFloat(cursor.getColumnIndexOrThrow("rate"));
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
-        String text2content = "$"+tutorRate+"/hr";
+        String text2content = currencyFormatter.format(tutorRate) + "/hr";
         subHeader.setText(text2content);
         ratingBar.setRating(Float.parseFloat(tutorRating));
     }
