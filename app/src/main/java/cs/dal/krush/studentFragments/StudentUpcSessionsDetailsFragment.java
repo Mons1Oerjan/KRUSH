@@ -90,7 +90,6 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         sessionDetailLocation = (Button) view.findViewById(R.id.sessionDetailLocation);
         sessionRecordStart = (Button) view.findViewById(R.id.sessionRecordStart);
         sessionRecordStop = (Button) view.findViewById(R.id.sessionRecordStop);
-//        sessionRecordStart.setVisibility(view.INVISIBLE);
         sessionRecordStop.setVisibility(view.INVISIBLE);
 
         //fetch custom app font
@@ -145,7 +144,7 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
             hasStarted = timeFormatter.parse(startTime).before(timeFormatter.parse(currentTime));
         }
         catch (Exception e){
-            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
         if(hasStarted)
@@ -233,10 +232,8 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
                         mediaRecorder.prepare();
                         mediaRecorder.start();
                     } catch (IllegalStateException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
 
@@ -274,7 +271,10 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
 
         return view;
     }
-    // init media recorder
+
+    /**
+     *  init media recorder
+     */
     public void MediaRecorderReady(){
         mediaRecorder=new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -283,7 +283,11 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
 
     }
-    // check device permissions
+
+    /**
+     * check device permissions
+     * @return boolean permission
+     */
     public boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getContext(),
                 WRITE_EXTERNAL_STORAGE);
@@ -292,7 +296,10 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         return result == PackageManager.PERMISSION_GRANTED &&
                 result1 == PackageManager.PERMISSION_GRANTED;
     }
-    // set device permissions
+
+    /**
+     * set device permissions
+     */
     private void requestPermission() {
         ActivityCompat.requestPermissions(getActivity(), new
                 String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, RequestPermissionCode);
