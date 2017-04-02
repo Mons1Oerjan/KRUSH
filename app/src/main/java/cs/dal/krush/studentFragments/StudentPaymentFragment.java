@@ -47,6 +47,7 @@ public class StudentPaymentFragment extends Fragment {
         END_TIME = getArguments().getString("END_TIME");
         TITLE = getArguments().getString("TITLE");
         COST = getArguments().getFloat("COST");
+        LOCATION_ID = getArguments().getInt("LOCATION_ID");
 
         //initialize database connection
         mydb = new DBHelper(getActivity().getApplicationContext());

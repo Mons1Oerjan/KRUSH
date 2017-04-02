@@ -39,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import cs.dal.krush.R;
+import cs.dal.krush.helpers.ValidationHelper;
 import cs.dal.krush.models.DBHelper;
 
 import static android.R.attr.name;
@@ -176,49 +177,63 @@ public class StudentProfileEditFragment extends Fragment implements View.OnClick
         switch(v.getId()) {
             case R.id.save_profile_button:  //Save values in views and return to profile view
                 try {
+                    boolean isValid = true;
                     // Get data from fields
                     String new_email = email_view.getText().toString();
                     int new_school = schoolList.indexOf(school_view.getSelectedItem().toString()) + 1;
 
-                    // Write new fields to table
-                    ContentValues cv = new ContentValues();
-                    cv.put("email", new_email);
-                    cv.put("school_id", new_school);
-
-                    // Check if profile picture was changed
-                    if(!imagePath.equals(""))
-                        cv.put("profile_pic", imagePath);
-
-                    // Check if password was changed
-                    String curr_password = curr_password_view.getText().toString();
-                    if(curr_password.equals(user_password)) {
-                        String new_password = new_password_view.getText().toString();
-                        String new_password_conf = new_password_view_conf.getText().toString();
-
-                        if(!new_password.isEmpty() && !new_password_conf.isEmpty()) {
-                            if(new_password.equals(new_password_conf)) {
-                                cv.put("password", new_password);
-                            }
-                        }
+                    // Validate input fields
+                    if (new_email.length() == 0) {
+                        email_view.setError("Email is required!");
+                        isValid = false;
+                    }
+                    if (!ValidationHelper.Email_Validate(new_email)) {
+                        email_view.setError("Invalid email format!");
+                        isValid = false;
                     }
 
-                    // Save new values to db
-                    mydb.getWritableDatabase().update("students", cv,"id="+USER_ID, null);
+                    // Update profile if the input is valid
+                    if (isValid) {
+                        // Write new fields to table
+                        ContentValues cv = new ContentValues();
+                        cv.put("email", new_email);
+                        cv.put("school_id", new_school);
 
-                    //Close DB
-                    cursor.close();
-                    mydb.close();
+                        // Check if profile picture was changed
+                        if(!imagePath.equals(""))
+                            cv.put("profile_pic", imagePath);
 
-                    // Add USER_ID to bundle to pass back to profile fragment
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("USER_ID", USER_ID);
+                        // Check if password was changed
+                        String curr_password = curr_password_view.getText().toString();
+                        if(curr_password.equals(user_password)) {
+                            String new_password = new_password_view.getText().toString();
+                            String new_password_conf = new_password_view_conf.getText().toString();
 
-                    // Switch to profile fragment
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    StudentProfileFragment profile = new StudentProfileFragment();
-                    profile.setArguments(bundle);
-                    transaction.replace(R.id.student_fragment_container, profile);
-                    transaction.commit();
+                            if(!new_password.isEmpty() && !new_password_conf.isEmpty()) {
+                                if(new_password.equals(new_password_conf)) {
+                                    cv.put("password", new_password);
+                                }
+                            }
+                        }
+
+                        // Save new values to db
+                        mydb.getWritableDatabase().update("students", cv,"id="+USER_ID, null);
+
+                        //Close DB
+                        cursor.close();
+                        mydb.close();
+
+                        // Add USER_ID to bundle to pass back to profile fragment
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("USER_ID", USER_ID);
+
+                        // Switch to profile fragment
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        StudentProfileFragment profile = new StudentProfileFragment();
+                        profile.setArguments(bundle);
+                        transaction.replace(R.id.student_fragment_container, profile);
+                        transaction.commit();
+                    }
                 }
                 catch(Exception ex) {
                     ex.printStackTrace();

@@ -105,22 +105,31 @@
         android:id="@+id/sessionDetailLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Get Directions"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:minWidth="170dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/bottom_bar_color"
         android:layout_below="@+id/student_upc_details_school"
-        android:text="Location" />
+        android:layout_marginTop="42dp"
+        android:layout_alignEnd="@+id/student_cancel_session_button"
+        android:layout_alignStart="@+id/student_cancel_session_button" />
 
     <Button
         android:id="@+id/student_cancel_session_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/student_upc_details_school"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button_cancel"
         android:textColor="@color/color_white"
         android:paddingRight="25dp"
         android:paddingLeft="25dp"
         android:minWidth="170dp"
-        android:text="Cancel" />
+        android:text="Cancel"
+        android:layout_below="@+id/sessionDetailLocation"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/sessionRecordStart"

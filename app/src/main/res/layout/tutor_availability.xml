@@ -82,20 +82,19 @@
         android:background="@drawable/button_main"
         android:paddingRight="25dp"
         android:paddingLeft="25dp"
-        android:minHeight="30dp"
-        android:minWidth="70dp"
+        android:minHeight="50dp"
+        android:minWidth="140dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
         android:layout_marginLeft="115px"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="51dp"
-        android:layout_below="@+id/txtEndTime"
-        android:layout_alignEnd="@+id/txtEndTime" />
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/btnEndTime"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CALENDAR"
+        android:text="View Calendar"
         android:id="@+id/btnViewCalendar"
         android:background="@drawable/button_main"
         android:paddingRight="25dp"
@@ -104,11 +103,9 @@
         android:minWidth="70dp"
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/bottom_bar_color"
-        android:layout_marginLeft="40px"
-        android:layout_marginRight="10px"
-        android:layout_alignBaseline="@+id/btnSubmit"
-        android:layout_alignBottom="@+id/btnSubmit"
-        android:layout_toStartOf="@+id/txtEndTime" />
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/btnSubmit"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="Your Availability"
@@ -157,11 +154,11 @@
         android:minWidth="70dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:text="Location"
+        android:text="Set Location"
         android:textColor="@color/bottom_bar_color"
-        android:layout_below="@+id/btnViewCalendar"
-        android:layout_alignStart="@+id/btnViewCalendar"
-        android:layout_marginTop="20dp" />
+        android:layout_alignBaseline="@+id/btnViewCalendar"
+        android:layout_alignBottom="@+id/btnViewCalendar"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="200dp"
@@ -169,6 +166,7 @@
         android:id="@+id/txtDate"
         android:paddingTop="15dp"
         android:textSize="15dp"
+        android:minWidth="70dp"
         android:fontFamily="sans-serif-medium"
         android:layout_below="@+id/txtSelectAvailability"
         android:layout_toEndOf="@+id/btnDate" />
