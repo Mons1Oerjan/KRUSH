@@ -25,10 +25,11 @@ public class Tutor extends Table{
      * @param password
      * @param rate
      * @param rating
+     * @param ratingCount
      * @return boolean
      */
     public boolean insert(int locationId, int schoolId, String profilePic, String firstName, String lastName, String
-                          email, String password, int rate, float rating){
+                          email, String password, int rate, float rating, int ratingCount){
         ContentValues contentValues = new ContentValues();
         if (locationId != 0) {
             contentValues.put("location_id", locationId);
@@ -44,6 +45,7 @@ public class Tutor extends Table{
         }
         contentValues.put("rating", rating);
         contentValues.put("revenue", 0.00);
+        contentValues.put("rating_count", ratingCount);
         dbWrite.insert("tutors", null, contentValues);
         return true;
     }
@@ -54,10 +56,11 @@ public class Tutor extends Table{
      * @param rating
      * @return
      */
-    public boolean updateTutorRating(int tutorId, float rating){
+    public boolean updateTutorRating(int tutorId, float rating, int rateCount){
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("rating", rating);
+        contentValues.put("rating_count", rateCount);
         dbWrite.update("tutors", contentValues, "id=?", new String[] { "" + tutorId});
         return true;
     }
@@ -206,6 +209,18 @@ public class Tutor extends Table{
         else{
             return -1;
         }
+    }
+
+    /**
+     * Gets the rating count for a given tutor
+     * @param tutorID
+     * @return
+     */
+    public int getTutorRatingCount(int tutorID) {
+        Cursor res = dbRead.rawQuery("SELECT rating_count FROM tutors WHERE id=" + tutorID, null);
+        res.moveToFirst();
+        int ratingCount = Integer.parseInt(res.getString(res.getColumnIndex("rating_count")));
+        return ratingCount;
     }
 
     /**
