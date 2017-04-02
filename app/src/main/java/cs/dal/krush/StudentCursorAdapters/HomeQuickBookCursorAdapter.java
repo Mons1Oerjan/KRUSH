@@ -87,7 +87,7 @@ public class HomeQuickBookCursorAdapter extends CursorAdapter {
         //Set the row's sub-header text:
         Float tutorRate = cursor.getFloat(cursor.getColumnIndexOrThrow("rate"));
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
-        String text2content = currencyFormatter.format(tutorRate) + "/hr";
+        String text2content = currencyFormatter.format(tutorRate) + " per half hour";
         subHeader.setText(text2content);
         ratingBar.setRating(Float.parseFloat(tutorRating));
     }
