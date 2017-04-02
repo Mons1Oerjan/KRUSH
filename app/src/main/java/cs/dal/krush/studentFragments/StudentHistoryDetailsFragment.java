@@ -152,7 +152,7 @@ public class StudentHistoryDetailsFragment extends Fragment {
                     newTutorRating = newTutorRating/n;
                     newTutorRating = Float.parseFloat(String.format("%.1f", newTutorRating));
 
-                    mydb.tutor.updateTutorRating(TUTOR_ID, newTutorRating);
+                    mydb.tutor.updateTutorRating(TUTOR_ID, newTutorRating, n);
                     ratingBarView.setRating(rating);
                     mydb.close();
                 }

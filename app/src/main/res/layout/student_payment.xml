@@ -121,6 +121,7 @@
         android:ems="10"
         android:id="@+id/creditNumberInput"
         android:textSize="20sp"
+        android:maxLength="16"
         android:layout_alignBaseline="@+id/cardNumberLabel"
         android:layout_alignBottom="@+id/cardNumberLabel"
         android:layout_alignParentEnd="true" />
