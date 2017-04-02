@@ -53,25 +53,22 @@ public class CoursesTutors {
      * @return ArrayList<String>
      */
     public ArrayList<String> getCourseNamesFromTutor(int tutor_id){
-        ArrayList<String> courseNames;
+        ArrayList<String> courseNames = null;
         Cursor res = dbRead.rawQuery(
-                "SELECT c.title " +
+                "SELECT c.title, c.course_code " +
                         "FROM courses c " +
                         "INNER JOIN course_tutors ct on ct.course_id = c.id " +
                         "INNER JOIN tutors t on t.id = ct.tutor_id " +
                         "WHERE t.id="+tutor_id, null);
-        if(res != null) {
-            res.moveToFirst();
+        if(res.moveToFirst()) {
             courseNames = new ArrayList<>();
             do {
-                courseNames.add(res.getString(res.getColumnIndex("title")));
+                courseNames.add(res.getString(res.getColumnIndex("course_code")) + " - "
+                        + res.getString(res.getColumnIndex("title")));
             } while(res.moveToNext());
-            res.close();
-            return courseNames;
         }
-        else{
-            return null;
-        }
+        res.close();
+        return courseNames;
     }
 
     /**

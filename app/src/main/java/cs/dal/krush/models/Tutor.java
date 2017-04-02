@@ -214,20 +214,16 @@ public class Tutor extends Table{
      * @return
      */
     public String getLocationName(int tutorID) {
-        String location;
+        String location = null;
         Cursor res = dbRead.rawQuery("SELECT l.location " +
                 "FROM locations l " +
                 "INNER JOIN tutors t on t.location_id = l.id " +
                 "WHERE t.id="+tutorID, null);
-        if(res != null) {
-            res.moveToFirst();
+        if(res.moveToFirst()) {
             location = res.getString(res.getColumnIndex("location"));
-            res.close();
-            return location;
         }
-        else {
-            return "Location Not Found";
-        }
+        res.close();
+        return location;
     }
 
     /**
@@ -251,6 +247,28 @@ public class Tutor extends Table{
         else {
             return "School Not Found";
         }
+
+    }
+
+    /**
+     * Given a tutorID, returns a string of the school name associated
+     * with this tutors location_id
+     * @param tutorId
+     * @return
+     */
+    public String getSchoolNameAndType(int tutorId) {
+        String school = null;
+        Cursor res = dbRead.rawQuery("SELECT s.name, s.type " +
+                "FROM schools s " +
+                "INNER JOIN tutors t on t.school_id = s.id " +
+                "WHERE t.id="+tutorId, null);
+        if(res.moveToFirst()) {
+            school = res.getString(res.getColumnIndex("name")) + " "
+                    + res.getString(res.getColumnIndex("type"));
+        }
+        res.close();
+        return school;
+
 
     }
 

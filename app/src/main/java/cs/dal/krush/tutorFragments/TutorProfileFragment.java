@@ -7,6 +7,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +30,7 @@ public class TutorProfileFragment extends Fragment implements View.OnClickListen
     private Cursor cursor;
     static int USER_ID;
     ImageView edit_btn, profile_picture_view;
-    TextView profile_name_view, email_view, school_view, rate_view;
+    TextView profile_name_view, email_view, school_view, rate_view, email_label, school_label, rate_label;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,20 +47,21 @@ public class TutorProfileFragment extends Fragment implements View.OnClickListen
         cursor.moveToFirst();
 
         // Get TextViews
-        profile_name_view = (TextView) myView.findViewById(R.id.profile_name);
+        profile_name_view = (TextView) myView.findViewById(R.id.tutor_profile_name);
         profile_picture_view = (ImageView) myView.findViewById(R.id.tutor_profile_picture);
         email_view = (TextView) myView.findViewById(R.id.tutor_email);
         school_view = (TextView) myView.findViewById(R.id.tutor_school);
         rate_view = (TextView) myView.findViewById(R.id.tutor_rate);
+        email_label = (TextView) myView.findViewById(R.id.tutor_profile_email_label);
+        school_label = (TextView) myView.findViewById(R.id.tutor_profile_school_label);
+        rate_label = (TextView) myView.findViewById(R.id.tutor_profile_rate_label);
 
         //Get values from database
         String name = cursor.getString(cursor.getColumnIndex("f_name")) + " " + cursor.getString(cursor.getColumnIndex("l_name"));
         String email = cursor.getString(cursor.getColumnIndex(("email")));
-        String rate = cursor.getString(cursor.getColumnIndex(("rate")));
-        int school_id = cursor.getInt(cursor.getColumnIndex("school_id"));
-        Cursor schoolCursor = mydb.school.getData(school_id);
-        schoolCursor.moveToFirst();
-        String school = schoolCursor.getString(schoolCursor.getColumnIndex("name"));
+        String rate = TextUtils.isEmpty(cursor.getString(cursor.getColumnIndex(("rate")))) ? "Please set your rate"
+                : cursor.getString(cursor.getColumnIndex(("rate")));
+        String school = mydb.tutor.getSchoolNameAndType(USER_ID);
 
         //Profile Picture
         String imagePath = cursor.getString(cursor.getColumnIndex("profile_pic"));
@@ -80,6 +83,9 @@ public class TutorProfileFragment extends Fragment implements View.OnClickListen
         email_view.setTypeface(typeFace);
         school_view.setTypeface(typeFace);
         rate_view.setTypeface(typeFace);
+        email_label.setTypeface(typeFace);
+        school_label.setTypeface(typeFace);
+        rate_label.setTypeface(typeFace);
 
         //Edit profile button listener
         edit_btn = (ImageView) myView.findViewById(R.id.edit_profile_button);

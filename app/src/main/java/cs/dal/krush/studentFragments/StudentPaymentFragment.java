@@ -1,5 +1,6 @@
 package cs.dal.krush.studentFragments;
 
+import android.content.ContentValues;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -170,6 +171,12 @@ public class StudentPaymentFragment extends Fragment {
 
                     // Create a new session
                     mydb.tutoringSession.insert(USER_ID,TUTOR_ID,LOCATION_ID,1,TITLE,START_TIME,END_TIME);
+
+                    // Set tutors available time to booked
+                    ContentValues cv = new ContentValues();
+                    cv.put("booked", "1");
+                    String start = "\"" + START_TIME + "\"";
+                    mydb.getWritableDatabase().update("available_time", cv, "start_time="+start, null);
 
                     // Get the session_id
                     int SESSION_ID = mydb.tutoringSession.getLastBookedSessionIdByUserId(USER_ID);
