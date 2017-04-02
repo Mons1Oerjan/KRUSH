@@ -199,7 +199,6 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
                 home.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.student_fragment_container, home);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
