@@ -54,13 +54,14 @@ public class Tutor extends Table{
      * Updates the rating for a given tutor
      * @param tutorId
      * @param rating
+     * @param ratingCount
      * @return
      */
-    public boolean updateTutorRating(int tutorId, float rating, int rateCount){
+    public boolean updateTutorRating(int tutorId, float rating, int ratingCount){
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("rating", rating);
-        contentValues.put("rating_count", rateCount);
+        contentValues.put("rating_count", ratingCount);
         dbWrite.update("tutors", contentValues, "id=?", new String[] { "" + tutorId});
         return true;
     }
