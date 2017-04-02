@@ -136,6 +136,32 @@
         android:layout_below="@+id/sessionDetailLocation"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:id="@+id/sessionRecordStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_main"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
+        android:layout_below="@+id/student_cancel_session_button"
+        android:text="Start Recording"/>
+
+    <Button
+        android:id="@+id/sessionRecordStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_cancel"
+        android:paddingRight="25dp"
+        android:paddingLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/color_white"
+        android:layout_below="@+id/student_cancel_session_button"
+        android:text="Stop Recording"/>
+
 </RelativeLayout>
 
     </ScrollView>

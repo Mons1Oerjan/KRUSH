@@ -103,7 +103,7 @@ public class TutoringSession extends Table{
                 "INNER JOIN tutoring_sessions ts ON _id = ts.tutor_id " +
                 "INNER JOIN locations l ON ts.location_id = l.id " +
                 "WHERE ts.student_id=" + studentId +
-                " AND ts.start_time>datetime('now')"
+                " AND ts.end_time>=date('now')"
                 ,null
         );
     }
@@ -131,7 +131,7 @@ public class TutoringSession extends Table{
                         "INNER JOIN schools sl ON s.school_id = sl.id " +
                         "WHERE ts.tutor_id=" + tutorId +
                         " AND ts.session_booked=1" +
-                        " AND ts.start_time>datetime('now')"
+                        " AND ts.end_time>=date('now')"
                 ,null
         );
     }
@@ -159,7 +159,7 @@ public class TutoringSession extends Table{
                 "INNER JOIN schools sl ON t.school_id = sl.id " +
                 "WHERE ts.student_id=" + studentId +
                 " AND ts.session_booked=1" +
-                " AND ts.end_time<datetime('now')"
+                " AND ts.end_time<date('now')"
                 ,null
         );
     }
@@ -187,7 +187,7 @@ public class TutoringSession extends Table{
                 "INNER JOIN schools sl ON s.school_id = sl.id " +
                 "WHERE ts.tutor_id=" + tutorId +
                 " AND ts.session_booked=1" +
-                " AND ts.end_time<datetime('now')"
+                " AND ts.end_time<date('now')"
                 ,null
         );
     }

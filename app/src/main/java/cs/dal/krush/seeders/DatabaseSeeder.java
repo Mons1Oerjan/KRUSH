@@ -43,7 +43,6 @@ public class DatabaseSeeder {
         TutoringSessionSeeder.insert(mydb);
         TutorRatingSeeder.insert(mydb);
         CourseSeeder.insert(mydb);
-        AudioRecordingSeeder.insert(mydb);
         CoursesTutorsSeeder.insert(mydb);
         AvailableTimeSeeder.insert(mydb);
     }
@@ -59,14 +58,7 @@ public class DatabaseSeeder {
          * Get and display data
          */
         Cursor rs;
-        rs = mydb.audioRecording.getData(1);
-        rs.moveToFirst();
         String s;
-        s = rs.getString(rs.getColumnIndex("location_id"));
-        System.out.println(s);
-        if (!rs.isClosed()) {
-            rs.close();
-        }
 
         rs = mydb.location.getLocationBySchool(1);
         rs.moveToFirst();

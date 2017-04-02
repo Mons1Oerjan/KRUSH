@@ -112,8 +112,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "CREATE TABLE audio_recording " +
                         "(id INTEGER PRIMARY KEY," +
                         "student_id INTEGER," +
-                        "location_id INTEGER," +
-                        "FOREIGN KEY(location_id) REFERENCES locations(id)," +
+                        "session_id INTEGER," +
+                        "FOREIGN KEY(session_id) REFERENCES tutoring_sessions(id)," +
                         "FOREIGN KEY(student_id) REFERENCES students(id) ON DELETE CASCADE)"
         );
 
