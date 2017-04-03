@@ -83,6 +83,14 @@ public class SessionCursorAdapter extends CursorAdapter {
         String tutorLastName = cursor.getString(cursor.getColumnIndexOrThrow("l_name"));
         String tutorRating = cursor.getString(cursor.getColumnIndexOrThrow("rating"));
         String sessionLocation = cursor.getString(cursor.getColumnIndexOrThrow("location"));
+
+        //remove postal code, city and state if found:
+        if (sessionLocation.contains("B3H")) {
+            sessionLocation = sessionLocation.split("B3H")[0];
+        }
+        if (sessionLocation.contains(",")) {
+            sessionLocation = sessionLocation.split(",")[0];
+        }
         String text2content = " With " + tutorFirstName+" "+tutorLastName+" at "+sessionLocation.split(",")[0];
         subHeader.setText(text2content);
     }

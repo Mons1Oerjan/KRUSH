@@ -206,8 +206,7 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
         String END_TIME = timeCursor.getString(timeCursor.getColumnIndex("end_time"));
 
         //Set a title
-        String TITLE = courseSpinnerView.getSelectedItem().toString() + " with " +
-                name + " at " + location + " on " + timeSpinnerView.getSelectedItem().toString();
+        String TITLE = courseSpinnerView.getSelectedItem().toString();
 
         // Calculate cost
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd H:mm:ss", Locale.getDefault());
