@@ -120,7 +120,6 @@ public class TutorUpcSessionsDetailsFragment extends Fragment {
                 home.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.tutor_fragment_container, home);
-                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
