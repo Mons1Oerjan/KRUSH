@@ -183,8 +183,13 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         builder.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                // Initialize db connection
+                mydb = new DBHelper(getContext());
+
                 // user clicked on "Yes" - destroy the tutoring session
                 mydb.tutoringSession.deleteTutoringSession(SESSION_ID);
+                mydb.audioRecording.deleteAudioRecording(SESSION_ID);
 
                 // Set tutors available time booked to 0
                 ContentValues cv = new ContentValues();
@@ -328,7 +333,7 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         });
 
         sessionCursor.close();
-
+        mydb.close();
         return view;
     }
 
