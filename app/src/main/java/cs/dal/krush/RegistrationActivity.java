@@ -165,7 +165,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     //create user based on their type (student/tutor)
                     if(profileSelected == 1){
-                        mydb.tutor.insert(0, schoolID, null, firstName, lastName, email, password, 0, 0);
+                        mydb.tutor.insert(0, schoolID, null, firstName, lastName, email, password, 0, 0, 0);
                         Intent i = new Intent(RegistrationActivity.this, TutorMainActivity.class);
                         //get the new user we just inserted to the DB and pass the ID to the next activity:
                         Cursor newUser = mydb.tutor.getDataEmail(email, password);

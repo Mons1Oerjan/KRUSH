@@ -44,7 +44,7 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
     DBHelper mydb;
     Cursor tutorCursor, timeCursor;
     ImageView tutorProfilePicView;
-    TextView nameView, schoolView, rateView, locationView, schoolLabel,rateLabel,locationLabel,coursesLabel,timeLabel;
+    TextView nameView, schoolView, rateView, locationView, schoolLabel, rateLabel, locationLabel, coursesLabel, timeLabel, ratingCount;
     RatingBar ratingBarView;
     Spinner courseSpinnerView, timeSpinnerView;
     Button bookButton;
@@ -71,6 +71,7 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
         schoolView = (TextView) view.findViewById(R.id.tutor_details_school);
         rateView = (TextView) view.findViewById(R.id.tutor_details_rate);
         ratingBarView = (RatingBar) view.findViewById(R.id.tutor_details_rating);
+        ratingCount = (TextView) view.findViewById(R.id.ratingCount);
         tutorProfilePicView = (ImageView) view.findViewById(R.id.tutor_details_profile_picture);
         locationView = (TextView) view.findViewById(R.id.tutor_details_location);
         courseSpinnerView = (Spinner) view.findViewById(R.id.tutor_details_courses);
@@ -112,6 +113,9 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
             rateDisplay = currencyFormatter.format(Float.parseFloat(rate));
         }
         String rating = tutorCursor.getString(tutorCursor.getColumnIndex("rating"));
+        int totalRatings = mydb.tutor.getTutorRatingCount(TUTOR_ID);
+        ratingCount.setText("(" + totalRatings + ")");
+        ratingCount.setTypeface(typeFace);
         location = mydb.tutor.getLocationName(TUTOR_ID);
         ArrayList<String> courseNames = mydb.coursesTutors.getCourseNamesFromTutor(TUTOR_ID);
 
@@ -202,8 +206,7 @@ public class StudentBookingDetailsFragment extends Fragment implements View.OnCl
         String END_TIME = timeCursor.getString(timeCursor.getColumnIndex("end_time"));
 
         //Set a title
-        String TITLE = courseSpinnerView.getSelectedItem().toString() + " with " +
-                name + " at " + location + " on " + timeSpinnerView.getSelectedItem().toString();
+        String TITLE = courseSpinnerView.getSelectedItem().toString();
 
         // Calculate cost
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd H:mm:ss", Locale.getDefault());

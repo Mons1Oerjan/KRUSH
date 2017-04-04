@@ -51,6 +51,7 @@ public class TutorHomeFragment extends Fragment {
         //fetch UI elements:
         ListView upcomingSessionsListView = (ListView)view.findViewById(R.id.upcomingSessionsListView);
         RatingBar tutorRating = (RatingBar) view.findViewById(R.id.rating);
+        TextView ratingCount = (TextView) view.findViewById(R.id.ratingCount);
         TextView pageTitle = (TextView)view.findViewById(R.id.homeTitleLabel);
         TextView sessionsLabel = (TextView)view.findViewById(R.id.upcomingSessionsLabel);
         TextView ratingTitle = (TextView) view.findViewById(R.id.tutorRating);
@@ -59,6 +60,8 @@ public class TutorHomeFragment extends Fragment {
         String currentTutorRating = tutor.getString(tutor.getColumnIndex("rating"));
         if(currentTutorRating != null)
             tutorRating.setRating(Float.parseFloat(currentTutorRating));
+        int totalRatings = mydb.tutor.getTutorRatingCount(USER_ID);
+        ratingCount.setText("(" + totalRatings + ")");
 
         //fetch custom app font:
         final Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -67,6 +70,8 @@ public class TutorHomeFragment extends Fragment {
         pageTitle.setTypeface(typeFace);
         sessionsLabel.setTypeface(typeFace);
         ratingTitle.setTypeface(typeFace);
+        ratingCount.setTypeface(typeFace);
+
 
         //get all tutoring sessions by the tutor:
         final Cursor cursorSessionsResponse = mydb.tutoringSession.getDataByTutorIdForCursorAdapter(USER_ID);

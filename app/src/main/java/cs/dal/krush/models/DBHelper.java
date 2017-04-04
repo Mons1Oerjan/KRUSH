@@ -43,6 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "email VARCHAR(255)," +
                         "password VARCHAR(255)," +
                         "rating INTEGER," +
+                        "rating_count INTEGER," +
                         "rate INTEGER," +
                         "revenue INTEGER," +
                         "FOREIGN KEY(school_id) REFERENCES schools(id)," +
