@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.StringDef;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -129,14 +130,36 @@ public class StudentHomeFragment extends Fragment {
         });
 
         // TODO: 2017-03-18 We need to write the instructions once the actual functionality is implemented to accurately write to be
-        final String text = "Lorem ipsum dolor sit amet, pri magna delicata an. An " +
-                "imperdiet, vitae nemore duo eu. Sed ne etiam inermis, aperiam convenire " +
-                "appellantur ad ius, quo elit consequat vulputate eu. Eu cum choro " +
-                "constituto, at per justo nostrum abhorreant. Ridens lobortis vix an." +
-                " Impetus salutatus pro ea, ex recteque neglegentur signiferumque vim. " +
-                "Vim ex scaevola scriptorem, usu te quando nonumes delectus.";
+        final String introBody = "\nWelcome to Krush!\nWe help you connect with tutors for a wide " +
+                "range of topics. Whether you need help on a specific assignment or need that extra " +
+                "weekly follow up Krush will help you find the right tutor for your topic, school " +
+                "and budget.\n";
+        final String homeBody = "\nHome is where you can have glimpse of your upcoming tutoring sessions or use the ‘Quick Book’ to book a session in a cinch.\n" +
+                "\n" +
+                "Your upcoming sessions are all the session you booked and paid for. You can click " +
+                "on the individual sessions to view details of that session such as time, location " +
+                "and the tutor’s name. Further, you can cancel the session in case you have " +
+                "a change of plans.\n" +
+                "\n" +
+                "Need a tutor in hurry for a tune up before the exam? We got you covered! " +
+                "You can book a tutor in no time with the ‘Quick Book’ feature. Simply select one " +
+                "of the tutors you previously had session with, select your time and pay. " +
+                "That’s it!\n";
+        final String bookingBody = "\nBooking a tutor has never been easier. Forget the billboard, " +
+                "Krush brings tutoring to the 21st century. In the booking menu, you can view all " +
+                "the tutors in Krush. You can even filter to see tutors for your school. Once you " +
+                "select a tutor, you can browse details about that tutor include their rate and " +
+                "rating. Then you need to select a time from their availabilities. That’s it! Pay " +
+                "for your session with a credit card and you’re on your way to better grades!\n";
+        final String sessionBody = "\nIn the sessions section, you can browse all your tutoring " +
+                "sessions (past and present). You can click on a specific session to submit a " +
+                "review for a tutor or listen to the audio recording for that session!\n";
+        final String profileBody = "\n" +
+                "In the profile section, you can view and edit your profile details. We strongly " +
+                "recommend using your camera associate your face with your profile! Setting your " +
+                "profile picture makes it easy to meet a new tutor in a public location. \n";
 
-        //display student help dialog
+                //display student help dialog
         helpButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Create custom dialog object
@@ -168,11 +191,11 @@ public class StudentHomeFragment extends Fragment {
                 profileStudentHelpLabel.setTypeface(typeFace);
 
                 //set text in dialogue
-                studentHelpIntro.setText(text);
-                homeStudentHelpText.setText(text);
-                bookingStudentHelpText.setText(text);
-                sessionsStudentHelpText.setText(text);
-                profileStudentHelpText.setText(text);
+                studentHelpIntro.setText(introBody);
+                homeStudentHelpText.setText(homeBody);
+                bookingStudentHelpText.setText(bookingBody);
+                sessionsStudentHelpText.setText(sessionBody);
+                profileStudentHelpText.setText(profileBody);
 
                 //close dialogue button
                 Button closeButton = (Button) dialog.findViewById(R.id.declineButton);
