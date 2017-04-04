@@ -129,7 +129,6 @@ public class StudentHomeFragment extends Fragment {
             }
         });
 
-        // TODO: 2017-03-18 We need to write the instructions once the actual functionality is implemented to accurately write to be
         final String introBody = "\nWelcome to Krush!\nWe help you connect with tutors for a wide " +
                 "range of topics. Whether you need help on a specific assignment or need that extra " +
                 "weekly follow up Krush will help you find the right tutor for your topic, school " +

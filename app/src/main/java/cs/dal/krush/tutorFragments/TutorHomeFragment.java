@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -80,13 +81,32 @@ public class TutorHomeFragment extends Fragment {
         SessionCursorAdapter sessionsAdapter = new SessionCursorAdapter(C, cursorSessionsResponse);
         upcomingSessionsListView.setAdapter(sessionsAdapter);
 
-        // TODO: 2017-03-18 We need to write the instructions once the actual functionality is implemented to accurately write to be
-        final String text = "Lorem ipsum dolor sit amet, pri magna delicata an. An " +
-                "imperdiet, vitae nemore duo eu. Sed ne etiam inermis, aperiam convenire " +
-                "appellantur ad ius, quo elit consequat vulputate eu. Eu cum choro " +
-                "constituto, at per justo nostrum abhorreant. Ridens lobortis vix an." +
-                " Impetus salutatus pro ea, ex recteque neglegentur signiferumque vim. " +
-                "Vim ex scaevola scriptorem, usu te quando nonumes delectus.";
+        final String introBody = "\n" +
+                "Tired of using a billboard to get clients? Or want to make some extra income? " +
+                "We got you covered! Krush streamlines the entire process from account creation, " +
+                "getting your first client and collect your payment! \n" +
+                "\n";
+        final String homeBody = "\n" +
+                "The home page is your dashboard: you can browse your upcoming sessions and keep " +
+                "track of your rating. You can click on an upcoming session to view the details " +
+                "of that session such the student information, data, time and location.\n" +
+                "\n";
+        final String availabilityBody = "\n" +
+                "The availability section is where you set up your available times and set your " +
+                "meeting location. Further, you can browse your current availabilities and remove " +
+                "them if need be. To create a new availability simply select a date, start time, " +
+                "end time and submit. Done! Easy right? Setting your location is just as easy, " +
+                "click on ‘Set Location’ and at the bottom of the page enter the address where " +
+                "you want to hold your sessions.\n" +
+                "\n";
+        final String sessionBody = "\nIn the sessions section, you can browse all your tutoring " +
+                "sessions (past and present). You can click on a specific session to submit a " +
+                "review for a tutor or listen to the audio recording for that session!\n";
+        final String profileBody = "\n" +
+                "In the profile section, you can view and edit your profile details. We strongly " +
+                "recommend using your camera associate your face with your profile! Setting your " +
+                "profile picture makes it easy to meet a new student in a public location. You can" +
+                "also set your rate per half-hour. \n";
 
 
         //display tutor help dialog
@@ -120,11 +140,11 @@ public class TutorHomeFragment extends Fragment {
                 profileTutorHelpLabel.setTypeface(typeFace);
 
                 //set text in dialogue
-                tutorHelpIntro.setText(text);
-                homeTutorHelpText.setText(text);
-                bookingTutorHelpText.setText(text);
-                sessionsTutorHelpText.setText(text);
-                profileTutorHelpText.setText(text);
+                tutorHelpIntro.setText(introBody);
+                homeTutorHelpText.setText(homeBody);
+                bookingTutorHelpText.setText(availabilityBody);
+                sessionsTutorHelpText.setText(sessionBody);
+                profileTutorHelpText.setText(profileBody);
 
                 //close dialogue button
                 Button closeButton = (Button) dialog.findViewById(R.id.declineTutorButton);
