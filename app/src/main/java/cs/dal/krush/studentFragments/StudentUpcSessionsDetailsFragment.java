@@ -52,9 +52,8 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
     TextView titleField, tutorNameField, tutorEmailField, locationField,
             startField, endField, tutorLabel, sessionInfoLabel, schoolField;
     ImageView tutorPicture;
-    Button cancelButton, sessionDetailLocation, sessionRecordStart, sessionRecordStop, playRecording, stopRecording;
+    Button cancelButton, sessionDetailLocation, sessionRecordStart, sessionRecordStop;
     MediaRecorder mediaRecorder;
-    MediaPlayer mediaPlayer;
     public static final int RequestPermissionCode = 1;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,11 +90,7 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         sessionDetailLocation = (Button) view.findViewById(R.id.sessionDetailLocation);
         sessionRecordStart = (Button) view.findViewById(R.id.sessionRecordStart);
         sessionRecordStop = (Button) view.findViewById(R.id.sessionRecordStop);
-        playRecording = (Button) view.findViewById(R.id.sessionPlayRecording);
-        stopRecording = (Button) view.findViewById(R.id.sessionStopRecording);
         sessionRecordStop.setVisibility(view.INVISIBLE);
-        playRecording.setVisibility(view.INVISIBLE);
-        stopRecording.setVisibility(view.INVISIBLE);
 
         //fetch custom app font
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(),"fonts/FredokaOne-Regular.ttf");
@@ -114,8 +109,6 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
         cancelButton.setTypeface(typeFace);
         sessionRecordStart.setTypeface(typeFace);
         sessionRecordStop.setTypeface(typeFace);
-        playRecording.setTypeface(typeFace);
-        stopRecording.setTypeface(typeFace);
 
         // Get values from database
         String title = sessionCursor.getString(sessionCursor.getColumnIndex("title"));
@@ -264,7 +257,6 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
 
                     sessionRecordStart.setVisibility(v.INVISIBLE);
                     sessionRecordStop.setVisibility(v.VISIBLE);
-                    playRecording.setVisibility(v.INVISIBLE);
                     sessionCursor.close();
                     student.close();
                     hasRecorded.close();
@@ -282,53 +274,6 @@ public class StudentUpcSessionsDetailsFragment extends Fragment {
                 mediaRecorder.stop();
                 sessionRecordStart.setVisibility(view.VISIBLE);
                 sessionRecordStop.setVisibility(view.INVISIBLE);
-                playRecording.setVisibility(view.VISIBLE);
-            }
-        });
-
-        playRecording.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) throws IllegalArgumentException,
-                    SecurityException, IllegalStateException {
-
-                // Initialize db connection
-                mydb = new DBHelper(getContext());
-
-                // Get session
-                sessionCursor = mydb.tutoringSession.getSessionHistoryDetailsBySessionIdForTutorCursorAdapter(SESSION_ID);
-                sessionCursor.moveToFirst();
-
-                //Get student
-                student = mydb.student.getData(USER_ID);
-                student.moveToFirst();
-
-                playRecording.setVisibility(view.INVISIBLE);
-                stopRecording.setVisibility(view.VISIBLE);
-                AudioSavePathInDevice =
-                        Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + student.getString(student.getColumnIndex("f_name")) +
-                                student.getString(student.getColumnIndex("l_name")) + sessionCursor.getString(sessionCursor.getColumnIndex("start_time")) + ".3gp";
-                mediaPlayer = new MediaPlayer();
-                try {
-                    mediaPlayer.setDataSource(AudioSavePathInDevice);
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                sessionCursor.close();
-                student.close();
-                mydb.close();
-                mediaPlayer.start();
-
-            }
-        });
-
-        stopRecording.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mediaPlayer.release();
-                mediaPlayer = null;
-                playRecording.setVisibility(v.VISIBLE);
-                stopRecording.setVisibility(v.INVISIBLE);
             }
         });
 
