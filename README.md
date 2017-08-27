@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="login-signup.png" alt="Krush Login" style="width: 30px; height: 60px;">
+  <img src="img/login-signup.png" alt="Krush Login" style="width: 30px; height: 60px;">
 </p>
 
 KRUSH is an android native application where students can book tutoring session based on the tutor's hourly rate, availability, and overall rating. Students can record their tutoring sessions and revisit their previous conversations. Tutors can also build their own profile and reputation through KRUSH. All payment transactions are taken care of by the application making it easy and simple to book a new tutor. 
@@ -21,29 +21,41 @@ KRUSH is an android native application where students can book tutoring session 
 KRUSH uses SQLite along with Android's DBHelper Class for data storage / retrieval.
 
 ### ER Diagram
-![ER Diagram](erd.png)
+![ER Diagram](img/erd.png)
 
 ## Site Map
-![Site Map](sitemap.png)
+![Site Map](img/sitemap.png)
 
 ## UML Diagram
 [Click here](https://drive.google.com/open?id=0B_oCfPfOVbvWUV9GdHV5SXNPV1k) to take a look at KRUSH's UML Diagram. This will help you, as a developer, to get a full understanding of the architectural overview on how the activities and fragments are setup.
 
 ## Application Screenshots
 <p align="center">
-  <img src="registration.png" alt="Registration" style="width: 30px; height: 60px;">
+  <img src="img/registration.png" alt="Registration" style="width: 30px; height: 60px;">
 </p>
 <p align="center">
-  <img src="user-guide.png" alt="User Guide" style="width: 30px; height: 60px;">
+  <img src="img/user-guide.png" alt="User Guide" style="width: 30px; height: 60px;">
 </p>
 <p align="center">
-  <img src="booking.png" alt="Booking View" style="width: 30px; height: 60px;">
+  <img src="img/tutor-profile.png" alt="Tutor Profile" style="width: 30px; height: 60px;">
 </p>
 <p align="center">
-  <img src="history.png" alt="Session History View" style="width: 30px; height: 60px;">
+  <img src="img/booking.png" alt="Booking View" style="width: 30px; height: 60px;">
 </p>
 <p align="center">
-  <img src="profile.png" alt="User Profile" style="width: 30px; height: 60px;">
+  <img src="img/payment.png" alt="Payment View" style="width: 30px; height: 60px;">
+</p>
+<p align="center">
+  <img src="img/form-validation.png" alt="Form Validation" style="width: 30px; height: 60px;">
+</p>
+<p align="center">
+  <img src="img/calendar.png" alt="Calendar View" style="width: 30px; height: 60px;">
+</p>
+<p align="center">
+  <img src="img/timeslot.png" alt="Timeslot View" style="width: 30px; height: 60px;">
+</p>
+<p align="center">
+  <img src="img/history.png" alt="Session History View" style="width: 30px; height: 60px;">
 </p>
 
 ## Code Contribution Instructions
